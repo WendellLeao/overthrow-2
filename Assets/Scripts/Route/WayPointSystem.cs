@@ -53,7 +53,7 @@ public sealed class WayPointSystem : MonoBehaviour
 public sealed class WayPointChecker : MonoBehaviour
 {
     private WayPointSystem _wayPointSystem;
-    public Transform[] _wayPoints;
+    private Transform[] _wayPoints;
 
     public WayPointChecker(WayPointSystem wayPointSystem, Transform[] wayPoints)
     {
