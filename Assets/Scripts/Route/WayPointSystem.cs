@@ -40,7 +40,7 @@ public sealed class WayPointSystem : MonoBehaviour
 
     private void HandleWayPointIndex()
     {
-        if (_wayPointChecker.IsAtTheCurrentPoint())
+        if (_wayPointChecker.IsAtTheTargetPoint())
         {
             if (_wayPointChecker.IsAtTheLastPoint())
                 _wayPointIndex = 0;
@@ -61,7 +61,7 @@ public sealed class WayPointChecker : MonoBehaviour
         _wayPoints = wayPoints;
     }
 
-    public bool IsAtTheCurrentPoint()
+    public bool IsAtTheTargetPoint()
     {
         return _wayPointSystem.transform.position == _wayPoints[_wayPointSystem.WayPointIndex].transform.position;
     }
