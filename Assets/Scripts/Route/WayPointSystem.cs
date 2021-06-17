@@ -40,9 +40,7 @@ public sealed class WayPointSystem : MonoBehaviour
 
     private void HandleWayPointIndex()
     {
-        Debug.Log(_wayPointIndex);
-
-        if (Input.GetKeyDown(KeyCode.Space))//IsAtTheCurrentPoint()
+        if (_wayPointChecker.IsAtTheCurrentPoint())
         {
             if (_wayPointChecker.IsAtTheLastPoint())
                 _wayPointIndex = 0;
@@ -55,7 +53,7 @@ public sealed class WayPointSystem : MonoBehaviour
 public sealed class WayPointChecker : MonoBehaviour
 {
     private WayPointSystem _wayPointSystem;
-    private Transform[] _wayPoints;
+    public Transform[] _wayPoints;
 
     public WayPointChecker(WayPointSystem wayPointSystem, Transform[] wayPoints)
     {
@@ -65,11 +63,11 @@ public sealed class WayPointChecker : MonoBehaviour
 
     public bool IsAtTheCurrentPoint()
     {
-        return transform.position == _wayPoints[_wayPointSystem.WayPointIndex].transform.position;
+        return _wayPointSystem.transform.position == _wayPoints[_wayPointSystem.WayPointIndex].transform.position;
     }
 
     public bool IsAtTheLastPoint()
     {
-        return _wayPointSystem.WayPointIndex == _wayPoints.Length - 1;
+        return _wayPointSystem.transform.position == _wayPoints[_wayPoints.Length - 1].position;
     }
 }
