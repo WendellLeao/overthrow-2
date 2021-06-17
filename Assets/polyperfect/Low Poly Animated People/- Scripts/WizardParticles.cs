@@ -13,7 +13,7 @@ public class WizardParticles : MonoBehaviour {
     public Quaternion rotation;
     public float scale;
 
-    public ParticleSystem particleSystem;
+    //public ParticleSystem particleSystem;
 
     public Vector3 sizeMultiplier = Vector3.right;
 
@@ -24,7 +24,7 @@ public class WizardParticles : MonoBehaviour {
         leftHand = animator.GetBoneTransform(HumanBodyBones.LeftHand);
         rightHand = animator.GetBoneTransform(HumanBodyBones.RightHand);
 
-        particleSystem = GetComponent<ParticleSystem>();
+        //particleSystem = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
