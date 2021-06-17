@@ -48,26 +48,26 @@ public sealed class WayPointSystem : MonoBehaviour
                 _wayPointIndex++;
         }
     }
-}
 
-public sealed class WayPointChecker : MonoBehaviour
-{
-    private WayPointSystem _wayPointSystem;
-    private Transform[] _wayPoints;
-
-    public WayPointChecker(WayPointSystem wayPointSystem, Transform[] wayPoints)
+    private sealed class WayPointChecker : MonoBehaviour
     {
-        _wayPointSystem = wayPointSystem;
-        _wayPoints = wayPoints;
-    }
+        private WayPointSystem _wayPointSystem;
+        private Transform[] _wayPoints;
 
-    public bool IsAtTheTargetPoint()
-    {
-        return _wayPointSystem.transform.position == _wayPoints[_wayPointSystem.WayPointIndex].transform.position;
-    }
+        public WayPointChecker(WayPointSystem wayPointSystem, Transform[] wayPoints)
+        {
+            _wayPointSystem = wayPointSystem;
+            _wayPoints = wayPoints;
+        }
 
-    public bool IsAtTheLastPoint()
-    {
-        return _wayPointSystem.transform.position == _wayPoints[_wayPoints.Length - 1].position;
+        public bool IsAtTheTargetPoint()
+        {
+            return _wayPointSystem.transform.position == _wayPoints[_wayPointSystem.WayPointIndex].transform.position;
+        }
+
+        public bool IsAtTheLastPoint()
+        {
+            return _wayPointSystem.transform.position == _wayPoints[_wayPoints.Length - 1].position;
+        }
     }
 }
