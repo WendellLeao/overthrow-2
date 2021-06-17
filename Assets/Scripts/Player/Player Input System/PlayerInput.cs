@@ -4,7 +4,7 @@ public sealed class PlayerInput : MonoBehaviour
 {
     private PlayerInputSystem _playerInputSystem;
 
-    private void Awake()
+    public void Awake()
     {
         _playerInputSystem = new PlayerInputSystem();
     }
