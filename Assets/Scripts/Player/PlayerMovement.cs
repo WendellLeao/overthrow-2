@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public sealed class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Player Controller")]
+    [SerializeField] private PlayerController _playerController;
+    private float _horizontalMouse, _verticalMouse;
+    
+    private void Update()
     {
-        
+        HandleMovement();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HandleMovement()
     {
-        
+        _horizontalMouse += Input.GetAxis("Mouse X");
+        _verticalMouse -= Input.GetAxis("Mouse Y");
+
+        transform.eulerAngles = new Vector3(_verticalMouse * 1f, _horizontalMouse * 1f, 0);
     }
 }
