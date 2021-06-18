@@ -19,10 +19,18 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
             ""id"": ""0350dd04-1e39-4161-83dc-898946436fc0"",
             ""actions"": [
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""HorizontalMouse"",
                     ""type"": ""PassThrough"",
                     ""id"": ""e2bf92c2-63a9-4899-aa81-844fb9e7badb"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""VerticalMouse"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""4b686f01-6005-4840-aa3b-bbbff456dc24"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -39,11 +47,11 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9673b706-612a-420e-a515-b6643cd1b152"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""path"": ""<Mouse>/delta/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""HorizontalMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -57,6 +65,17 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54f10131-3a44-4658-8ac4-bdac6863d169"",
+                    ""path"": ""<Mouse>/position/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -65,7 +84,8 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
 }");
         // CharacterControls
         m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
-        m_CharacterControls_Look = m_CharacterControls.FindAction("Look", throwIfNotFound: true);
+        m_CharacterControls_HorizontalMouse = m_CharacterControls.FindAction("HorizontalMouse", throwIfNotFound: true);
+        m_CharacterControls_VerticalMouse = m_CharacterControls.FindAction("VerticalMouse", throwIfNotFound: true);
         m_CharacterControls_Shoot = m_CharacterControls.FindAction("Shoot", throwIfNotFound: true);
     }
 
@@ -116,13 +136,15 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
     // CharacterControls
     private readonly InputActionMap m_CharacterControls;
     private ICharacterControlsActions m_CharacterControlsActionsCallbackInterface;
-    private readonly InputAction m_CharacterControls_Look;
+    private readonly InputAction m_CharacterControls_HorizontalMouse;
+    private readonly InputAction m_CharacterControls_VerticalMouse;
     private readonly InputAction m_CharacterControls_Shoot;
     public struct CharacterControlsActions
     {
         private @PlayerInputSystem m_Wrapper;
         public CharacterControlsActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Look => m_Wrapper.m_CharacterControls_Look;
+        public InputAction @HorizontalMouse => m_Wrapper.m_CharacterControls_HorizontalMouse;
+        public InputAction @VerticalMouse => m_Wrapper.m_CharacterControls_VerticalMouse;
         public InputAction @Shoot => m_Wrapper.m_CharacterControls_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
@@ -133,9 +155,12 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_CharacterControlsActionsCallbackInterface != null)
             {
-                @Look.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnLook;
+                @HorizontalMouse.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnHorizontalMouse;
+                @HorizontalMouse.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnHorizontalMouse;
+                @HorizontalMouse.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnHorizontalMouse;
+                @VerticalMouse.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnVerticalMouse;
+                @VerticalMouse.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnVerticalMouse;
+                @VerticalMouse.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnVerticalMouse;
                 @Shoot.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
@@ -143,9 +168,12 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
             m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Look.started += instance.OnLook;
-                @Look.performed += instance.OnLook;
-                @Look.canceled += instance.OnLook;
+                @HorizontalMouse.started += instance.OnHorizontalMouse;
+                @HorizontalMouse.performed += instance.OnHorizontalMouse;
+                @HorizontalMouse.canceled += instance.OnHorizontalMouse;
+                @VerticalMouse.started += instance.OnVerticalMouse;
+                @VerticalMouse.performed += instance.OnVerticalMouse;
+                @VerticalMouse.canceled += instance.OnVerticalMouse;
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
@@ -155,7 +183,8 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
     public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
     public interface ICharacterControlsActions
     {
-        void OnLook(InputAction.CallbackContext context);
+        void OnHorizontalMouse(InputAction.CallbackContext context);
+        void OnVerticalMouse(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
     }
 }

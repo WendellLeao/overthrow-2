@@ -2,11 +2,26 @@ using UnityEngine;
 
 public sealed class PlayerInput : MonoBehaviour
 {
+    [Header("Player Controller")]
+    [SerializeField] private PlayerController _playerController;
+    
     private PlayerInputSystem _playerInputSystem;
+    private PlayerInputSystem.CharacterControlsActions _characterControls;
 
-    public void Awake()
+    private Vector2 _mouseInput;
+
+    private void Awake()
     {
         _playerInputSystem = new PlayerInputSystem();
+        _characterControls = _playerInputSystem.CharacterControls;
+
+        _characterControls.HorizontalMouse.performed += ctx => _mouseInput.x = ctx.ReadValue<float>();
+        _characterControls.HorizontalMouse.performed += ctx => _mouseInput.y = ctx.ReadValue<float>();
+    }
+
+    private void Update()
+    {
+        _playerController.PlayerMouseLook.SetMouseInput(_mouseInput);
     }
 
     private void OnEnable()
@@ -17,10 +32,5 @@ public sealed class PlayerInput : MonoBehaviour
     private void OnDisable()
     {
         _playerInputSystem.Disable();
-    }
-
-    public Vector2 GetMouseDelta()
-    {
-        return _playerInputSystem.CharacterControls.Look.ReadValue<Vector2>();
     }
 }

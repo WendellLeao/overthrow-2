@@ -34,8 +34,6 @@ public sealed class WayPointSystem : MonoBehaviour
     {
         Vector3 targetPos = _wayPoints[_wayPointIndex].transform.position;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, _moveSpeed * Time.deltaTime);
-
-        transform.LookAt(_wayPoints[_wayPointIndex].transform.position);
     }
 
     private void HandleWayPointIndex()

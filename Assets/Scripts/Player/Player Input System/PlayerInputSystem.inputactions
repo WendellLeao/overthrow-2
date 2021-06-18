@@ -1,15 +1,23 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerInputSystem",
     "maps": [
         {
             "name": "CharacterControls",
             "id": "0350dd04-1e39-4161-83dc-898946436fc0",
             "actions": [
                 {
-                    "name": "Look",
+                    "name": "HorizontalMouse",
                     "type": "PassThrough",
                     "id": "e2bf92c2-63a9-4899-aa81-844fb9e7badb",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "VerticalMouse",
+                    "type": "PassThrough",
+                    "id": "4b686f01-6005-4840-aa3b-bbbff456dc24",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -26,11 +34,11 @@
                 {
                     "name": "",
                     "id": "9673b706-612a-420e-a515-b6643cd1b152",
-                    "path": "<Mouse>/delta",
+                    "path": "<Mouse>/delta/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "HorizontalMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -42,6 +50,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54f10131-3a44-4658-8ac4-bdac6863d169",
+                    "path": "<Mouse>/position/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
