@@ -6,11 +6,10 @@ public sealed class PlayerMouseLook : MonoBehaviour
     
     [SerializeField] private float _horizontalSensitivity, _verticalSensitivy;
     
-    private float _horizontalMouse, _verticalMouse;
-
     private float _horizontalClamp = 85f;
     private float _horizontalRotation = 0f;
-    
+    private float _horizontalMouse, _verticalMouse;
+
     private void Update()
     {
         HandleLook();
