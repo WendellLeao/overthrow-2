@@ -23,8 +23,8 @@ public sealed class PlayerMouseLook : MonoBehaviour
     {
         SetMouseInput(_playerController.PlayerInput.GetMouseDelta());
 
-        HandleVerticalLook();
-        HandleHorizontalLook();
+        HandleCameraVerticalRotation();
+        HandlePlayerHorizontalRotation();
     }
 
     public void SetMouseInput(Vector2 mouseInput)
@@ -33,7 +33,7 @@ public sealed class PlayerMouseLook : MonoBehaviour
         _verticalMouse = mouseInput.y * _verticalSensitivy * Time.deltaTime;
     }
 
-    private void HandleVerticalLook()
+    private void HandleCameraVerticalRotation()
     {
         _verticalRotation -= _verticalMouse;
         _verticalRotation = Mathf.Clamp(_verticalRotation, -90f, 90f);
@@ -41,8 +41,8 @@ public sealed class PlayerMouseLook : MonoBehaviour
         _cameraTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
     }
     
-    private void HandleHorizontalLook()
+    private void HandlePlayerHorizontalRotation()
     {
-        transform.Rotate(Vector3.up, _horizontalMouse);
+        this.transform.Rotate(Vector3.up, _horizontalMouse);
     }
 }
