@@ -41,6 +41,14 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseLook"",
+                    ""type"": ""Value"",
+                    ""id"": ""eb7ad548-3341-479d-a3a8-0882db6a1048"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -76,6 +84,17 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                     ""action"": ""VerticalMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00f3d276-ecf8-4c24-9d34-f322621a1383"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -87,6 +106,7 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         m_CharacterControls_HorizontalMouse = m_CharacterControls.FindAction("HorizontalMouse", throwIfNotFound: true);
         m_CharacterControls_VerticalMouse = m_CharacterControls.FindAction("VerticalMouse", throwIfNotFound: true);
         m_CharacterControls_Shoot = m_CharacterControls.FindAction("Shoot", throwIfNotFound: true);
+        m_CharacterControls_MouseLook = m_CharacterControls.FindAction("MouseLook", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,6 +159,7 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_CharacterControls_HorizontalMouse;
     private readonly InputAction m_CharacterControls_VerticalMouse;
     private readonly InputAction m_CharacterControls_Shoot;
+    private readonly InputAction m_CharacterControls_MouseLook;
     public struct CharacterControlsActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -146,6 +167,7 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         public InputAction @HorizontalMouse => m_Wrapper.m_CharacterControls_HorizontalMouse;
         public InputAction @VerticalMouse => m_Wrapper.m_CharacterControls_VerticalMouse;
         public InputAction @Shoot => m_Wrapper.m_CharacterControls_Shoot;
+        public InputAction @MouseLook => m_Wrapper.m_CharacterControls_MouseLook;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -164,6 +186,9 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
+                @MouseLook.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
+                @MouseLook.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
+                @MouseLook.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
             }
             m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -177,6 +202,9 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @MouseLook.started += instance.OnMouseLook;
+                @MouseLook.performed += instance.OnMouseLook;
+                @MouseLook.canceled += instance.OnMouseLook;
             }
         }
     }
@@ -186,5 +214,6 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         void OnHorizontalMouse(InputAction.CallbackContext context);
         void OnVerticalMouse(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnMouseLook(InputAction.CallbackContext context);
     }
 }

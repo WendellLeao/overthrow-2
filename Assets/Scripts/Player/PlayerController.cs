@@ -8,6 +8,6 @@ public sealed class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.visible = false;////////////////
+        Cursor.lockState = CursorLockMode.Locked;////////////////
     }
 }

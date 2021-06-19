@@ -14,14 +14,11 @@ public sealed class PlayerInput : MonoBehaviour
     {
         _playerInputSystem = new PlayerInputSystem();
         _characterControls = _playerInputSystem.CharacterControls;
-
-        _characterControls.HorizontalMouse.performed += ctx => _mouseInput.x = ctx.ReadValue<float>();
-        _characterControls.HorizontalMouse.performed += ctx => _mouseInput.y = ctx.ReadValue<float>();
     }
 
     private void Update()
     {
-        _playerController.PlayerMouseLook.SetMouseInput(_mouseInput);
+        _playerController.PlayerMouseLook.SetMouseInput(GetMouseDelta());
     }
 
     private void OnEnable()
@@ -32,5 +29,10 @@ public sealed class PlayerInput : MonoBehaviour
     private void OnDisable()
     {
         _playerInputSystem.Disable();
+    }
+
+    private Vector2 GetMouseDelta()
+    {
+        return _characterControls.MouseLook.ReadValue<Vector2>();
     }
 }

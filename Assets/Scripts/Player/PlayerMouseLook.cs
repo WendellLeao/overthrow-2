@@ -6,31 +6,33 @@ public sealed class PlayerMouseLook : MonoBehaviour
     
     [SerializeField] private float _horizontalSensitivity, _verticalSensitivy;
     
-    private float _horizontalClamp = 85f;
-    private float _horizontalRotation = 0f;
+    private float _verticalRotation = 0f;
     private float _horizontalMouse, _verticalMouse;
 
     private void Update()
     {
-        HandleLook();
-    }
+        HandleVerticalLook();
+        HandleHorizontalLook();
 
-    private void HandleLook()
-    {
-        transform.Rotate(Vector3.up, _horizontalMouse * Time.deltaTime);
-
-        _horizontalRotation -= _verticalMouse;
-        _horizontalRotation = Mathf.Clamp(_horizontalRotation, -_horizontalClamp, _horizontalClamp);
-
-        Vector3 targetRotation = transform.eulerAngles;
-        targetRotation.x = _horizontalRotation;
-
-        _cameraTransform.eulerAngles = targetRotation;
+        Debug.Log(_verticalMouse);
     }
 
     public void SetMouseInput(Vector2 mouseInput)
     {
-        _horizontalMouse = mouseInput.x * _horizontalSensitivity;
-        _verticalMouse = mouseInput.y * _verticalSensitivy;
+        _horizontalMouse = mouseInput.x * _horizontalSensitivity * Time.deltaTime;
+        _verticalMouse = mouseInput.y * _verticalSensitivy * Time.deltaTime;
+    }
+
+    private void HandleVerticalLook()
+    {
+        _verticalRotation -= _verticalMouse;
+        _verticalRotation = Mathf.Clamp(_verticalRotation, -90f, 90f);
+        
+        transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+    }
+    
+    private void HandleHorizontalLook()
+    {
+        transform.Rotate(Vector3.up, _horizontalMouse);
     }
 }
