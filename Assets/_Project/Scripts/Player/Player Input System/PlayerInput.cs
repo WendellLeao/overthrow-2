@@ -3,7 +3,9 @@ using UnityEngine;
 public sealed class PlayerInput : MonoBehaviour
 {
     private PlayerInputSystem _playerInputSystem;
+
     private PlayerInputSystem.CharacterControlsActions _characterControls;
+    public PlayerInputSystem.CharacterControlsActions CharacterControls => _characterControls;
 
     private void Awake()
     {

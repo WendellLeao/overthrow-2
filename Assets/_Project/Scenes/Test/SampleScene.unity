@@ -557,7 +557,7 @@ MonoBehaviour:
   _playerController: {fileID: 177912672}
   _cameraTransform: {fileID: 614238342}
   _horizontalSensitivity: 2
-  _verticalSensitivy: 0.5
+  _verticalSensitivy: 1
 --- !u!114 &177912675
 MonoBehaviour:
   m_ObjectHideFlags: 0

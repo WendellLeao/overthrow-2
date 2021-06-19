@@ -13,7 +13,13 @@ public sealed class PlayerMouseLook : MonoBehaviour
     
     private float _verticalRotation = 0f;
     private float _horizontalMouse, _verticalMouse;
-
+    
+    public void SetMouseInput(Vector2 mouseInput)
+    {
+        _horizontalMouse = mouseInput.x * _horizontalSensitivity * Time.deltaTime;
+        _verticalMouse = mouseInput.y * _verticalSensitivy * Time.deltaTime;
+    }
+    
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;/////////////////////////
@@ -25,12 +31,6 @@ public sealed class PlayerMouseLook : MonoBehaviour
 
         HandleCameraVerticalRotation();
         HandlePlayerHorizontalRotation();
-    }
-
-    public void SetMouseInput(Vector2 mouseInput)
-    {
-        _horizontalMouse = mouseInput.x * _horizontalSensitivity * Time.deltaTime;
-        _verticalMouse = mouseInput.y * _verticalSensitivy * Time.deltaTime;
     }
 
     private void HandleCameraVerticalRotation()
