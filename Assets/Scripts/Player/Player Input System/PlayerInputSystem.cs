@@ -44,7 +44,7 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""MouseLook"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""eb7ad548-3341-479d-a3a8-0882db6a1048"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

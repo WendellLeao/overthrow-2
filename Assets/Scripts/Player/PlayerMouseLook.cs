@@ -13,8 +13,6 @@ public sealed class PlayerMouseLook : MonoBehaviour
     {
         HandleVerticalLook();
         HandleHorizontalLook();
-
-        Debug.Log(_verticalMouse);
     }
 
     public void SetMouseInput(Vector2 mouseInput)
@@ -28,7 +26,7 @@ public sealed class PlayerMouseLook : MonoBehaviour
         _verticalRotation -= _verticalMouse;
         _verticalRotation = Mathf.Clamp(_verticalRotation, -90f, 90f);
         
-        transform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+        _cameraTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
     }
     
     private void HandleHorizontalLook()
