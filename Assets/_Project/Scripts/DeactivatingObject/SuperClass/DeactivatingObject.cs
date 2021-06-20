@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public sealed class Cube : MonoBehaviour, IDestroyable
+public abstract class DeactivatingObject : MonoBehaviour
 {
     [Header("Materials")]
     [SerializeField] private Material _disabledMaterial;
-    
+
+    [Header("Enable Bolls")]
     private bool _isEnabled = true;
     public bool IsEnabled => _isEnabled;
-
+    
     public void DestroyObject()
     {
         Destroy(this.gameObject);

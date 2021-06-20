@@ -1,8 +1,9 @@
 using UnityEngine;
 
 public sealed class WayPointSystem : MonoBehaviour
-{
+{    
     [SerializeField] private Transform[] _wayPoints;
+    public Transform[] WayPoints => _wayPoints;
     
     private int _wayPointIndex;
     public int WayPointIndex => _wayPointIndex;

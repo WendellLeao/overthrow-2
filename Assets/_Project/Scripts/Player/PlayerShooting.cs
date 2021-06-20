@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput))]
-public sealed class PlayerShootProjectiles : MonoBehaviour
+public sealed class PlayerShooting : MonoBehaviour
 {
     [Header("Player Controller")]
     [SerializeField] private PlayerController _playerController;
@@ -11,9 +11,6 @@ public sealed class PlayerShootProjectiles : MonoBehaviour
     [SerializeField] private Transform _spawnProjectilePos;
     [SerializeField] private float _shootForce;
 
-    [Header("Others")]
-    [SerializeField] private Camera _mainCamera;
-
     private void Start()
     {
         _playerController.PlayerInput.CharacterControls.Shoot.performed += _ => OnPlayerShoot_PerformShoot();
@@ -21,7 +18,7 @@ public sealed class PlayerShootProjectiles : MonoBehaviour
 
     private void OnPlayerShoot_PerformShoot()
     {
-        GameObject cloneProjectile = Instantiate(_projectilePf, transform.position, Quaternion.identity);
+        GameObject cloneProjectile = Instantiate(_projectilePf, _spawnProjectilePos.position, _spawnProjectilePos.localRotation);
 
         cloneProjectile.GetComponent<Rigidbody>().velocity = transform.forward * _shootForce;
     }

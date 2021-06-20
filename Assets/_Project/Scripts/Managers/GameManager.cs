@@ -24,5 +24,7 @@ public class GameManager : MonoBehaviour
         #endregion
 
         _gameState = GameState.Playing;
+        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

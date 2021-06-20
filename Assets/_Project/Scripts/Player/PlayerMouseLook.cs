@@ -19,11 +19,6 @@ public sealed class PlayerMouseLook : MonoBehaviour
         _horizontalMouse = mouseInput.x * _horizontalSensitivity * Time.deltaTime;
         _verticalMouse = mouseInput.y * _verticalSensitivy * Time.deltaTime;
     }
-    
-    private void Awake()
-    {
-        Cursor.lockState = CursorLockMode.Locked;/////////////////////////
-    }
 
     private void Update()
     {
