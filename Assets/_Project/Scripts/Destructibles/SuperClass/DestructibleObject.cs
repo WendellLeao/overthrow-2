@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class DeactivatingObject : MonoBehaviour
+public abstract class DestructibleObject : MonoBehaviour
 {
     [Header("Materials")]
     [SerializeField] private Material _disabledMaterial;
