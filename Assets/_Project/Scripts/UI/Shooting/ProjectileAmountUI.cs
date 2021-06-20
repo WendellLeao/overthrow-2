@@ -15,6 +15,8 @@ public sealed class ProjectileAmountUI : MonoBehaviour
     private void UpdateProjectileAmountColorUI(int projectileAmount)
     {
         if(projectileAmount <= 0)
+        {
             _projectileAmountText.color = Color.red;
+        }
     }
 }

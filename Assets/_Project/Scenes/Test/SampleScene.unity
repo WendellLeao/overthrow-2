@@ -704,8 +704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 1783462831}
-  _projectilePf: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
-  _spawnProjectilePos: {fileID: 81888989}
+  _projectilePrefab: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
+  _spawnProjectilePosition: {fileID: 81888989}
   _shootForce: 30
   _projectileAmount: 10
 --- !u!114 &177912671

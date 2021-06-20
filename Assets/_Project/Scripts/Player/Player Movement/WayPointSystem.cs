@@ -3,15 +3,15 @@ using UnityEngine;
 public sealed class WayPointSystem : MonoBehaviour
 {    
     [SerializeField] private Transform[] _wayPoints;
-    public Transform[] WayPoints => _wayPoints;
-    
     private int _wayPointIndex;
-    public int WayPointIndex => _wayPointIndex;
 
     [Header("Movement")]
     [SerializeField] private float _moveSpeed;
     
     private WayPointChecker _wayPointChecker;
+    
+    public Transform[] GetWayPoints => _wayPoints;
+    public int GetWayPointIndex => _wayPointIndex;
 
     private void Awake()
     {

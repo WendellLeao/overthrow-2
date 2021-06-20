@@ -4,16 +4,14 @@ public sealed class LaserCollider : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        DestructibleObject destructibleObject = other.GetComponent<DestructibleObject>();
-        
-        if(destructibleObject != null) 
+        if(other.TryGetComponent<DestructibleObject>(out DestructibleObject destructibleObject))
         {
             if(destructibleObject.IsEnabled)
             {
-                Cube cube = other.GetComponent<Cube>();
-
-                if(cube != null) 
+                if(other.TryGetComponent<Cube>(out Cube cube))
+                {
                     Debug.Log("You Lose!");
+                }
             }
             else
             {

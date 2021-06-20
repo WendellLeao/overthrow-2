@@ -12,8 +12,8 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void HandleRotation()
     {
-        int wayPointIndex = _playerController.WayPointSystem.WayPointIndex;
+        int wayPointIndex = _playerController.WayPointSystem.GetWayPointIndex;
 
-        transform.LookAt(_playerController.WayPointSystem.WayPoints[wayPointIndex].position);
+        transform.LookAt(_playerController.WayPointSystem.GetWayPoints[wayPointIndex].position);
     }
 }

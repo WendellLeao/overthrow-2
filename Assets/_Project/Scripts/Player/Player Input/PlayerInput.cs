@@ -11,6 +11,8 @@ public sealed class PlayerInput : MonoBehaviour
     {
         _playerInputSystem = new PlayerInputSystem();
         _characterControls = _playerInputSystem.CharacterControls;
+
+        //_characterControls.Shoot.performed += _ => OnPlayerShoot_PerformShoot();
     }
 
     private void OnEnable()

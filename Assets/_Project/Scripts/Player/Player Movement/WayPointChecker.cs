@@ -13,7 +13,7 @@ public sealed class WayPointChecker
 
     public bool IsAtTheTargetPoint()
     {
-        return _wayPointSystem.transform.position == _wayPoints[_wayPointSystem.WayPointIndex].transform.position;
+        return _wayPointSystem.transform.position == _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position;
     }
 
     public bool IsAtTheLastPoint()

@@ -7,8 +7,8 @@ public sealed class PlayerShooting : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
 
     [Header("Projectile")]
-    [SerializeField] private GameObject _projectilePf;
-    [SerializeField] private Transform _spawnProjectilePos;
+    [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private Transform _spawnProjectilePosition;
     [SerializeField] private float _shootForce;
 
     [Header("Ammo")]
@@ -28,7 +28,7 @@ public sealed class PlayerShooting : MonoBehaviour
     {
         if(_currentProjectileAmount > 0)
         {
-            GameObject cloneProjectile = Instantiate(_projectilePf, _spawnProjectilePos.position, _spawnProjectilePos.localRotation);
+            GameObject cloneProjectile = Instantiate(_projectilePrefab, _spawnProjectilePosition.position, _spawnProjectilePosition.localRotation);
 
             cloneProjectile.GetComponent<Rigidbody>().velocity = transform.forward * _shootForce;
 
