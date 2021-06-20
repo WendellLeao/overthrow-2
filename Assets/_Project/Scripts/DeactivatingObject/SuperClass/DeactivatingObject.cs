@@ -14,6 +14,12 @@ public abstract class DeactivatingObject : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    private void Update()
+    {
+        if(transform.position.y <= -120f)
+            DestroyObject();
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Ground")
