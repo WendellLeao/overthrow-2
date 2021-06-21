@@ -17,7 +17,7 @@ public static class EditorExtensions {
     [ContextMenu("Get Path")]
     public static string GetPath()
     {
-        Type projectWindowUtilType = typeof(ProjectWindowUtil);
+        Type projectWindowUtilType = null;//typeof(ProjectWindowUtil);
         MethodInfo getActiveFolderPath = projectWindowUtilType.GetMethod("GetActiveFolderPath", BindingFlags.Static | BindingFlags.NonPublic);
         object obj = getActiveFolderPath.Invoke(null, new object[0]);
         return obj.ToString();
