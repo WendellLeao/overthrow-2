@@ -13,7 +13,7 @@ public sealed class WayPointSystem : MonoBehaviour
     
     private WayPointChecker _wayPointChecker;
     
-    public Transform[] GetWayPoints => _wayPoints;
+    public WayPointChecker GetWayPointChecker => _wayPointChecker;
     public int GetWayPointIndex => _wayPointIndex;
 
     private void Awake()
@@ -42,13 +42,14 @@ public sealed class WayPointSystem : MonoBehaviour
 
     private void HandleWayPointIndex()
     {
-        if (_wayPointChecker.IsAtTheTargetPoint())
+        if (_wayPointChecker.IsAtTheNextTarget())
         {
             OnPlayerIsAtTarget?.Invoke();
             
-            if (_wayPointChecker.IsAtTheLastPoint())
+            if (_wayPointChecker.IsAtTheLastTarget())
             {
-                _wayPointIndex = 0;
+                //_wayPointIndex = 0;
+                Debug.Log("You Won!");
             }
             else
             {

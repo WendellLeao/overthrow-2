@@ -10,7 +10,7 @@ public sealed class LaserCollider : MonoBehaviour
             {
                 if(other.TryGetComponent<Cube>(out Cube cube))
                 {
-                    Debug.Log("You Lose!");
+                    //Debug.Log("You Lose!");
                 }
             }
             else

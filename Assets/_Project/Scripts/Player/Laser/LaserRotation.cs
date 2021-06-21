@@ -4,30 +4,49 @@ public sealed class LaserRotation : MonoBehaviour
 {
     [Header("Player Controller")]
     [SerializeField] private PlayerController _playerController;
-    private int _wayPointIndex;
 
-    private void OnEnable()
-    {
-        _playerController.GetWayPointSystem.OnPlayerIsAtTarget += OnPlayerIsAtTarget_UpdateWayPointIndex;
-    }
+    [Header("Laser Components")]
+    [SerializeField] private GameObject _laserContainer;
 
-    private void OnDisable()
+    private float startOffset;
+
+    private void Start()
     {
-        _playerController.GetWayPointSystem.OnPlayerIsAtTarget -= OnPlayerIsAtTarget_UpdateWayPointIndex;
+        startOffset = transform.localPosition.z;
     }
     
     private void Update()
     {
         HandleRotation();
     }
-
+    
     private void HandleRotation()
     {
-        transform.LookAt(_playerController.GetWayPointSystem.GetWayPoints[_wayPointIndex].position);
-    }
-    
-    private void OnPlayerIsAtTarget_UpdateWayPointIndex()
-    {
-        _wayPointIndex = _playerController.GetWayPointSystem.GetWayPointIndex;
+        WayPointChecker wayPointChecker = _playerController.GetWayPointSystem.GetWayPointChecker;
+        
+        if(wayPointChecker.GetNextTargetDistance() > 10f)
+        {
+            _laserContainer.SetActive(true);//Play Animation "HideLaserAnim"
+
+            if(wayPointChecker.NextTargetIsFoward())
+            {
+                transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                transform.localPosition = new Vector3(0f, 0f, startOffset);
+            }
+            else if(wayPointChecker.NextTargetIsLeft())
+            {
+                transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+                transform.localPosition = new Vector3(-startOffset, 0f, 0f);
+            }
+            else if(wayPointChecker.NextTargetIsRight())
+            {
+                transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+                transform.localPosition = new Vector3(startOffset, 0f, 0f);
+            }
+        }
+        else
+        {
+            _laserContainer.SetActive(false);//Play Animation "HideLaserAnim"
+        }
     }
 }
