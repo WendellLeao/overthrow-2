@@ -8,12 +8,12 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void OnEnable()
     {
-        _playerController.WayPointSystem.OnPlayerIsAtTarget += OnPlayerIsAtTarget_UpdateWayPointIndex;
+        _playerController.GetWayPointSystem.OnPlayerIsAtTarget += OnPlayerIsAtTarget_UpdateWayPointIndex;
     }
 
     private void OnDisable()
     {
-        _playerController.WayPointSystem.OnPlayerIsAtTarget -= OnPlayerIsAtTarget_UpdateWayPointIndex;
+        _playerController.GetWayPointSystem.OnPlayerIsAtTarget -= OnPlayerIsAtTarget_UpdateWayPointIndex;
     }
     
     private void Update()
@@ -23,11 +23,11 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void HandleRotation()
     {
-        transform.LookAt(_playerController.WayPointSystem.GetWayPoints[_wayPointIndex].position);
+        transform.LookAt(_playerController.GetWayPointSystem.GetWayPoints[_wayPointIndex].position);
     }
     
     private void OnPlayerIsAtTarget_UpdateWayPointIndex()
     {
-        _wayPointIndex = _playerController.WayPointSystem.GetWayPointIndex;
+        _wayPointIndex = _playerController.GetWayPointSystem.GetWayPointIndex;
     }
 }

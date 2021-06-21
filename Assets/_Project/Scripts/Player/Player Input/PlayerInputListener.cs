@@ -8,7 +8,6 @@ public sealed class PlayerInputListener : MonoBehaviour
     private PlayerInputSystem _playerInputSystem;
 
     private PlayerInputSystem.CharacterControlsActions _characterControls;
-    public PlayerInputSystem.CharacterControlsActions CharacterControls => _characterControls;
 
     private void Awake()
     {
@@ -30,7 +29,7 @@ public sealed class PlayerInputListener : MonoBehaviour
 
     public void OnPlayerShoot_PerformShoot()
     {
-        _playerController.PlayerShooting.OnPlayerShoot_PerformShoot();
+        _playerController.GetPlayerShooting.OnPlayerShoot_PerformShoot();
     }
 
     public Vector2 GetMouseDelta()

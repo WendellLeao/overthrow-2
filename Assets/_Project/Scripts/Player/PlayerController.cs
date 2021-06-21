@@ -7,7 +7,7 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField] private PlayerInputListener _playerInput;
     [SerializeField] private PlayerShooting _playerShooting;
 
-    public WayPointSystem WayPointSystem => _wayPointSystem;
-    public PlayerInputListener PlayerInput => _playerInput;
-    public PlayerShooting PlayerShooting => _playerShooting;
+    public WayPointSystem GetWayPointSystem => _wayPointSystem;
+    public PlayerInputListener GetPlayerInput => _playerInput;
+    public PlayerShooting GetPlayerShooting => _playerShooting;
 }

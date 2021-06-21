@@ -6,7 +6,7 @@ public sealed class ShootingContainerUI : MonoBehaviour
 
     [Header("Canvas Assets")]
     [SerializeField] private ProjectileAmountUI _projectileAmountUI;
-    public ProjectileAmountUI ProjectileAmountUI => _projectileAmountUI;
+    public ProjectileAmountUI GetProjectileAmountUI => _projectileAmountUI;
 
     private void Awake()
     {

@@ -6,7 +6,7 @@ public sealed class LaserCollider : MonoBehaviour
     {
         if(other.TryGetComponent<DestructibleObject>(out DestructibleObject destructibleObject))
         {
-            if(destructibleObject.IsEnabled)
+            if(destructibleObject.GetIsEnabled)
             {
                 if(other.TryGetComponent<Cube>(out Cube cube))
                 {

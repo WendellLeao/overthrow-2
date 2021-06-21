@@ -4,10 +4,14 @@ public abstract class DestructibleObject : MonoBehaviour
 {
     [Header("Materials")]
     [SerializeField] private Material _disabledMaterial;
+    [SerializeField] private MeshRenderer _meshRenderer;
+
+    [Header("Detection")]
+    [SerializeField] private LayerMask deactivatorObject;
 
     [Header("Enable Bolls")]
     private bool _isEnabled = true;
-    public bool IsEnabled => _isEnabled;
+    public bool GetIsEnabled => _isEnabled;
     
     public void DestroyObject()
     {
@@ -22,9 +26,9 @@ public abstract class DestructibleObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Ground")
+        if(other.gameObject.tag == "Ground")//deactivatorObject
         {
-            GetComponent<MeshRenderer>().material = _disabledMaterial;
+            _meshRenderer.material = _disabledMaterial;
             _isEnabled = false;
         }
     }

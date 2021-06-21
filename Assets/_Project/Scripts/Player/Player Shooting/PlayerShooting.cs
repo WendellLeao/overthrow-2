@@ -18,7 +18,7 @@ public sealed class PlayerShooting : MonoBehaviour
     {
         if(_playerAmmo.GetCurrentProjectileAmount > 0)
         {
-            GameObject cloneProjectile = Instantiate(_projectilePrefab, _spawnPosition.position, _spawnPosition.localRotation);
+            GameObject cloneProjectile = Instantiate(_projectilePrefab, _spawnPosition.position, Quaternion.identity);//_spawnPosition.localRotation
             
             cloneProjectile.GetComponent<Projectile>().Initialize(this.transform);
             

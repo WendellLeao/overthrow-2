@@ -22,7 +22,7 @@ public sealed class PlayerMouseLook : MonoBehaviour
 
     private void Update()
     {
-        SetMouseInput(_playerController.PlayerInput.GetMouseDelta());
+        SetMouseInput(_playerController.GetPlayerInput.GetMouseDelta());
 
         HandleCameraVerticalRotation();
         HandlePlayerHorizontalRotation();

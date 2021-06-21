@@ -24,6 +24,6 @@ public sealed class PlayerAmmo
 
     public void UpdateProjectileAmountUI()
     {
-        ShootingContainerUI.instance.ProjectileAmountUI.UpdateProjectileAmountUI(_currentProjectileAmount);
+        ShootingContainerUI.instance.GetProjectileAmountUI.UpdateProjectileAmountUI(_currentProjectileAmount);
     }
 }
