@@ -307,7 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 81888989}
   m_Layer: 0
-  m_Name: spawnProjectilePos
+  m_Name: spawnPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -705,8 +705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 1783462831}
   _projectilePrefab: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
-  _spawnProjectilePosition: {fileID: 81888989}
-  _shootForce: 30
+  _spawnPosition: {fileID: 81888989}
   _projectileAmount: 10
 --- !u!114 &177912671
 MonoBehaviour:
@@ -720,6 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e0b23cd08582c49b8cd8a527395907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerController: {fileID: 1783462831}
 --- !u!4 &177912673
 Transform:
   m_ObjectHideFlags: 0
@@ -4296,8 +4296,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca27608ce3a20a943a628e9d9cdf2f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInput: {fileID: 177912671}
   _wayPointSystem: {fileID: 1783462827}
+  _playerInput: {fileID: 177912671}
+  _playerShooting: {fileID: 177912670}
 --- !u!1 &1810701519
 GameObject:
   m_ObjectHideFlags: 0

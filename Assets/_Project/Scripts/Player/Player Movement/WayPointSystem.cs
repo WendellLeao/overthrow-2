@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public sealed class WayPointSystem : MonoBehaviour
 {    
+    public event Action OnPlayerIsAtTarget;
+    
     [SerializeField] private Transform[] _wayPoints;
     private int _wayPointIndex;
 
@@ -41,10 +44,16 @@ public sealed class WayPointSystem : MonoBehaviour
     {
         if (_wayPointChecker.IsAtTheTargetPoint())
         {
+            OnPlayerIsAtTarget?.Invoke();
+            
             if (_wayPointChecker.IsAtTheLastPoint())
+            {
                 _wayPointIndex = 0;
+            }
             else
+            {
                 _wayPointIndex++;
+            }
         }
     }
 }

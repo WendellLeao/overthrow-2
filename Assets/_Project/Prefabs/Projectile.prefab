@@ -126,3 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _disabledMaterial: {fileID: 2100000, guid: 12ca79d1906ac624994fa91e85880fb8, type: 2}
+  body: {fileID: 836969101488410415}
+  _shootForce: 30

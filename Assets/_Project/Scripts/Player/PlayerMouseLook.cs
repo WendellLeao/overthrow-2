@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(PlayerInputListener))]
 public sealed class PlayerMouseLook : MonoBehaviour
 {
     [Header("Player Controller")]
