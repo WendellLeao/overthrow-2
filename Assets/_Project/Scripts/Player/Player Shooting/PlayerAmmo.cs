@@ -19,7 +19,9 @@ public sealed class PlayerAmmo
 
     public void IncreaseAmmo()
     {
-        //code here
+        _currentProjectileAmount++;
+        
+        UpdateProjectileAmountUI();
     }
 
     public void UpdateProjectileAmountUI()
