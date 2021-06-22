@@ -18,15 +18,19 @@ public abstract class DestructibleObject : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void Update()
+    private void Update()//////////////////////
     {
         if(transform.position.y <= -120f)
+        {
             DestroyObject();
+        }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Ground")//deactivatorObject
+        int singleLayer = (int) Mathf.Log(deactivatorObject.value, 2);
+
+        if(other.gameObject.layer == singleLayer)
         {
             _meshRenderer.material = _disabledMaterial;
             _isEnabled = false;

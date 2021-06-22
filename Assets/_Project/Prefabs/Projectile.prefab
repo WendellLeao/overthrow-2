@@ -129,6 +129,6 @@ MonoBehaviour:
   _meshRenderer: {fileID: 836969101488410413}
   deactivatorObject:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   body: {fileID: 836969101488410415}
   _shootForce: 30

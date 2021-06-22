@@ -3,22 +3,24 @@ using UnityEngine;
 
 public sealed class WayPointSystem : MonoBehaviour
 {    
-    public event Action OnPlayerIsAtTarget;
-    
     [SerializeField] private Transform[] _wayPoints;
     private int _wayPointIndex;
 
     [Header("Movement")]
     [SerializeField] private float _moveSpeed;
     
+    private WayPointDirections _wayPointDirections;
     private WayPointChecker _wayPointChecker;
     
+    public WayPointDirections GetWayPointDirections => _wayPointDirections;
     public WayPointChecker GetWayPointChecker => _wayPointChecker;
+    
     public int GetWayPointIndex => _wayPointIndex;
 
     private void Awake()
     {
         _wayPointChecker = new WayPointChecker(this, _wayPoints);
+        _wayPointDirections = new WayPointDirections(this, _wayPoints);
     }
 
     private void Start()
@@ -44,8 +46,6 @@ public sealed class WayPointSystem : MonoBehaviour
     {
         if (_wayPointChecker.IsAtTheNextTarget())
         {
-            OnPlayerIsAtTarget?.Invoke();
-            
             if (_wayPointChecker.IsAtTheLastTarget())
             {
                 //_wayPointIndex = 0;

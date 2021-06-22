@@ -3247,7 +3247,7 @@ GameObject:
   - component: {fileID: 1165216349}
   - component: {fileID: 1165216348}
   - component: {fileID: 1165216347}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ground1
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -3758,7 +3758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1439141387
 Transform:
   m_ObjectHideFlags: 0
@@ -3767,7 +3767,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439141386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 18.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1515333486}
@@ -3908,7 +3908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1501331793
 Transform:
   m_ObjectHideFlags: 0
@@ -4193,7 +4193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726061173}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -0.2729}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1165216346}
@@ -4299,7 +4299,7 @@ MonoBehaviour:
   - {fileID: 1686758888}
   - {fileID: 2050611831}
   - {fileID: 531211472}
-  _moveSpeed: 5
+  _moveSpeed: 10
 --- !u!4 &1783462828
 Transform:
   m_ObjectHideFlags: 0
@@ -4308,7 +4308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783462826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.799997, y: 2, z: 13}
+  m_LocalPosition: {x: -17.799997, y: 2, z: -7.4483833}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 177912673}
@@ -4458,7 +4458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1906719825
 Transform:
   m_ObjectHideFlags: 0

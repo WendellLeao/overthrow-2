@@ -11,11 +11,6 @@ public sealed class WayPointChecker
         _wayPoints = wayPoints;
     }
 
-    public float GetNextTargetDistance()
-    {
-        return Vector3.Distance(_wayPointSystem.transform.position, _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position);
-    }
-
     public bool IsAtTheNextTarget()
     {
         return _wayPointSystem.transform.position == _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position;
@@ -26,18 +21,13 @@ public sealed class WayPointChecker
         return _wayPointSystem.transform.position == _wayPoints[_wayPoints.Length - 1].position;
     }
 
-    public bool NextTargetIsLeft()
+    public bool NextTargetIsTheLast()
     {
-        return _wayPointSystem.transform.position.x > _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.x;
+        return _wayPointSystem.GetWayPointIndex != _wayPoints.Length - 1;
     }
 
-    public bool NextTargetIsRight()
+    public float GetNextTargetDistance()
     {
-        return _wayPointSystem.transform.position.x < _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.x;
-    }
-
-    public bool NextTargetIsFoward()
-    {
-        return _wayPointSystem.transform.position.z < _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.z;
+        return Vector3.Distance(_wayPointSystem.transform.position, _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position);
     }
 }

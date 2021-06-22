@@ -28,25 +28,35 @@ public sealed class LaserRotation : MonoBehaviour
         {
             _laserContainer.SetActive(true);//Play Animation "HideLaserAnim"
 
-            if(wayPointChecker.NextTargetIsFoward())
-            {
-                transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-                transform.localPosition = new Vector3(0f, 0f, startOffset);
-            }
-            else if(wayPointChecker.NextTargetIsLeft())
-            {
-                transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
-                transform.localPosition = new Vector3(-startOffset, 0f, 0f);
-            }
-            else if(wayPointChecker.NextTargetIsRight())
-            {
-                transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
-                transform.localPosition = new Vector3(startOffset, 0f, 0f);
-            }
+            UpdateLaserRotation();
         }
         else
         {
-            _laserContainer.SetActive(false);//Play Animation "HideLaserAnim"
+            if(wayPointChecker.NextTargetIsTheLast())
+            {
+                _laserContainer.SetActive(false);//Play Animation "HideLaserAnim"
+            }
+        }
+    }
+
+    private void UpdateLaserRotation()
+    {
+        WayPointDirections wayPointDirections = _playerController.GetWayPointSystem.GetWayPointDirections;
+
+        if(wayPointDirections.NextTargetIsFoward())
+        {
+            transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            transform.localPosition = new Vector3(0f, 0f, startOffset);
+        }
+        else if (wayPointDirections.NextTargetIsLeft())
+        {
+            transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+            transform.localPosition = new Vector3(-startOffset, 0f, 0f);
+        }
+        else if (wayPointDirections.NextTargetIsRight())
+        {
+            transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+            transform.localPosition = new Vector3(startOffset, 0f, 0f);
         }
     }
 }
