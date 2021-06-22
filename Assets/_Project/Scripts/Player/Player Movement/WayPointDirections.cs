@@ -25,9 +25,4 @@ public sealed class WayPointDirections
     {
         return _wayPointSystem.transform.position.z < _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.z;
     }
-
-    public bool NextTargetIsBackwards()
-    {
-        return _wayPointSystem.transform.position.z > _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.z;
-    }
 }

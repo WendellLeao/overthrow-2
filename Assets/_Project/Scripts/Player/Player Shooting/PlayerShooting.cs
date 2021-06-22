@@ -3,9 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInputListener))]
 public sealed class PlayerShooting : MonoBehaviour
 {
-    [Header("Player Controller")]
-    [SerializeField] private PlayerController _playerController;
-
     [Header("Projectile")]
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _spawnPosition;

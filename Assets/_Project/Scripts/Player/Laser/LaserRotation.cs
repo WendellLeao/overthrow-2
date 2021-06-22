@@ -32,7 +32,7 @@ public sealed class LaserRotation : MonoBehaviour
         }
         else
         {
-            if(wayPointChecker.NextTargetIsTheLast())
+            if(!wayPointChecker.NextTargetIsTheLast())
             {
                 _laserContainer.SetActive(false);//Play Animation "HideLaserAnim"
             }

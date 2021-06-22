@@ -23,7 +23,7 @@ public sealed class WayPointChecker
 
     public bool NextTargetIsTheLast()
     {
-        return _wayPointSystem.GetWayPointIndex != _wayPoints.Length - 1;
+        return _wayPointSystem.GetWayPointIndex == _wayPoints.Length - 1;
     }
 
     public float GetNextTargetDistance()
