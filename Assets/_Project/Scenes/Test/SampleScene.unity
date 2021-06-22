@@ -703,7 +703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc04a2cd48fcec4bb6f9c3685c8730e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 1783462831}
   _projectilePrefab: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
   _spawnPosition: {fileID: 81888989}
   _projectileAmount: 10

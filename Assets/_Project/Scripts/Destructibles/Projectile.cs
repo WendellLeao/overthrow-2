@@ -13,10 +13,12 @@ public sealed class Projectile : DestructibleObject
     public void Initialize(Transform playerTransform)
     {
         _playerTransform = playerTransform;
+
+        SetRigidbodyVelocity();
     }
-    
-    private void Start()
+
+    private void SetRigidbodyVelocity()
     {
-        body.velocity = _playerTransform.forward * _shootForce;
+        body.velocity = _playerTransform.forward * _shootForce;///
     }
 }

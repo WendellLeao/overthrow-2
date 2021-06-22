@@ -29,7 +29,7 @@ public sealed class PlayerInputListener : MonoBehaviour
 
     public void OnPlayerShoot_PerformShoot()
     {
-        _playerController.GetPlayerShooting.OnPlayerShoot_PerformShoot();
+        _playerController.GetPlayerShooting.PerformShoot();
     }
 
     public Vector2 GetMouseDelta()

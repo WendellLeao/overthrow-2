@@ -11,7 +11,7 @@ public sealed class PlayerShooting : MonoBehaviour
     [SerializeField] private int _projectileAmount;
     private PlayerAmmo _playerAmmo;
 
-    public void OnPlayerShoot_PerformShoot()
+    public void PerformShoot()
     {
         if(_playerAmmo.GetCurrentProjectileAmount > 0)
         {

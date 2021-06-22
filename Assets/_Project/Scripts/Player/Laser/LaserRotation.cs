@@ -24,7 +24,9 @@ public sealed class LaserRotation : MonoBehaviour
     {
         WayPointChecker wayPointChecker = _playerController.GetWayPointSystem.GetWayPointChecker;
         
-        if(wayPointChecker.GetNextTargetDistance() > 10f)
+        float distanceToRotate = 10f;
+
+        if(wayPointChecker.GetNextTargetDistance() > distanceToRotate)
         {
             _laserContainer.SetActive(true);//Play Animation "HideLaserAnim"
 
