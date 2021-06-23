@@ -13,12 +13,14 @@ public sealed class WayPointChecker
 
     public bool IsAtTheNextTarget()
     {
-        return _wayPointSystem.transform.position == _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position;
+        return _wayPointSystem.transform.position.x == _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.x 
+        && _wayPointSystem.transform.position.z == _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.z;
     }
 
     public bool IsAtTheLastTarget()
     {
-        return _wayPointSystem.transform.position == _wayPoints[_wayPoints.Length - 1].position;
+        return _wayPointSystem.transform.position.x == _wayPoints[_wayPoints.Length - 1].transform.position.x 
+        && _wayPointSystem.transform.position.z == _wayPoints[_wayPoints.Length - 1].transform.position.z;
     }
 
     public bool NextTargetIsTheLast()

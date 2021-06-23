@@ -8,17 +8,13 @@ public sealed class Projectile : DestructibleObject
     [Header("Fire")]
     [SerializeField] private float _shootForce;
 
-    private Transform _playerTransform;
-
-    public void Initialize(Transform playerTransform)
+    public void Initialize(Transform spawnPosition)
     {
-        _playerTransform = playerTransform;
-
-        SetRigidbodyVelocity();
+        SetRigidbodyVelocity(spawnPosition);
     }
 
-    private void SetRigidbodyVelocity()
+    private void SetRigidbodyVelocity(Transform spawnPosition)
     {
-        body.velocity = _playerTransform.forward * _shootForce;///
+        body.velocity = spawnPosition.forward * _shootForce;
     }
 }

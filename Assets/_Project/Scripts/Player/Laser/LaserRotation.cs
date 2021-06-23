@@ -43,22 +43,49 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void UpdateLaserRotation()
     {
-        WayPointDirections wayPointDirections = _playerController.GetWayPointSystem.GetWayPointDirections;
+        WayPointDirectionChecker wayPointDirections = _playerController.GetWayPointSystem.GetWayPointDirections;
 
-        if(wayPointDirections.NextTargetIsFoward())
+        switch(wayPointDirections.GetCurrentDirection)
         {
-            transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-            transform.localPosition = new Vector3(0f, 0f, startOffset);
+            case WayPointDirection.FOWARD:
+            {
+                RotateToFoward();
+                break;
+            }
+            case WayPointDirection.LEFT:
+            {
+                RotateToLeft();
+                break;
+            }
+            case WayPointDirection.RIGHT:
+            {
+                RotateToRight();
+                break;
+            }
         }
-        else if (wayPointDirections.NextTargetIsLeft())
-        {
-            transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
-            transform.localPosition = new Vector3(-startOffset, 0f, 0f);
-        }
-        else if (wayPointDirections.NextTargetIsRight())
-        {
-            transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
-            transform.localPosition = new Vector3(startOffset, 0f, 0f);
-        }
+    }
+
+    private void RotateToFoward()
+    {
+        Debug.Log("forward");
+
+        transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        transform.localPosition = new Vector3(0f, transform.localPosition.y, startOffset);
+    }
+
+    private void RotateToLeft()
+    {
+        Debug.Log("left");
+
+        transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+        transform.localPosition = new Vector3(-startOffset, transform.localPosition.y, 0f);
+    }
+
+    private void RotateToRight()
+    {
+        Debug.Log("right");
+
+        transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+        transform.localPosition = new Vector3(startOffset, transform.localPosition.y, 0f);
     }
 }

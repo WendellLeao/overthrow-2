@@ -6,22 +6,6 @@
             "id": "0350dd04-1e39-4161-83dc-898946436fc0",
             "actions": [
                 {
-                    "name": "HorizontalMouse",
-                    "type": "PassThrough",
-                    "id": "e2bf92c2-63a9-4899-aa81-844fb9e7badb",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "VerticalMouse",
-                    "type": "PassThrough",
-                    "id": "4b686f01-6005-4840-aa3b-bbbff456dc24",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Shoot",
                     "type": "Button",
                     "id": "cae2ce4c-c0a2-42ce-b2e1-798814e94450",
@@ -36,20 +20,17 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "fe6bf8e7-7915-4871-b1b8-d57e2bbdd47c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "9673b706-612a-420e-a515-b6643cd1b152",
-                    "path": "<Mouse>/delta/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HorizontalMouse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "8cce268a-bbfa-45e3-ba71-abf6611220eb",
@@ -63,23 +44,23 @@
                 },
                 {
                     "name": "",
-                    "id": "54f10131-3a44-4658-8ac4-bdac6863d169",
-                    "path": "<Mouse>/position/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "VerticalMouse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "00f3d276-ecf8-4c24-9d34-f322621a1383",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "MouseLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c2767b6-03c4-44e6-946d-de7f4e6f7596",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

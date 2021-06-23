@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInputListener))]
 public sealed class PlayerShooting : MonoBehaviour
 {
+    [SerializeField] private PlayerController _playerController;
+    
     [Header("Projectile")]
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _spawnPosition;
@@ -15,10 +17,10 @@ public sealed class PlayerShooting : MonoBehaviour
     {
         if(_playerAmmo.GetCurrentProjectileAmount > 0)
         {
-            GameObject cloneProjectile = Instantiate(_projectilePrefab, _spawnPosition.position, Quaternion.identity);//_spawnPosition.localRotation
+            GameObject cloneProjectile = Instantiate(_projectilePrefab, _spawnPosition.position, _spawnPosition.rotation);
             
-            cloneProjectile.GetComponent<Projectile>().Initialize(this.transform);
-            
+            cloneProjectile.GetComponent<Projectile>().Initialize(_spawnPosition);
+
             _playerAmmo.DecreaseAmmo();
         }
     }

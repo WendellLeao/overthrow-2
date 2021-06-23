@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Player/Player Input System/PlayerInputSystem.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/_Project/InputActions/Player/PlayerInputSystem.inputactions'
 
 using System;
 using System.Collections;
@@ -19,22 +19,6 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
             ""id"": ""0350dd04-1e39-4161-83dc-898946436fc0"",
             ""actions"": [
                 {
-                    ""name"": ""HorizontalMouse"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""e2bf92c2-63a9-4899-aa81-844fb9e7badb"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""VerticalMouse"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""4b686f01-6005-4840-aa3b-bbbff456dc24"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""cae2ce4c-c0a2-42ce-b2e1-798814e94450"",
@@ -49,20 +33,17 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""fe6bf8e7-7915-4871-b1b8-d57e2bbdd47c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""9673b706-612a-420e-a515-b6643cd1b152"",
-                    ""path"": ""<Mouse>/delta/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""HorizontalMouse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""8cce268a-bbfa-45e3-ba71-abf6611220eb"",
@@ -76,23 +57,23 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""54f10131-3a44-4658-8ac4-bdac6863d169"",
-                    ""path"": ""<Mouse>/position/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""VerticalMouse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""00f3d276-ecf8-4c24-9d34-f322621a1383"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MouseLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c2767b6-03c4-44e6-946d-de7f4e6f7596"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -103,10 +84,9 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
 }");
         // CharacterControls
         m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
-        m_CharacterControls_HorizontalMouse = m_CharacterControls.FindAction("HorizontalMouse", throwIfNotFound: true);
-        m_CharacterControls_VerticalMouse = m_CharacterControls.FindAction("VerticalMouse", throwIfNotFound: true);
         m_CharacterControls_Shoot = m_CharacterControls.FindAction("Shoot", throwIfNotFound: true);
         m_CharacterControls_MouseLook = m_CharacterControls.FindAction("MouseLook", throwIfNotFound: true);
+        m_CharacterControls_MousePosition = m_CharacterControls.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -156,18 +136,16 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
     // CharacterControls
     private readonly InputActionMap m_CharacterControls;
     private ICharacterControlsActions m_CharacterControlsActionsCallbackInterface;
-    private readonly InputAction m_CharacterControls_HorizontalMouse;
-    private readonly InputAction m_CharacterControls_VerticalMouse;
     private readonly InputAction m_CharacterControls_Shoot;
     private readonly InputAction m_CharacterControls_MouseLook;
+    private readonly InputAction m_CharacterControls_MousePosition;
     public struct CharacterControlsActions
     {
         private @PlayerInputSystem m_Wrapper;
         public CharacterControlsActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
-        public InputAction @HorizontalMouse => m_Wrapper.m_CharacterControls_HorizontalMouse;
-        public InputAction @VerticalMouse => m_Wrapper.m_CharacterControls_VerticalMouse;
         public InputAction @Shoot => m_Wrapper.m_CharacterControls_Shoot;
         public InputAction @MouseLook => m_Wrapper.m_CharacterControls_MouseLook;
+        public InputAction @MousePosition => m_Wrapper.m_CharacterControls_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -177,43 +155,36 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_CharacterControlsActionsCallbackInterface != null)
             {
-                @HorizontalMouse.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnHorizontalMouse;
-                @HorizontalMouse.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnHorizontalMouse;
-                @HorizontalMouse.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnHorizontalMouse;
-                @VerticalMouse.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnVerticalMouse;
-                @VerticalMouse.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnVerticalMouse;
-                @VerticalMouse.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnVerticalMouse;
                 @Shoot.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
                 @MouseLook.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
                 @MouseLook.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
                 @MouseLook.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
+                @MousePosition.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMousePosition;
             }
             m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @HorizontalMouse.started += instance.OnHorizontalMouse;
-                @HorizontalMouse.performed += instance.OnHorizontalMouse;
-                @HorizontalMouse.canceled += instance.OnHorizontalMouse;
-                @VerticalMouse.started += instance.OnVerticalMouse;
-                @VerticalMouse.performed += instance.OnVerticalMouse;
-                @VerticalMouse.canceled += instance.OnVerticalMouse;
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
                 @MouseLook.started += instance.OnMouseLook;
                 @MouseLook.performed += instance.OnMouseLook;
                 @MouseLook.canceled += instance.OnMouseLook;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
             }
         }
     }
     public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
     public interface ICharacterControlsActions
     {
-        void OnHorizontalMouse(InputAction.CallbackContext context);
-        void OnVerticalMouse(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnMouseLook(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }
