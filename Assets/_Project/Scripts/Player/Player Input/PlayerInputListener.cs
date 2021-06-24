@@ -9,6 +9,11 @@ public sealed class PlayerInputListener : MonoBehaviour
 
     private PlayerInputSystem.CharacterControlsActions _characterControls;
 
+    public void OnPlayerShoot_PerformShoot()
+    {
+        _playerController.GetPlayerShooting.PerformShoot();
+    }
+
     private void Awake()
     {
         _playerInputSystem = new PlayerInputSystem();
@@ -25,11 +30,6 @@ public sealed class PlayerInputListener : MonoBehaviour
     private void OnDisable()
     {
         _playerInputSystem.Disable();
-    }
-
-    public void OnPlayerShoot_PerformShoot()
-    {
-        _playerController.GetPlayerShooting.PerformShoot();
     }
 
     public Vector2 GetMouseDelta()

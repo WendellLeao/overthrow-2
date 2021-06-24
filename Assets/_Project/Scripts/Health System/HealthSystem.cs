@@ -2,10 +2,9 @@ using System;
 
 public sealed class HealthSystem
 {
-    private int _maxHealthAmount;
-    private int _currentHealthAmount;
-
     public event Action OnHealthChanged;
+
+    private int _maxHealthAmount, _currentHealthAmount;
 
     public int GetCurrentHealthAmount => _currentHealthAmount;
     public int GetMaxHealthAmount => _maxHealthAmount;
