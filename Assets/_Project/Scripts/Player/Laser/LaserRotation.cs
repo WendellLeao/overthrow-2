@@ -67,25 +67,19 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void RotateToFoward()
     {
-        Debug.Log("forward");
-
         transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         transform.localPosition = new Vector3(0f, transform.localPosition.y, startOffset);
     }
 
     private void RotateToLeft()
     {
-        Debug.Log("left");
-
-        transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+        transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
         transform.localPosition = new Vector3(-startOffset, transform.localPosition.y, 0f);
     }
 
     private void RotateToRight()
     {
-        Debug.Log("right");
-
-        transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+        transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
         transform.localPosition = new Vector3(startOffset, transform.localPosition.y, 0f);
     }
 }

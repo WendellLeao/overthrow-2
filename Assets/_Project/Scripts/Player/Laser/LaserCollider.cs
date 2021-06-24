@@ -2,6 +2,9 @@ using UnityEngine;
 
 public sealed class LaserCollider : MonoBehaviour
 {
+    [Header("Player Controller")]
+    [SerializeField] private PlayerController _playerController;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent<DestructibleObject>(out DestructibleObject destructibleObject))
@@ -10,7 +13,7 @@ public sealed class LaserCollider : MonoBehaviour
             {
                 if(other.TryGetComponent<Cube>(out Cube cube))
                 {
-                    //Debug.Log("You Lose!");
+                    _playerController.GetPlayerDamageHandler.GetPlayerHealthSystem.Damage(20);
                 }
             }
             else

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public sealed class WayPointSystem : MonoBehaviour
 {    
+    public event Action OnPlayerIsAtLastTarget;
+
     [SerializeField] private Transform[] _wayPoints;
     private int _wayPointIndex;
 
@@ -61,7 +63,7 @@ public sealed class WayPointSystem : MonoBehaviour
         {
             if (_wayPointChecker.IsAtTheLastTarget())
             {
-                Debug.Log("You Won!");
+                OnPlayerIsAtLastTarget?.Invoke();
             }
             else
             {
