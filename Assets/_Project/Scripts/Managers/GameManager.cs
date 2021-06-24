@@ -16,11 +16,11 @@ public sealed class GameManager : MonoBehaviour
     {
         if(IsPaused())
         {
-            ResumeGame();
+            HidePausePanel();
         }
         else
         {
-            PauseGame();
+            ShowPausePanel();
         }
     }
 
@@ -28,12 +28,7 @@ public sealed class GameManager : MonoBehaviour
     {
         _currentGameState = GameState.PLAYING;
         
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void Start()
-    {
-        Time.timeScale = 1f;
+        ResumeGame();
     }
 
     private void OnEnable()
@@ -50,27 +45,20 @@ public sealed class GameManager : MonoBehaviour
         _playerController.GetPlayerInput.OnGamePaused -= OnGamePaused_HandlePauseGame;
     }
 
-    void Update()
+    private void ShowPausePanel()
     {
-        Debug.Log(_currentGameState);
-    }
-
-    private void PauseGame()
-    {
+        StopGame();
+        
         SetGameState(GameState.PAUSED);
 
         CanvasAssets.instance.GetPausePanelObject.SetActive(true);
     }
 
-    private void ResumeGame()
+    private void HidePausePanel()
     {
-        Time.timeScale = 1f;
+        ResumeGame();
 
-        _currentGameState = GameState.PLAYING;
-
-        OnGameStateChanged?.Invoke();
-
-        Cursor.lockState = CursorLockMode.Locked;
+        SetGameState(GameState.PLAYING);
 
         CanvasAssets.instance.GetPausePanelObject.SetActive(false);
     }
@@ -82,6 +70,8 @@ public sealed class GameManager : MonoBehaviour
 
     private void OnPlayerIsAtLastTarget_LevelComplete()
     {
+        StopGame();
+
         SetGameState(GameState.WIN);
 
         CanvasAssets.instance.GetWinPanelObject.SetActive(true);
@@ -89,19 +79,31 @@ public sealed class GameManager : MonoBehaviour
 
     private void OnPlayerDied_LoseGame()
     {
+        StopGame();
+
         SetGameState(GameState.LOSE);
 
         CanvasAssets.instance.GetGameOverPanelObject.SetActive(true);
     }
 
-    private void SetGameState(GameState newGameState)
+    private void StopGame()
     {
         Time.timeScale = 0f;
 
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void SetGameState(GameState newGameState)
+    {
         _currentGameState = newGameState;
 
         OnGameStateChanged?.Invoke();
-
-        Cursor.lockState = CursorLockMode.None;
     }
 }

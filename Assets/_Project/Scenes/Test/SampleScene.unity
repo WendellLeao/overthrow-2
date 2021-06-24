@@ -5189,6 +5189,7 @@ MonoBehaviour:
   _playerInput: {fileID: 177912671}
   _wayPointSystem: {fileID: 1783462827}
   _playerShooting: {fileID: 177912670}
+  _gameManager: {fileID: 1619920499}
 --- !u!1 &1938102738
 GameObject:
   m_ObjectHideFlags: 0
