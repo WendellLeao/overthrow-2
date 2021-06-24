@@ -41,6 +41,14 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6dd3146-f449-4c0b-8622-7739ced8fc37"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -76,6 +84,17 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b55ee52-59b6-4763-8451-7f7dde741c00"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -87,6 +106,7 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         m_CharacterControls_Shoot = m_CharacterControls.FindAction("Shoot", throwIfNotFound: true);
         m_CharacterControls_MouseLook = m_CharacterControls.FindAction("MouseLook", throwIfNotFound: true);
         m_CharacterControls_MousePosition = m_CharacterControls.FindAction("MousePosition", throwIfNotFound: true);
+        m_CharacterControls_PauseGame = m_CharacterControls.FindAction("PauseGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,6 +159,7 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_CharacterControls_Shoot;
     private readonly InputAction m_CharacterControls_MouseLook;
     private readonly InputAction m_CharacterControls_MousePosition;
+    private readonly InputAction m_CharacterControls_PauseGame;
     public struct CharacterControlsActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -146,6 +167,7 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         public InputAction @Shoot => m_Wrapper.m_CharacterControls_Shoot;
         public InputAction @MouseLook => m_Wrapper.m_CharacterControls_MouseLook;
         public InputAction @MousePosition => m_Wrapper.m_CharacterControls_MousePosition;
+        public InputAction @PauseGame => m_Wrapper.m_CharacterControls_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -164,6 +186,9 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                 @MousePosition.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMousePosition;
+                @PauseGame.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
             }
             m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -177,6 +202,9 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
             }
         }
     }
@@ -186,5 +214,6 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnMouseLook(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
 }

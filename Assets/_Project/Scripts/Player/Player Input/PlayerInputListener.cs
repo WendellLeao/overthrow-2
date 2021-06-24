@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public sealed class PlayerInputListener : MonoBehaviour
 {
+    public event Action OnPlayerShot, OnGamePaused;
+    
     [Header("Player Controller")]
     [SerializeField] private PlayerController _playerController;
 
@@ -9,17 +12,13 @@ public sealed class PlayerInputListener : MonoBehaviour
 
     private PlayerInputSystem.CharacterControlsActions _characterControls;
 
-    public void OnPlayerShoot_PerformShoot()
-    {
-        _playerController.GetPlayerShooting.PerformShoot();
-    }
-
     private void Awake()
     {
         _playerInputSystem = new PlayerInputSystem();
         _characterControls = _playerInputSystem.CharacterControls;
 
-        _characterControls.Shoot.performed += _ => OnPlayerShoot_PerformShoot();
+        _characterControls.PauseGame.performed += _ => OnGamePaused?.Invoke();
+        _characterControls.Shoot.performed += _ => OnPlayerShot?.Invoke();
     }
 
     private void OnEnable()

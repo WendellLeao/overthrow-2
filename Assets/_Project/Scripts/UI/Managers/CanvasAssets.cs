@@ -7,6 +7,7 @@ public sealed class CanvasAssets : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject _gameOverPanelObject;
     [SerializeField] private GameObject _winPanelObject;
+    [SerializeField] private GameObject pausePanelObject;
 
     [Header("Health System UI")]
     [SerializeField] private HealthBarUI _healthBarUI;
@@ -20,6 +21,7 @@ public sealed class CanvasAssets : MonoBehaviour
 
     public GameObject GetGameOverPanelObject => _gameOverPanelObject;
     public GameObject GetWinPanelObject => _winPanelObject;
+    public GameObject GetPausePanelObject => pausePanelObject;
 
     private void Awake()
     {

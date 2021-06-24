@@ -1,11 +1,28 @@
+using System;
 using UnityEngine;
 
 public sealed class GameManager : MonoBehaviour
 {
+    public event Action OnGameStateChanged;
+    
     [Header("Player Controller")]
     [SerializeField] private PlayerController _playerController;
     
     private GameState _currentGameState;
+
+    public GameState GetCurrentGameState => _currentGameState;
+
+    public void OnGamePaused_HandlePauseGame()
+    {
+        if(IsPaused())
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
 
     private void Awake()
     {
@@ -23,17 +40,44 @@ public sealed class GameManager : MonoBehaviour
     {
         _playerController.GetWayPointSystem.OnPlayerIsAtLastTarget += OnPlayerIsAtLastTarget_LevelComplete;
         _playerController.GetPlayerDamageHandler.OnPlayerDied += OnPlayerDied_LoseGame;
+        _playerController.GetPlayerInput.OnGamePaused += OnGamePaused_HandlePauseGame;
     }
 
     private void OnDisable()
     {
         _playerController.GetWayPointSystem.OnPlayerIsAtLastTarget -= OnPlayerIsAtLastTarget_LevelComplete;
         _playerController.GetPlayerDamageHandler.OnPlayerDied -= OnPlayerDied_LoseGame;
+        _playerController.GetPlayerInput.OnGamePaused -= OnGamePaused_HandlePauseGame;
     }
 
     void Update()
     {
         Debug.Log(_currentGameState);
+    }
+
+    private void PauseGame()
+    {
+        SetGameState(GameState.PAUSED);
+
+        CanvasAssets.instance.GetPausePanelObject.SetActive(true);
+    }
+
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+
+        _currentGameState = GameState.PLAYING;
+
+        OnGameStateChanged?.Invoke();
+
+        Cursor.lockState = CursorLockMode.Locked;
+
+        CanvasAssets.instance.GetPausePanelObject.SetActive(false);
+    }
+
+    private bool IsPaused()
+    {
+        return Time.timeScale == 0f;
     }
 
     private void OnPlayerIsAtLastTarget_LevelComplete()
@@ -55,6 +99,8 @@ public sealed class GameManager : MonoBehaviour
         Time.timeScale = 0f;
 
         _currentGameState = newGameState;
+
+        OnGameStateChanged?.Invoke();
 
         Cursor.lockState = CursorLockMode.None;
     }

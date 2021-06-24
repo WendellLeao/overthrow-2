@@ -13,7 +13,22 @@ public sealed class PlayerShooting : MonoBehaviour
     [SerializeField] private int _projectileAmount;
     private PlayerAmmo _playerAmmo;
 
-    public void PerformShoot()
+    private void OnEnable()
+    {
+        _playerController.GetPlayerInput.OnPlayerShot += OnPlayerShot_PerformShoot;
+    }
+
+    private void OnDisable()
+    {
+        _playerController.GetPlayerInput.OnPlayerShot -= OnPlayerShot_PerformShoot;
+    }
+    
+    private void Start()
+    {
+        _playerAmmo = new PlayerAmmo(_projectileAmount);
+    }
+
+    private void OnPlayerShot_PerformShoot()
     {
         if(_playerAmmo.GetCurrentProjectileAmount > 0)
         {
@@ -23,10 +38,5 @@ public sealed class PlayerShooting : MonoBehaviour
 
             _playerAmmo.DecreaseAmmo();
         }
-    }
-
-    private void Start()
-    {
-        _playerAmmo = new PlayerAmmo(_projectileAmount);
     }
 }
