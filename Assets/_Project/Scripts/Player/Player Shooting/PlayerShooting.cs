@@ -12,20 +12,7 @@ public sealed class PlayerShooting : MonoBehaviour
     [Header("Ammo")]
     [SerializeField] private int _projectileAmount;
 
-    [Header("Listening to events")]
-    [SerializeField] private GameEvent _playerShootEvent;
-
     private PlayerAmmo _playerAmmo;
-
-    private void OnEnable()
-    {
-        _playerShootEvent.OnEventRaised += OnPlayerShot_PerformShoot;
-    }
-
-    private void OnDisable()
-    {
-        _playerShootEvent.OnEventRaised -= OnPlayerShot_PerformShoot;
-    }
     
     private void Start()
     {

@@ -64,7 +64,7 @@ public sealed class WayPointSystem : MonoBehaviour
         {
             if (_wayPointChecker.IsAtTheLastTarget())
             {
-                _levelCompleteEvent.OnEventRaised?.Invoke();
+                _levelCompleteEvent.Raise();
             }
             else
             {

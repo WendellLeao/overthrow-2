@@ -23,7 +23,7 @@ public sealed class HealthSystem : ScriptableObject
             _currentHealthAmount = 0;
         }
 
-        _healthChangeEvent.OnEventRaised?.Invoke();
+        _healthChangeEvent.Raise();
     }
 
     public void ResetCurrentHealthAmount()

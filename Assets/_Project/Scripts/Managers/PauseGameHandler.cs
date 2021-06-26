@@ -8,9 +8,6 @@ public sealed class PauseGameHandler : MonoBehaviour
     [Header("Invoking events")]
     [SerializeField] private GameEvent _gameStateChangeEvent;
 
-    [Header("Listening to events")]
-    [SerializeField] private GameEvent _pauseGameEvent;
-
     [Header("UI")]
     [SerializeField] private GameObject _pausePanelObject;
     
@@ -25,17 +22,7 @@ public sealed class PauseGameHandler : MonoBehaviour
         _pausePanelObject.SetActive(false);
     }
 
-    private void OnEnable()
-    {
-        _pauseGameEvent.OnEventRaised += OnGamePaused_HandlePauseGame;
-    }
-
-    private void OnDisable()
-    {
-        _pauseGameEvent.OnEventRaised -= OnGamePaused_HandlePauseGame;
-    }
-
-    private void OnGamePaused_HandlePauseGame()
+    public void OnGamePaused_HandlePauseGame()
     {
         if(CanPauseGame())
         {
@@ -65,7 +52,7 @@ public sealed class PauseGameHandler : MonoBehaviour
     {
         _gameStateScriptableObject._currentGameState = newGameState;
 
-        _gameStateChangeEvent.OnEventRaised?.Invoke();
+        _gameStateChangeEvent.Raise();
     }
 
     private bool IsPaused()

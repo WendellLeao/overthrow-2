@@ -16,8 +16,8 @@ public sealed class PlayerInputListener : ScriptableObject
         _playerInputSystem = new PlayerInputSystem();
         _characterControls = _playerInputSystem.CharacterControls;
 
-        _characterControls.PauseGame.performed += _ => _pauseGameEvent.OnEventRaised?.Invoke();
-        _characterControls.Shoot.performed += _ => _playerShootEvent.OnEventRaised?.Invoke();
+        _characterControls.PauseGame.performed += _ => _pauseGameEvent.Raise();
+        _characterControls.Shoot.performed += _ => _playerShootEvent.Raise();
         
         _playerInputSystem.Enable();
     }
