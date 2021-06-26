@@ -10,9 +10,4 @@ public sealed class GameStateScriptableOject : ScriptableObject
         get{return _currentGameState;}
         set{_currentGameState = value;}
     }
-
-    private void OnEnable()
-    {
-        _currentGameState = GameState.PLAYING;
-    }
 }

@@ -6,7 +6,7 @@ public sealed class PlayerMouseLook : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
 
     [Header("Mouse Look")]
-    [SerializeField] private Transform _cameraTransform;///////////////////////
+    [SerializeField] private Transform _cameraTransform;
     
     [SerializeField] private float _horizontalSensitivity, _verticalSensitivy;
     

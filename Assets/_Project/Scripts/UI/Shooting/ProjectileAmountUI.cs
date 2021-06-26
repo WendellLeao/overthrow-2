@@ -7,7 +7,7 @@ public sealed class ProjectileAmountUI : MonoBehaviour
 
     public void UpdateProjectileAmountUI(int projectileAmount)
     {
-        _projectileAmountText.text = "Balls: " + projectileAmount.ToString();
+        _projectileAmountText.text = "Ammo: " + projectileAmount.ToString();
 
         UpdateProjectileAmountColorUI(projectileAmount);
     }
