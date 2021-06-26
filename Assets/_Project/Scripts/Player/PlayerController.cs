@@ -8,21 +8,24 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField] private PlayerShooting _playerShooting;
     [SerializeField] private PlayerInputListener _playerInput;
 
+    [Header("Listening to events")]
+    [SerializeField] private GameEvent _gameStateChangeEvent;
+
+    [Header("Game Manager")]
+    [SerializeField] private GameManager _gameManager;
+
     public PlayerDamageHandler GetPlayerDamageHandler => _playerDamageHandler;
     public WayPointSystem GetWayPointSystem => _wayPointSystem;
-    public PlayerShooting GetPlayerShooting => _playerShooting;
     public PlayerInputListener GetPlayerInput => _playerInput;
-
-    [SerializeField] private GameManager _gameManager;
 
     private void OnEnable()
     {
-        _gameManager.OnGameStateChanged += OnGameStateChanged_HandlePlayerComponents;
+        _gameStateChangeEvent.OnEventRaised += OnGameStateChanged_HandlePlayerComponents;
     }
 
     private void OnDisable()
     {
-        _gameManager.OnGameStateChanged -= OnGameStateChanged_HandlePlayerComponents;
+        _gameStateChangeEvent.OnEventRaised -= OnGameStateChanged_HandlePlayerComponents;
     }
 
     private void OnGameStateChanged_HandlePlayerComponents()

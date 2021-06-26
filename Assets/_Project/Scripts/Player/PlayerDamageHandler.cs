@@ -6,31 +6,29 @@ public sealed class PlayerDamageHandler : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
 
     [Header("Health System")]
-    [SerializeField] private int _maxHealthAmount;
+    [SerializeField] private HealthSystem _playerHealthSystem;
 
-    [SerializeField] private HealthBarUI _healthBarUI;
-
-    [Header("Listening on channel")]
+    [Header("Invoking events")]
     [SerializeField] private GameEvent _playerDeathEvent;
-    
-    private HealthSystem _playerHealthSystem;
+
+    [Header("Listening to events")]
+    [SerializeField] private GameEvent _healthChangeEvent;
 
     public HealthSystem GetPlayerHealthSystem => _playerHealthSystem;
 
-    private void Awake()
-    {
-        _playerHealthSystem = new HealthSystem(_maxHealthAmount);
-        _healthBarUI.Initialize(_playerHealthSystem);
-    }
-
     private void OnEnable()
     {
-        _playerHealthSystem.OnHealthChanged += OnHealthChanged_CheckIfPlayerIsDead;
+        _healthChangeEvent.OnEventRaised += OnHealthChanged_CheckIfPlayerIsDead;
     }
 
     private void OnDisable()
     {
-        _playerHealthSystem.OnHealthChanged -= OnHealthChanged_CheckIfPlayerIsDead;
+        _healthChangeEvent.OnEventRaised -= OnHealthChanged_CheckIfPlayerIsDead;
+    }
+
+    private void Start()
+    {
+        _playerHealthSystem.ResetCurrentHealthAmount();
     }
 
     private void OnHealthChanged_CheckIfPlayerIsDead()

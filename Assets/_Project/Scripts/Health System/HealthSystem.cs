@@ -1,19 +1,18 @@
-using System;
+using UnityEngine;
 
-public sealed class HealthSystem
+[CreateAssetMenu(fileName = "NewHealthSystem", menuName = "HealthSystem/New Health System")]
+public sealed class HealthSystem : ScriptableObject
 {
-    public event Action OnHealthChanged;
+    [Header("Variable")]
+    [SerializeField] private int _maxHealthAmount;
 
-    private int _maxHealthAmount, _currentHealthAmount;
+    [Header("Invoking events")]
+    [SerializeField] private GameEvent _healthChangeEvent;
 
-    public int GetCurrentHealthAmount => _currentHealthAmount;
+    private int _currentHealthAmount;
+
     public int GetMaxHealthAmount => _maxHealthAmount;
-
-    public HealthSystem(int maxHealthSystem)
-    {
-        _maxHealthAmount = maxHealthSystem;
-        _currentHealthAmount = _maxHealthAmount;
-    }
+    public int GetCurrentHealthAmount => _currentHealthAmount;
 
     public void Damage(int damageAmount)
     {
@@ -24,6 +23,11 @@ public sealed class HealthSystem
             _currentHealthAmount = 0;
         }
 
-        OnHealthChanged?.Invoke();
+        _healthChangeEvent.OnEventRaised?.Invoke();
+    }
+
+    public void ResetCurrentHealthAmount()
+    {
+        _currentHealthAmount = _maxHealthAmount;
     }
 }

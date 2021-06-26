@@ -3,22 +3,23 @@ using UnityEngine.UI;
 
 public sealed class HealthBarUI : MonoBehaviour
 {
+    [Header("Player Health System")]
+    [SerializeField] private HealthSystem _healthSystem;
+
+    [Header("UI")]
     [SerializeField] private Image _healthBarImage;
-    private HealthSystem _healthSystem;
 
-    public void Initialize(HealthSystem healthSystem)
-    {
-        _healthSystem = healthSystem;
-    }
+    [Header("Listening to events")]
+    [SerializeField] private GameEvent _healthChangeEvent;
 
-    private void Start()
+    private void OnEnable()
     {
-        _healthSystem.OnHealthChanged += OnHealthChanged_UpdateHealthBar;
+        _healthChangeEvent.OnEventRaised += OnHealthChanged_UpdateHealthBar;
     }
 
     private void OnDisable()
     {
-        _healthSystem.OnHealthChanged -= OnHealthChanged_UpdateHealthBar;
+        _healthChangeEvent.OnEventRaised -= OnHealthChanged_UpdateHealthBar;
     }
 
     private void OnHealthChanged_UpdateHealthBar()

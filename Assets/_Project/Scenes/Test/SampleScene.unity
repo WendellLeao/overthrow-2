@@ -2099,7 +2099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745c8f398d32b8f4897b652f45271e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 1783462831}
+  _playerHealthSystem: {fileID: 11400000, guid: b3249c6c5639f3449abed719c28bf6fe, type: 2}
 --- !u!65 &537757658
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4682,7 +4682,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f721060617a17468e31979c2f52af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthSystem: {fileID: 11400000, guid: b3249c6c5639f3449abed719c28bf6fe, type: 2}
   _healthBarImage: {fileID: 1503174602}
+  _healthChangeEvent: {fileID: 11400000, guid: e86107ef1697cb24ebff56ae5bbfde8f, type: 2}
 --- !u!1 &1619920498
 GameObject:
   m_ObjectHideFlags: 0
@@ -4715,6 +4717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameOverPanelObject: {fileID: 2016918618}
   _winPanelObject: {fileID: 1059832005}
+  _gameStateChangeEvent: {fileID: 11400000, guid: a89c654e0fd0e664f941958185b6e740, type: 2}
   _playerDeathEvent: {fileID: 11400000, guid: 04126153c6b6393458a2324848962468, type: 2}
   _pauseGameEvent: {fileID: 11400000, guid: d8790f8438df20b4e8fdcbad37d2eb8e, type: 2}
   _levelCompleteEvent: {fileID: 11400000, guid: 2b283818bf81a354fabae24d26dfa937, type: 2}
@@ -4744,6 +4747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf8906f1a4c78d478de9dde0beef638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameManager: {fileID: 1619920499}
   _pauseGameEvent: {fileID: 11400000, guid: d8790f8438df20b4e8fdcbad37d2eb8e, type: 2}
   _pausePanelObject: {fileID: 547616723}
 --- !u!1 &1632213781
@@ -5161,9 +5165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 1783462831}
-  _maxHealthAmount: 100
-  _healthBarUI: {fileID: 1555284333}
+  _playerHealthSystem: {fileID: 11400000, guid: b3249c6c5639f3449abed719c28bf6fe, type: 2}
   _playerDeathEvent: {fileID: 11400000, guid: 04126153c6b6393458a2324848962468, type: 2}
+  _healthChangeEvent: {fileID: 11400000, guid: e86107ef1697cb24ebff56ae5bbfde8f, type: 2}
 --- !u!114 &1783462831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5180,6 +5184,7 @@ MonoBehaviour:
   _wayPointSystem: {fileID: 1783462827}
   _playerShooting: {fileID: 177912670}
   _playerInput: {fileID: 11400000, guid: 6142d501afa9b1842a12b5bd8a081cda, type: 2}
+  _gameStateChangeEvent: {fileID: 11400000, guid: a89c654e0fd0e664f941958185b6e740, type: 2}
   _gameManager: {fileID: 1619920499}
 --- !u!1 &1938102738
 GameObject:
@@ -5605,6 +5610,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2136817878}
     m_Modifications:
+    - target: {fileID: 4282546929663689693, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282546930220173470, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282546930476936286, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282546930619997286, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282546930916130422, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282546931002487519, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282546931059888288, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282546931150701022, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6482479068379885120, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
       propertyPath: m_RootOrder
       value: 0

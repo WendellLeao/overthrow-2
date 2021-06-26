@@ -2,6 +2,9 @@ using UnityEngine;
 
 public sealed class PauseGameHandler : MonoBehaviour
 {
+    [Header("Game Manager")]
+    [SerializeField] private GameManager _gameManager;
+
     [Header("Listening on channels")]
     [SerializeField] private GameEvent _pauseGameEvent;
 
@@ -13,6 +16,8 @@ public sealed class PauseGameHandler : MonoBehaviour
         Time.timeScale = 1f;
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        _gameManager.SetGameState(GameState.PLAYING);
 
         _pausePanelObject.SetActive(false);
     }
@@ -29,13 +34,16 @@ public sealed class PauseGameHandler : MonoBehaviour
 
     private void OnGamePaused_HandlePauseGame()
     {
-        if(IsPaused())
+        if(_gameManager.GetCurrentGameState == GameState.PLAYING)
         {
-            HidePausePanel();
-        }
-        else
-        {
-            ShowPausePanel();
+            if(IsPaused())
+            {
+                HidePausePanel();
+            }
+            else
+            {
+                ShowPausePanel();
+            }
         }
     }
 
@@ -44,6 +52,8 @@ public sealed class PauseGameHandler : MonoBehaviour
         Time.timeScale = 0f;
 
         Cursor.lockState = CursorLockMode.None;
+
+        _gameManager.SetGameState(GameState.PAUSED);
         
         _pausePanelObject.SetActive(true);
     }

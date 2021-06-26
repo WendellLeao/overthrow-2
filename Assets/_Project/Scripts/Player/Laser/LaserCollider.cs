@@ -2,8 +2,8 @@ using UnityEngine;
 
 public sealed class LaserCollider : MonoBehaviour
 {
-    [Header("Player Controller")]
-    [SerializeField] private PlayerController _playerController;
+    [Header("Player Health System")]
+    [SerializeField] private HealthSystem _playerHealthSystem;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,7 +13,7 @@ public sealed class LaserCollider : MonoBehaviour
             {
                 if(other.TryGetComponent<Cube>(out Cube cube))
                 {
-                    _playerController.GetPlayerDamageHandler.GetPlayerHealthSystem.Damage(20);
+                    _playerHealthSystem.Damage(20);
                 }
             }
             else

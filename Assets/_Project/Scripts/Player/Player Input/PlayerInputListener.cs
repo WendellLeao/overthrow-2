@@ -1,15 +1,15 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewPlayerInputListener", menuName = "Player/Player Input Listener")]
+[CreateAssetMenu(fileName = "NewPlayerInputListener", menuName = "Input/Player Input Listener")]
 public sealed class PlayerInputListener : ScriptableObject
 {
+    [Header("Invoke events")]
+    [SerializeField] private GameEvent _pauseGameEvent;
+    [SerializeField] private GameEvent _playerShootEvent;
+
     private PlayerInputSystem _playerInputSystem;
 
     private PlayerInputSystem.CharacterControlsActions _characterControls;
-
-    [Header("Invoke channels")]
-    [SerializeField] private GameEvent _pauseGameEvent;
-    [SerializeField] private GameEvent _playerShootEvent;
 
     private void OnEnable()
     {

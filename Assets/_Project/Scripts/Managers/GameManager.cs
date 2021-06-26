@@ -1,15 +1,15 @@
-using System;
 using UnityEngine;
 
 public sealed class GameManager : MonoBehaviour
 {
-    public event Action OnGameStateChanged;
-
     [Header("Panels")]
     [SerializeField] private GameObject _gameOverPanelObject;
     [SerializeField] private GameObject _winPanelObject;
+
+    [Header("Invoking events")]
+    [SerializeField] private GameEvent _gameStateChangeEvent;
     
-    [Header("Listening on channels")]
+    [Header("Listening to events")]
     [SerializeField] private GameEvent _playerDeathEvent;
     [SerializeField] private GameEvent _pauseGameEvent;
     [SerializeField] private GameEvent _levelCompleteEvent;
@@ -17,6 +17,13 @@ public sealed class GameManager : MonoBehaviour
     private GameState _currentGameState;
 
     public GameState GetCurrentGameState => _currentGameState;
+
+    public void SetGameState(GameState newGameState)
+    {
+        _currentGameState = newGameState;
+
+        _gameStateChangeEvent.OnEventRaised?.Invoke();
+    }
 
     private void Awake()
     {
@@ -28,14 +35,12 @@ public sealed class GameManager : MonoBehaviour
     private void OnEnable()
     {
         _levelCompleteEvent.OnEventRaised += OnPlayerIsAtLastTarget_LevelComplete;
-        //_pauseGameEvent.OnEventRaised += OnGamePaused_HandlePauseGame;
         _playerDeathEvent.OnEventRaised += OnPlayerDied_LoseGame;
     }
 
     private void OnDisable()
     {
         _levelCompleteEvent.OnEventRaised -= OnPlayerIsAtLastTarget_LevelComplete;
-        //_pauseGameEvent.OnEventRaised -= OnGamePaused_HandlePauseGame;
         _playerDeathEvent.OnEventRaised -= OnPlayerDied_LoseGame;
     }
 
@@ -43,7 +48,7 @@ public sealed class GameManager : MonoBehaviour
     {
         StopGame();
 
-        //SetGameState(GameState.WIN);
+        SetGameState(GameState.WIN);
 
         _winPanelObject.SetActive(true);
     }
@@ -52,7 +57,7 @@ public sealed class GameManager : MonoBehaviour
     {
         StopGame();
 
-        //SetGameState(GameState.LOSE);
+        SetGameState(GameState.LOSE);
 
         _gameOverPanelObject.SetActive(true);
     }
