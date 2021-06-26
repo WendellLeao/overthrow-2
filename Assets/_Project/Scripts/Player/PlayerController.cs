@@ -11,10 +11,9 @@ public sealed class PlayerController : MonoBehaviour
     [Header("Listening to events")]
     [SerializeField] private GameEvent _gameStateChangeEvent;
 
-    [Header("Game Manager")]
-    [SerializeField] private GameManager _gameManager;
+    [Header("Game State Scriptable Object")]
+    [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
 
-    public PlayerDamageHandler GetPlayerDamageHandler => _playerDamageHandler;
     public WayPointSystem GetWayPointSystem => _wayPointSystem;
     public PlayerInputListener GetPlayerInput => _playerInput;
 
@@ -30,7 +29,7 @@ public sealed class PlayerController : MonoBehaviour
 
     private void OnGameStateChanged_HandlePlayerComponents()
     {
-        if(_gameManager.GetCurrentGameState != GameState.PLAYING)
+        if(_gameStateScriptableObject.CurrentGameState != GameState.PLAYING)
         {
             DisablePlayerComponents();
         }

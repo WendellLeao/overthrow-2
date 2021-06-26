@@ -11,23 +11,14 @@ public sealed class GameManager : MonoBehaviour
     
     [Header("Listening to events")]
     [SerializeField] private GameEvent _playerDeathEvent;
-    [SerializeField] private GameEvent _pauseGameEvent;
     [SerializeField] private GameEvent _levelCompleteEvent;
     
-    private GameState _currentGameState;
-
-    public GameState GetCurrentGameState => _currentGameState;
-
-    public void SetGameState(GameState newGameState)
-    {
-        _currentGameState = newGameState;
-
-        _gameStateChangeEvent.OnEventRaised?.Invoke();
-    }
+    [Header("Game State Scriptable Object")]
+    [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
 
     private void Awake()
     {
-        _currentGameState = GameState.PLAYING;
+        _gameStateScriptableObject.CurrentGameState = GameState.PLAYING;
         
         ResumeGame();
     }
@@ -74,5 +65,12 @@ public sealed class GameManager : MonoBehaviour
         Time.timeScale = 1f;
 
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void SetGameState(GameState newGameState)
+    {
+        _gameStateScriptableObject._currentGameState = newGameState;
+
+        _gameStateChangeEvent.OnEventRaised?.Invoke();
     }
 }

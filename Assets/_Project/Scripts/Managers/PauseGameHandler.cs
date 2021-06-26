@@ -2,10 +2,13 @@ using UnityEngine;
 
 public sealed class PauseGameHandler : MonoBehaviour
 {
-    [Header("Game Manager")]
-    [SerializeField] private GameManager _gameManager;
+    [Header("Game State Scriptable Object")]
+    [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
 
-    [Header("Listening on channels")]
+    [Header("Invoking events")]
+    [SerializeField] private GameEvent _gameStateChangeEvent;
+
+    [Header("Listening to events")]
     [SerializeField] private GameEvent _pauseGameEvent;
 
     [Header("UI")]
@@ -17,7 +20,7 @@ public sealed class PauseGameHandler : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        _gameManager.SetGameState(GameState.PLAYING);
+        SetGameState(GameState.PLAYING);
 
         _pausePanelObject.SetActive(false);
     }
@@ -34,9 +37,9 @@ public sealed class PauseGameHandler : MonoBehaviour
 
     private void OnGamePaused_HandlePauseGame()
     {
-        if(_gameManager.GetCurrentGameState == GameState.PLAYING)
+        if(CanPauseGame())
         {
-            if(IsPaused())
+            if (IsPaused())
             {
                 HidePausePanel();
             }
@@ -53,13 +56,26 @@ public sealed class PauseGameHandler : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
 
-        _gameManager.SetGameState(GameState.PAUSED);
+        SetGameState(GameState.PAUSED);
         
         _pausePanelObject.SetActive(true);
+    }
+
+    private void SetGameState(GameState newGameState)
+    {
+        _gameStateScriptableObject._currentGameState = newGameState;
+
+        _gameStateChangeEvent.OnEventRaised?.Invoke();
     }
 
     private bool IsPaused()
     {
         return Time.timeScale == 0f;
+    }
+
+    private bool CanPauseGame()
+    {
+        return _gameStateScriptableObject.CurrentGameState == GameState.PLAYING 
+        || _gameStateScriptableObject.CurrentGameState == GameState.PAUSED;
     }
 }

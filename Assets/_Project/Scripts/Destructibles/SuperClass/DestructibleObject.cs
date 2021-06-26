@@ -11,6 +11,7 @@ public abstract class DestructibleObject : MonoBehaviour
 
     [Header("Enable Bolls")]
     private bool _isEnabled = true;
+    
     public bool GetIsEnabled => _isEnabled;
     
     public void DestroyObject()

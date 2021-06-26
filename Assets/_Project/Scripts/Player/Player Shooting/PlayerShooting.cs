@@ -2,7 +2,6 @@ using UnityEngine;
 
 public sealed class PlayerShooting : MonoBehaviour
 {
-    
     [Header("Projectile")]
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _spawnPosition;
@@ -12,10 +11,11 @@ public sealed class PlayerShooting : MonoBehaviour
 
     [Header("Ammo")]
     [SerializeField] private int _projectileAmount;
-    private PlayerAmmo _playerAmmo;
 
     [Header("Listening on channels")]
     [SerializeField] private GameEvent _playerShootEvent;
+
+    private PlayerAmmo _playerAmmo;
 
     private void OnEnable()
     {
