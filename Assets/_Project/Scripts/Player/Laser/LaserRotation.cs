@@ -22,45 +22,51 @@ public sealed class LaserRotation : MonoBehaviour
     
     private void HandleRotation()
     {
-        WayPointChecker wayPointChecker = _playerController.GetWayPointSystem.GetWayPointChecker;
-        
-        float distanceToRotate = 10f;
-
-        if(wayPointChecker.GetNextTargetDistance() > distanceToRotate)
+        if(_playerController.GetWayPointSystem != null)
         {
-            _laserContainer.SetActive(true);//Play Animation "HideLaserAnim"
+            WayPointChecker wayPointChecker = _playerController.GetWayPointSystem.GetWayPointChecker;
+            
+            float distanceToRotate = 10f;
 
-            UpdateLaserRotation();
-        }
-        else
-        {
-            if(!wayPointChecker.NextTargetIsTheLast())
+            if(wayPointChecker.GetNextTargetDistance() > distanceToRotate)
             {
-                _laserContainer.SetActive(false);//Play Animation "HideLaserAnim"
+                _laserContainer.SetActive(true);//Play Animation "HideLaserAnim"
+
+                UpdateLaserRotation();
+            }
+            else
+            {
+                if(!wayPointChecker.NextTargetIsTheLast())
+                {
+                    _laserContainer.SetActive(false);//Play Animation "HideLaserAnim"
+                }
             }
         }
     }
 
     private void UpdateLaserRotation()
     {
-        WayPointDirectionChecker wayPointDirections = _playerController.GetWayPointSystem.GetWayPointDirections;
-
-        switch(wayPointDirections.GetCurrentDirection)
+        if(_playerController.GetWayPointSystem != null)
         {
-            case WayPointDirection.FOWARD:
+            WayPointDirectionChecker wayPointDirections = _playerController.GetWayPointSystem.GetWayPointDirections;
+
+            switch(wayPointDirections.GetCurrentDirection)
             {
-                RotateToFoward();
-                break;
-            }
-            case WayPointDirection.LEFT:
-            {
-                RotateToLeft();
-                break;
-            }
-            case WayPointDirection.RIGHT:
-            {
-                RotateToRight();
-                break;
+                case WayPointDirection.FOWARD:
+                {
+                    RotateToFoward();
+                    break;
+                }
+                case WayPointDirection.LEFT:
+                {
+                    RotateToLeft();
+                    break;
+                }
+                case WayPointDirection.RIGHT:
+                {
+                    RotateToRight();
+                    break;
+                }
             }
         }
     }

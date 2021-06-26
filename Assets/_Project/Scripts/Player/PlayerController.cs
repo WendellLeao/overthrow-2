@@ -41,17 +41,41 @@ public sealed class PlayerController : MonoBehaviour
 
     private void DisablePlayerComponents()
     {
-        _playerDamageHandler.enabled = false;
-        _wayPointSystem.enabled = false;
-        _playerShooting.enabled = false;
+        if(_playerDamageHandler != null)
+        {
+            _playerDamageHandler.enabled = false;
+        }
+
+        if(_wayPointSystem != null)
+        {
+            _wayPointSystem.enabled = false;
+        }
+
+        if(_playerShooting != null)
+        {
+            _playerShooting.enabled = false;
+        }
+        
         //_playerInput.enabled = false;
     }
 
     private void EnablePlayerComponents()
     {
-        _playerDamageHandler.enabled = true;
-        _wayPointSystem.enabled = true;
-        _playerShooting.enabled = true;
+       if(_playerDamageHandler != null)
+        {
+            _playerDamageHandler.enabled = true;
+        }
+
+        if(_wayPointSystem != null)
+        {
+            _wayPointSystem.enabled = true;
+        }
+
+        if(_playerShooting != null)
+        {
+            _playerShooting.enabled = true;
+        }
+
         //_playerInput.enabled = true;
     }
 }

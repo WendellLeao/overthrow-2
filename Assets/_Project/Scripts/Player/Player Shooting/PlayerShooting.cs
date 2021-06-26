@@ -12,7 +12,7 @@ public sealed class PlayerShooting : MonoBehaviour
     [Header("Ammo")]
     [SerializeField] private int _projectileAmount;
 
-    [Header("Listening on channels")]
+    [Header("Listening to events")]
     [SerializeField] private GameEvent _playerShootEvent;
 
     private PlayerAmmo _playerAmmo;

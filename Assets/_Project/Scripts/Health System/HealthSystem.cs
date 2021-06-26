@@ -30,4 +30,9 @@ public sealed class HealthSystem : ScriptableObject
     {
         _currentHealthAmount = _maxHealthAmount;
     }
+
+    private void OnEnable()
+    {
+        _currentHealthAmount = _maxHealthAmount;
+    }
 }

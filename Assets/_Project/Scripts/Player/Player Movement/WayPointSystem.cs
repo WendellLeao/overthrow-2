@@ -7,7 +7,7 @@ public sealed class WayPointSystem : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float _moveSpeed;
 
-    [Header("Listening on channels")]
+    [Header("Invoking events")]
     [SerializeField] private GameEvent _levelCompleteEvent;
     
     private WayPointDirectionChecker _wayPointDirections;
