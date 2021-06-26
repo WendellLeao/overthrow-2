@@ -3,13 +3,13 @@ using UnityEngine;
 
 public sealed class WayPointSystem : MonoBehaviour
 {    
-    public event Action OnPlayerIsAtLastTarget;
-
     [SerializeField] private Transform[] _wayPoints;
-    private int _wayPointIndex;
 
     [Header("Movement")]
     [SerializeField] private float _moveSpeed;
+
+    [Header("Listening on channels")]
+    [SerializeField] private GameEvent _levelCompleteEvent;
     
     private WayPointDirectionChecker _wayPointDirections;
     private WayPointChecker _wayPointChecker;
@@ -17,6 +17,8 @@ public sealed class WayPointSystem : MonoBehaviour
     private float startVerticalPosition;
 
     private Vector3 targetPos, newPos;
+    
+    private int _wayPointIndex;
     
     public WayPointDirectionChecker GetWayPointDirections => _wayPointDirections;
     public WayPointChecker GetWayPointChecker => _wayPointChecker;
@@ -63,7 +65,7 @@ public sealed class WayPointSystem : MonoBehaviour
         {
             if (_wayPointChecker.IsAtTheLastTarget())
             {
-                OnPlayerIsAtLastTarget?.Invoke();
+                _levelCompleteEvent.OnEventRaised?.Invoke();
             }
             else
             {

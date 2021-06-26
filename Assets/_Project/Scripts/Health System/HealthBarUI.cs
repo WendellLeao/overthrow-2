@@ -16,11 +16,6 @@ public sealed class HealthBarUI : MonoBehaviour
         _healthSystem.OnHealthChanged += OnHealthChanged_UpdateHealthBar;
     }
 
-    private void OnEnable()
-    {
-        //_healthSystem.OnHealthChanged += OnHealthChanged_UpdateHealthBar; NullReferenceException
-    }
-
     private void OnDisable()
     {
         _healthSystem.OnHealthChanged -= OnHealthChanged_UpdateHealthBar;

@@ -467,7 +467,6 @@ GameObject:
   - component: {fileID: 134683900}
   - component: {fileID: 134683899}
   - component: {fileID: 134683898}
-  - component: {fileID: 134683901}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -561,23 +560,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &134683901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134683896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecd5ef25dc99d454fb41a4fa51f9d08b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameOverPanelObject: {fileID: 2016918618}
-  _winPanelObject: {fileID: 1059832005}
-  pausePanelObject: {fileID: 547616723}
-  _healthBarUI: {fileID: 1555284333}
-  _projectileAmountUI: {fileID: 850035639}
 --- !u!1 &167122768
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,7 +703,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 177912673}
-  - component: {fileID: 177912671}
   - component: {fileID: 177912674}
   - component: {fileID: 177912670}
   m_Layer: 0
@@ -743,23 +724,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc04a2cd48fcec4bb6f9c3685c8730e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 1783462831}
   _projectilePrefab: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
   _spawnPosition: {fileID: 81888989}
+  _projectileAmountUI: {fileID: 850035639}
   _projectileAmount: 10
---- !u!114 &177912671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177912669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2e0b23cd08582c49b8cd8a527395907, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerController: {fileID: 1783462831}
+  _playerShootEvent: {fileID: 11400000, guid: b74faa6faf265dc41be879b2eae50732, type: 2}
 --- !u!4 &177912673
 Transform:
   m_ObjectHideFlags: 0
@@ -3593,9 +3562,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1619920499}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OnGamePaused_HandlePauseGame
+      - m_Target: {fileID: 1619920501}
+        m_TargetAssemblyTypeName: PauseGameHandler, Assembly-CSharp
+        m_MethodName: HidePausePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4724,6 +4693,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1619920500}
   - component: {fileID: 1619920499}
+  - component: {fileID: 1619920501}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4743,7 +4713,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206891ee66a17c845b7ac4b765accac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 1783462831}
+  _gameOverPanelObject: {fileID: 2016918618}
+  _winPanelObject: {fileID: 1059832005}
+  _playerDeathEvent: {fileID: 11400000, guid: 04126153c6b6393458a2324848962468, type: 2}
+  _pauseGameEvent: {fileID: 11400000, guid: d8790f8438df20b4e8fdcbad37d2eb8e, type: 2}
+  _levelCompleteEvent: {fileID: 11400000, guid: 2b283818bf81a354fabae24d26dfa937, type: 2}
 --- !u!4 &1619920500
 Transform:
   m_ObjectHideFlags: 0
@@ -4758,6 +4732,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1619920501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619920498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf8906f1a4c78d478de9dde0beef638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pauseGameEvent: {fileID: 11400000, guid: d8790f8438df20b4e8fdcbad37d2eb8e, type: 2}
+  _pausePanelObject: {fileID: 547616723}
 --- !u!1 &1632213781
 GameObject:
   m_ObjectHideFlags: 0
@@ -5143,6 +5131,7 @@ MonoBehaviour:
   - {fileID: 2050611831}
   - {fileID: 531211472}
   _moveSpeed: 7
+  _levelCompleteEvent: {fileID: 11400000, guid: 2b283818bf81a354fabae24d26dfa937, type: 2}
 --- !u!4 &1783462828
 Transform:
   m_ObjectHideFlags: 0
@@ -5173,6 +5162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 1783462831}
   _maxHealthAmount: 100
+  _healthBarUI: {fileID: 1555284333}
+  _playerDeathEvent: {fileID: 11400000, guid: 04126153c6b6393458a2324848962468, type: 2}
 --- !u!114 &1783462831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5186,9 +5177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerDamageHandler: {fileID: 1783462829}
-  _playerInput: {fileID: 177912671}
   _wayPointSystem: {fileID: 1783462827}
   _playerShooting: {fileID: 177912670}
+  _playerInput: {fileID: 11400000, guid: 6142d501afa9b1842a12b5bd8a081cda, type: 2}
   _gameManager: {fileID: 1619920499}
 --- !u!1 &1938102738
 GameObject:

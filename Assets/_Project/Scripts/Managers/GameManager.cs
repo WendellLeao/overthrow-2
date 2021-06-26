@@ -4,25 +4,19 @@ using UnityEngine;
 public sealed class GameManager : MonoBehaviour
 {
     public event Action OnGameStateChanged;
+
+    [Header("Panels")]
+    [SerializeField] private GameObject _gameOverPanelObject;
+    [SerializeField] private GameObject _winPanelObject;
     
-    [Header("Player Controller")]
-    [SerializeField] private PlayerController _playerController;
+    [Header("Listening on channels")]
+    [SerializeField] private GameEvent _playerDeathEvent;
+    [SerializeField] private GameEvent _pauseGameEvent;
+    [SerializeField] private GameEvent _levelCompleteEvent;
     
     private GameState _currentGameState;
 
     public GameState GetCurrentGameState => _currentGameState;
-
-    public void OnGamePaused_HandlePauseGame()
-    {
-        if(IsPaused())
-        {
-            HidePausePanel();
-        }
-        else
-        {
-            ShowPausePanel();
-        }
-    }
 
     private void Awake()
     {
@@ -33,57 +27,34 @@ public sealed class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _playerController.GetWayPointSystem.OnPlayerIsAtLastTarget += OnPlayerIsAtLastTarget_LevelComplete;
-        _playerController.GetPlayerDamageHandler.OnPlayerDied += OnPlayerDied_LoseGame;
-        _playerController.GetPlayerInput.OnGamePaused += OnGamePaused_HandlePauseGame;
+        _levelCompleteEvent.OnEventRaised += OnPlayerIsAtLastTarget_LevelComplete;
+        //_pauseGameEvent.OnEventRaised += OnGamePaused_HandlePauseGame;
+        _playerDeathEvent.OnEventRaised += OnPlayerDied_LoseGame;
     }
 
     private void OnDisable()
     {
-        _playerController.GetWayPointSystem.OnPlayerIsAtLastTarget -= OnPlayerIsAtLastTarget_LevelComplete;
-        _playerController.GetPlayerDamageHandler.OnPlayerDied -= OnPlayerDied_LoseGame;
-        _playerController.GetPlayerInput.OnGamePaused -= OnGamePaused_HandlePauseGame;
-    }
-
-    private void ShowPausePanel()
-    {
-        StopGame();
-        
-        SetGameState(GameState.PAUSED);
-
-        CanvasAssets.instance.GetPausePanelObject.SetActive(true);
-    }
-
-    private void HidePausePanel()
-    {
-        ResumeGame();
-
-        SetGameState(GameState.PLAYING);
-
-        CanvasAssets.instance.GetPausePanelObject.SetActive(false);
-    }
-
-    private bool IsPaused()
-    {
-        return Time.timeScale == 0f;
+        _levelCompleteEvent.OnEventRaised -= OnPlayerIsAtLastTarget_LevelComplete;
+        //_pauseGameEvent.OnEventRaised -= OnGamePaused_HandlePauseGame;
+        _playerDeathEvent.OnEventRaised -= OnPlayerDied_LoseGame;
     }
 
     private void OnPlayerIsAtLastTarget_LevelComplete()
     {
         StopGame();
 
-        SetGameState(GameState.WIN);
+        //SetGameState(GameState.WIN);
 
-        CanvasAssets.instance.GetWinPanelObject.SetActive(true);
+        _winPanelObject.SetActive(true);
     }
 
     private void OnPlayerDied_LoseGame()
     {
         StopGame();
 
-        SetGameState(GameState.LOSE);
+        //SetGameState(GameState.LOSE);
 
-        CanvasAssets.instance.GetGameOverPanelObject.SetActive(true);
+        _gameOverPanelObject.SetActive(true);
     }
 
     private void StopGame()
@@ -98,12 +69,5 @@ public sealed class GameManager : MonoBehaviour
         Time.timeScale = 1f;
 
         Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void SetGameState(GameState newGameState)
-    {
-        _currentGameState = newGameState;
-
-        OnGameStateChanged?.Invoke();
     }
 }

@@ -1,10 +1,15 @@
 public sealed class PlayerAmmo
 {
+    private ProjectileAmountUI _projectileAmountUI;
+    
     private int _currentProjectileAmount;
+    
     public int GetCurrentProjectileAmount => _currentProjectileAmount;
 
-    public PlayerAmmo(int projectileAmount)
+    public PlayerAmmo(int projectileAmount, ProjectileAmountUI projectileAmountUI)
     {
+        _projectileAmountUI = projectileAmountUI;
+
         _currentProjectileAmount = projectileAmount;
 
         UpdateProjectileAmountUI();
@@ -26,6 +31,6 @@ public sealed class PlayerAmmo
 
     public void UpdateProjectileAmountUI()
     {
-        CanvasAssets.instance.GetProjectileAmountUI.UpdateProjectileAmountUI(_currentProjectileAmount);
+        _projectileAmountUI.UpdateProjectileAmountUI(_currentProjectileAmount);
     }
 }

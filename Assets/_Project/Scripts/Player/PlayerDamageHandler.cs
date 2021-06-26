@@ -1,15 +1,18 @@
-using System;
 using UnityEngine;
 
 public sealed class PlayerDamageHandler : MonoBehaviour
 {
-    public event Action OnPlayerDied;
-    
     [Header("Player Controller")]
     [SerializeField] private PlayerController _playerController;
 
     [Header("Health System")]
     [SerializeField] private int _maxHealthAmount;
+
+    [SerializeField] private HealthBarUI _healthBarUI;
+
+    [Header("Listening on channel")]
+    [SerializeField] private GameEvent _playerDeathEvent;
+    
     private HealthSystem _playerHealthSystem;
 
     public HealthSystem GetPlayerHealthSystem => _playerHealthSystem;
@@ -17,7 +20,7 @@ public sealed class PlayerDamageHandler : MonoBehaviour
     private void Awake()
     {
         _playerHealthSystem = new HealthSystem(_maxHealthAmount);
-        CanvasAssets.instance.GetHealthBarUI.Initialize(_playerHealthSystem);
+        _healthBarUI.Initialize(_playerHealthSystem);
     }
 
     private void OnEnable()
@@ -34,7 +37,7 @@ public sealed class PlayerDamageHandler : MonoBehaviour
     {
         if(_playerHealthSystem.GetCurrentHealthAmount <= 0)
         {
-            OnPlayerDied?.Invoke();
+            _playerDeathEvent.OnEventRaised?.Invoke();
         }
     }
 }

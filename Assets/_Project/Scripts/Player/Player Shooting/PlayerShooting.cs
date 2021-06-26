@@ -1,31 +1,35 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerInputListener))]
 public sealed class PlayerShooting : MonoBehaviour
 {
-    [SerializeField] private PlayerController _playerController;
     
     [Header("Projectile")]
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _spawnPosition;
 
+    [Header("UI")]
+    [SerializeField] private ProjectileAmountUI _projectileAmountUI;
+
     [Header("Ammo")]
     [SerializeField] private int _projectileAmount;
     private PlayerAmmo _playerAmmo;
 
+    [Header("Listening on channels")]
+    [SerializeField] private GameEvent _playerShootEvent;
+
     private void OnEnable()
     {
-        _playerController.GetPlayerInput.OnPlayerShot += OnPlayerShot_PerformShoot;
+        _playerShootEvent.OnEventRaised += OnPlayerShot_PerformShoot;
     }
 
     private void OnDisable()
     {
-        _playerController.GetPlayerInput.OnPlayerShot -= OnPlayerShot_PerformShoot;
+        _playerShootEvent.OnEventRaised -= OnPlayerShot_PerformShoot;
     }
     
     private void Start()
     {
-        _playerAmmo = new PlayerAmmo(_projectileAmount);
+        _playerAmmo = new PlayerAmmo(_projectileAmount, _projectileAmountUI);
     }
 
     private void OnPlayerShot_PerformShoot()
