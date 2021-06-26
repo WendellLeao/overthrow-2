@@ -7,12 +7,12 @@ public sealed class GameManager : MonoBehaviour
     [SerializeField] private GameObject _winPanelObject;
 
     [Header("Invoking events")]
-    [SerializeField] private GameEvent _gameStateChangeEvent;
+    [SerializeField] private VoidEventChannel _gameStateChangeEvent;
     
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
 
-    public void OnPlayerIsAtLastTarget_LevelComplete()
+    public void LevelComplete()
     {
         StopGame();
 
@@ -21,7 +21,7 @@ public sealed class GameManager : MonoBehaviour
         _winPanelObject.SetActive(true);
     }
 
-    public void OnPlayerDied_LoseGame()
+    public void LoseGame()
     {
         StopGame();
 
@@ -55,6 +55,6 @@ public sealed class GameManager : MonoBehaviour
     {
         _gameStateScriptableObject._currentGameState = newGameState;
 
-        _gameStateChangeEvent.Raise();
+        _gameStateChangeEvent.RaiseEvent();
     }
 }

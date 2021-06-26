@@ -705,6 +705,7 @@ GameObject:
   - component: {fileID: 177912673}
   - component: {fileID: 177912674}
   - component: {fileID: 177912670}
+  - component: {fileID: 177912671}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -728,6 +729,35 @@ MonoBehaviour:
   _spawnPosition: {fileID: 81888989}
   _projectileAmountUI: {fileID: 850035639}
   _projectileAmount: 10
+  _currentGameState: {fileID: 11400000, guid: c12687761aca2b446b5dec78ed9b44d3, type: 2}
+--- !u!114 &177912671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177912669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _channel: {fileID: 11400000, guid: b74faa6faf265dc41be879b2eae50732, type: 2}
+  OnEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 177912670}
+        m_TargetAssemblyTypeName: PlayerShooting, Assembly-CSharp
+        m_MethodName: PerformShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &177912673
 Transform:
   m_ObjectHideFlags: 0
@@ -3007,7 +3037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 135.29999, y: 53.100006}
+  m_AnchoredPosition: {x: 147.5, y: 53.100006}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &850035637
@@ -3030,7 +3060,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Balls: 0'
+  m_text: 'Ammo: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4696,13 +4726,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: e86107ef1697cb24ebff56ae5bbfde8f, type: 2}
-  Response:
+  _channel: {fileID: 11400000, guid: e86107ef1697cb24ebff56ae5bbfde8f, type: 2}
+  OnEventRaised:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1555284333}
         m_TargetAssemblyTypeName: HealthBarUI, Assembly-CSharp
-        m_MethodName: OnHealthChanged_UpdateHealthBar
+        m_MethodName: UpdateHealthBar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4725,6 +4755,7 @@ GameObject:
   - component: {fileID: 1619920501}
   - component: {fileID: 1619920502}
   - component: {fileID: 1619920503}
+  - component: {fileID: 1619920504}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4789,13 +4820,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 04126153c6b6393458a2324848962468, type: 2}
-  Response:
+  _channel: {fileID: 11400000, guid: 2b283818bf81a354fabae24d26dfa937, type: 2}
+  OnEventRaised:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1619920499}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OnPlayerDied_LoseGame
+        m_MethodName: LevelComplete
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4817,13 +4848,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: d8790f8438df20b4e8fdcbad37d2eb8e, type: 2}
-  Response:
+  _channel: {fileID: 11400000, guid: 04126153c6b6393458a2324848962468, type: 2}
+  OnEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1619920499}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: LoseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1619920504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619920498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _channel: {fileID: 11400000, guid: d8790f8438df20b4e8fdcbad37d2eb8e, type: 2}
+  OnEventRaised:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1619920501}
         m_TargetAssemblyTypeName: PauseGameHandler, Assembly-CSharp
-        m_MethodName: OnGamePaused_HandlePauseGame
+        m_MethodName: HandlePauseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5189,8 +5248,8 @@ GameObject:
   - component: {fileID: 1783462828}
   - component: {fileID: 1783462831}
   - component: {fileID: 1783462829}
+  - component: {fileID: 1783462832}
   - component: {fileID: 1783462827}
-  - component: {fileID: 1783462830}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5251,34 +5310,6 @@ MonoBehaviour:
   _playerController: {fileID: 1783462831}
   _playerHealthSystem: {fileID: 11400000, guid: b3249c6c5639f3449abed719c28bf6fe, type: 2}
   _playerDeathEvent: {fileID: 11400000, guid: 04126153c6b6393458a2324848962468, type: 2}
---- !u!114 &1783462830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1783462826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: a89c654e0fd0e664f941958185b6e740, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1783462831}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnGameStateChanged_HandlePlayerComponents
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1783462831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5295,7 +5326,34 @@ MonoBehaviour:
   _wayPointSystem: {fileID: 1783462827}
   _playerShooting: {fileID: 177912670}
   _playerInput: {fileID: 11400000, guid: 6142d501afa9b1842a12b5bd8a081cda, type: 2}
-  _gameStateScriptableObject: {fileID: 11400000, guid: c12687761aca2b446b5dec78ed9b44d3, type: 2}
+--- !u!114 &1783462832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783462826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _channel: {fileID: 11400000, guid: e86107ef1697cb24ebff56ae5bbfde8f, type: 2}
+  OnEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1783462829}
+        m_TargetAssemblyTypeName: PlayerDamageHandler, Assembly-CSharp
+        m_MethodName: CheckIfPlayerIsDead
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1938102738
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public sealed class WayPointSystem : MonoBehaviour
     [SerializeField] private float _moveSpeed;
 
     [Header("Invoking events")]
-    [SerializeField] private GameEvent _levelCompleteEvent;
+    [SerializeField] private VoidEventChannel _levelCompleteEvent;
     
     private WayPointDirectionChecker _wayPointDirections;
     private WayPointChecker _wayPointChecker;
@@ -64,7 +64,7 @@ public sealed class WayPointSystem : MonoBehaviour
         {
             if (_wayPointChecker.IsAtTheLastTarget())
             {
-                _levelCompleteEvent.Raise();
+                _levelCompleteEvent.RaiseEvent();
             }
             else
             {

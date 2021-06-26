@@ -6,23 +6,12 @@ public sealed class PauseGameHandler : MonoBehaviour
     [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
 
     [Header("Invoking events")]
-    [SerializeField] private GameEvent _gameStateChangeEvent;
+    [SerializeField] private VoidEventChannel _gameStateChangeEvent;
 
     [Header("UI")]
     [SerializeField] private GameObject _pausePanelObject;
     
-    public void HidePausePanel()
-    {
-        Time.timeScale = 1f;
-
-        Cursor.lockState = CursorLockMode.Locked;
-
-        SetGameState(GameState.PLAYING);
-
-        _pausePanelObject.SetActive(false);
-    }
-
-    public void OnGamePaused_HandlePauseGame()
+    public void HandlePauseGame()
     {
         if(CanPauseGame())
         {
@@ -35,6 +24,17 @@ public sealed class PauseGameHandler : MonoBehaviour
                 ShowPausePanel();
             }
         }
+    }
+
+    public void HidePausePanel()
+    {
+        Time.timeScale = 1f;
+
+        Cursor.lockState = CursorLockMode.Locked;
+
+        SetGameState(GameState.PLAYING);
+
+        _pausePanelObject.SetActive(false);
     }
 
     private void ShowPausePanel()
@@ -52,7 +52,7 @@ public sealed class PauseGameHandler : MonoBehaviour
     {
         _gameStateScriptableObject._currentGameState = newGameState;
 
-        _gameStateChangeEvent.Raise();
+        _gameStateChangeEvent.RaiseEvent();
     }
 
     private bool IsPaused()

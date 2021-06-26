@@ -12,16 +12,14 @@ public sealed class PlayerShooting : MonoBehaviour
     [Header("Ammo")]
     [SerializeField] private int _projectileAmount;
 
-    private PlayerAmmo _playerAmmo;
-    
-    private void Start()
-    {
-        _playerAmmo = new PlayerAmmo(_projectileAmount, _projectileAmountUI);
-    }
+    [Header("Game State")]
+    [SerializeField] private GameStateScriptableOject _currentGameState;
 
-    private void OnPlayerShot_PerformShoot()
+    private PlayerAmmo _playerAmmo;
+
+    public void PerformShoot()
     {
-        if(_playerAmmo.GetCurrentProjectileAmount > 0)
+        if(_playerAmmo.GetCurrentProjectileAmount > 0 && _currentGameState.CurrentGameState == GameState.PLAYING)
         {
             GameObject cloneProjectile = Instantiate(_projectilePrefab, _spawnPosition.position, _spawnPosition.rotation);
             
@@ -29,5 +27,10 @@ public sealed class PlayerShooting : MonoBehaviour
 
             _playerAmmo.DecreaseAmmo();
         }
+    }
+    
+    private void Start()
+    {
+        _playerAmmo = new PlayerAmmo(_projectileAmount, _projectileAmountUI);
     }
 }

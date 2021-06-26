@@ -4,8 +4,8 @@ using UnityEngine;
 public sealed class PlayerInputListener : ScriptableObject
 {
     [Header("Invoke events")]
-    [SerializeField] private GameEvent _pauseGameEvent;
-    [SerializeField] private GameEvent _playerShootEvent;
+    [SerializeField] private VoidEventChannel _pauseGameEvent;
+    [SerializeField] private VoidEventChannel _playerShootEvent;
 
     private PlayerInputSystem _playerInputSystem;
 
@@ -16,8 +16,8 @@ public sealed class PlayerInputListener : ScriptableObject
         _playerInputSystem = new PlayerInputSystem();
         _characterControls = _playerInputSystem.CharacterControls;
 
-        _characterControls.PauseGame.performed += _ => _pauseGameEvent.Raise();
-        _characterControls.Shoot.performed += _ => _playerShootEvent.Raise();
+        _characterControls.PauseGame.performed += _ => _pauseGameEvent.RaiseEvent();
+        _characterControls.Shoot.performed += _ => _playerShootEvent.RaiseEvent();
         
         _playerInputSystem.Enable();
     }
