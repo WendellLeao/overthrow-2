@@ -1,14 +1,14 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewGameEvent",  menuName = "Events/Game Event")]
 public sealed class VoidEventChannel : ScriptableObject
 {
-	private List<VoidEventListener> eventListeners = new List<VoidEventListener>();
+    private List<VoidEventListener> eventListeners = new List<VoidEventListener>();
 
     public void RaiseEvent()
     {
-        for (int i = eventListeners.Count - 1; i >= 0; i--)
+        for(int i = 0; i < eventListeners.Count; i++)
         {
             eventListeners[i].Respond(this);
         }

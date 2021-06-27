@@ -8,9 +8,9 @@ public sealed class VoidEventListener : MonoBehaviour
 
 	public void Respond(VoidEventChannel channel)
 	{
-		for (int i = eventsAndResponses.Count - 1; i >= 0; i--)
+        for(int i = 0; i < eventsAndResponses.Count; i++)
         {
-            if (channel == eventsAndResponses[i]._channel)
+            if(channel == eventsAndResponses[i]._channel)
             {
                 eventsAndResponses[i].EventRaised();
             }
@@ -19,9 +19,9 @@ public sealed class VoidEventListener : MonoBehaviour
 
 	private void OnEnable()
 	{
-		if (eventsAndResponses.Count >= 1)
+		if(eventsAndResponses.Count >= 1)
         {
-            foreach (EventAndResponse eventAndResponse in eventsAndResponses)
+            foreach(EventAndResponse eventAndResponse in eventsAndResponses)
             {
                 eventAndResponse._channel.RegisterListener(this);
             }
@@ -30,9 +30,9 @@ public sealed class VoidEventListener : MonoBehaviour
 
 	private void OnDisable()
 	{
-		if (eventsAndResponses.Count >= 1)
+		if(eventsAndResponses.Count >= 1)
         {
-            foreach (EventAndResponse eventAndResponse in eventsAndResponses)
+            foreach(EventAndResponse eventAndResponse in eventsAndResponses)
             {
                 eventAndResponse._channel.UnregisterListener(this);
             }
@@ -48,7 +48,7 @@ public sealed class EventAndResponse
 
 	public void EventRaised()
     {
-        if (OnEventRaised.GetPersistentEventCount() >= 1)
+        if(OnEventRaised.GetPersistentEventCount() >= 1)
         {
             OnEventRaised.Invoke();
         }
