@@ -742,22 +742,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _channel: {fileID: 11400000, guid: b74faa6faf265dc41be879b2eae50732, type: 2}
-  OnEventRaised:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 177912670}
-        m_TargetAssemblyTypeName: PlayerShooting, Assembly-CSharp
-        m_MethodName: PerformShoot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  eventsAndResponses:
+  - _channel: {fileID: 11400000, guid: b74faa6faf265dc41be879b2eae50732, type: 2}
+    OnEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 177912670}
+          m_TargetAssemblyTypeName: PlayerShooting, Assembly-CSharp
+          m_MethodName: PerformShoot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &177912673
 Transform:
   m_ObjectHideFlags: 0
@@ -4726,22 +4727,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _channel: {fileID: 11400000, guid: e86107ef1697cb24ebff56ae5bbfde8f, type: 2}
-  OnEventRaised:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1555284333}
-        m_TargetAssemblyTypeName: HealthBarUI, Assembly-CSharp
-        m_MethodName: UpdateHealthBar
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  eventsAndResponses:
+  - _channel: {fileID: 11400000, guid: e86107ef1697cb24ebff56ae5bbfde8f, type: 2}
+    OnEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1555284333}
+          m_TargetAssemblyTypeName: HealthBarUI, Assembly-CSharp
+          m_MethodName: UpdateHealthBar
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1619920498
 GameObject:
   m_ObjectHideFlags: 0
@@ -4754,8 +4756,6 @@ GameObject:
   - component: {fileID: 1619920499}
   - component: {fileID: 1619920501}
   - component: {fileID: 1619920502}
-  - component: {fileID: 1619920503}
-  - component: {fileID: 1619920504}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4820,78 +4820,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _channel: {fileID: 11400000, guid: 2b283818bf81a354fabae24d26dfa937, type: 2}
-  OnEventRaised:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1619920499}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: LevelComplete
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1619920503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619920498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _channel: {fileID: 11400000, guid: 04126153c6b6393458a2324848962468, type: 2}
-  OnEventRaised:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1619920499}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: LoseGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1619920504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619920498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _channel: {fileID: 11400000, guid: d8790f8438df20b4e8fdcbad37d2eb8e, type: 2}
-  OnEventRaised:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1619920501}
-        m_TargetAssemblyTypeName: PauseGameHandler, Assembly-CSharp
-        m_MethodName: HandlePauseGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  eventsAndResponses:
+  - _channel: {fileID: 11400000, guid: 2b283818bf81a354fabae24d26dfa937, type: 2}
+    OnEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1619920499}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: LevelComplete
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _channel: {fileID: 11400000, guid: 04126153c6b6393458a2324848962468, type: 2}
+    OnEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1619920499}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: LoseGame
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _channel: {fileID: 11400000, guid: d8790f8438df20b4e8fdcbad37d2eb8e, type: 2}
+    OnEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1619920501}
+          m_TargetAssemblyTypeName: PauseGameHandler, Assembly-CSharp
+          m_MethodName: HandlePauseGame
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1632213781
 GameObject:
   m_ObjectHideFlags: 0
@@ -5248,8 +5225,8 @@ GameObject:
   - component: {fileID: 1783462828}
   - component: {fileID: 1783462831}
   - component: {fileID: 1783462829}
-  - component: {fileID: 1783462832}
   - component: {fileID: 1783462827}
+  - component: {fileID: 1783462832}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5338,22 +5315,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab414762985f470409b67500e8dabc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _channel: {fileID: 11400000, guid: e86107ef1697cb24ebff56ae5bbfde8f, type: 2}
-  OnEventRaised:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1783462829}
-        m_TargetAssemblyTypeName: PlayerDamageHandler, Assembly-CSharp
-        m_MethodName: CheckIfPlayerIsDead
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  eventsAndResponses:
+  - _channel: {fileID: 11400000, guid: e86107ef1697cb24ebff56ae5bbfde8f, type: 2}
+    OnEventRaised:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1783462829}
+          m_TargetAssemblyTypeName: PlayerDamageHandler, Assembly-CSharp
+          m_MethodName: CheckIfPlayerIsDead
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1938102738
 GameObject:
   m_ObjectHideFlags: 0

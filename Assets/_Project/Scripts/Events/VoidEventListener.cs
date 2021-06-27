@@ -1,27 +1,56 @@
+using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 
-public class VoidEventListener : MonoBehaviour
+public sealed class VoidEventListener : MonoBehaviour
 {
-    [SerializeField] private VoidEventChannel _channel = default;
+	[SerializeField] private List<EventAndResponse> eventsAndResponses = new List<EventAndResponse>();
 
-	public UnityEvent OnEventRaised;
+	public void Respond(VoidEventChannel channel)
+	{
+		for (int i = eventsAndResponses.Count - 1; i >= 0; i--)
+        {
+            if (channel == eventsAndResponses[i]._channel)
+            {
+                eventsAndResponses[i].EventRaised();
+            }
+        }
+	}
 
 	private void OnEnable()
 	{
-		if (_channel != null)
-			_channel.OnEventRaised += Respond;
+		if (eventsAndResponses.Count >= 1)
+        {
+            foreach (EventAndResponse eventAndResponse in eventsAndResponses)
+            {
+                eventAndResponse._channel.RegisterListener(this);
+            }
+        }
 	}
 
 	private void OnDisable()
 	{
-		if (_channel != null)
-			_channel.OnEventRaised -= Respond;
+		if (eventsAndResponses.Count >= 1)
+        {
+            foreach (EventAndResponse eventAndResponse in eventsAndResponses)
+            {
+                eventAndResponse._channel.UnregisterListener(this);
+            }
+        }
 	}
+}
 
-	private void Respond()
-	{
-		if (OnEventRaised != null)
-			OnEventRaised.Invoke();
+[System.Serializable]
+public sealed class EventAndResponse
+{
+	public VoidEventChannel _channel = default;
+	public UnityEvent OnEventRaised;
+
+	public void EventRaised()
+    {
+        if (OnEventRaised.GetPersistentEventCount() >= 1)
+        {
+            OnEventRaised.Invoke();
+        }
 	}
 }
