@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseGameEvent: {fileID: 11400000, guid: d8790f8438df20b4e8fdcbad37d2eb8e, type: 2}
   _playerShootEvent: {fileID: 11400000, guid: b74faa6faf265dc41be879b2eae50732, type: 2}
+  _gameEvent: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}

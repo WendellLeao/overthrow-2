@@ -6,6 +6,9 @@ public sealed class PlayerInputListener : ScriptableObject
     [Header("Invoke events")]
     [SerializeField] private VoidEventChannel _pauseGameEvent;
     [SerializeField] private VoidEventChannel _playerShootEvent;
+    
+    [Header("Game Events")]
+    [SerializeField] private GameEvents _gameEvent;
 
     private PlayerInputSystem _playerInputSystem;
 
@@ -17,7 +20,8 @@ public sealed class PlayerInputListener : ScriptableObject
         _characterControls = _playerInputSystem.CharacterControls;
 
         _characterControls.PauseGame.performed += _ => _pauseGameEvent.RaiseEvent();
-        _characterControls.Shoot.performed += _ => _playerShootEvent.RaiseEvent();
+        //_characterControls.Shoot.performed += _ => _playerShootEvent.RaiseEvent();
+        _characterControls.Shoot.performed += _ => _gameEvent.OnPlayerShot?.Invoke();
         
         _playerInputSystem.Enable();
     }

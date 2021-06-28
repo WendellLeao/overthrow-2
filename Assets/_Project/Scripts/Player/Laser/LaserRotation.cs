@@ -32,7 +32,7 @@ public sealed class LaserRotation : MonoBehaviour
             {
                 _laserContainer.SetActive(true);//Play Animation "HideLaserAnim"
 
-                UpdateLaserRotation();
+                UpdateLaserDirection();
             }
             else
             {
@@ -44,17 +44,22 @@ public sealed class LaserRotation : MonoBehaviour
         }
     }
 
-    private void UpdateLaserRotation()
+    private void UpdateLaserDirection()
     {
         if(_playerController.GetWayPointSystem != null)
         {
-            WayPointDirectionChecker wayPointDirections = _playerController.GetWayPointSystem.GetWayPointDirections;
+            WayPointDirectionChecker wayPointDirectionsChecker = _playerController.GetWayPointSystem.GetWayPointDirections;
 
-            switch(wayPointDirections.GetCurrentDirection)
+            switch(wayPointDirectionsChecker.GetCurrentDirection)
             {
                 case WayPointDirection.FOWARD:
                 {
                     RotateToFoward();
+                    break;
+                }
+                case WayPointDirection.BACKWARD:
+                {
+                    RotateToBackward();
                     break;
                 }
                 case WayPointDirection.LEFT:
@@ -75,6 +80,11 @@ public sealed class LaserRotation : MonoBehaviour
     {
         transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         transform.localPosition = new Vector3(0f, transform.localPosition.y, startOffset);
+    }
+    private void RotateToBackward()
+    {
+        transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        transform.localPosition = new Vector3(0f, transform.localPosition.y, -startOffset);
     }
 
     private void RotateToLeft()

@@ -29,6 +29,10 @@ public sealed class WayPointDirectionChecker
         {
             _currentDirection = WayPointDirection.FOWARD;
         }
+        else if(NextTargetIsBackward())
+        {
+            _currentDirection = WayPointDirection.BACKWARD;
+        }
     }
 
     private bool NextTargetIsLeft()
@@ -38,11 +42,17 @@ public sealed class WayPointDirectionChecker
 
     private bool NextTargetIsRight()
     {
-        return _wayPointSystem.transform.position.x < _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.x && !NextTargetIsFoward();
+        return _wayPointSystem.transform.position.x < _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.x 
+        && !NextTargetIsFoward();
     }
 
     private bool NextTargetIsFoward()
     {
         return _wayPointSystem.transform.position.z < _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.z;
+    }
+
+    private bool NextTargetIsBackward()
+    {
+        return _wayPointSystem.transform.position.z > _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.z;
     }
 }

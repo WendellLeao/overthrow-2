@@ -12,12 +12,15 @@ public sealed class PlayerShooting : MonoBehaviour
     [Header("Ammo")]
     [SerializeField] private int _projectileAmount;
 
+    [Header("Game Events")]
+    [SerializeField] private GameEvents _gameEvent;
+    
     [Header("Game State")]
     [SerializeField] private GameStateScriptableOject _currentGameState;
 
     private PlayerAmmo _playerAmmo;
 
-    public void PerformShoot()
+    public void OnPlayerShot_PerformShoot()
     {
         if(_playerAmmo.GetCurrentProjectileAmount > 0 && _currentGameState.CurrentGameState == GameState.PLAYING)
         {
@@ -27,6 +30,16 @@ public sealed class PlayerShooting : MonoBehaviour
 
             _playerAmmo.DecreaseAmmo();
         }
+    }
+
+    private void OnEnable()
+    {
+        _gameEvent.OnPlayerShot += OnPlayerShot_PerformShoot;
+    }
+
+    private void OnDisable()
+    {
+        _gameEvent.OnPlayerShot -= OnPlayerShot_PerformShoot;
     }
     
     private void Start()

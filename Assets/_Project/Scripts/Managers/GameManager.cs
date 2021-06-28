@@ -33,7 +33,7 @@ public sealed class GameManager : MonoBehaviour
     private void Awake()
     {
         _gameStateScriptableObject.CurrentGameState = GameState.PLAYING;
-        
+
         ResumeGame();
     }
     
