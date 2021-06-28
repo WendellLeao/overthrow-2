@@ -6,8 +6,8 @@ public sealed class HealthSystem : ScriptableObject
     [Header("Variable")]
     [SerializeField] private int _maxHealthAmount;
 
-    [Header("Invoking events")]
-    [SerializeField] private VoidEventChannel _healthChangeEvent;
+    [Header("Game Events")]
+    [SerializeField] private LocalGameEvents _localGameEvent;
 
     private int _currentHealthAmount;
 
@@ -23,7 +23,7 @@ public sealed class HealthSystem : ScriptableObject
             _currentHealthAmount = 0;
         }
 
-        _healthChangeEvent.RaiseEvent();
+        _localGameEvent.OnHealthChanged?.Invoke();
     }
 
     public void ResetCurrentHealthAmount()

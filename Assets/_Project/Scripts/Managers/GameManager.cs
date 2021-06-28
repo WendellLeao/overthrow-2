@@ -6,13 +6,32 @@ public sealed class GameManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverPanelObject;
     [SerializeField] private GameObject _winPanelObject;
 
-    [Header("Invoking events")]
-    [SerializeField] private VoidEventChannel _gameStateChangeEvent;
+    [Header("Game Events")]
+    [SerializeField] private GlobalGameEvents _globalGameEvents;
     
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
 
-    public void LevelComplete()
+    private void Awake()
+    {
+        _gameStateScriptableObject.CurrentGameState = GameState.PLAYING;
+
+        ResumeGame();
+    }
+
+    private void OnEnable()
+    {
+        _globalGameEvents.OnLevelCompleted += OnLevelCompleted_LevelComplete;
+        _globalGameEvents.OnPlayerDied += OnPlayerDied_LoseGame;
+    }
+
+    private void OnDisable()
+    {
+        _globalGameEvents.OnLevelCompleted -= OnLevelCompleted_LevelComplete;
+        _globalGameEvents.OnPlayerDied -= OnPlayerDied_LoseGame;
+    }
+
+    private void OnLevelCompleted_LevelComplete()
     {
         StopGame();
 
@@ -21,20 +40,13 @@ public sealed class GameManager : MonoBehaviour
         _winPanelObject.SetActive(true);
     }
 
-    public void LoseGame()
+    private void OnPlayerDied_LoseGame()
     {
         StopGame();
 
         SetGameState(GameState.LOSE);
 
         _gameOverPanelObject.SetActive(true);
-    }
-
-    private void Awake()
-    {
-        _gameStateScriptableObject.CurrentGameState = GameState.PLAYING;
-
-        ResumeGame();
     }
     
     private void StopGame()
@@ -55,6 +67,6 @@ public sealed class GameManager : MonoBehaviour
     {
         _gameStateScriptableObject._currentGameState = newGameState;
 
-        _gameStateChangeEvent.RaiseEvent();
+        _globalGameEvents.OnGameStateChanged?.Invoke();
     }
 }

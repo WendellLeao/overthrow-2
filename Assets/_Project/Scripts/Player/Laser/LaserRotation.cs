@@ -30,7 +30,7 @@ public sealed class LaserRotation : MonoBehaviour
 
             if(wayPointChecker.GetNextTargetDistance() > distanceToRotate)
             {
-                _laserContainer.SetActive(true);//Play Animation "HideLaserAnim"
+                _laserContainer.SetActive(true);
 
                 UpdateLaserDirection();
             }
@@ -38,7 +38,7 @@ public sealed class LaserRotation : MonoBehaviour
             {
                 if(!wayPointChecker.NextTargetIsTheLast())
                 {
-                    _laserContainer.SetActive(false);//Play Animation "HideLaserAnim"
+                    _laserContainer.SetActive(false);
                 }
             }
         }

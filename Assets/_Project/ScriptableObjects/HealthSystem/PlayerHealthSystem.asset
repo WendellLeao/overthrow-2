@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerHealthSystem
   m_EditorClassIdentifier: 
   _maxHealthAmount: 100
-  _healthChangeEvent: {fileID: 11400000, guid: e86107ef1697cb24ebff56ae5bbfde8f, type: 2}
+  _localGameEvent: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}

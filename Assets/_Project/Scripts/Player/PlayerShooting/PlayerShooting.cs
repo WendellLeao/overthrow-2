@@ -13,16 +13,31 @@ public sealed class PlayerShooting : MonoBehaviour
     [SerializeField] private int _projectileAmount;
 
     [Header("Game Events")]
-    [SerializeField] private GameEvents _gameEvent;
+    [SerializeField] private LocalGameEvents _localGameEvent;
     
     [Header("Game State")]
     [SerializeField] private GameStateScriptableOject _currentGameState;
 
     private PlayerAmmo _playerAmmo;
 
-    public void OnPlayerShot_PerformShoot()
+    private void OnEnable()
     {
-        if(_playerAmmo.GetCurrentProjectileAmount > 0 && _currentGameState.CurrentGameState == GameState.PLAYING)
+        _localGameEvent.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
+    }
+
+    private void OnDisable()
+    {
+        _localGameEvent.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
+    }
+    
+    private void Start()
+    {
+        _playerAmmo = new PlayerAmmo(_projectileAmount, _projectileAmountUI);
+    }
+
+    private void OnPlayerShot_PerformShoot(PlayerInputData playerInputData)
+    {
+        if(playerInputData.IsShooting && _playerAmmo.GetCurrentProjectileAmount > 0 && _currentGameState.CurrentGameState == GameState.PLAYING)
         {
             GameObject cloneProjectile = Instantiate(_projectilePrefab, _spawnPosition.position, _spawnPosition.rotation);
             
@@ -30,20 +45,5 @@ public sealed class PlayerShooting : MonoBehaviour
 
             _playerAmmo.DecreaseAmmo();
         }
-    }
-
-    private void OnEnable()
-    {
-        _gameEvent.OnPlayerShot += OnPlayerShot_PerformShoot;
-    }
-
-    private void OnDisable()
-    {
-        _gameEvent.OnPlayerShot -= OnPlayerShot_PerformShoot;
-    }
-    
-    private void Start()
-    {
-        _playerAmmo = new PlayerAmmo(_projectileAmount, _projectileAmountUI);
     }
 }

@@ -7,8 +7,8 @@ public sealed class WayPointSystem : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float _moveSpeed;
 
-    [Header("Invoking events")]
-    [SerializeField] private VoidEventChannel _levelCompleteEvent;
+    [Header("Game Events")]
+    [SerializeField] private GlobalGameEvents _globalGameEvent;
     
     private WayPointDirectionChecker _wayPointDirections;
     private WayPointChecker _wayPointChecker;
@@ -64,7 +64,7 @@ public sealed class WayPointSystem : MonoBehaviour
         {
             if (_wayPointChecker.IsAtTheLastTarget())
             {
-                _levelCompleteEvent.RaiseEvent();
+                _globalGameEvent.OnLevelCompleted?.Invoke();
             }
             else
             {

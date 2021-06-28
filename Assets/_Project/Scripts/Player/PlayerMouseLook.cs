@@ -7,22 +7,27 @@ public sealed class PlayerMouseLook : MonoBehaviour
 
     [Header("Mouse Look")]
     [SerializeField] private Transform _cameraTransform;
-    
+
     [SerializeField] private float _horizontalSensitivity, _verticalSensitivy;
+
+    [Header("Game Events")]
+    [SerializeField] private LocalGameEvents _localGameEvent;
     
     private float _verticalRotation = 0f;
     private float _horizontalMouse, _verticalMouse;
-    
-    public void SetMouseInput(Vector2 mouseInput)
+
+    private void OnEnable()
     {
-        _horizontalMouse = mouseInput.x * _horizontalSensitivity * Time.deltaTime;
-        _verticalMouse = mouseInput.y * _verticalSensitivy * Time.deltaTime;
+        _localGameEvent.OnReadPlayerInputs += SetMouseInput;
+    }
+
+    private void OnDisable()
+    {
+        _localGameEvent.OnReadPlayerInputs -= SetMouseInput;
     }
 
     private void Update()
     {
-        SetMouseInput(_playerController.GetPlayerInput.GetMouseDelta());
-
         HandleCameraVerticalRotation();
         HandlePlayerHorizontalRotation();
     }
@@ -38,5 +43,11 @@ public sealed class PlayerMouseLook : MonoBehaviour
     private void HandlePlayerHorizontalRotation()
     {
         this.transform.Rotate(Vector3.up, _horizontalMouse);
+    }
+
+    private void SetMouseInput(PlayerInputData playerInputData)
+    {
+        _horizontalMouse = playerInputData.MousePosition.x * _horizontalSensitivity * Time.deltaTime;
+        _verticalMouse = playerInputData.MousePosition.y * _verticalSensitivy * Time.deltaTime;
     }
 }

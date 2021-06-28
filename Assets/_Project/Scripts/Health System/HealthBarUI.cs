@@ -9,7 +9,20 @@ public sealed class HealthBarUI : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Image _healthBarImage;
 
-    public void UpdateHealthBar()
+    [Header("Game Events")]
+    [SerializeField] private LocalGameEvents _localGameEvent;
+
+    private void OnEnable()
+    {
+        _localGameEvent.OnHealthChanged += OnHealthChanged_UpdateHealthBar;
+    }
+
+    private void OnDisable()
+    {
+        _localGameEvent.OnHealthChanged -= OnHealthChanged_UpdateHealthBar;
+    }
+
+    private void OnHealthChanged_UpdateHealthBar()
     {
         float healthPercent = (float)_healthSystem.GetCurrentHealthAmount / _healthSystem.GetMaxHealthAmount;
         _healthBarImage.fillAmount = healthPercent;
