@@ -3,19 +3,19 @@ using UnityEngine.UI;
 
 public sealed class PauseGameHandler : MonoBehaviour
 {
-    [Header("Game State Scriptable Object")]
-    [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
-
-    [Header("Game Events")]
-    [SerializeField] private GlobalGameEvents _globalGameEvents;
-    [SerializeField] private LocalGameEvents _localGameEvent;
-
     [Header("Panels UI")]
     [SerializeField] private GameObject _pausePanelObject;
 
     [Header("Buttons UI")]
     [SerializeField] private Button _restartGameButton; 
     [SerializeField] private Button _resumeGameButton; 
+
+    [Header("Game Events")]
+    [SerializeField] private GlobalGameEvents _globalGameEvents;
+    [SerializeField] private LocalGameEvents _localGameEvent;
+    
+    [Header("Game State Scriptable Object")]
+    [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
 
     [SerializeField] private SceneHandler _sceneHandler = new SceneHandler();
 
@@ -62,9 +62,7 @@ public sealed class PauseGameHandler : MonoBehaviour
 
     private void HidePausePanel()
     {
-        Time.timeScale = 1f;
-
-        Cursor.lockState = CursorLockMode.Locked;
+        ResumeGame();
 
         SetGameState(GameState.PLAYING);
 
@@ -73,13 +71,25 @@ public sealed class PauseGameHandler : MonoBehaviour
 
     private void ShowPausePanel()
     {
-        Time.timeScale = 0f;
-
-        Cursor.lockState = CursorLockMode.None;
+        StopGame();
 
         SetGameState(GameState.PAUSED);
         
         _pausePanelObject.SetActive(true);
+    }
+
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void StopGame()
+    {
+        Time.timeScale = 0f;
+
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void SetGameState(GameState newGameState)

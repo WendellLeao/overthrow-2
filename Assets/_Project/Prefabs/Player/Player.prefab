@@ -628,6 +628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
   _spawnPosition: {fileID: 7679208728402740734}
+  _fireRate: 0.2
   _projectileAmountUI: {fileID: 0}
   _projectileAmount: 10
   _localGameEvent: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}

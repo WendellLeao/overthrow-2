@@ -8,4 +8,7 @@ public sealed class LocalGameEvents : ScriptableObject
 
     public delegate void DelegateOnReadPlayerInputs(PlayerInputData playerInputData);
     public DelegateOnReadPlayerInputs OnReadPlayerInputs;
+
+    public delegate void DelegateOnAmmoChanged(int currentProjectileAmount);
+    public DelegateOnAmmoChanged OnAmmoChanged;
 }

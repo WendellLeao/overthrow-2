@@ -1,36 +1,21 @@
 public sealed class PlayerAmmo
 {
-    private ProjectileAmountUI _projectileAmountUI;
-    
     private int _currentProjectileAmount;
     
     public int GetCurrentProjectileAmount => _currentProjectileAmount;
 
-    public PlayerAmmo(int projectileAmount, ProjectileAmountUI projectileAmountUI)
+    public PlayerAmmo(int maxProjectileAmount)
     {
-        _projectileAmountUI = projectileAmountUI;
-
-        _currentProjectileAmount = projectileAmount;
-
-        UpdateProjectileAmountUI();
+        _currentProjectileAmount = maxProjectileAmount;
     }
 
     public void DecreaseAmmo()
     {   
         _currentProjectileAmount--;
-        
-        UpdateProjectileAmountUI();
     }
 
     public void IncreaseAmmo()
     {
         _currentProjectileAmount++;
-        
-        UpdateProjectileAmountUI();
-    }
-
-    public void UpdateProjectileAmountUI()
-    {
-        _projectileAmountUI.OnPlayerShot_UpdateProjectileAmountUI(_currentProjectileAmount);
     }
 }

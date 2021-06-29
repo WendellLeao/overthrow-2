@@ -2,9 +2,6 @@ using UnityEngine;
 
 public sealed class PlayerDamageHandler : MonoBehaviour
 {
-    [Header("Player Controller")]
-    [SerializeField] private PlayerController _playerController;
-
     [Header("Health System")]
     [SerializeField] private HealthSystem _playerHealthSystem;
 

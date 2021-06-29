@@ -1,10 +1,8 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInputListener))]
 public sealed class PlayerMouseLook : MonoBehaviour
 {
-    [Header("Player Controller")]
-    [SerializeField] private PlayerController _playerController;
-
     [Header("Mouse Look")]
     [SerializeField] private Transform _cameraTransform;
 

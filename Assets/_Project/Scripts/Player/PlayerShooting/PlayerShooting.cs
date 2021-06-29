@@ -1,16 +1,15 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInputListener))]
 public sealed class PlayerShooting : MonoBehaviour
 {
     [Header("Projectile")]
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _spawnPosition;
-
-    [Header("UI")]
-    [SerializeField] private ProjectileAmountUI _projectileAmountUI;
+    [SerializeField] private float _fireRate;
 
     [Header("Ammo")]
-    [SerializeField] private int _projectileAmount;
+    [SerializeField] private int _maxProjectileAmount;
 
     [Header("Game Events")]
     [SerializeField] private LocalGameEvents _localGameEvent;
@@ -19,6 +18,8 @@ public sealed class PlayerShooting : MonoBehaviour
     [SerializeField] private GameStateScriptableOject _currentGameState;
 
     private PlayerAmmo _playerAmmo;
+
+    private float nextFire;
 
     private void OnEnable()
     {
@@ -47,20 +48,39 @@ public sealed class PlayerShooting : MonoBehaviour
 
     private void InstancePlayerAmmo()
     {
-        _playerAmmo = new PlayerAmmo(_projectileAmount, _projectileAmountUI);///Pass parameters by delegate
+        _playerAmmo = new PlayerAmmo(_maxProjectileAmount);
+
+        _localGameEvent.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount);
     }
 
     private void OnPlayerShot_PerformShoot(PlayerInputData playerInputData)
     {
-        if(playerInputData.IsShooting && _playerAmmo.GetCurrentProjectileAmount > 0 && _currentGameState.CurrentGameState == GameState.PLAYING)
+        if(CanShoot(playerInputData) && _currentGameState.CurrentGameState == GameState.PLAYING)
         {
-            GameObject cloneProjectile = Instantiate(_projectilePrefab, _spawnPosition.position, _spawnPosition.rotation);
-            
-            cloneProjectile.GetComponent<Projectile>().Initialize(_spawnPosition);
+            nextFire = Time.time + _fireRate;
 
-            _playerAmmo.DecreaseAmmo();
+            SpawnProjectile();
 
-            playerInputData.IsShooting = false;
+            HandleAmmo();
         }
+    }
+
+    private void SpawnProjectile()
+    {
+        GameObject cloneProjectile = Instantiate(_projectilePrefab, _spawnPosition.position, _spawnPosition.rotation);
+
+        cloneProjectile.GetComponent<Projectile>().Initialize(_spawnPosition);
+    }
+
+    private void HandleAmmo()
+    {
+        _playerAmmo.DecreaseAmmo();
+        
+        _localGameEvent.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount);
+    }
+
+    private bool CanShoot(PlayerInputData playerInputData)
+    {
+        return playerInputData.IsShooting && Time.time > nextFire && _playerAmmo.GetCurrentProjectileAmount > 0;
     }
 }

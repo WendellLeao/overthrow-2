@@ -1927,6 +1927,43 @@ Transform:
   m_Father: {fileID: 1247141435}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1568081451 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7938760289510950042, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
+  m_PrefabInstance: {fileID: 7938760291130082024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1568081452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568081451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95174fb40d5d0eb46b79ce374676310e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameOverPanelObject: {fileID: 2016918618}
+  _restartGameButton: {fileID: 562680031}
+  _globalGameEvents: {fileID: 11400000, guid: 5404f54fbff4c00498f96470263f1154, type: 2}
+  _gameStateScriptableObject: {fileID: 11400000, guid: c12687761aca2b446b5dec78ed9b44d3, type: 2}
+--- !u!114 &1568081453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568081451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c50ba169ffdfb448a8c0806726e8a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _winPanelObject: {fileID: 1059832005}
+  _continueButton: {fileID: 432411577}
+  _globalGameEvents: {fileID: 11400000, guid: 5404f54fbff4c00498f96470263f1154, type: 2}
+  _gameStateScriptableObject: {fileID: 11400000, guid: c12687761aca2b446b5dec78ed9b44d3, type: 2}
 --- !u!1 &1632213781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2765,10 +2802,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7679208726618355848, guid: 95bec163b768e2448a7fede340bf9af8, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7679208726618355848, guid: 95bec163b768e2448a7fede340bf9af8, type: 3}
       propertyPath: _wayPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1726061174}
@@ -2848,6 +2881,10 @@ PrefabInstance:
       propertyPath: _projectileAmountUI
       value: 
       objectReference: {fileID: 850035639}
+    - target: {fileID: 7679208728242780285, guid: 95bec163b768e2448a7fede340bf9af8, type: 3}
+      propertyPath: _maxProjectileAmount
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95bec163b768e2448a7fede340bf9af8, type: 3}
 --- !u!1001 &7938760291130082024
