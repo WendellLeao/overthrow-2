@@ -9,8 +9,8 @@ public sealed class PlayerInputListener : MonoBehaviour
     private PlayerInputSystem _playerInputSystem;
     private PlayerInputSystem.CharacterControlsActions _characterControls;
     
-    private bool _isShooting, _gameIsPaused;
-    private Vector2 _mouseLookAtPosition;
+    private bool _isShooting = false, _gameIsPaused = false;
+    private Vector2 _mousePosition;
 
     private void OnEnable()
     {
@@ -32,6 +32,9 @@ public sealed class PlayerInputListener : MonoBehaviour
     private void Update()
     {
         _localGameEvents.OnReadPlayerInputs?.Invoke(CreateInput());
+
+        _isShooting = false;//////////////
+        _gameIsPaused = false;//////////////
     }
 
     private PlayerInputData CreateInput()
@@ -40,39 +43,47 @@ public sealed class PlayerInputListener : MonoBehaviour
 
         playerInputData.IsShooting = _isShooting;
         playerInputData.GameIsPaused = _gameIsPaused;
-        playerInputData.MousePosition = _mouseLookAtPosition;
+        playerInputData.MousePosition = _mousePosition;
 
         return playerInputData;
     }
 
-    private void PerformShoot(InputAction.CallbackContext action)
+    private void PerformShoot(InputAction.CallbackContext context)
     {
-        switch(action.phase)
+        switch(context.phase)
         {
             case InputActionPhase.Performed:
-            _isShooting = true;
-            break;
+            {
+                _isShooting = true;
+                break;
+            }
             case InputActionPhase.Canceled:
-            _isShooting = false;
-            break;
+            {
+                _isShooting = false;
+                break;
+            }
         }
     }
 
-    private void PauseGame(InputAction.CallbackContext action)
+    private void PauseGame(InputAction.CallbackContext context)
     {
-        switch(action.phase)
+        switch(context.phase)
         {
             case InputActionPhase.Performed:
-            _gameIsPaused = true;
-            break;
+            {
+                _gameIsPaused = true;
+                break;
+            }
             case InputActionPhase.Canceled:
-            _gameIsPaused = false;
-            break;
+            {
+                _gameIsPaused = false;
+                break;
+            }
         }
     }
 
     private void MouseDelta(InputAction.CallbackContext action)
     {
-        _mouseLookAtPosition = action.ReadValue<Vector2>();
+        _mousePosition = action.ReadValue<Vector2>();
     } 
 }

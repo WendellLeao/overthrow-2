@@ -1,16 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public sealed class GameManager : MonoBehaviour
 {
-    [Header("Panels")]
+    [Header("Panels UI")]
     [SerializeField] private GameObject _gameOverPanelObject;
     [SerializeField] private GameObject _winPanelObject;
+
+    [Header("Buttons UI")]
+    [SerializeField] private Button _restartGameButton;
+    [SerializeField] private Button _continueButton;
 
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
     
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
+    private SceneHandler _sceneHandler = new SceneHandler();
 
     private void Awake()
     {
@@ -23,6 +29,9 @@ public sealed class GameManager : MonoBehaviour
     {
         _globalGameEvents.OnLevelCompleted += OnLevelCompleted_LevelComplete;
         _globalGameEvents.OnPlayerDied += OnPlayerDied_LoseGame;
+
+        _restartGameButton.onClick.AddListener(_sceneHandler.ReloadScene);
+        _continueButton.onClick.AddListener(_sceneHandler.LoadNextScene);
     }
 
     private void OnDisable()

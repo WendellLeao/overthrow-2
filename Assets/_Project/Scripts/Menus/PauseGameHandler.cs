@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public sealed class PauseGameHandler : MonoBehaviour
 {
@@ -9,26 +10,33 @@ public sealed class PauseGameHandler : MonoBehaviour
     [SerializeField] private GlobalGameEvents _globalGameEvents;
     [SerializeField] private LocalGameEvents _localGameEvent;
 
-    [Header("UI")]
+    [Header("Panels UI")]
     [SerializeField] private GameObject _pausePanelObject;
+
+    [Header("Buttons UI")]
+    [SerializeField] private Button _restartGameButton; 
+    [SerializeField] private Button _resumeGameButton; 
+
+    [SerializeField] private SceneHandler _sceneHandler = new SceneHandler();
 
     private void OnEnable()
     {
-        //_globalGameEvents.OnGamePaused += OnGamePaused_HandlePauseGame;
         _localGameEvent.OnReadPlayerInputs += OnGamePaused_HandlePauseGame;
+
+        _resumeGameButton.onClick.AddListener(HidePausePanel);
+        _restartGameButton.onClick.AddListener(_sceneHandler.ReloadScene);
     }
 
     private void OnDisable()
     {
-        //_globalGameEvents.OnGamePaused -= OnGamePaused_HandlePauseGame;
         _localGameEvent.OnReadPlayerInputs -= OnGamePaused_HandlePauseGame;
     }
     
     private void OnGamePaused_HandlePauseGame(PlayerInputData playerInputData)
     {
-        if(CanPauseGame())
+        if(CanPauseGame() && playerInputData.GameIsPaused)
         {
-            if (playerInputData.GameIsPaused)//IsPaused()
+            if(IsPaused())
             {
                 HidePausePanel();
             }

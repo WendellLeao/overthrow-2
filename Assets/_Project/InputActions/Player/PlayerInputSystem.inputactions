@@ -22,14 +22,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MousePosition",
-                    "type": "Value",
-                    "id": "fe6bf8e7-7915-4871-b1b8-d57e2bbdd47c",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "PauseGame",
                     "type": "Button",
                     "id": "c6dd3146-f449-4c0b-8622-7739ced8fc37",
@@ -63,18 +55,34 @@
                 },
                 {
                     "name": "",
-                    "id": "4c2767b6-03c4-44e6-946d-de7f4e6f7596",
-                    "path": "<Mouse>/position",
+                    "id": "4b55ee52-59b6-4763-8451-7f7dde741c00",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MousePosition",
+                    "action": "PauseGame",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "MenuControls",
+            "id": "7cc6d022-008b-425a-a371-ab2caf98b3af",
+            "actions": [
+                {
+                    "name": "PauseGame",
+                    "type": "Button",
+                    "id": "64dcba63-6cb3-476d-936b-623707ca5adf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
                 {
                     "name": "",
-                    "id": "4b55ee52-59b6-4763-8451-7f7dde741c00",
+                    "id": "917ceb6c-3ee4-4ec6-a2d9-0f889910d69b",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",

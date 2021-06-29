@@ -35,14 +35,6 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""MousePosition"",
-                    ""type"": ""Value"",
-                    ""id"": ""fe6bf8e7-7915-4871-b1b8-d57e2bbdd47c"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""PauseGame"",
                     ""type"": ""Button"",
                     ""id"": ""c6dd3146-f449-4c0b-8622-7739ced8fc37"",
@@ -76,18 +68,34 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4c2767b6-03c4-44e6-946d-de7f4e6f7596"",
-                    ""path"": ""<Mouse>/position"",
+                    ""id"": ""4b55ee52-59b6-4763-8451-7f7dde741c00"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MousePosition"",
+                    ""action"": ""PauseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
+                }
+            ]
+        },
+        {
+            ""name"": ""MenuControls"",
+            ""id"": ""7cc6d022-008b-425a-a371-ab2caf98b3af"",
+            ""actions"": [
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""64dcba63-6cb3-476d-936b-623707ca5adf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""4b55ee52-59b6-4763-8451-7f7dde741c00"",
+                    ""id"": ""917ceb6c-3ee4-4ec6-a2d9-0f889910d69b"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -105,8 +113,10 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
         m_CharacterControls_Shoot = m_CharacterControls.FindAction("Shoot", throwIfNotFound: true);
         m_CharacterControls_MouseLook = m_CharacterControls.FindAction("MouseLook", throwIfNotFound: true);
-        m_CharacterControls_MousePosition = m_CharacterControls.FindAction("MousePosition", throwIfNotFound: true);
         m_CharacterControls_PauseGame = m_CharacterControls.FindAction("PauseGame", throwIfNotFound: true);
+        // MenuControls
+        m_MenuControls = asset.FindActionMap("MenuControls", throwIfNotFound: true);
+        m_MenuControls_PauseGame = m_MenuControls.FindAction("PauseGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -158,7 +168,6 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
     private ICharacterControlsActions m_CharacterControlsActionsCallbackInterface;
     private readonly InputAction m_CharacterControls_Shoot;
     private readonly InputAction m_CharacterControls_MouseLook;
-    private readonly InputAction m_CharacterControls_MousePosition;
     private readonly InputAction m_CharacterControls_PauseGame;
     public struct CharacterControlsActions
     {
@@ -166,7 +175,6 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         public CharacterControlsActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_CharacterControls_Shoot;
         public InputAction @MouseLook => m_Wrapper.m_CharacterControls_MouseLook;
-        public InputAction @MousePosition => m_Wrapper.m_CharacterControls_MousePosition;
         public InputAction @PauseGame => m_Wrapper.m_CharacterControls_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
@@ -183,9 +191,6 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                 @MouseLook.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
                 @MouseLook.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
                 @MouseLook.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
-                @MousePosition.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMousePosition;
-                @MousePosition.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMousePosition;
-                @MousePosition.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMousePosition;
                 @PauseGame.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
                 @PauseGame.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
                 @PauseGame.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
@@ -199,9 +204,6 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
                 @MouseLook.started += instance.OnMouseLook;
                 @MouseLook.performed += instance.OnMouseLook;
                 @MouseLook.canceled += instance.OnMouseLook;
-                @MousePosition.started += instance.OnMousePosition;
-                @MousePosition.performed += instance.OnMousePosition;
-                @MousePosition.canceled += instance.OnMousePosition;
                 @PauseGame.started += instance.OnPauseGame;
                 @PauseGame.performed += instance.OnPauseGame;
                 @PauseGame.canceled += instance.OnPauseGame;
@@ -209,11 +211,47 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
         }
     }
     public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
+
+    // MenuControls
+    private readonly InputActionMap m_MenuControls;
+    private IMenuControlsActions m_MenuControlsActionsCallbackInterface;
+    private readonly InputAction m_MenuControls_PauseGame;
+    public struct MenuControlsActions
+    {
+        private @PlayerInputSystem m_Wrapper;
+        public MenuControlsActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PauseGame => m_Wrapper.m_MenuControls_PauseGame;
+        public InputActionMap Get() { return m_Wrapper.m_MenuControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuControlsActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuControlsActions instance)
+        {
+            if (m_Wrapper.m_MenuControlsActionsCallbackInterface != null)
+            {
+                @PauseGame.started -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnPauseGame;
+            }
+            m_Wrapper.m_MenuControlsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
+            }
+        }
+    }
+    public MenuControlsActions @MenuControls => new MenuControlsActions(this);
     public interface ICharacterControlsActions
     {
         void OnShoot(InputAction.CallbackContext context);
         void OnMouseLook(InputAction.CallbackContext context);
-        void OnMousePosition(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
+    }
+    public interface IMenuControlsActions
+    {
         void OnPauseGame(InputAction.CallbackContext context);
     }
 }
