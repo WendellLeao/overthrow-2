@@ -14,10 +14,20 @@ public sealed class HealthBarUI : MonoBehaviour
 
     private void OnEnable()
     {
-        _localGameEvent.OnHealthChanged += OnHealthChanged_UpdateHealthBar;
+        SubscribeEvents();
     }
 
     private void OnDisable()
+    {
+        UnsubscribeEvents();
+    }
+
+    private void SubscribeEvents()
+    {
+        _localGameEvent.OnHealthChanged += OnHealthChanged_UpdateHealthBar;
+    }
+
+    private void UnsubscribeEvents()
     {
         _localGameEvent.OnHealthChanged -= OnHealthChanged_UpdateHealthBar;
     }

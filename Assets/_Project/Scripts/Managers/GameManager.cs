@@ -20,12 +20,22 @@ public sealed class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        _gameStateScriptableObject.CurrentGameState = GameState.PLAYING;
-
         ResumeGame();
+
+        SetGameState(GameState.PLAYING);
     }
 
     private void OnEnable()
+    {
+        SubscribeEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeEvents();
+    }
+
+    private void SubscribeEvents()
     {
         _globalGameEvents.OnLevelCompleted += OnLevelCompleted_LevelComplete;
         _globalGameEvents.OnPlayerDied += OnPlayerDied_LoseGame;
@@ -34,10 +44,13 @@ public sealed class GameManager : MonoBehaviour
         _continueButton.onClick.AddListener(_sceneHandler.LoadNextScene);
     }
 
-    private void OnDisable()
+    private void UnsubscribeEvents()
     {
         _globalGameEvents.OnLevelCompleted -= OnLevelCompleted_LevelComplete;
         _globalGameEvents.OnPlayerDied -= OnPlayerDied_LoseGame;
+
+        _restartGameButton.onClick.RemoveAllListeners();
+        _continueButton.onClick.RemoveAllListeners();
     }
 
     private void OnLevelCompleted_LevelComplete()

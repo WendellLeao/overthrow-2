@@ -21,15 +21,28 @@ public sealed class PauseGameHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        SubscribeEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeEvents();
+    }
+
+    private void SubscribeEvents()
+    {
         _localGameEvent.OnReadPlayerInputs += OnGamePaused_HandlePauseGame;
 
         _resumeGameButton.onClick.AddListener(HidePausePanel);
         _restartGameButton.onClick.AddListener(_sceneHandler.ReloadScene);
     }
 
-    private void OnDisable()
+    private void UnsubscribeEvents()
     {
         _localGameEvent.OnReadPlayerInputs -= OnGamePaused_HandlePauseGame;
+
+        _resumeGameButton.onClick.RemoveAllListeners();
+        _restartGameButton.onClick.RemoveAllListeners();
     }
     
     private void OnGamePaused_HandlePauseGame(PlayerInputData playerInputData)

@@ -12,7 +12,7 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void Start()
     {
-        startOffset = transform.localPosition.z;
+        SetStartDepthOffset(transform.localPosition.z);
     }
     
     private void Update()
@@ -46,32 +46,29 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void UpdateLaserDirection()
     {
-        if(_playerController.GetWayPointSystem != null)
-        {
-            WayPointDirectionChecker wayPointDirectionsChecker = _playerController.GetWayPointSystem.GetWayPointDirections;
+        WayPointDirectionChecker wayPointDirectionsChecker = _playerController.GetWayPointSystem.GetWayPointDirections;
 
-            switch(wayPointDirectionsChecker.GetCurrentDirection)
+        switch (wayPointDirectionsChecker.GetCurrentDirection)
+        {
+            case WayPointDirection.FOWARD:
             {
-                case WayPointDirection.FOWARD:
-                {
-                    RotateToFoward();
-                    break;
-                }
-                case WayPointDirection.BACKWARD:
-                {
-                    RotateToBackward();
-                    break;
-                }
-                case WayPointDirection.LEFT:
-                {
-                    RotateToLeft();
-                    break;
-                }
-                case WayPointDirection.RIGHT:
-                {
-                    RotateToRight();
-                    break;
-                }
+                RotateToFoward();
+                break;
+            }
+            case WayPointDirection.BACKWARD:
+            {
+                RotateToBackward();
+                break;
+            }
+            case WayPointDirection.LEFT:
+            {
+                RotateToLeft();
+                break;
+            }
+            case WayPointDirection.RIGHT:
+            {
+                RotateToRight();
+                break;
             }
         }
     }
@@ -97,5 +94,10 @@ public sealed class LaserRotation : MonoBehaviour
     {
         transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
         transform.localPosition = new Vector3(startOffset, transform.localPosition.y, 0f);
+    }
+
+    private void SetStartDepthOffset(float offset)
+    {
+        startOffset = offset;
     }
 }

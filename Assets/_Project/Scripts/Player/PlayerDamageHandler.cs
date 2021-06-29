@@ -16,15 +16,30 @@ public sealed class PlayerDamageHandler : MonoBehaviour
     
     private void OnEnable()
     {
-        _localGameEvents.OnHealthChanged += OnHealthChanged_CheckIfPlayerIsDead;
+        SubscribeEvents();
     }
 
     private void OnDisable()
     {
-        _localGameEvents.OnHealthChanged -= OnHealthChanged_CheckIfPlayerIsDead;
+        UnsubscribeEvents();
     }
 
     private void Start()
+    {
+        ResetCurrentHealthAmount();
+    }
+
+    private void SubscribeEvents()
+    {
+        _localGameEvents.OnHealthChanged += OnHealthChanged_CheckIfPlayerIsDead;
+    }
+
+    private void UnsubscribeEvents()
+    {
+        _localGameEvents.OnHealthChanged -= OnHealthChanged_CheckIfPlayerIsDead;
+    }
+
+    private void ResetCurrentHealthAmount()
     {
         _playerHealthSystem.ResetCurrentHealthAmount();
     }

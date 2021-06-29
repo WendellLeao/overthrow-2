@@ -22,17 +22,32 @@ public sealed class PlayerShooting : MonoBehaviour
 
     private void OnEnable()
     {
-        _localGameEvent.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
+        SubscribeEvents();
     }
 
     private void OnDisable()
     {
-        _localGameEvent.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
+        UnsubscribeEvents();
     }
     
     private void Start()
     {
-        _playerAmmo = new PlayerAmmo(_projectileAmount, _projectileAmountUI);
+        InstancePlayerAmmo();
+    }
+
+    private void SubscribeEvents()
+    {
+        _localGameEvent.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
+    }
+
+    private void UnsubscribeEvents()
+    {
+        _localGameEvent.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
+    }
+
+    private void InstancePlayerAmmo()
+    {
+        _playerAmmo = new PlayerAmmo(_projectileAmount, _projectileAmountUI);///Pass parameters by delegate
     }
 
     private void OnPlayerShot_PerformShoot(PlayerInputData playerInputData)
@@ -44,6 +59,8 @@ public sealed class PlayerShooting : MonoBehaviour
             cloneProjectile.GetComponent<Projectile>().Initialize(_spawnPosition);
 
             _playerAmmo.DecreaseAmmo();
+
+            playerInputData.IsShooting = false;
         }
     }
 }

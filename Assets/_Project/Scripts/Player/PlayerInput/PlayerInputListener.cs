@@ -14,27 +14,61 @@ public sealed class PlayerInputListener : MonoBehaviour
 
     private void OnEnable()
     {
-        _playerInputSystem = new PlayerInputSystem();
-        _characterControls = _playerInputSystem.CharacterControls;
+        EnableInputSystem();
 
-        _characterControls.Shoot.performed += PerformShoot;
-        _characterControls.PauseGame.performed += PauseGame;
-        _characterControls.MouseLook.performed += MouseDelta;
-
-        _playerInputSystem.Enable();
+        SubscribeEvents();
     }
 
     private void OnDisable()
-    {
-        _playerInputSystem.Disable();
+    {      
+        DisableInputSystem();
+        
+        UnsubscribeEvents();
     }
 
     private void Update()
     {
-        _localGameEvents.OnReadPlayerInputs?.Invoke(CreateInput());
+        UpdateInputs();
+    }
 
-        _isShooting = false;//////////////
-        _gameIsPaused = false;//////////////
+    private void EnableInputSystem()
+    {
+        _playerInputSystem = new PlayerInputSystem();
+        _characterControls = _playerInputSystem.CharacterControls;
+
+        _playerInputSystem.Enable();
+    }
+
+    private void DisableInputSystem()
+    {
+        _playerInputSystem.Disable();
+    }
+
+    private void SubscribeEvents()
+    {
+        _characterControls.Shoot.performed += PerformShoot;
+        _characterControls.PauseGame.performed += PauseGame;
+        
+        _characterControls.MouseLook.performed += MouseDelta;
+
+        _characterControls.Shoot.canceled += PerformShoot;
+        _characterControls.PauseGame.canceled += PauseGame;
+    }
+
+    private void UnsubscribeEvents()
+    {
+        _characterControls.Shoot.performed -= PerformShoot;
+        _characterControls.PauseGame.performed -= PauseGame;
+        
+        _characterControls.MouseLook.performed -= MouseDelta;
+
+        _characterControls.Shoot.canceled -= PerformShoot;
+        _characterControls.PauseGame.canceled -= PauseGame;
+    }
+
+    private void UpdateInputs()
+    {
+        _localGameEvents.OnReadPlayerInputs?.Invoke(CreateInput());
     }
 
     private PlayerInputData CreateInput()

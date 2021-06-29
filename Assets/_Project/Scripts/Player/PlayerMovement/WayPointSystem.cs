@@ -10,52 +10,44 @@ public sealed class WayPointSystem : MonoBehaviour
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvent;
     
-    private WayPointDirectionChecker _wayPointDirections;
+    private WayPointDirectionChecker _wayPointDirectionChecker;
     private WayPointChecker _wayPointChecker;
 
     private float startVerticalPosition;
 
     private Vector3 targetPos, newPos;
     
-    private int _wayPointIndex;
+    private int _wayPointIndex = 0;
     
-    public WayPointDirectionChecker GetWayPointDirections => _wayPointDirections;
+    public WayPointDirectionChecker GetWayPointDirections => _wayPointDirectionChecker;
     public WayPointChecker GetWayPointChecker => _wayPointChecker;
     
     public int GetWayPointIndex => _wayPointIndex;
 
     private void Awake()
     {
-        _wayPointChecker = new WayPointChecker(this, _wayPoints);
-        _wayPointDirections = new WayPointDirectionChecker(this, _wayPoints);
+        InstanceWaypointCheckers();
     }
 
     private void Start()
     {
-        startVerticalPosition = this.transform.position.y;
+        SetStartVerticalPosition(this.transform.position.y);
 
-        _wayPointIndex = 0;
-        
-        targetPos = _wayPoints[_wayPointIndex].transform.position;
-        newPos = new Vector3(targetPos.x, startVerticalPosition, targetPos.z);
-
-        this.transform.position = newPos;
+        SetStartPosition(GetNewPosition());
     }
 
     private void Update()
     {
         HandleMovement();
+
         HandlePlayerIsAtTarget();
 
-        _wayPointDirections.UpdateDirections();
+        _wayPointDirectionChecker.UpdateDirections();
     }
 
     private void HandleMovement()
     {
-        targetPos = _wayPoints[_wayPointIndex].transform.position;
-        newPos = new Vector3(targetPos.x, startVerticalPosition, targetPos.z);
-        
-        transform.position = Vector3.MoveTowards(transform.position, newPos, _moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, GetNewPosition(), _moveSpeed * Time.deltaTime);
     }
 
     private void HandlePlayerIsAtTarget()
@@ -71,5 +63,30 @@ public sealed class WayPointSystem : MonoBehaviour
                 _wayPointIndex++;
             }
         }
+    }
+
+    private void InstanceWaypointCheckers()
+    {
+        _wayPointChecker = new WayPointChecker(this, _wayPoints);
+
+        _wayPointDirectionChecker = new WayPointDirectionChecker(this, _wayPoints);
+    }
+
+    private Vector3 GetNewPosition()
+    {
+        targetPos = _wayPoints[_wayPointIndex].transform.position;
+        newPos = new Vector3(targetPos.x, startVerticalPosition, targetPos.z);
+
+        return newPos;
+    }
+
+    private void SetStartVerticalPosition(float verticalPosition)
+    {
+        startVerticalPosition = verticalPosition;
+    }
+
+    private void SetStartPosition(Vector3 position)
+    {
+        this.transform.position = position;
     }
 }

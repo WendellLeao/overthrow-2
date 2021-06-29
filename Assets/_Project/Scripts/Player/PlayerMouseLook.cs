@@ -18,18 +18,28 @@ public sealed class PlayerMouseLook : MonoBehaviour
 
     private void OnEnable()
     {
-        _localGameEvent.OnReadPlayerInputs += SetMouseInput;
+        SubscribeEvents();
     }
 
     private void OnDisable()
     {
-        _localGameEvent.OnReadPlayerInputs -= SetMouseInput;
+        UnsubscribeEvents();
     }
 
     private void Update()
     {
         HandleCameraVerticalRotation();
         HandlePlayerHorizontalRotation();
+    }
+
+    private void SubscribeEvents()
+    {
+        _localGameEvent.OnReadPlayerInputs += SetMouseInput;
+    }
+
+    private void UnsubscribeEvents()
+    {
+        _localGameEvent.OnReadPlayerInputs -= SetMouseInput;
     }
 
     private void HandleCameraVerticalRotation()

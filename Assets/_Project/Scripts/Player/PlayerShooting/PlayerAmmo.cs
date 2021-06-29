@@ -31,6 +31,6 @@ public sealed class PlayerAmmo
 
     public void UpdateProjectileAmountUI()
     {
-        _projectileAmountUI.UpdateProjectileAmountUI(_currentProjectileAmount);
+        _projectileAmountUI.OnPlayerShot_UpdateProjectileAmountUI(_currentProjectileAmount);
     }
 }
