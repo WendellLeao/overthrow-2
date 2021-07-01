@@ -25,11 +25,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454372825378638494}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.24, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7679208728242780226}
+  m_Father: {fileID: 7679208727378460919}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2091737365855436041
@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.6536922, y: 4.524245, z: 1.1642661}
-  m_Center: {x: -0.069104195, y: -1.113765, z: 1.2104428}
+  m_Size: {x: 4.68, y: 4.524245, z: 1.2852387}
+  m_Center: {x: 0, y: -1.113765, z: 1.2709291}
 --- !u!114 &2960254852790321104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2be6f1dc61e8ee4e9f3ca68c5afcb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 7679208726618355852}
   _playerHealthSystem: {fileID: 11400000, guid: b3249c6c5639f3449abed719c28bf6fe, type: 2}
   _globalGameEvents: {fileID: 11400000, guid: 5404f54fbff4c00498f96470263f1154, type: 2}
   _localGameEvents: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
@@ -209,6 +208,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7679208726512982768}
+  - {fileID: 1941501437769957295}
   m_Father: {fileID: 7679208726618355855}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -580,7 +580,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7679208727873538981}
-  - {fileID: 1941501437769957295}
   m_Father: {fileID: 7679208726618355855}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -609,7 +608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08093c438c023324790d2dc04b14f410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 7679208726618355852}
   _cameraTransform: {fileID: 7679208727873538981}
   _horizontalSensitivity: 3
   _verticalSensitivy: 2
@@ -628,9 +626,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
   _spawnPosition: {fileID: 7679208728402740734}
+  _objectPool: {fileID: 11400000, guid: ca2514a015cc75e43a909d53830e048e, type: 2}
   _fireRate: 0.2
-  _projectileAmountUI: {fileID: 0}
-  _projectileAmount: 10
+  _maxProjectileAmount: 350
   _localGameEvent: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
   _currentGameState: {fileID: 11400000, guid: c12687761aca2b446b5dec78ed9b44d3, type: 2}
 --- !u!1 &7679208728281376701

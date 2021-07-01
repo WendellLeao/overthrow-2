@@ -6,6 +6,7 @@ public sealed class PlayerShooting : MonoBehaviour
     [Header("Projectile")]
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _spawnPosition;
+    [SerializeField] private ObjectPool _objectPool;
     [SerializeField] private float _fireRate;
 
     [Header("Ammo")]
@@ -34,6 +35,8 @@ public sealed class PlayerShooting : MonoBehaviour
     private void Start()
     {
         InstancePlayerAmmo();
+        
+        ClearObjectPolling();
     }
 
     private void SubscribeEvents()
@@ -53,6 +56,11 @@ public sealed class PlayerShooting : MonoBehaviour
         _localGameEvent.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount);
     }
 
+    private void ClearObjectPolling()
+    {
+        _objectPool.ClearPool();
+    }
+
     private void OnPlayerShot_PerformShoot(PlayerInputData playerInputData)
     {
         if(CanShoot(playerInputData) && _currentGameState.CurrentGameState == GameState.PLAYING)
@@ -67,9 +75,11 @@ public sealed class PlayerShooting : MonoBehaviour
 
     private void SpawnProjectile()
     {
-        GameObject cloneProjectile = Instantiate(_projectilePrefab, _spawnPosition.position, _spawnPosition.rotation);
+        GameObject newProjectile = _objectPool.GetObject(_projectilePrefab);
+        
+        newProjectile.transform.position = _spawnPosition.position;
 
-        cloneProjectile.GetComponent<Projectile>().Initialize(_spawnPosition);
+        newProjectile.GetComponent<Projectile>().SetProjectileVelocity(_spawnPosition);
     }
 
     private void HandleAmmo()

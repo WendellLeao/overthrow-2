@@ -130,5 +130,6 @@ MonoBehaviour:
   deactivatorObject:
     serializedVersion: 2
     m_Bits: 384
-  body: {fileID: 836969101488410415}
+  _objectPool: {fileID: 11400000, guid: ca2514a015cc75e43a909d53830e048e, type: 2}
+  _rigidbody2D: {fileID: 836969101488410415}
   _shootForce: 40

@@ -3,18 +3,34 @@ using UnityEngine;
 public sealed class Projectile : DestructibleObject
 {
     [Header("Projectile Components")]
-    [SerializeField] private Rigidbody body;
+    [SerializeField] private ObjectPool _objectPool;
+    [SerializeField] private Rigidbody _rigidbody2D;
 
     [Header("Fire")]
     [SerializeField] private float _shootForce;
 
-    public void Initialize(Transform spawnPosition)
+    public void SetProjectileVelocity(Transform spawnPosition)
     {
-        SetRigidbodyVelocity(spawnPosition);
+        _rigidbody2D.velocity = spawnPosition.forward * _shootForce;
     }
 
-    private void SetRigidbodyVelocity(Transform spawnPosition)
+    private void Update()
     {
-        body.velocity = spawnPosition.forward * _shootForce;
+        CheckProjectilePosition();
+    }
+
+    private void CheckProjectilePosition()
+    {
+        float maximumDistanceToDisable = -120f;
+
+        if(transform.position.y <= maximumDistanceToDisable)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnDisable()
+    {
+        _objectPool.ReturnGameObject(this.gameObject);        
     }
 }
