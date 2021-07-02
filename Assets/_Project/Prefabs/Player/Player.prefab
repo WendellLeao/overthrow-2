@@ -474,7 +474,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.93346757, g: 0.62184054, b: 0.9622642, a: 0}
+  m_BackGroundColor: {r: 0.8467049, g: 0.5007565, b: 0.8773585, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -626,7 +626,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
   _spawnPosition: {fileID: 7679208728402740734}
-  _objectPool: {fileID: 11400000, guid: ca2514a015cc75e43a909d53830e048e, type: 2}
   _fireRate: 0.2
   _maxProjectileAmount: 350
   _localGameEvent: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}

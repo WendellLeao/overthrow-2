@@ -131,4 +131,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   _rigidbody: {fileID: 836969101488410415}
-  _shootForce: 40
+  _shootForce: 35

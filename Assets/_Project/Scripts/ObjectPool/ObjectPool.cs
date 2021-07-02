@@ -44,9 +44,7 @@ public sealed class ObjectPool : MonoBehaviour
 
             for(int i = 0; i < pool._startAmount; i++)
             {
-                GameObject newGameObject = Instantiate(pool._objectToPool);
-                
-                newGameObject.SetActive(false);
+                GameObject newGameObject = CreateNewObject(pool._objectToPool);
                 
                 objectPool.Enqueue(newGameObject);
             }
@@ -55,22 +53,36 @@ public sealed class ObjectPool : MonoBehaviour
         }
     }
 
-    public GameObject GetObjectFromPool(ObjectType objectType)
+    public GameObject GetObjectFromPool(ObjectType objectType, GameObject objectToPool)
     {
-        if(!_poolDictionary.ContainsKey(objectType))
+        if (_poolDictionary.TryGetValue(objectType, out Queue<GameObject> objectList))
         {
-            Debug.LogWarning("Pool with tag '" + objectType + "' doesn't exist.");
-            
-            return null;
+            if (objectList.Count == 0)
+            {
+                return CreateNewObject(objectToPool);
+            }
+            else
+            {
+                GameObject objectFromPool = objectList.Dequeue();
+                
+                objectFromPool.SetActive(true);
+                
+                return objectFromPool;
+            }
         }
+        else
+        {
+            return CreateNewObject(objectToPool);
+        }
+    }
 
-        GameObject objectFromPool;
+    private GameObject CreateNewObject(GameObject gameObject)
+    {
+        GameObject newGameObject = Instantiate(gameObject);
 
-        objectFromPool = _poolDictionary[objectType].Dequeue();
-            
-        objectFromPool.SetActive(true);
-
-        return objectFromPool;
+        newGameObject.SetActive(false);
+                
+        return newGameObject;
     }
 }
 

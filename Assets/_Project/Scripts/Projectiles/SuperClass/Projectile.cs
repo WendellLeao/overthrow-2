@@ -19,11 +19,6 @@ public abstract class Projectile : DestructibleObject
         StartCoroutine(CheckProjectilePosition());
     }
 
-    protected void OnDisable()
-    {
-        ObjectPool.instance.ReturnObjectToPool(ObjectType.PROJECTILE_BALL, this.gameObject);
-    }
-
     private IEnumerator CheckProjectilePosition()
     {
         float timeToCheck = 0.5f;

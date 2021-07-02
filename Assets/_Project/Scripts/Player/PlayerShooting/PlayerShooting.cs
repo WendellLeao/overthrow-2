@@ -67,7 +67,7 @@ public sealed class PlayerShooting : MonoBehaviour
 
     private void SpawnProjectile()
     {
-        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(ObjectType.PROJECTILE_BALL);
+        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(ObjectType.PROJECTILE_BALL, _projectilePrefab);
         
         projectileClone.transform.position = _spawnPosition.position;
         projectileClone.transform.rotation = _spawnPosition.rotation;
