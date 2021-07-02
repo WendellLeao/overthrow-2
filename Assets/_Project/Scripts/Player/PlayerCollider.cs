@@ -9,7 +9,7 @@ public sealed class PlayerCollider : MonoBehaviour
     {
         if(other.TryGetComponent<DestructibleObject>(out DestructibleObject destructibleObject))
         {
-            if(destructibleObject.GetIsEnabled && other.TryGetComponent<Cube>(out Cube cube))
+            if(destructibleObject.GetIsEnabled && other.TryGetComponent<BarricadeCube>(out BarricadeCube cubeBarricade))
             {
                 _playerHealthSystem.Damage(20);
             }
