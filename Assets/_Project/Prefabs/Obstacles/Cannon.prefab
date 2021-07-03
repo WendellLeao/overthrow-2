@@ -404,6 +404,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372a13dade9c6e14cb619d5fb5c09f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileCube: {fileID: 7104654789432281182, guid: e214503bef001dd47b75617b42f34727, type: 3}
   _spawnPosition: {fileID: 7442630517233331981}
-  _fireRate: 0.5
+  _fireRate: 1

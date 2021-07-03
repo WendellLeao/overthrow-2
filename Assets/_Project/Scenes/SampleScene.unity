@@ -3018,14 +3018,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cannon
       objectReference: {fileID: 0}
-    - target: {fileID: 6727948197397855731, guid: a244eee8769da5a4da448bfab39e9240, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8389450500559891935, guid: a244eee8769da5a4da448bfab39e9240, type: 3}
-      propertyPath: _fireRate
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a244eee8769da5a4da448bfab39e9240, type: 3}
 --- !u!1001 &6482479067241017613
@@ -3273,6 +3265,10 @@ PrefabInstance:
       propertyPath: _objectPool
       value: 
       objectReference: {fileID: 11400000, guid: 4f891bbce5a99204ca8b8a48d005468c, type: 2}
+    - target: {fileID: 7679208728242780285, guid: 95bec163b768e2448a7fede340bf9af8, type: 3}
+      propertyPath: _maxProjectileAmount
+      value: 350
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95bec163b768e2448a7fede340bf9af8, type: 3}
 --- !u!1001 &7938760291130082024

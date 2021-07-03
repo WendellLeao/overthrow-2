@@ -4,7 +4,6 @@ using UnityEngine;
 public sealed class PlayerShooting : MonoBehaviour
 {
     [Header("Projectile")]
-    [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _spawnPosition;
     [SerializeField] private float _fireRate;
 
@@ -67,7 +66,7 @@ public sealed class PlayerShooting : MonoBehaviour
 
     private void SpawnProjectile()
     {
-        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(ObjectType.PROJECTILE_BALL, _projectilePrefab);
+        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(ObjectType.PROJECTILE_BALL);
         
         projectileClone.transform.position = _spawnPosition.position;
         projectileClone.transform.rotation = _spawnPosition.rotation;

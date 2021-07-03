@@ -8,14 +8,16 @@ public sealed class ObjectPool : MonoBehaviour
     [SerializeField] private List<Pool> _pools = new List<Pool>();
 
     private Dictionary<ObjectType, Queue<GameObject>> _poolDictionary;
-    
+
+    private List<GameObject> _backupObjectList = new List<GameObject>();
+
     public void ReturnObjectToPool(ObjectType objectType, GameObject objectToReturn)
     {
         if (_poolDictionary.TryGetValue(objectType, out Queue<GameObject> objectList))
         {
             objectList.Enqueue(objectToReturn);
         }
-        
+
         objectToReturn.SetActive(false);
     }
 
@@ -45,34 +47,37 @@ public sealed class ObjectPool : MonoBehaviour
             for(int i = 0; i < pool._startAmount; i++)
             {
                 GameObject newGameObject = CreateNewObject(pool._objectToPool);
-                
+
                 objectPool.Enqueue(newGameObject);
             }
-        
+
+            _backupObjectList.Add(pool._objectToPool);
             _poolDictionary.Add(pool._objectType, objectPool);
         }
     }
 
-    public GameObject GetObjectFromPool(ObjectType objectType, GameObject objectToPool)
+    public GameObject GetObjectFromPool(ObjectType objectType)
     {
         if (_poolDictionary.TryGetValue(objectType, out Queue<GameObject> objectList))
         {
             if (objectList.Count == 0)
             {
-                return CreateNewObject(objectToPool);
+                return CreateBackupObject(objectType);
             }
             else
             {
                 GameObject objectFromPool = objectList.Dequeue();
-                
+
                 objectFromPool.SetActive(true);
-                
+
                 return objectFromPool;
             }
         }
         else
         {
-            return CreateNewObject(objectToPool);
+            Debug.LogWarning("Pool of type '" + objectType + "' doesn't exist!");
+
+            return null;
         }
     }
 
@@ -81,8 +86,27 @@ public sealed class ObjectPool : MonoBehaviour
         GameObject newGameObject = Instantiate(gameObject);
 
         newGameObject.SetActive(false);
-                
+
         return newGameObject;
+    }
+
+    private GameObject CreateBackupObject(ObjectType objectType)
+    {
+        GameObject newBackupObject = null;
+
+        foreach (Pool pool in _pools)
+        {
+            if (pool._objectType == objectType)
+            {
+                newBackupObject = Instantiate(pool._objectToPool);
+
+                return newBackupObject;
+            }
+        }
+
+        Debug.LogWarning("Pool of type '" + objectType + "' doesn't exist!");
+        
+        return null;
     }
 }
 

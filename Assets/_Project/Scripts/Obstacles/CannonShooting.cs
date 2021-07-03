@@ -3,7 +3,6 @@ using UnityEngine;
 
 public sealed class CannonShooting : MonoBehaviour
 {
-    [SerializeField] private GameObject _projectileCube;
     [SerializeField] private Transform _spawnPosition;
     [SerializeField] private float _fireRate;
     private bool _canShoot = true;
@@ -27,7 +26,7 @@ public sealed class CannonShooting : MonoBehaviour
     {
         yield return new WaitForSeconds(_fireRate);
 
-        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(ObjectType.PROJECTILE_CUBE, _projectileCube);
+        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(ObjectType.PROJECTILE_CUBE);
 
         projectileClone.transform.position = _spawnPosition.transform.position;
         projectileClone.transform.rotation = _spawnPosition.transform.rotation;
