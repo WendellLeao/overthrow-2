@@ -7,11 +7,11 @@ public sealed class PlayerCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<DestructibleObject>(out DestructibleObject destructibleObject))
+        if(other.TryGetComponent<DeactivatableObject>(out DeactivatableObject deactivatableObject))
         {
-            if(destructibleObject.GetIsEnabled && other.TryGetComponent<BarricadeCube>(out BarricadeCube cubeBarricade))
+            if(deactivatableObject.GetIsActivated && other.TryGetComponent<BarricadeCube>(out BarricadeCube barricadeCube))
             {
-                _playerHealthSystem.Damage(20);
+                _playerHealthSystem.Damage(35);
             }
         }
 

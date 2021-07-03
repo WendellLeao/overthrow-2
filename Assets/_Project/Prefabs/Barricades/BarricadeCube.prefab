@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2564e9edd8f91949bb7e2159fa77318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _disabledMaterial: {fileID: 2100000, guid: 4b6c16c8bf29c9e40bc66796d0674b6e, type: 2}
+  _deactivatedMaterial: {fileID: 2100000, guid: 4b6c16c8bf29c9e40bc66796d0674b6e, type: 2}
   _meshRenderer: {fileID: 1201168275915254272}
   deactivatorObject:
     serializedVersion: 2

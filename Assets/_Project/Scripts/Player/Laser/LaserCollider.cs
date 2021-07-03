@@ -7,11 +7,11 @@ public sealed class LaserCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<DestructibleObject>(out DestructibleObject destructibleObject))
+        if(other.TryGetComponent<DeactivatableObject>(out DeactivatableObject deactivatableObject))
         {
-            if(!destructibleObject.GetIsEnabled)
+            if(!deactivatableObject.GetIsActivated)
             {
-                destructibleObject.DestroyObject();
+                deactivatableObject.DeactivateObject();
             }
         }
     }

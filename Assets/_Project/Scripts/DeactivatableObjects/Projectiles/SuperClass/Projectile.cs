@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class Projectile : DestructibleObject
+public abstract class Projectile : DeactivatableObject
 {
     [Header("Projectile Components")]
     [SerializeField] private Rigidbody _rigidbody;

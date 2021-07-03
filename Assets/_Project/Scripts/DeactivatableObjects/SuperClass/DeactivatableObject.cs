@@ -1,22 +1,22 @@
 using UnityEngine;
 
-public abstract class DestructibleObject : MonoBehaviour
+public abstract class DeactivatableObject : MonoBehaviour
 {
     [Header("Materials")]
-    [SerializeField] protected Material _disabledMaterial;
+    [SerializeField] protected Material _deactivatedMaterial;
     [SerializeField] protected MeshRenderer _meshRenderer;
 
     [Header("Detection")]
     [SerializeField] private LayerMask deactivatorObject;
 
     [Header("Enable Bolls")]
-    private bool _isEnabled = true;
+    private bool _isActivated = true;
     
-    public bool GetIsEnabled => _isEnabled;
+    public bool GetIsActivated => _isActivated;
     
-    public void DestroyObject()
+    public void DeactivateObject()
     {
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -25,9 +25,9 @@ public abstract class DestructibleObject : MonoBehaviour
 
         if(other.gameObject.layer == singleLayer)
         {
-            _meshRenderer.material = _disabledMaterial;
+            _meshRenderer.material = _deactivatedMaterial;
             
-            _isEnabled = false;
+            _isActivated = false;
         }
     }
 }

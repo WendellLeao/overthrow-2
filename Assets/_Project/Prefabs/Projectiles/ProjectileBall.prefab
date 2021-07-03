@@ -125,18 +125,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05dd3345d2f62f04480277ee90dd00ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _disabledMaterial: {fileID: 2100000, guid: 12ca79d1906ac624994fa91e85880fb8, type: 2}
   _meshRenderer: {fileID: 836969101488410413}
+  _deactivatedMaterial: {fileID: 2100000, guid: 12ca79d1906ac624994fa91e85880fb8, type: 2}
   deactivatorObject:
     serializedVersion: 2
     m_Bits: 384
   _rigidbody: {fileID: 836969101488410415}
   _shootForce: 35
-  _enabledMaterials:
+  _startMaterial:
   - {fileID: 2100000, guid: 175c347bf7af8be438e2dea24ea3e13c, type: 2}
-  - {fileID: 2100000, guid: 15836349560cc2c4fa4c2bdd919d419a, type: 2}
   - {fileID: 2100000, guid: 7ce5ecbd14b38f147aeb451c075b5cb7, type: 2}
-  _disabledMaterials:
+  - {fileID: 2100000, guid: d5954e28d369f0b49b9a96bb43c17ad7, type: 2}
+  _newDeactivatedMaterial:
   - {fileID: 2100000, guid: 12ca79d1906ac624994fa91e85880fb8, type: 2}
-  - {fileID: 2100000, guid: 42caffe1132386f4daa037a9663088b9, type: 2}
   - {fileID: 2100000, guid: 4b6c16c8bf29c9e40bc66796d0674b6e, type: 2}
+  - {fileID: 2100000, guid: 700ae469e5be9ac4095d29b97116027a, type: 2}
