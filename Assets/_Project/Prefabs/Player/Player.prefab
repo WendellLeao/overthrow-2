@@ -627,7 +627,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
   _spawnPosition: {fileID: 7679208728402740734}
   _fireRate: 0.2
-  _maxProjectileAmount: 350
+  _maxProjectileAmount: 15
   _localGameEvent: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
   _currentGameState: {fileID: 11400000, guid: c12687761aca2b446b5dec78ed9b44d3, type: 2}
 --- !u!1 &7679208728281376701

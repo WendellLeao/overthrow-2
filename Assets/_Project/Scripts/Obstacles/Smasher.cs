@@ -4,6 +4,7 @@ public sealed class Smasher : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float _minimumVerticalDistance, _maximumVerticalDistance, _smashSpeed;
+    private float _pingPongValue = 0f;
 
     private void Update()
     {
@@ -12,7 +13,9 @@ public sealed class Smasher : MonoBehaviour
 
     private void HandleMovement()
     {
-        float pingPong = Mathf.PingPong(Time.time * _smashSpeed, 1);
+        _pingPongValue += Time.deltaTime * _smashSpeed;
+
+        float pingPong = Mathf.PingPong(_pingPongValue, 1);
         float verticalposition = Mathf.Lerp(_minimumVerticalDistance, _maximumVerticalDistance, pingPong);
 
         transform.position = new Vector3(transform.position.x, verticalposition, transform.position.z);

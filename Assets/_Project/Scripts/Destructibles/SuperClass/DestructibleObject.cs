@@ -3,8 +3,8 @@ using UnityEngine;
 public abstract class DestructibleObject : MonoBehaviour
 {
     [Header("Materials")]
-    [SerializeField] private Material _disabledMaterial;
-    [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] protected Material _disabledMaterial;
+    [SerializeField] protected MeshRenderer _meshRenderer;
 
     [Header("Detection")]
     [SerializeField] private LayerMask deactivatorObject;

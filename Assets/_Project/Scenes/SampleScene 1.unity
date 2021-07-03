@@ -2744,6 +2744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileAmountText: {fileID: 850035637}
+  _localGameEvent: {fileID: 0}
 --- !u!1 &888552837
 GameObject:
   m_ObjectHideFlags: 0
