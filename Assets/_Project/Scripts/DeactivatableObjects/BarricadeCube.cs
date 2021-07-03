@@ -1,4 +1,4 @@
-public sealed class BarricadeCube : DeactivatableObject
+public sealed class BarricadeCube : DeactivatableObject, IObstacle
 {
     
 }

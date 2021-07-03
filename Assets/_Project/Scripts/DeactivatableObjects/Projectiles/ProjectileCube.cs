@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public sealed class ProjectileCube : Projectile
+public sealed class ProjectileCube : Projectile, IObstacle
 {
     private void OnDisable()
     {

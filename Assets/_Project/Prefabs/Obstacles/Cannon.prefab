@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 1173734320035999585}
   - component: {fileID: 7038722493325454978}
   - component: {fileID: 2113857774272604162}
+  - component: {fileID: 2167019527041285472}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -113,6 +114,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2167019527041285472
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2842636805252436679}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7348556155622324996, guid: a31fe8b4daac6d941b32d41379f93473, type: 3}
 --- !u!1 &2862140084262642065
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +220,7 @@ GameObject:
   - component: {fileID: 7580844901373679887}
   - component: {fileID: 8997938681554696994}
   - component: {fileID: 4190447948953543347}
+  - component: {fileID: 2929551222301381328}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -277,6 +293,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2929551222301381328
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975018337227669682}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4493585093827132993, guid: a31fe8b4daac6d941b32d41379f93473, type: 3}
 --- !u!1 &6490658346888065734
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6203050505758877513}
   - component: {fileID: 8389450500559891935}
+  - component: {fileID: 7161173485181624605}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -406,3 +437,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPosition: {fileID: 7442630517233331981}
   _fireRate: 1
+--- !u!54 &7161173485181624605
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727948197397855731}
+  serializedVersion: 2
+  m_Mass: 30
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

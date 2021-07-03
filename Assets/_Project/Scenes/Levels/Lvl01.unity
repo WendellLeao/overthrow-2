@@ -1959,6 +1959,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectPool
       objectReference: {fileID: 0}
+    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
+      propertyPath: _pools.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
+      propertyPath: _pools.Array.data[1]._poolType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
+      propertyPath: _pools.Array.data[1]._startAmount
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
+      propertyPath: _pools.Array.data[1]._objectToPool
+      value: 
+      objectReference: {fileID: 7104654789432281182, guid: e214503bef001dd47b75617b42f34727, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
 --- !u!1001 &7679208728333632291
@@ -1968,6 +1984,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7679208726618355848, guid: 95bec163b768e2448a7fede340bf9af8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7679208726618355848, guid: 95bec163b768e2448a7fede340bf9af8, type: 3}
       propertyPath: _wayPoints.Array.size
       value: 2

@@ -9,9 +9,9 @@ public sealed class PlayerCollider : MonoBehaviour
     {
         if(other.TryGetComponent<DeactivatableObject>(out DeactivatableObject deactivatableObject))
         {
-            if(deactivatableObject.GetIsActivated && other.TryGetComponent<BarricadeCube>(out BarricadeCube barricadeCube))
+            if(deactivatableObject.GetIsActivated && other.TryGetComponent<IObstacle>(out IObstacle obstacle))
             {
-                _playerHealthSystem.Damage(35);
+                _playerHealthSystem.Damage(30);
             }
         }
 
