@@ -20,6 +20,6 @@ public sealed class ProjectileBall : Projectile
 
     private void OnDisable()
     {
-        ObjectPool.instance.ReturnObjectToPool(ObjectType.PROJECTILE_BALL, this.gameObject);
+        ObjectPool.instance.ReturnObjectToPool(PoolType.PROJECTILE_BALL, this.gameObject);
     }
 }

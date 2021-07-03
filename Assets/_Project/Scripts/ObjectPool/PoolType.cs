@@ -1,4 +1,4 @@
-public enum ObjectType
+public enum PoolType
 {
     PROJECTILE_BALL,
     PROJECTILE_CUBE

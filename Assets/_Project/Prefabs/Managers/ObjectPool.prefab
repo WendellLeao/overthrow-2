@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pools:
-  - _objectType: 0
+  - _poolType: 0
     _objectToPool: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
     _startAmount: 30
-  - _objectType: 1
+  - _poolType: 1
     _objectToPool: {fileID: 7104654789432281182, guid: e214503bef001dd47b75617b42f34727, type: 3}
     _startAmount: 60

@@ -7,11 +7,9 @@ public sealed class ObjectPool : MonoBehaviour
 
     [SerializeField] private List<Pool> _pools = new List<Pool>();
 
-    private Dictionary<ObjectType, Queue<GameObject>> _poolDictionary;
+    private Dictionary<PoolType, Queue<GameObject>> _poolDictionary;
 
-    private List<GameObject> _backupObjectList = new List<GameObject>();
-
-    public void ReturnObjectToPool(ObjectType objectType, GameObject objectToReturn)
+    public void ReturnObjectToPool(PoolType objectType, GameObject objectToReturn)
     {
         if (_poolDictionary.TryGetValue(objectType, out Queue<GameObject> objectList))
         {
@@ -38,7 +36,7 @@ public sealed class ObjectPool : MonoBehaviour
 
     private void FillPool()
     {
-        _poolDictionary = new Dictionary<ObjectType, Queue<GameObject>>();
+        _poolDictionary = new Dictionary<PoolType, Queue<GameObject>>();
 
         foreach (Pool pool in _pools)
         {
@@ -51,18 +49,17 @@ public sealed class ObjectPool : MonoBehaviour
                 objectPool.Enqueue(newGameObject);
             }
 
-            _backupObjectList.Add(pool._objectToPool);
-            _poolDictionary.Add(pool._objectType, objectPool);
+            _poolDictionary.Add(pool._poolType, objectPool);
         }
     }
 
-    public GameObject GetObjectFromPool(ObjectType objectType)
+    public GameObject GetObjectFromPool(PoolType poolType)
     {
-        if (_poolDictionary.TryGetValue(objectType, out Queue<GameObject> objectList))
+        if (_poolDictionary.TryGetValue(poolType, out Queue<GameObject> objectList))
         {
             if (objectList.Count == 0)
             {
-                return CreateBackupObject(objectType);
+                return CreateBackupObject(poolType);
             }
             else
             {
@@ -75,7 +72,7 @@ public sealed class ObjectPool : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Pool of type '" + objectType + "' doesn't exist!");
+            Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
 
             return null;
         }
@@ -90,13 +87,13 @@ public sealed class ObjectPool : MonoBehaviour
         return newGameObject;
     }
 
-    private GameObject CreateBackupObject(ObjectType objectType)
+    private GameObject CreateBackupObject(PoolType poolType)
     {
         GameObject newBackupObject = null;
 
         foreach (Pool pool in _pools)
         {
-            if (pool._objectType == objectType)
+            if (pool._poolType == poolType)
             {
                 newBackupObject = Instantiate(pool._objectToPool);
 
@@ -104,7 +101,7 @@ public sealed class ObjectPool : MonoBehaviour
             }
         }
 
-        Debug.LogWarning("Pool of type '" + objectType + "' doesn't exist!");
+        Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
         
         return null;
     }
@@ -113,7 +110,7 @@ public sealed class ObjectPool : MonoBehaviour
 [System.Serializable]
 public sealed class Pool
 {
-    public ObjectType _objectType;
+    public PoolType _poolType;
     public GameObject _objectToPool;
     public int _startAmount;
 }

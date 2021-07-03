@@ -26,7 +26,7 @@ public sealed class CannonShooting : MonoBehaviour
     {
         yield return new WaitForSeconds(_fireRate);
 
-        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(ObjectType.PROJECTILE_CUBE);
+        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(PoolType.PROJECTILE_CUBE);
 
         projectileClone.transform.position = _spawnPosition.transform.position;
         projectileClone.transform.rotation = _spawnPosition.transform.rotation;
