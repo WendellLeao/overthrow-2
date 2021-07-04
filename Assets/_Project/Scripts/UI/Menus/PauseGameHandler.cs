@@ -57,6 +57,8 @@ public sealed class PauseGameHandler : MonoBehaviour
             {
                 ShowPausePanel();
             }
+
+            playerInputData.GameIsPaused = false;
         }
     }
 

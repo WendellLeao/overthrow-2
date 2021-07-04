@@ -10,6 +10,9 @@ public sealed class PlayerShooting : MonoBehaviour
     [Header("Ammo")]
     [SerializeField] private int _maxProjectileAmount;
 
+    [Header("Player Transform")]
+    [SerializeField] private Transform _playerTransform;
+
     [Header("Game Events")]
     [SerializeField] private LocalGameEvents _localGameEvent;
     
@@ -68,7 +71,7 @@ public sealed class PlayerShooting : MonoBehaviour
     {
         GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(PoolType.PROJECTILE_BALL);
         
-        //projectileClone.transform.parent = this.transform;
+        projectileClone.transform.parent = _playerTransform;
 
         projectileClone.transform.position = _spawnPosition.position;
         projectileClone.transform.rotation = _spawnPosition.rotation;

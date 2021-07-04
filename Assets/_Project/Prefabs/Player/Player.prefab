@@ -622,6 +622,7 @@ MonoBehaviour:
   _maxProjectileAmount: 15
   _localGameEvent: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
   _currentGameState: {fileID: 11400000, guid: c12687761aca2b446b5dec78ed9b44d3, type: 2}
+  _playerTransform: {fileID: 7679208726618355855}
 --- !u!1 &7679208728281376701
 GameObject:
   m_ObjectHideFlags: 0
