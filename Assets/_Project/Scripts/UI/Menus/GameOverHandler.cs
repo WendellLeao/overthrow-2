@@ -8,6 +8,7 @@ public sealed class GameOverHandler : MonoBehaviour
 
     [Header("Buttons UI")]
     [SerializeField] private Button _restartGameButton;
+    [SerializeField] private Button _mainMenuButton; 
 
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
@@ -32,6 +33,7 @@ public sealed class GameOverHandler : MonoBehaviour
         _globalGameEvents.OnPlayerDied += OnPlayerDied_LoseGame;
 
         _restartGameButton.onClick.AddListener(_sceneHandler.ReloadScene);
+        _mainMenuButton.onClick.AddListener(_sceneHandler.BackToMainMenu);
     }
 
     private void UnsubscribeEvents()
@@ -39,6 +41,7 @@ public sealed class GameOverHandler : MonoBehaviour
         _globalGameEvents.OnPlayerDied -= OnPlayerDied_LoseGame;
 
         _restartGameButton.onClick.RemoveAllListeners();
+        _mainMenuButton.onClick.RemoveAllListeners();
     }
 
     private void OnPlayerDied_LoseGame()

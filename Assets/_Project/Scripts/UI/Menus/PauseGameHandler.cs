@@ -9,6 +9,7 @@ public sealed class PauseGameHandler : MonoBehaviour
     [Header("Buttons UI")]
     [SerializeField] private Button _restartGameButton; 
     [SerializeField] private Button _resumeGameButton; 
+    [SerializeField] private Button _mainMenuButton; 
 
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
@@ -35,6 +36,7 @@ public sealed class PauseGameHandler : MonoBehaviour
 
         _resumeGameButton.onClick.AddListener(HidePausePanel);
         _restartGameButton.onClick.AddListener(_sceneHandler.ReloadScene);
+        _mainMenuButton.onClick.AddListener(_sceneHandler.BackToMainMenu);
     }
 
     private void UnsubscribeEvents()
@@ -43,6 +45,7 @@ public sealed class PauseGameHandler : MonoBehaviour
 
         _resumeGameButton.onClick.RemoveAllListeners();
         _restartGameButton.onClick.RemoveAllListeners();
+        _mainMenuButton.onClick.RemoveAllListeners();
     }
     
     private void OnGamePaused_HandlePauseGame(PlayerInputData playerInputData)

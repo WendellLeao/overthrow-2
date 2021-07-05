@@ -2,7 +2,7 @@ using UnityEngine;
 
 public sealed class CubesBackgroundRotation : MonoBehaviour
 {
-    [SerializeField] private float _horizontalRotationSpeed, _verticalRotationSpeed, _depthRotationSpeed;
+    [SerializeField] private float _xRotationSpeed, _yRotationSpeed, _zRotationSpeed;
 
     private void Update()
     {
@@ -11,6 +11,6 @@ public sealed class CubesBackgroundRotation : MonoBehaviour
 
     private void HandleRotation()
     {
-        transform.Rotate(new Vector3(_horizontalRotationSpeed, _verticalRotationSpeed, _depthRotationSpeed));
+        transform.Rotate(new Vector3(_xRotationSpeed, _yRotationSpeed, _zRotationSpeed) * Time.deltaTime);
     }
 }

@@ -11,7 +11,7 @@ public sealed class PlayerMouseLook : MonoBehaviour
     [Header("Game Events")]
     [SerializeField] private LocalGameEvents _localGameEvent;
     
-    private float _verticalRotation = 0f;
+    private float _horizontalRotation = 0f;
     private float _horizontalMouse, _verticalMouse;
 
     private void OnEnable()
@@ -42,10 +42,10 @@ public sealed class PlayerMouseLook : MonoBehaviour
 
     private void HandleCameraVerticalRotation()
     {
-        _verticalRotation -= _verticalMouse;
-        _verticalRotation = Mathf.Clamp(_verticalRotation, -90f, 90f);
+        _horizontalRotation -= _verticalMouse;
+        _horizontalRotation = Mathf.Clamp(_horizontalRotation, -90f, 90f);
         
-        _cameraTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+        _cameraTransform.localRotation = Quaternion.Euler(_horizontalRotation, 0f, 0f);
     }
     
     private void HandlePlayerHorizontalRotation()

@@ -434,7 +434,6 @@ GameObject:
   - component: {fileID: 7679208727873538981}
   - component: {fileID: 7679208727873538982}
   - component: {fileID: 7679208727873538983}
-  - component: {fileID: 7679208727873538980}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -508,40 +507,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7679208727873538976}
   m_Enabled: 1
---- !u!114 &7679208727873538980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7679208727873538976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &7679208728242780286
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,9 +585,9 @@ MonoBehaviour:
   _spawnPosition: {fileID: 7679208728402740734}
   _fireRate: 0.2
   _maxProjectileAmount: 15
+  _playerTransform: {fileID: 7679208726618355855}
   _localGameEvent: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
   _currentGameState: {fileID: 11400000, guid: c12687761aca2b446b5dec78ed9b44d3, type: 2}
-  _playerTransform: {fileID: 7679208726618355855}
 --- !u!1 &7679208728281376701
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +707,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7679208728402740735}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7679208727873538981}

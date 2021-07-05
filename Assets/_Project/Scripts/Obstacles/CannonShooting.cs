@@ -31,7 +31,7 @@ public sealed class CannonShooting : MonoBehaviour
         projectileClone.transform.position = _spawnPosition.transform.position;
         projectileClone.transform.rotation = _spawnPosition.transform.rotation;
 
-        projectileClone.GetComponent<ProjectileCube>().SetProjectileVelocity(_spawnPosition);
+        projectileClone.GetComponent<Projectile>().SetProjectileVelocity(_spawnPosition);
 
         _canShoot = true;
     }
