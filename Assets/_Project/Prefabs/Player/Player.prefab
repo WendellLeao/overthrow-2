@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc04a2cd48fcec4bb6f9c3685c8730e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPosition: {fileID: 7679208728402740734}
+  _spawnTransform: {fileID: 7679208728402740734}
   _fireRate: 0.2
   _maxProjectileAmount: 15
   _playerTransform: {fileID: 7679208726618355855}
@@ -693,7 +693,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7679208728402740734}
   m_Layer: 0
-  m_Name: spawnPos
+  m_Name: spawnProjectilePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

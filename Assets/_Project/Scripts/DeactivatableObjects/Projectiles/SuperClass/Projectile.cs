@@ -9,14 +9,19 @@ public abstract class Projectile : DeactivatableObject
     [Header("Fire")]
     [SerializeField] private float _shootForce;
 
-    public void SetProjectileVelocity(Transform spawnPosition)
+    public void SetProjectileVelocity(Transform spawnTransform)
     {
-        _rigidbody.velocity = spawnPosition.forward * _shootForce;
+        _rigidbody.AddForce(spawnTransform.forward * _shootForce, ForceMode.Impulse);
     }
 
     protected void Update()
     {
         StartCoroutine(CheckProjectilePosition());
+    }
+
+    private void LateUpdate()
+    {
+        UnparentProjectile();
     }
 
     private IEnumerator CheckProjectilePosition()
@@ -27,9 +32,17 @@ public abstract class Projectile : DeactivatableObject
 
         float distanceToDisable = 120f;
 
-        if(transform.position.y <= -distanceToDisable || transform.position.y >= distanceToDisable / 2f)
+        if(transform.position.y <= -distanceToDisable || transform.position.y >= distanceToDisable / 1.5f)
         {
             this.gameObject.SetActive(false);
+        }
+    }
+
+    private void UnparentProjectile()
+    {
+        if(this.transform.parent != null)
+        {
+            this.transform.parent = null;
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public sealed class PlayerShooting : MonoBehaviour
 {
     [Header("Projectile")]
-    [SerializeField] private Transform _spawnPosition;
+    [SerializeField] private Transform _spawnTransform;
     [SerializeField] private float _fireRate;
 
     [Header("Ammo")]
@@ -61,22 +61,22 @@ public sealed class PlayerShooting : MonoBehaviour
         {
             nextFire = Time.time + _fireRate;
 
-            SpawnProjectile(playerInputData);
+            SpawnProjectile();
 
             HandleAmmo();
         }
     }
 
-    private void SpawnProjectile(PlayerInputData playerInputData)
+    private void SpawnProjectile()
     {
         GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(PoolType.PROJECTILE_BALL);
         
-        //projectileClone.transform.parent = _playerTransform;
+        projectileClone.transform.parent = _playerTransform;
 
-        projectileClone.transform.position = _spawnPosition.position;
-        projectileClone.transform.rotation = _spawnPosition.rotation;
+        projectileClone.transform.position = _spawnTransform.position;
+        projectileClone.transform.rotation = Quaternion.identity;
 
-        projectileClone.GetComponent<Projectile>().SetProjectileVelocity(_spawnPosition);
+        projectileClone.GetComponent<Projectile>().SetProjectileVelocity(_spawnTransform);
     }
 
     private void HandleAmmo()
