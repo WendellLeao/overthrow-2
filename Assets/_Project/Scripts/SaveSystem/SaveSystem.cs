@@ -1,44 +1,54 @@
 using UnityEngine;
 using System.IO;
 
-[CreateAssetMenu]
-public sealed class SaveSystem : ScriptableObject
+public static class SaveSystem
 {
-    private GameData gameData = new GameData();
+    private static GameData _gameData = new GameData();
+    private static GameData _loadedGameData;
 
-    private GameData loadedGameData;
-    public GameData GetLoadedGameData => loadedGameData;
+    private static string _jsonFilePath, _jsonFile, _json;
 
-    public void SaveGame()
+    public static GameData GetLoadedGameData => _loadedGameData;
+    public static int GetLoadedLevelIndex => _loadedGameData.currentLevelIndex;
+
+    public static void SaveGame()
     {
-        string json = JsonUtility.ToJson(gameData);
+        _jsonFile = "/data.json";
 
-        File.WriteAllText(Application.dataPath + "/_Project/GameData/saveFile.json", json);
+        _jsonFilePath = Application.persistentDataPath + "/_Project/GameData" + _jsonFile;
+
+        _json = JsonUtility.ToJson(_gameData);
+
+        File.WriteAllText(_jsonFilePath, _json);
     }
     
-    public void LoadGame()
-    {        
-        string json = File.ReadAllText(Application.dataPath + "/_Project/GameData/saveFile.json");
+    public static void LoadGame()
+    {      
+        _jsonFile = "/data.json";
 
-        loadedGameData = JsonUtility.FromJson<GameData>(json);
+        _jsonFilePath = Application.persistentDataPath + "/_Project/GameData" + _jsonFile;
+
+        if(File.Exists(_jsonFilePath))//C:\Users\leaow\AppData\LocalLow\LeaoSoft\Overthrow 2
+        {
+            ReadJsonFile();
+        }
+        else
+        {
+            SaveGame(); //Create a new file
+
+            ReadJsonFile();
+        }
     }
 
-    public void SaveCurrentLevel(int currentSceneIndex)
+    public static void SetCurrentLevelIndex(int currentSceneIndex)
     {
-        gameData.currentLevelIndex = currentSceneIndex;
-
-        SaveGame();
+        _gameData.currentLevelIndex = currentSceneIndex;
     }
-
-    public int LoadCurrentLevelIndex()
+    
+    private static void ReadJsonFile()
     {
-        LoadGame();
+        _json = File.ReadAllText(_jsonFilePath);
 
-        return loadedGameData.currentLevelIndex;
+        _loadedGameData = JsonUtility.FromJson<GameData>(_json);
     }
-}
-
-public sealed class GameData
-{
-    public int currentLevelIndex;
 }

@@ -15,9 +15,6 @@ public sealed class WinGameHandler : MonoBehaviour
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
 
-    [Header("Save System")]
-    [SerializeField] private SaveSystem _saveSystem;
-    
     private SceneHandler _sceneHandler = new SceneHandler();
 
     private void OnEnable()
@@ -48,7 +45,8 @@ public sealed class WinGameHandler : MonoBehaviour
     {
         StopGame();
 
-        _saveSystem.SaveCurrentLevel(_sceneHandler.GetCurrentSceneIndex());
+        // SaveSystem.SetCurrentLevelIndex(_sceneHandler.GetCurrentSceneIndex());
+        // SaveSystem.SaveGame();
 
         SetGameState(GameState.WIN);
 

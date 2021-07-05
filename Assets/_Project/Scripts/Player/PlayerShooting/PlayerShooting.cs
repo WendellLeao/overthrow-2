@@ -61,17 +61,17 @@ public sealed class PlayerShooting : MonoBehaviour
         {
             nextFire = Time.time + _fireRate;
 
-            SpawnProjectile();
+            SpawnProjectile(playerInputData);
 
             HandleAmmo();
         }
     }
 
-    private void SpawnProjectile()
+    private void SpawnProjectile(PlayerInputData playerInputData)
     {
         GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(PoolType.PROJECTILE_BALL);
         
-        projectileClone.transform.parent = _playerTransform;
+        //projectileClone.transform.parent = _playerTransform;
 
         projectileClone.transform.position = _spawnPosition.position;
         projectileClone.transform.rotation = _spawnPosition.rotation;

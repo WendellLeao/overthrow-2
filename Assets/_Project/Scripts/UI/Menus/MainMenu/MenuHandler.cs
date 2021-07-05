@@ -10,9 +10,6 @@ public sealed class MenuHandler : MonoBehaviour
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _quitButton;
     
-    [Header("Save System")]
-    [SerializeField] private SaveSystem _saveSystem;
-
     private SceneHandler _sceneHandler = new SceneHandler();
     
     private Menu _currentMenu;
@@ -34,6 +31,8 @@ public sealed class MenuHandler : MonoBehaviour
         SetMenuObjectPosition();
 
         ShowMenu(Menu.MAIN);
+
+        // LoadGame();
     }
 
     private void SubscribeEvents()
@@ -48,6 +47,11 @@ public sealed class MenuHandler : MonoBehaviour
         _quitButton.onClick.RemoveAllListeners();
     }
 
+    private void LoadGame()
+    {
+        SaveSystem.LoadGame();
+    }
+
     private void ShowMenu(Menu menu)
     {
         menu = Menu.MAIN;
@@ -57,14 +61,17 @@ public sealed class MenuHandler : MonoBehaviour
         switch(menu)
         {
             case Menu.MAIN:
+            {
                 _mainMenuObject.SetActive(true);
                 break;
+            }
         }
     }
 
     private void OnClick_PlayGame()
     {
-        _sceneHandler.LoadScene(_saveSystem.LoadCurrentLevelIndex() + 1); //Skip Main Menu Scene (index 0)
+        _sceneHandler.LoadNextScene();
+        // _sceneHandler.LoadScene(_saveSystem.GetLoadedLevelIndex + 1); //Skip Main Menu Scene (index 0)
     }
 
     private void OnClick_Quit()
