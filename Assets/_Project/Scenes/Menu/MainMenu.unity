@@ -865,6 +865,7 @@ MonoBehaviour:
   _mainMenuObject: {fileID: 1853907140}
   _playButton: {fileID: 612384127}
   _quitButton: {fileID: 2017311533}
+  _saveSystem: {fileID: 11400000, guid: 885068b85f94ec44b96088c12e878f72, type: 2}
 --- !u!1 &1529730749
 GameObject:
   m_ObjectHideFlags: 0

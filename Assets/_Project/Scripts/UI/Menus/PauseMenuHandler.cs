@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class PauseGameHandler : MonoBehaviour
+public sealed class PauseMenuHandler : MonoBehaviour
 {
     [Header("Panels UI")]
     [SerializeField] private GameObject _pausePanelObject;

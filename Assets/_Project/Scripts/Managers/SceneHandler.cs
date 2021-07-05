@@ -26,4 +26,9 @@ public class SceneHandler
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public int GetCurrentSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
 }

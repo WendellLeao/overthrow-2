@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class WinPanelHandler : MonoBehaviour
+public sealed class WinGameHandler : MonoBehaviour
 {
     [Header("Panels UI")]
     [SerializeField] private GameObject _winPanelObject;
@@ -14,6 +14,9 @@ public sealed class WinPanelHandler : MonoBehaviour
 
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
+
+    [Header("Save System")]
+    [SerializeField] private SaveSystem _saveSystem;
     
     private SceneHandler _sceneHandler = new SceneHandler();
 
@@ -44,6 +47,8 @@ public sealed class WinPanelHandler : MonoBehaviour
     private void OnLevelCompleted_LevelComplete()
     {
         StopGame();
+
+        _saveSystem.SaveCurrentLevel(_sceneHandler.GetCurrentSceneIndex());
 
         SetGameState(GameState.WIN);
 

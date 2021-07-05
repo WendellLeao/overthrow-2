@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7169453610359815901}
   - component: {fileID: 2701819273557121525}
   m_Layer: 5
-  m_Name: MainMenuButton
+  m_Name: GameOverMainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 3332054148843816989}
   - component: {fileID: 439923564048982049}
   m_Layer: 5
-  m_Name: mainMenuText
+  m_Name: gameOverMainMenuText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

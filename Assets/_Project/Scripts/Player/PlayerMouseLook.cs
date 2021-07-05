@@ -3,16 +3,17 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInputListener))]
 public sealed class PlayerMouseLook : MonoBehaviour
 {
-    [Header("Mouse Look")]
+    [Header("Camera")]
     [SerializeField] private Transform _cameraTransform;
 
-    [SerializeField] private float _horizontalSensitivity, _verticalSensitivy;
+    [Header("Sensitivity")]
+    [SerializeField] private float _horizontalSensitivity;
+    [SerializeField] private float _verticalSensitivy;
 
     [Header("Game Events")]
     [SerializeField] private LocalGameEvents _localGameEvent;
     
-    private float _horizontalRotation = 0f;
-    private float _horizontalMouse, _verticalMouse;
+    private float _horizontalRotation = 0f, _horizontalMouse, _verticalMouse;
 
     private void OnEnable()
     {

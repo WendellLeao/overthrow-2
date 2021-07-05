@@ -6,8 +6,8 @@ public sealed class PlayerInputListener : MonoBehaviour
     [Header("Game Events")]
     [SerializeField] private LocalGameEvents _localGameEvents;
 
-    private PlayerInputSystem _playerInputSystem;
-    private PlayerInputSystem.CharacterControlsActions _characterControls;
+    private InputActionsSystem _inputActionsSystem;
+    private InputActionsSystem.CharacterControlsActions _characterControls;
     
     private bool _isShooting = false, _gameIsPaused = false;
     private Vector2 _mousePosition;
@@ -33,15 +33,15 @@ public sealed class PlayerInputListener : MonoBehaviour
 
     private void EnableInputSystem()
     {
-        _playerInputSystem = new PlayerInputSystem();
-        _characterControls = _playerInputSystem.CharacterControls;
+        _inputActionsSystem = new InputActionsSystem();
+        _characterControls = _inputActionsSystem.CharacterControls;
 
-        _playerInputSystem.Enable();
+        _inputActionsSystem.Enable();
     }
 
     private void DisableInputSystem()
     {
-        _playerInputSystem.Disable();
+        _inputActionsSystem.Disable();
     }
 
     private void SubscribeEvents()

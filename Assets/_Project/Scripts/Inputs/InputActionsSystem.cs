@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/_Project/InputActions/Player/PlayerInputSystem.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/_Project/InputActions/InputActionsSystem.inputactions'
 
 using System;
 using System.Collections;
@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @PlayerInputSystem : IInputActionCollection, IDisposable
+public class @InputActionsSystem : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @PlayerInputSystem()
+    public @InputActionsSystem()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""PlayerInputSystem"",
+    ""name"": ""InputActionsSystem"",
     ""maps"": [
         {
             ""name"": ""CharacterControls"",
@@ -171,8 +171,8 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_CharacterControls_PauseGame;
     public struct CharacterControlsActions
     {
-        private @PlayerInputSystem m_Wrapper;
-        public CharacterControlsActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
+        private @InputActionsSystem m_Wrapper;
+        public CharacterControlsActions(@InputActionsSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_CharacterControls_Shoot;
         public InputAction @MouseLook => m_Wrapper.m_CharacterControls_MouseLook;
         public InputAction @PauseGame => m_Wrapper.m_CharacterControls_PauseGame;
@@ -218,8 +218,8 @@ public class @PlayerInputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_MenuControls_PauseGame;
     public struct MenuControlsActions
     {
-        private @PlayerInputSystem m_Wrapper;
-        public MenuControlsActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
+        private @InputActionsSystem m_Wrapper;
+        public MenuControlsActions(@InputActionsSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @PauseGame => m_Wrapper.m_MenuControls_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_MenuControls; }
         public void Enable() { Get().Enable(); }

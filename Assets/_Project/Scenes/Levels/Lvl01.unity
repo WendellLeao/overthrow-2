@@ -2125,6 +2125,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5345972127548944086 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3253765736427145873, guid: 466d9cba622f09d44bc9891c57221653, type: 3}
+  m_PrefabInstance: {fileID: 5345972127548944084}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6482479067241017613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2285,22 +2296,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectPool
       objectReference: {fileID: 0}
-    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
-      propertyPath: _pools.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
-      propertyPath: _pools.Array.data[1]._poolType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
-      propertyPath: _pools.Array.data[1]._startAmount
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
-      propertyPath: _pools.Array.data[1]._objectToPool
-      value: 
-      objectReference: {fileID: 7104654789432281182, guid: e214503bef001dd47b75617b42f34727, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
 --- !u!1001 &7679208728333632291
@@ -2383,6 +2378,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1568081452, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
+      propertyPath: _mainMenuButton
+      value: 
+      objectReference: {fileID: 5345972127548944086}
     - target: {fileID: 1568081452, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _restartGameButton
       value: 

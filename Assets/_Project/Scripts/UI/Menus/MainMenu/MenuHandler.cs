@@ -9,6 +9,9 @@ public sealed class MenuHandler : MonoBehaviour
     [Header("Menu Buttons")]
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _quitButton;
+    
+    [Header("Save System")]
+    [SerializeField] private SaveSystem _saveSystem;
 
     private SceneHandler _sceneHandler = new SceneHandler();
     
@@ -61,7 +64,7 @@ public sealed class MenuHandler : MonoBehaviour
 
     private void OnClick_PlayGame()
     {
-        _sceneHandler.LoadNextScene();
+        _sceneHandler.LoadScene(_saveSystem.LoadCurrentLevelIndex() + 1); //Skip Main Menu Scene (index 0)
     }
 
     private void OnClick_Quit()
