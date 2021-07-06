@@ -32,6 +32,8 @@ public sealed class MenuHandler : MonoBehaviour
 
         ShowMenu(Menu.MAIN);
 
+        SoundManager.instance.PlaySoundtrack();
+
         // LoadGame();
     }
 

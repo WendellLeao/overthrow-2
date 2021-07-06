@@ -9,6 +9,8 @@ public abstract class Projectile : DeactivatableObject
     [Header("Fire")]
     [SerializeField] private float _shootForce;
 
+    private bool _canPlaySound = true;
+
     public void SetProjectileVelocity(Transform spawnTransform)
     {
         _rigidbody.AddForce(spawnTransform.forward * _shootForce, ForceMode.Impulse);
@@ -44,5 +46,22 @@ public abstract class Projectile : DeactivatableObject
         {
             this.transform.parent = null;
         }
+    }
+    
+    protected override void OnCollisionEnter(Collision other)
+    {
+        base.OnCollisionEnter(other);
+        
+        if(_canPlaySound)
+        {
+            SoundManager.instance.Play("CubeCollision");
+
+            _canPlaySound = false;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        _canPlaySound = true;
     }
 }

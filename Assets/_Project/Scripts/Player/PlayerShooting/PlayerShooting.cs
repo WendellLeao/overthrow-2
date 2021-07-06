@@ -61,6 +61,8 @@ public sealed class PlayerShooting : MonoBehaviour
         {
             nextFire = Time.time + _fireRate;
 
+            SoundManager.instance.Play("PlayerShooting");
+
             SpawnProjectile();
 
             HandleAmmo();

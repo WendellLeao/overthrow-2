@@ -12,6 +12,8 @@ public sealed class LaserCollider : MonoBehaviour
             if(!deactivatableObject.GetIsActivated)
             {
                 deactivatableObject.DeactivateObject();
+
+                SoundManager.instance.Play("LaserCollision");
             }
         }
     }

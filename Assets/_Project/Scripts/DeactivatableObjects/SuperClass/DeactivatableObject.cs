@@ -19,7 +19,7 @@ public abstract class DeactivatableObject : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void OnCollisionEnter(Collision other)
+    protected virtual void OnCollisionEnter(Collision other)
     {
         int singleLayer = (int) Mathf.Log(deactivatorObject.value, 2);
 
