@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public sealed class BarricadeCube : DeactivatableObject, IObstacle
+public sealed class BarricadeCube : MonoBehaviour, IObstacle
 {
     // private bool _canPlaySound = true;
 

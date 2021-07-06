@@ -1,15 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class Projectile : DeactivatableObject
+public abstract class Projectile : MonoBehaviour
 {
     [Header("Projectile Components")]
     [SerializeField] private Rigidbody _rigidbody;
 
     [Header("Fire")]
     [SerializeField] private float _shootForce;
-
-    private bool _canPlaySound = true;
 
     public void SetProjectileVelocity(Transform spawnTransform)
     {
@@ -46,22 +44,5 @@ public abstract class Projectile : DeactivatableObject
         {
             this.transform.parent = null;
         }
-    }
-    
-    protected override void OnCollisionEnter(Collision other)
-    {
-        base.OnCollisionEnter(other);
-        
-        if(_canPlaySound)
-        {
-            SoundManager.instance.Play("CubeCollision");
-
-            _canPlaySound = false;
-        }
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        _canPlaySound = true;
     }
 }

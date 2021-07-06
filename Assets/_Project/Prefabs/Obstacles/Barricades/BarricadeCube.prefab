@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1201168275915254272}
   - component: {fileID: 3284982877799677353}
   - component: {fileID: 2295873807666452801}
+  - component: {fileID: 1888719013819148040}
   - component: {fileID: 8849262195203203025}
   m_Layer: 7
   m_Name: BarricadeCube
@@ -113,6 +114,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &1888719013819148040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7104654789432281182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d83d0ea0f0d404a9a7cbc675955673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deactivatedMaterial: {fileID: 2100000, guid: 4b6c16c8bf29c9e40bc66796d0674b6e, type: 2}
+  _meshRenderer: {fileID: 1201168275915254272}
+  deactivatorObject:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &8849262195203203025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,8 +143,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2564e9edd8f91949bb7e2159fa77318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deactivatedMaterial: {fileID: 2100000, guid: 4b6c16c8bf29c9e40bc66796d0674b6e, type: 2}
-  _meshRenderer: {fileID: 1201168275915254272}
-  deactivatorObject:
-    serializedVersion: 2
-    m_Bits: 256

@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public abstract class DeactivatableObject : MonoBehaviour
+public sealed class DeactivatableObject : MonoBehaviour
 {
     [Header("Materials")]
-    [SerializeField] protected Material _deactivatedMaterial;
-    [SerializeField] protected MeshRenderer _meshRenderer;
+    [SerializeField] private Material _deactivatedMaterial;
+
+    [Header("Mesh Renderer")]
+    [SerializeField] private MeshRenderer _meshRenderer;
 
     [Header("Detection")]
     [SerializeField] private LayerMask deactivatorObject;
@@ -13,13 +15,18 @@ public abstract class DeactivatableObject : MonoBehaviour
     private bool _isActivated = true;
     
     public bool GetIsActivated => _isActivated;
-    
+
     public void DeactivateObject()
     {
         this.gameObject.SetActive(false);
     }
 
-    protected virtual void OnCollisionEnter(Collision other)
+    public void SetDeactivatedMaterial(Material deactivatedMaterial)
+    {
+        _deactivatedMaterial = deactivatedMaterial;
+    }
+
+    private void OnCollisionEnter(Collision other)
     {
         int singleLayer = (int) Mathf.Log(deactivatorObject.value, 2);
 
