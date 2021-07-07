@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class MenuHandler : MonoBehaviour
+public sealed class MenuManager : MonoBehaviour
 {
     [Header("Menu Containers")]
     [SerializeField] private GameObject _mainMenuObject;
@@ -34,7 +34,7 @@ public sealed class MenuHandler : MonoBehaviour
 
         SoundManager.instance.PlaySoundtrack();
 
-        // LoadGame();
+        LoadGame();
     }
 
     private void SubscribeEvents()
@@ -48,10 +48,15 @@ public sealed class MenuHandler : MonoBehaviour
         _playButton.onClick.RemoveAllListeners();
         _quitButton.onClick.RemoveAllListeners();
     }
-
-    private void LoadGame()
+    
+    private void ResumeGame()
     {
-        SaveSystem.LoadGame();
+        Time.timeScale = 1f;
+    }
+
+    private void SetMenuObjectPosition()
+    {
+        _mainMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
 
     private void ShowMenu(Menu menu)
@@ -69,6 +74,11 @@ public sealed class MenuHandler : MonoBehaviour
             }
         }
     }
+    
+    private void LoadGame()
+    {
+        //SaveSystem.LoadGame();
+    }
 
     private void OnClick_PlayGame()
     {
@@ -81,15 +91,5 @@ public sealed class MenuHandler : MonoBehaviour
         Debug.Log("Quit");
 
         Application.Quit();
-    }
-
-    private void ResumeGame()
-    {
-        Time.timeScale = 1f;
-    }
-
-    private void SetMenuObjectPosition()
-    {
-        _mainMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
 }

@@ -52,6 +52,8 @@ public sealed class PauseMenuHandler : MonoBehaviour
     {
         if(CanPauseGame() && playerInputData.GameIsPaused)
         {
+            playerInputData.GameIsPaused = false;
+
             if(IsPaused())
             {
                 HidePausePanel();
@@ -60,8 +62,6 @@ public sealed class PauseMenuHandler : MonoBehaviour
             {
                 ShowPausePanel();
             }
-
-            playerInputData.GameIsPaused = false;
         }
     }
 
