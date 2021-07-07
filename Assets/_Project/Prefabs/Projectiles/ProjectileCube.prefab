@@ -112,7 +112,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &2970913233718368737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,10 +125,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833ab98b24add044ab78926d6c160b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deactivatedMaterial: {fileID: 2100000, guid: 4b6c16c8bf29c9e40bc66796d0674b6e, type: 2}
-  _meshRenderer: {fileID: 1201168275915254272}
-  deactivatorObject:
-    serializedVersion: 2
-    m_Bits: 256
   _rigidbody: {fileID: 2295873807666452801}
   _shootForce: 50
