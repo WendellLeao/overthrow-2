@@ -78,7 +78,7 @@ public sealed class PlayerShooting : MonoBehaviour
         projectileClone.transform.position = _spawnTransform.position;
         projectileClone.transform.rotation = Quaternion.identity;
 
-        projectileClone.GetComponent<Projectile>().SetProjectileVelocity(_spawnTransform);
+        projectileClone.GetComponent<Projectile>().SetProjectileForce(_spawnTransform);
     }
 
     private void HandleAmmo()

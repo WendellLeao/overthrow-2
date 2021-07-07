@@ -28,9 +28,9 @@ public sealed class DeactivatableObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        int singleLayer = (int) Mathf.Log(deactivatorObject.value, 2);
+        //int singleLayer = (int) Mathf.Log(deactivatorObject.value, 2);
 
-        if(other.gameObject.layer == singleLayer)
+        if(other.gameObject.layer == 3)//Platform index
         {
             _meshRenderer.material = _deactivatedMaterial;
             

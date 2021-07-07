@@ -9,19 +9,24 @@ public abstract class Projectile : MonoBehaviour
     [Header("Fire")]
     [SerializeField] private float _shootForce;
 
-    public void SetProjectileVelocity(Transform spawnTransform)
+    public void SetProjectileForce(Transform spawnTransform)
     {
         _rigidbody.AddForce(spawnTransform.forward * _shootForce, ForceMode.Impulse);
     }
 
-    protected void Update()
+    protected virtual void OnDisable()
+    {
+        ResetProjectileVelocity();
+    }
+
+    private void Update()
     {
         StartCoroutine(CheckProjectilePosition());
     }
 
-    private void LateUpdate()
+    private void ResetProjectileVelocity()
     {
-        UnparentProjectile();
+        _rigidbody.velocity = Vector3.zero;
     }
 
     private IEnumerator CheckProjectilePosition()
@@ -35,14 +40,6 @@ public abstract class Projectile : MonoBehaviour
         if(transform.position.y <= -distanceToDisable || transform.position.y >= distanceToDisable / 1.5f)
         {
             this.gameObject.SetActive(false);
-        }
-    }
-
-    private void UnparentProjectile()
-    {
-        if(this.transform.parent != null)
-        {
-            this.transform.parent = null;
         }
     }
 }

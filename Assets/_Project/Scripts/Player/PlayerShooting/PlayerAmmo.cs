@@ -13,9 +13,4 @@ public sealed class PlayerAmmo
     {   
         _currentProjectileAmount--;
     }
-
-    public void IncreaseAmmo()
-    {
-        _currentProjectileAmount++;
-    }
 }

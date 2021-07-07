@@ -7,7 +7,7 @@ public sealed class CannonShooting : MonoBehaviour
     [SerializeField] private float _fireRate;
     private bool _canShoot = true;
 
-    private void Update()
+    private void FixedUpdate()
     {
         HandleShoot();
     }
@@ -28,10 +28,12 @@ public sealed class CannonShooting : MonoBehaviour
 
         GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(PoolType.PROJECTILE_CUBE);
 
-        projectileClone.transform.position = _spawnPosition.transform.position;
-        projectileClone.transform.rotation = _spawnPosition.transform.rotation;
+        projectileClone.transform.parent = null;
 
-        projectileClone.GetComponent<Projectile>().SetProjectileVelocity(_spawnPosition);
+        projectileClone.transform.position = _spawnPosition.transform.position;
+        projectileClone.transform.eulerAngles = Vector3.zero;
+
+        projectileClone.GetComponent<Projectile>().SetProjectileForce(_spawnPosition);
 
         _canShoot = true;
     }

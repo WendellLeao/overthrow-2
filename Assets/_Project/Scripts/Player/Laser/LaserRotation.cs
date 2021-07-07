@@ -80,7 +80,7 @@ public sealed class LaserRotation : MonoBehaviour
     }
     private void RotateToBackward()
     {
-        transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
         transform.localPosition = new Vector3(0f, transform.localPosition.y, -startOffset);
     }
 

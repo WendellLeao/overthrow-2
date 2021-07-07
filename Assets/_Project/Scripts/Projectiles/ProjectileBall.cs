@@ -14,6 +14,13 @@ public sealed class ProjectileBall : Projectile
 
     private int randomNumber;
 
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        ReturnProjectileToPool();
+    }
+
     private void Start()
     {
         SetRandomNumber();
@@ -23,6 +30,19 @@ public sealed class ProjectileBall : Projectile
         SetRandomDeactivatedMaterial();
     }
 
+    private void LateUpdate()
+    {
+        UnparentProjectile();
+    }
+
+    private void UnparentProjectile()
+    {
+        if(this.transform.parent != null)
+        {
+            this.transform.parent = null;
+        }
+    }
+
     private void SetRandomNumber()
     {
         randomNumber = Random.Range(0, _startMaterial.Length);
@@ -30,15 +50,15 @@ public sealed class ProjectileBall : Projectile
 
     private void SetRandomStartMaterial()
     {
-        _deactivatableObject.SetDeactivatedMaterial(_newDeactivatedMaterial[randomNumber]);
+        _meshRenderer.material = _startMaterial[randomNumber];
     }
 
     private void SetRandomDeactivatedMaterial()
     {
-        _meshRenderer.material = _startMaterial[randomNumber];
+        _deactivatableObject.SetDeactivatedMaterial(_newDeactivatedMaterial[randomNumber]);
     }
 
-    private void OnDisable()
+    private void ReturnProjectileToPool()
     {
         ObjectPool.instance.ReturnObjectToPool(PoolType.PROJECTILE_BALL, this.gameObject);
     }
