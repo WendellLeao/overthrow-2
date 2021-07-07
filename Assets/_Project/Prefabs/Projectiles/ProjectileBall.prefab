@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 836969101488410415}
-  _shootForce: 350
+  _shootForce: 250
   _deactivatableObject: {fileID: 5179823801072730766}
   _meshRenderer: {fileID: 836969101488410413}
   _startMaterial:
