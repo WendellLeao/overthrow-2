@@ -21,7 +21,14 @@ public sealed class PlayerShooting : MonoBehaviour
 
     private PlayerAmmo _playerAmmo;
 
+    private PoolType _poolType;
+
     private float nextFire;
+
+    public void SetPoolType(PoolType poolType)
+    {
+        _poolType = poolType;
+    }
 
     private void OnEnable()
     {
@@ -41,11 +48,13 @@ public sealed class PlayerShooting : MonoBehaviour
     private void SubscribeEvents()
     {
         _localGameEvent.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
+        _localGameEvent.OnPlayerBombShot += OnPlayerBombShot_PerformBombShooting;
     }
 
     private void UnsubscribeEvents()
     {
         _localGameEvent.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
+        _localGameEvent.OnPlayerBombShot -= OnPlayerBombShot_PerformBombShooting;
     }
 
     private void InitializePlayerAmmo()
@@ -61,17 +70,25 @@ public sealed class PlayerShooting : MonoBehaviour
         {
             nextFire = Time.time + _fireRate;
 
-            SoundManager.instance.Play("PlayerShooting");
+            SpawnProjectile(PoolType.BALL_PROJECTILE);
 
-            SpawnProjectile();
+            SoundManager.instance.Play("PlayerShooting");
 
             HandleAmmo();
         }
     }
 
-    private void SpawnProjectile()
+    private void OnPlayerBombShot_PerformBombShooting()
     {
-        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(PoolType.PROJECTILE_BALL);
+        if(_currentGameState.CurrentGameState == GameState.PLAYING)
+        {
+            SpawnProjectile(PoolType.BOMB_PROJECTILE);
+        }
+    }
+
+    private void SpawnProjectile(PoolType poolType)
+    {
+        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(poolType);
         
         projectileClone.transform.parent = _playerTransform;
 
@@ -90,6 +107,7 @@ public sealed class PlayerShooting : MonoBehaviour
 
     private bool CanShoot(PlayerInputData playerInputData)
     {
-        return playerInputData.IsShooting &&  _playerAmmo.GetCurrentProjectileAmount > 0 && Time.time > nextFire;
+        return playerInputData.IsShooting && !playerInputData.IsShootingBomb 
+        && _playerAmmo.GetCurrentProjectileAmount > 0 && Time.time > nextFire;
     }
 }

@@ -27,6 +27,14 @@ public class @InputActionsSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""PowerShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9b4888b-bc8d-413b-a3b1-9b20d2a344b5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""MouseLook"",
                     ""type"": ""PassThrough"",
                     ""id"": ""eb7ad548-3341-479d-a3a8-0882db6a1048"",
@@ -76,6 +84,17 @@ public class @InputActionsSystem : IInputActionCollection, IDisposable
                     ""action"": ""PauseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ad3e65c-63fc-486f-a229-04e730234181"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -112,6 +131,7 @@ public class @InputActionsSystem : IInputActionCollection, IDisposable
         // CharacterControls
         m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
         m_CharacterControls_Shoot = m_CharacterControls.FindAction("Shoot", throwIfNotFound: true);
+        m_CharacterControls_PowerShoot = m_CharacterControls.FindAction("PowerShoot", throwIfNotFound: true);
         m_CharacterControls_MouseLook = m_CharacterControls.FindAction("MouseLook", throwIfNotFound: true);
         m_CharacterControls_PauseGame = m_CharacterControls.FindAction("PauseGame", throwIfNotFound: true);
         // MenuControls
@@ -167,6 +187,7 @@ public class @InputActionsSystem : IInputActionCollection, IDisposable
     private readonly InputActionMap m_CharacterControls;
     private ICharacterControlsActions m_CharacterControlsActionsCallbackInterface;
     private readonly InputAction m_CharacterControls_Shoot;
+    private readonly InputAction m_CharacterControls_PowerShoot;
     private readonly InputAction m_CharacterControls_MouseLook;
     private readonly InputAction m_CharacterControls_PauseGame;
     public struct CharacterControlsActions
@@ -174,6 +195,7 @@ public class @InputActionsSystem : IInputActionCollection, IDisposable
         private @InputActionsSystem m_Wrapper;
         public CharacterControlsActions(@InputActionsSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_CharacterControls_Shoot;
+        public InputAction @PowerShoot => m_Wrapper.m_CharacterControls_PowerShoot;
         public InputAction @MouseLook => m_Wrapper.m_CharacterControls_MouseLook;
         public InputAction @PauseGame => m_Wrapper.m_CharacterControls_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
@@ -188,6 +210,9 @@ public class @InputActionsSystem : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
+                @PowerShoot.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPowerShoot;
+                @PowerShoot.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPowerShoot;
+                @PowerShoot.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPowerShoot;
                 @MouseLook.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
                 @MouseLook.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
                 @MouseLook.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
@@ -201,6 +226,9 @@ public class @InputActionsSystem : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @PowerShoot.started += instance.OnPowerShoot;
+                @PowerShoot.performed += instance.OnPowerShoot;
+                @PowerShoot.canceled += instance.OnPowerShoot;
                 @MouseLook.started += instance.OnMouseLook;
                 @MouseLook.performed += instance.OnMouseLook;
                 @MouseLook.canceled += instance.OnMouseLook;
@@ -247,6 +275,7 @@ public class @InputActionsSystem : IInputActionCollection, IDisposable
     public interface ICharacterControlsActions
     {
         void OnShoot(InputAction.CallbackContext context);
+        void OnPowerShoot(InputAction.CallbackContext context);
         void OnMouseLook(InputAction.CallbackContext context);
         void OnPauseGame(InputAction.CallbackContext context);
     }

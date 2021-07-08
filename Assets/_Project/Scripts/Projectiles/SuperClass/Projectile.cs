@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public abstract class Projectile : MonoBehaviour
@@ -19,27 +18,8 @@ public abstract class Projectile : MonoBehaviour
         ResetProjectileVelocity();
     }
 
-    private void Update()
-    {
-        StartCoroutine(CheckProjectilePosition());
-    }
-
     private void ResetProjectileVelocity()
     {
         _rigidbody.velocity = Vector3.zero;
-    }
-
-    private IEnumerator CheckProjectilePosition()
-    {
-        float timeToCheck = 0.5f;
-
-        yield return new WaitForSeconds(timeToCheck);
-
-        float distanceToDisable = 120f;
-
-        if(transform.position.y <= -distanceToDisable || transform.position.y >= distanceToDisable / 1.5f)
-        {
-            this.gameObject.SetActive(false);
-        }
     }
 }

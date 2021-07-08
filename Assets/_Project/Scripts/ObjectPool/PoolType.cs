@@ -1,5 +1,6 @@
 public enum PoolType
 {
-    PROJECTILE_BALL,
-    PROJECTILE_CUBE
+    BALL_PROJECTILE,
+    CUBE_PROJECTILE,
+    BOMB_PROJECTILE
 }

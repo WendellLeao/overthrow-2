@@ -9,7 +9,7 @@ public sealed class PlayerInputListener : MonoBehaviour
     private InputActionsSystem _inputActionsSystem;
     private InputActionsSystem.CharacterControlsActions _characterControls;
     
-    private bool _isShooting = false, _gameIsPaused = false;
+    private bool _isShooting = false, _isShootingBomb = false, _gameIsPaused = false;
     private Vector2 _mousePosition;
 
     private void OnEnable()
@@ -46,24 +46,28 @@ public sealed class PlayerInputListener : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        _characterControls.Shoot.performed += PerformShoot;
-        _characterControls.PauseGame.performed += PauseGame;
+        _characterControls.Shoot.performed += OnShoot_PerformShoot;
+        _characterControls.PowerShoot.performed += OnShootBomb_PerformShootingBomb;
+        _characterControls.PauseGame.performed += OnPauseGame_PauseGame;
         
-        _characterControls.MouseLook.performed += MouseDelta;
+        _characterControls.MouseLook.performed += SetMouseDelta;
 
-        _characterControls.Shoot.canceled += PerformShoot;
-        _characterControls.PauseGame.canceled += PauseGame;
+        _characterControls.Shoot.canceled += OnShoot_PerformShoot;
+        _characterControls.PowerShoot.canceled += OnShootBomb_PerformShootingBomb;
+        _characterControls.PauseGame.canceled += OnPauseGame_PauseGame;
     }
 
     private void UnsubscribeEvents()
     {
-        _characterControls.Shoot.performed -= PerformShoot;
-        _characterControls.PauseGame.performed -= PauseGame;
+        _characterControls.Shoot.performed -= OnShoot_PerformShoot;
+        _characterControls.PowerShoot.performed -= OnShootBomb_PerformShootingBomb;
+        _characterControls.PauseGame.performed -= OnPauseGame_PauseGame;
         
-        _characterControls.MouseLook.performed -= MouseDelta;
+        _characterControls.MouseLook.performed -= SetMouseDelta;
 
-        _characterControls.Shoot.canceled -= PerformShoot;
-        _characterControls.PauseGame.canceled -= PauseGame;
+        _characterControls.Shoot.canceled -= OnShoot_PerformShoot;
+        _characterControls.PowerShoot.canceled -= OnShootBomb_PerformShootingBomb;
+        _characterControls.PauseGame.canceled -= OnPauseGame_PauseGame;
     }
 
     private void UpdateInputs()
@@ -76,13 +80,14 @@ public sealed class PlayerInputListener : MonoBehaviour
         PlayerInputData playerInputData = new PlayerInputData();
 
         playerInputData.IsShooting = _isShooting;
+        playerInputData.IsShootingBomb = _isShootingBomb;
         playerInputData.GameIsPaused = _gameIsPaused;
         playerInputData.MousePosition = _mousePosition;
 
         return playerInputData;
     }
 
-    private void PerformShoot(InputAction.CallbackContext context)
+    private void OnShoot_PerformShoot(InputAction.CallbackContext context)
     {
         switch(context.phase)
         {
@@ -99,7 +104,24 @@ public sealed class PlayerInputListener : MonoBehaviour
         }
     }
 
-    private void PauseGame(InputAction.CallbackContext context)
+    private void OnShootBomb_PerformShootingBomb(InputAction.CallbackContext context)
+    {
+        switch(context.phase)
+        {
+            case InputActionPhase.Performed:
+            {
+                _isShootingBomb = true;
+                break;
+            }
+            case InputActionPhase.Canceled:
+            {
+                _isShootingBomb = false;
+                break;
+            }
+        }
+    }
+
+    private void OnPauseGame_PauseGame(InputAction.CallbackContext context)
     {
         switch(context.phase)
         {
@@ -116,7 +138,7 @@ public sealed class PlayerInputListener : MonoBehaviour
         }
     }
 
-    private void MouseDelta(InputAction.CallbackContext action)
+    private void SetMouseDelta(InputAction.CallbackContext action)
     {
         _mousePosition = action.ReadValue<Vector2>();
     } 

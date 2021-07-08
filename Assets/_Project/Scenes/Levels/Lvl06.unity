@@ -136,11 +136,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2682341721772561595, guid: a2b3b21717056554ea95c2550d4cc5d5, type: 3}
       propertyPath: ShapeModule.m_Scale.x
-      value: 90
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2682341721772561595, guid: a2b3b21717056554ea95c2550d4cc5d5, type: 3}
       propertyPath: ShapeModule.m_Scale.y
-      value: 150
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 2682341721772561596, guid: a2b3b21717056554ea95c2550d4cc5d5, type: 3}
       propertyPath: m_RootOrder

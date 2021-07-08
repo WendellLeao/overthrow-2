@@ -3,9 +3,6 @@ using UnityEngine.UI;
 
 public sealed class HealthBarUI : MonoBehaviour
 {
-    [Header("Player Health System")]
-    [SerializeField] private HealthSystem _healthSystem;
-
     [Header("UI")]
     [SerializeField] private Image _healthBarImage;
 
@@ -32,9 +29,10 @@ public sealed class HealthBarUI : MonoBehaviour
         _localGameEvent.OnHealthChanged -= OnHealthChanged_UpdateHealthBar;
     }
 
-    private void OnHealthChanged_UpdateHealthBar()
+    private void OnHealthChanged_UpdateHealthBar(int currentHealthAmount, int maxHealthAmount)
     {
-        float healthPercent = (float)_healthSystem.GetCurrentHealthAmount / _healthSystem.GetMaxHealthAmount;
+        float healthPercent = (float)currentHealthAmount / maxHealthAmount;
+        
         _healthBarImage.fillAmount = healthPercent;
     }
 }

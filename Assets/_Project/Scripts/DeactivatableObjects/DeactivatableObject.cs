@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public sealed class DeactivatableObject : MonoBehaviour
 {
+
     [Header("Materials")]
     [SerializeField] private Material _deactivatedMaterial;
 
@@ -26,6 +28,11 @@ public sealed class DeactivatableObject : MonoBehaviour
         _deactivatedMaterial = deactivatedMaterial;
     }
 
+    private void Update()
+    {
+        StartCoroutine(CheckObjectPosition());
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         //int singleLayer = (int) Mathf.Log(deactivatorObject.value, 2);
@@ -35,6 +42,20 @@ public sealed class DeactivatableObject : MonoBehaviour
             _meshRenderer.material = _deactivatedMaterial;
             
             _isActivated = false;
+        }
+    }
+
+    private IEnumerator CheckObjectPosition()
+    {
+        float timeToCheck = 0.5f;
+
+        yield return new WaitForSeconds(timeToCheck);
+
+        float distanceToDisable = 120f;
+
+        if(transform.position.y <= -distanceToDisable || transform.position.y >= distanceToDisable / 1.5f)
+        {
+            DeactivateObject();
         }
     }
 }

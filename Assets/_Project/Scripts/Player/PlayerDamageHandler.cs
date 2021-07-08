@@ -8,8 +8,6 @@ public sealed class PlayerDamageHandler : MonoBehaviour
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
     [SerializeField] private LocalGameEvents _localGameEvents;
-
-    public HealthSystem GetPlayerHealthSystem => _playerHealthSystem;
     
     private void OnEnable()
     {
@@ -41,9 +39,9 @@ public sealed class PlayerDamageHandler : MonoBehaviour
         _playerHealthSystem.ResetCurrentHealthAmount();
     }
 
-    private void OnHealthChanged_CheckIfPlayerIsDead()
+    private void OnHealthChanged_CheckIfPlayerIsDead(int currentHealthAmount, int maxHealthAmount)
     {
-        if(_playerHealthSystem.GetCurrentHealthAmount <= 0)
+        if(currentHealthAmount <= 0)
         {
             _globalGameEvents.OnPlayerDied?.Invoke();
         }

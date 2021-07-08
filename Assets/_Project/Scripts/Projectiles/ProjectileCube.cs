@@ -24,7 +24,7 @@ public sealed class ProjectileCube : Projectile, IObstacle
 
     private void ReturnProjectileToPool()
     {
-        ObjectPool.instance.ReturnObjectToPool(PoolType.PROJECTILE_CUBE, this.gameObject);
+        ObjectPool.instance.ReturnObjectToPool(PoolType.CUBE_PROJECTILE, this.gameObject);
     }
 
     private void ResetMaterial()

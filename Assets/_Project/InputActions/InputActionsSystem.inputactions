@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInputSystem",
+    "name": "InputActionsSystem",
     "maps": [
         {
             "name": "CharacterControls",
@@ -9,6 +9,14 @@
                     "name": "Shoot",
                     "type": "Button",
                     "id": "cae2ce4c-c0a2-42ce-b2e1-798814e94450",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "PowerShoot",
+                    "type": "Button",
+                    "id": "a9b4888b-bc8d-413b-a3b1-9b20d2a344b5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -61,6 +69,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ad3e65c-63fc-486f-a229-04e730234181",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerShoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

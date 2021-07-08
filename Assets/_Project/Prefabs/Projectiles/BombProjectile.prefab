@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1888719013819148040}
   - component: {fileID: 4625222713001868140}
   m_Layer: 7
-  m_Name: ProjectileCube
+  m_Name: BombProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ecce1a1895e37524282423faddfd60c9, type: 2}
+  - {fileID: 2100000, guid: f025c5db938b349a8b450e845b67e20a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d83d0ea0f0d404a9a7cbc675955673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deactivatedMaterial: {fileID: 2100000, guid: 4b6c16c8bf29c9e40bc66796d0674b6e, type: 2}
+  _deactivatedMaterial: {fileID: 2100000, guid: 40a353f6117398145a3e785d9854de93, type: 2}
   _meshRenderer: {fileID: 1201168275915254272}
   deactivatorObject:
     serializedVersion: 2
@@ -146,4 +146,3 @@ MonoBehaviour:
   _rigidbody: {fileID: 2295873807666452801}
   _shootForce: 80
   _meshRenderer: {fileID: 1201168275915254272}
-  _startMaterial: {fileID: 2100000, guid: ecce1a1895e37524282423faddfd60c9, type: 2}

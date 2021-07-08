@@ -60,6 +60,6 @@ public sealed class ProjectileBall : Projectile
 
     private void ReturnProjectileToPool()
     {
-        ObjectPool.instance.ReturnObjectToPool(PoolType.PROJECTILE_BALL, this.gameObject);
+        ObjectPool.instance.ReturnObjectToPool(PoolType.BALL_PROJECTILE, this.gameObject);
     }
 }
