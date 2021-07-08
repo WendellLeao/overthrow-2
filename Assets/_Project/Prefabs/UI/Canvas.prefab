@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 5345972126583697695}
   - component: {fileID: 5345972126583697694}
   m_Layer: 5
-  m_Name: imageHealthBar
+  m_Name: healthBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -388,7 +388,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f721060617a17468e31979c2f52af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthSystem: {fileID: 11400000, guid: b3249c6c5639f3449abed719c28bf6fe, type: 2}
   _healthBarImage: {fileID: 5345972126583697694}
   _localGameEvent: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
 --- !u!1 &5345972126847054106
@@ -984,6 +983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6265824652271315267}
+  - component: {fileID: 374868743938136844}
   m_Layer: 5
   m_Name: PowerBar
   m_TagString: Untagged
@@ -1014,6 +1014,20 @@ RectTransform:
   m_AnchoredPosition: {x: -519, y: 221}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &374868743938136844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5393943744222079622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3cc0174d78cf5241b45eb3c56f4c992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powerBarImage: {fileID: 3734830240342303114}
+  _localGameEvent: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
 --- !u!1 &5863572020610761846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,7 +1421,7 @@ GameObject:
   - component: {fileID: 4828767390182832635}
   - component: {fileID: 3734830240342303114}
   m_Layer: 5
-  m_Name: imageHealthBar
+  m_Name: powerBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

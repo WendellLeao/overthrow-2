@@ -6,7 +6,11 @@ public sealed class LocalGameEvents : ScriptableObject
 {
     public UnityAction<int, int> OnHealthChanged;
 
+    public UnityAction<int, int> OnPowerChanged;
+
     public UnityAction OnPlayerBombShot;
+
+    public UnityAction OnLaserCollide;
 
     public delegate void DelegateOnReadPlayerInputs(PlayerInputData playerInputData);
     public DelegateOnReadPlayerInputs OnReadPlayerInputs;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public sealed class ProjectileCube : Projectile, IObstacle
+public sealed class CubeProjectile : Projectile, IObstacle
 {
     [Header("Mesh Renderer")]
     [SerializeField] private MeshRenderer _meshRenderer;

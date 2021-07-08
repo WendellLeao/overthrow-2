@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public sealed class ProjectileBall : Projectile
+public sealed class BallProjectile : Projectile
 {
     [Header("Deactivatable Component")]
     [SerializeField] private DeactivatableObject _deactivatableObject;
@@ -11,6 +11,9 @@ public sealed class ProjectileBall : Projectile
     [Header("Materials")]
     [SerializeField] private Material[] _startMaterial;
     [SerializeField] private Material[] _newDeactivatedMaterial;
+
+    [Header("Particle System")]
+    [SerializeField] private ParticleSystem _particleSystem;
 
     private int randomNumber;
 
@@ -26,6 +29,8 @@ public sealed class ProjectileBall : Projectile
         SetRandomNumber();
 
         SetRandomStartMaterial();
+
+        SetParticleSystemStartColor();
 
         SetRandomDeactivatedMaterial();
     }
@@ -56,6 +61,17 @@ public sealed class ProjectileBall : Projectile
     private void SetRandomDeactivatedMaterial()
     {
         _deactivatableObject.SetDeactivatedMaterial(_newDeactivatedMaterial[randomNumber]);
+    }
+
+    private void SetParticleSystemStartColor()
+    {
+        ParticleSystem.MainModule particleSystemMainModule = _particleSystem.main;
+
+        Color startMaterialColor = _startMaterial[randomNumber].color;
+
+        float customAlphaColor = 0.2f;
+
+        particleSystemMainModule.startColor = new Color(startMaterialColor.r, startMaterialColor.g, startMaterialColor.b, customAlphaColor);
     }
 
     private void ReturnProjectileToPool()
