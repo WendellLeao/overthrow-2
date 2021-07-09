@@ -82,21 +82,23 @@ public sealed class MenuManager : MonoBehaviour
     {
         _mainMenuObject.SetActive(true);
 
-        _continueButton.gameObject.SetActive(SerializationManager.SaveFileExists());
+        _continueButton.gameObject.SetActive(SaveSystem.SaveFileExists());
     }
     
     private void OnClick_StartGame()
     {
-        _sceneHandler.LoadScene(SerializationManager.LoadGameData().currentLevelIndex + 1);
+        GameData.Instance.currentLevelIndex = SaveSystem.LoadGameData().currentLevelIndex;
+        
+        _sceneHandler.LoadScene(SaveSystem.LoadGameData().currentLevelIndex + 1);
     }
 
     private void OnClick_StartNewGame()
     {
-        SerializationManager.DeleteSave();
+        SaveSystem.DeleteSave();
 
         GameData.Instance.currentLevelIndex = 0;
 
-        _sceneHandler.LoadScene(SerializationManager.LoadGameData().currentLevelIndex + 1);
+        _sceneHandler.LoadScene(SaveSystem.LoadGameData().currentLevelIndex + 1);
     }
 
     private void OnClick_Quit()

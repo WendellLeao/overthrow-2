@@ -74,7 +74,7 @@ public sealed class WinGameHandler : MonoBehaviour
         {
             GameData.Instance.currentLevelIndex++;
             
-            SerializationManager.SaveGameData();
+            SaveSystem.SaveGameData();
 
             canSaveGame = false;
         }

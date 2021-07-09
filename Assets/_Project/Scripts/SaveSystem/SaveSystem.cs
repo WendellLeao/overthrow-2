@@ -1,54 +1,64 @@
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System.IO;
 
 public static class SaveSystem
 {
-    private static GameData _gameData = new GameData();
-    private static GameData _loadedGameData;
+    private static string _fileName = "gameData.save";
 
-    private static string _jsonFilePath, _jsonFile, _json;
-
-    public static GameData GetLoadedGameData => _loadedGameData;
-    public static int GetLoadedLevelIndex => _loadedGameData.currentLevelIndex;
-
-    public static void SaveGame()
+    public static GameData SaveGameData()
     {
-        _jsonFile = "/data.json";
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-        _jsonFilePath = Application.persistentDataPath + "/_Project/GameData" + _jsonFile;
+        string path = GetFilePath();
 
-        _json = JsonUtility.ToJson(_gameData);
-
-        File.WriteAllText(_jsonFilePath, _json);
-    }
-    
-    public static void LoadGame()
-    {      
-        _jsonFile = "/data.json";
-
-        _jsonFilePath = Application.persistentDataPath + "/_Project/GameData" + _jsonFile;
-
-        if(File.Exists("C:/Users/leaow/AppData/LocalLow/LeaoSoft/Overthrow 2"))//C:\Users\leaow\AppData\LocalLow\LeaoSoft\Overthrow 2 //_jsonFilePath
+        using(FileStream fileStream = File.Create(path))
         {
-            ReadJsonFile();
+            GameData gameData = GameData.Instance;
+
+            binaryFormatter.Serialize(fileStream, gameData);
+
+            fileStream.Close();
+            
+            return gameData;
+        }
+    }
+
+    public static GameData LoadGameData()
+    {
+        string path = GetFilePath();
+
+        if(!SaveFileExists())
+        {
+            return SaveGameData(); //Create a new save file
         }
         else
         {
-            SaveGame(); //Create a new file
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-            ReadJsonFile();
+            using(FileStream fileStream = new FileStream(path, FileMode.Open))
+            {
+                GameData gameData = binaryFormatter.Deserialize(fileStream) as GameData;
+
+                fileStream.Close();
+
+                return gameData;
+            }
         }
     }
 
-    public static void SetCurrentLevelIndex(int currentSceneIndex)
+    public static bool SaveFileExists()
     {
-        _gameData.currentLevelIndex = currentSceneIndex;
+        return File.Exists(GetFilePath());
     }
-    
-    private static void ReadJsonFile()
-    {
-        _json = File.ReadAllText(_jsonFilePath);
 
-        _loadedGameData = JsonUtility.FromJson<GameData>(_json);
+    public static void DeleteSave()
+    {
+        File.Delete(GetFilePath());
+    }
+
+    private static string GetFilePath()
+    {
+        return Path.Combine(Application.persistentDataPath, _fileName);
     }
 }

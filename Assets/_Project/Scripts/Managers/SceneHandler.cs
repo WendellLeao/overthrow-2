@@ -25,8 +25,6 @@ public class SceneHandler
     public void BackToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
-
-        SerializationManager.SaveGameData();
     }
 
     public int GetCurrentSceneIndex()
