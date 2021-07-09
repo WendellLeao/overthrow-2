@@ -70,11 +70,11 @@ public sealed class PauseMenuHandler : MonoBehaviour
         if(_gameStateScriptableObject.CurrentGameState != GameState.LOSE 
         && _gameStateScriptableObject.CurrentGameState != GameState.WIN)///////////////////////////////
         {
-            if(GameIsStopped() && !playerInputData.GameIsPaused)
+            if(GameIsStopped() && !playerInputData.PressPause)
             {
                 HidePausePanel();
             }
-            else if (!GameIsStopped() && playerInputData.GameIsPaused)
+            else if (!GameIsStopped() && playerInputData.PressPause)
             {
                 ShowPausePanel();
             }

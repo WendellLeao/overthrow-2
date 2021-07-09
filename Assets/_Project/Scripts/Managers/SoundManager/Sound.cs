@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public sealed class Sound
+public sealed class Sound // : ScriptableObject
 {  
     public string name;
     public AudioClip clip;

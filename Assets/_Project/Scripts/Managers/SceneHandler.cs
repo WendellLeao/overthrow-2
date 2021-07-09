@@ -27,8 +27,8 @@ public class SceneHandler
         SceneManager.LoadScene("MainMenu");
     }
 
-    public int GetCurrentSceneIndex()
+    public bool NextSceneExists()
     {
-        return SceneManager.GetActiveScene().buildIndex;
+        return SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings;
     }
 }

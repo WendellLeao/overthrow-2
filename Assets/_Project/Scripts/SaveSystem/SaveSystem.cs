@@ -1,4 +1,3 @@
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System.IO;
 
@@ -6,15 +5,15 @@ public static class SaveSystem
 {
     private static string _fileName = "gameData.json";
 
+    private static GameData _localData = new GameData();
+
     public static GameData SaveGameData()
     {
-        GameData gameData = GameData.Instance;
-
-        string _json = JsonUtility.ToJson(gameData);
+        string _json = JsonUtility.ToJson(_localData);
 
         File.WriteAllText(GetFilePath(), _json);
 
-        return gameData;
+        return _localData;
     }
 
     public static GameData LoadGameData()
@@ -29,9 +28,9 @@ public static class SaveSystem
         {
             string _json = File.ReadAllText(GetFilePath());
 
-            GameData.Instance =  JsonUtility.FromJson<GameData>(_json);
+            _localData =  JsonUtility.FromJson<GameData>(_json);
 
-            return GameData.Instance;
+            return _localData;
         }
     }
 
@@ -40,11 +39,16 @@ public static class SaveSystem
         return File.Exists(GetFilePath());
     }
 
+    public static GameData GetLocalData()
+    {
+        return _localData;
+    }
+
     public static void DeleteSave()
     {
         File.Delete(GetFilePath());
 
-        GameData.Instance.Reset();
+        _localData.Reset();
     }
 
     private static string GetFilePath()

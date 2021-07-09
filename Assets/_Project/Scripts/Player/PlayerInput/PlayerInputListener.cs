@@ -9,7 +9,7 @@ public sealed class PlayerInputListener : MonoBehaviour
     private InputActionsSystem _inputActionsSystem;
     private InputActionsSystem.CharacterControlsActions _characterControls;
     
-    private bool _isShooting = false, _isShootingBomb = false, _gameIsPaused = false;
+    private bool _isShooting = false, _isShootingBomb = false, _pressPause = false;
     private Vector2 _mousePosition;
 
     private void OnEnable()
@@ -29,6 +29,8 @@ public sealed class PlayerInputListener : MonoBehaviour
     private void Update()
     {
         UpdateInputs();
+        
+        //ResetInputs();
     }
 
     private void EnableInputSystem()
@@ -70,19 +72,24 @@ public sealed class PlayerInputListener : MonoBehaviour
 
     private void UpdateInputs()
     {
-        _localGameEvents.OnReadPlayerInputs?.Invoke(CreateInput());
+        _localGameEvents.OnReadPlayerInputs?.Invoke(CreateInputs());
     }
 
-    private PlayerInputData CreateInput()
+    private PlayerInputData CreateInputs()
     {
         PlayerInputData playerInputData = new PlayerInputData();
 
         playerInputData.IsShooting = _isShooting;
         playerInputData.IsShootingBomb = _isShootingBomb;
-        playerInputData.GameIsPaused = _gameIsPaused;
+        playerInputData.PressPause = _pressPause;
         playerInputData.MousePosition = _mousePosition;
 
         return playerInputData;
+    }
+
+    private void ResetInputs()
+    {
+        _pressPause = false;
     }
 
     private void OnShoot_PerformShoot(InputAction.CallbackContext context)
@@ -125,7 +132,7 @@ public sealed class PlayerInputListener : MonoBehaviour
         {
             case InputActionPhase.Performed:
             {
-                _gameIsPaused = !_gameIsPaused;
+                _pressPause = !_pressPause;
                 break;
             }
         }

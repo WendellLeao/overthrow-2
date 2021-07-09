@@ -5,9 +5,11 @@ public sealed class WinGameHandler : MonoBehaviour
 {
     [Header("Panels UI")]
     [SerializeField] private GameObject _winPanelObject;
+    [SerializeField] private GameObject _endGamePanelObject;
 
     [Header("Buttons UI")]
     [SerializeField] private Button _continueButton;
+    [SerializeField] private Button _mainMenuButton;
 
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
@@ -34,6 +36,7 @@ public sealed class WinGameHandler : MonoBehaviour
         _globalGameEvents.OnLevelCompleted += OnLevelCompleted_LevelComplete;
 
         _continueButton.onClick.AddListener(_sceneHandler.LoadNextScene);
+        _mainMenuButton.onClick.AddListener(_sceneHandler.BackToMainMenu);
     }
 
     private void UnsubscribeEvents()
@@ -41,17 +44,25 @@ public sealed class WinGameHandler : MonoBehaviour
         _globalGameEvents.OnLevelCompleted -= OnLevelCompleted_LevelComplete;
 
         _continueButton.onClick.RemoveAllListeners();
+        _mainMenuButton.onClick.RemoveAllListeners();
     }
 
     private void OnLevelCompleted_LevelComplete()
     {
         StopGame();
 
-        SaveGame();
-
         SetGameState(GameState.WIN);
 
-        _winPanelObject.SetActive(true);
+        if(_sceneHandler.NextSceneExists())
+        {
+            HandleGameSaving();
+
+            _winPanelObject.SetActive(true);
+        }
+        else
+        {
+            _endGamePanelObject.SetActive(true);
+        }
     }
 
     private void StopGame()
@@ -68,11 +79,11 @@ public sealed class WinGameHandler : MonoBehaviour
         _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }
 
-    private void SaveGame()
+    private void HandleGameSaving()
     {
         if(canSaveGame)
         {
-            GameData.Instance.currentLevelIndex++;
+            SaveSystem.GetLocalData().currentLevelIndex++;
             
             SaveSystem.SaveGameData();
 

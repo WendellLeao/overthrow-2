@@ -87,14 +87,18 @@ public sealed class MenuManager : MonoBehaviour
     
     private void OnClick_StartGame()
     {
-        _sceneHandler.LoadScene(SaveSystem.LoadGameData().currentLevelIndex + 1);
+        SaveSystem.LoadGameData();////////////////////////////////
+
+        _sceneHandler.LoadScene(SaveSystem.GetLocalData().currentLevelIndex + 1);
     }
 
     private void OnClick_StartNewGame()
     {
         SaveSystem.DeleteSave();
 
-        _sceneHandler.LoadScene(SaveSystem.LoadGameData().currentLevelIndex + 1);
+        SaveSystem.LoadGameData();////////////////////////////////
+
+        _sceneHandler.LoadScene(SaveSystem.GetLocalData().currentLevelIndex + 1);
     }
 
     private void OnClick_Quit()

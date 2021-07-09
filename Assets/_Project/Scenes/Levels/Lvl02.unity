@@ -1061,6 +1061,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7296380780718479259, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
   m_PrefabInstance: {fileID: 916446104}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &916446115 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4906434914738637336, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+  m_PrefabInstance: {fileID: 916446104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &916446116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1543987936157666045, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+  m_PrefabInstance: {fileID: 916446104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1038445585
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,9 +2163,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 916446110}
     - target: {fileID: 1568081453, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
+      propertyPath: _mainMenuButton
+      value: 
+      objectReference: {fileID: 916446115}
+    - target: {fileID: 1568081453, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _winPanelObject
       value: 
       objectReference: {fileID: 916446111}
+    - target: {fileID: 1568081453, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
+      propertyPath: _endGamePanelObject
+      value: 
+      objectReference: {fileID: 916446116}
     - target: {fileID: 7938760289510950042, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: m_Name
       value: GameManager
