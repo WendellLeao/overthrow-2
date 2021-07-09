@@ -82,7 +82,7 @@ public sealed class MenuManager : MonoBehaviour
     {
         _mainMenuObject.SetActive(true);
 
-        _continueButton.gameObject.SetActive(SerializationManager.LoadGameData().currentLevelIndex > 0);
+        _continueButton.gameObject.SetActive(SerializationManager.SaveFileExists());
     }
     
     private void OnClick_StartGame()

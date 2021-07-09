@@ -1,10 +1,10 @@
-using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using System.IO;
 
 public static class SerializationManager
 {
-    private static string _saveFile = ".save";
+    private static string _fileName = "gameData.save";
 
     public static GameData SaveGameData()
     {
@@ -28,7 +28,7 @@ public static class SerializationManager
     {
         string path = GetFilePath();
 
-        if(!File.Exists(path))
+        if(!SaveFileExists())
         {
             return SaveGameData(); //Create a new save file
         }
@@ -47,6 +47,11 @@ public static class SerializationManager
         }
     }
 
+    public static bool SaveFileExists()
+    {
+        return File.Exists(GetFilePath());
+    }
+
     public static void DeleteSave()
     {
         File.Delete(GetFilePath());
@@ -54,6 +59,6 @@ public static class SerializationManager
 
     private static string GetFilePath()
     {
-        return Application.persistentDataPath + "/gameData.save";
+        return Path.Combine(Application.persistentDataPath, _fileName);
     }
 }
