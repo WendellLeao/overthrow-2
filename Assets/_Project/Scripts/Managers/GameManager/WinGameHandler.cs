@@ -17,6 +17,8 @@ public sealed class WinGameHandler : MonoBehaviour
 
     private SceneHandler _sceneHandler = new SceneHandler();
 
+    private bool canSaveGame = true;
+
     private void OnEnable()
     {
         SubscribeEvents();
@@ -45,8 +47,7 @@ public sealed class WinGameHandler : MonoBehaviour
     {
         StopGame();
 
-        // SaveSystem.SetCurrentLevelIndex(_sceneHandler.GetCurrentSceneIndex());
-        // SaveSystem.SaveGame();
+        SaveGame();
 
         SetGameState(GameState.WIN);
 
@@ -65,5 +66,17 @@ public sealed class WinGameHandler : MonoBehaviour
         _gameStateScriptableObject._currentGameState = newGameState;
 
         _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
+    }
+
+    private void SaveGame()
+    {
+        if(canSaveGame)
+        {
+            GameData.Instance.currentLevelIndex++;
+            
+            SerializationManager.SaveGameData();
+
+            canSaveGame = false;
+        }
     }
 }

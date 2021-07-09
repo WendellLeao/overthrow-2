@@ -7,7 +7,8 @@ public sealed class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _mainMenuObject;
 
     [Header("Menu Buttons")]
-    [SerializeField] private Button _playButton;
+    [SerializeField] private Button _continueButton;
+    [SerializeField] private Button _newGameButton;
     [SerializeField] private Button _quitButton;
     
     private SceneHandler _sceneHandler = new SceneHandler();
@@ -33,19 +34,21 @@ public sealed class MenuManager : MonoBehaviour
         ShowMenu(Menu.MAIN);
 
         SoundManager.instance.PlaySoundtrack();
-
-        LoadGame();
     }
 
     private void SubscribeEvents()
     {
-        _playButton.onClick.AddListener(OnClick_PlayGame);
+        _continueButton.onClick.AddListener(OnClick_StartGame);
+        _newGameButton.onClick.AddListener(OnClick_StartNewGame);
+
         _quitButton.onClick.AddListener(OnClick_Quit);
     }
 
     private void UnsubscribeEvents()
     {
-        _playButton.onClick.RemoveAllListeners();
+        _continueButton.onClick.RemoveAllListeners();
+        _newGameButton.onClick.RemoveAllListeners();
+
         _quitButton.onClick.RemoveAllListeners();
     }
     
@@ -69,26 +72,36 @@ public sealed class MenuManager : MonoBehaviour
         {
             case Menu.MAIN:
             {
-                _mainMenuObject.SetActive(true);
+                HandleMainMenu();
                 break;
             }
         }
     }
-    
-    private void LoadGame()
+
+    private void HandleMainMenu()
     {
-        //SaveSystem.LoadGame();
+        _mainMenuObject.SetActive(true);
+
+        _continueButton.gameObject.SetActive(SerializationManager.LoadGameData().currentLevelIndex > 0);
+    }
+    
+    private void OnClick_StartGame()
+    {
+        _sceneHandler.LoadScene(SerializationManager.LoadGameData().currentLevelIndex + 1);
     }
 
-    private void OnClick_PlayGame()
+    private void OnClick_StartNewGame()
     {
-        _sceneHandler.LoadNextScene();
-        // _sceneHandler.LoadScene(_saveSystem.GetLoadedLevelIndex + 1); //Skip Main Menu Scene (index 0)
+        SerializationManager.DeleteSave();
+
+        GameData.Instance.currentLevelIndex = 0;
+
+        _sceneHandler.LoadScene(SerializationManager.LoadGameData().currentLevelIndex + 1);
     }
 
     private void OnClick_Quit()
     {
-        Debug.Log("Quit");
+        Debug.Log("Quit!");
 
         Application.Quit();
     }

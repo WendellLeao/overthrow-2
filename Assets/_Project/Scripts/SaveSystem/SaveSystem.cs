@@ -28,7 +28,7 @@ public static class SaveSystem
 
         _jsonFilePath = Application.persistentDataPath + "/_Project/GameData" + _jsonFile;
 
-        if(File.Exists(_jsonFilePath))//C:\Users\leaow\AppData\LocalLow\LeaoSoft\Overthrow 2
+        if(File.Exists("C:/Users/leaow/AppData/LocalLow/LeaoSoft/Overthrow 2"))//C:\Users\leaow\AppData\LocalLow\LeaoSoft\Overthrow 2 //_jsonFilePath
         {
             ReadJsonFile();
         }

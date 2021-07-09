@@ -3,7 +3,6 @@ using UnityEngine;
 
 public sealed class DeactivatableObject : MonoBehaviour
 {
-
     [Header("Materials")]
     [SerializeField] private Material _deactivatedMaterial;
 
