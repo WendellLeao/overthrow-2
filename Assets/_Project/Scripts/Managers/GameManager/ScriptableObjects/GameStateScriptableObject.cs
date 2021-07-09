@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewGameState", menuName = "Game State")]
-public sealed class GameStateScriptableOject : ScriptableObject
+public sealed class GameStateScriptableObject : ScriptableObject
 {
     public GameState _currentGameState;
 

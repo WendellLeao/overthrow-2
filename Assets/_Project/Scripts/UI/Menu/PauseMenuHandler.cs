@@ -13,10 +13,10 @@ public sealed class PauseMenuHandler : MonoBehaviour
 
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
-    [SerializeField] private LocalGameEvents _localGameEvent;
+    [SerializeField] private LocalGameEvents _localGameEvents;
     
     [Header("Game State Scriptable Object")]
-    [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
+    [SerializeField] private GameStateScriptableObject _gameStateScriptableObject;
 
     [SerializeField] private SceneHandler _sceneHandler = new SceneHandler();
 
@@ -32,33 +32,49 @@ public sealed class PauseMenuHandler : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        _localGameEvent.OnReadPlayerInputs += OnGamePaused_HandlePauseGame;
+        // _globalGameEvents.OnGameStateChanged += OnGameStateChanged_CheckIfCanPause;
+        
+        _localGameEvents.OnReadPlayerInputs += OnGamePaused_HandlePauseGame;
 
         _resumeGameButton.onClick.AddListener(HidePausePanel);
+        
         _restartGameButton.onClick.AddListener(_sceneHandler.ReloadScene);
         _mainMenuButton.onClick.AddListener(_sceneHandler.BackToMainMenu);
     }
 
     private void UnsubscribeEvents()
     {
-        _localGameEvent.OnReadPlayerInputs -= OnGamePaused_HandlePauseGame;
+        // _globalGameEvents.OnGameStateChanged -= OnGameStateChanged_CheckIfCanPause;
+        
+        _localGameEvents.OnReadPlayerInputs -= OnGamePaused_HandlePauseGame;
 
         _resumeGameButton.onClick.RemoveAllListeners();
         _restartGameButton.onClick.RemoveAllListeners();
         _mainMenuButton.onClick.RemoveAllListeners();
     }
+
+    private void OnGameStateChanged_CheckIfCanPause(GameState gameState)
+    {
+        if(gameState != GameState.LOSE && gameState != GameState.WIN)
+        {
+            _localGameEvents.OnReadPlayerInputs += OnGamePaused_HandlePauseGame;
+        }
+        else
+        {
+            _localGameEvents.OnReadPlayerInputs -= OnGamePaused_HandlePauseGame;
+        }
+    }
     
     private void OnGamePaused_HandlePauseGame(PlayerInputData playerInputData)
     {
-        if(CanPauseGame() && playerInputData.GameIsPaused)
+        if(_gameStateScriptableObject.CurrentGameState != GameState.LOSE 
+        && _gameStateScriptableObject.CurrentGameState != GameState.WIN)///////////////////////////////
         {
-            playerInputData.GameIsPaused = false;
-
-            if(IsPaused())
+            if(GameIsStopped() && !playerInputData.GameIsPaused)
             {
                 HidePausePanel();
             }
-            else
+            else if (!GameIsStopped() && playerInputData.GameIsPaused)
             {
                 ShowPausePanel();
             }
@@ -82,7 +98,7 @@ public sealed class PauseMenuHandler : MonoBehaviour
         
         _pausePanelObject.SetActive(true);
     }
-
+    
     private void ResumeGame()
     {
         Time.timeScale = 1f;
@@ -99,19 +115,11 @@ public sealed class PauseMenuHandler : MonoBehaviour
 
     private void SetGameState(GameState newGameState)
     {
-        _gameStateScriptableObject._currentGameState = newGameState;
-
-        _globalGameEvents.OnGameStateChanged?.Invoke();
+        _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }
 
-    private bool IsPaused()
+    private bool GameIsStopped()
     {
         return Time.timeScale == 0f;
-    }
-
-    private bool CanPauseGame()
-    {
-        return _gameStateScriptableObject.CurrentGameState == GameState.PLAYING 
-        || _gameStateScriptableObject.CurrentGameState == GameState.PAUSED;
     }
 }

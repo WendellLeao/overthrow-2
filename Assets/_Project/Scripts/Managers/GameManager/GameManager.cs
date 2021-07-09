@@ -6,13 +6,15 @@ public sealed class GameManager : MonoBehaviour
     [SerializeField] private GlobalGameEvents _globalGameEvents;
 
     [Header("Game State Scriptable Object")]
-    [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
+    [SerializeField] private GameStateScriptableObject _gameStateScriptableObject;
 
     private void Start()
     {
         ResumeGame();
 
         SetGameState(GameState.PLAYING);
+
+        SoundManager.instance.PlaySoundtrack();
     }
 
     private void ResumeGame()
@@ -26,6 +28,6 @@ public sealed class GameManager : MonoBehaviour
     {
         _gameStateScriptableObject._currentGameState = newGameState;
 
-        _globalGameEvents.OnGameStateChanged?.Invoke();
+        _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }
 }

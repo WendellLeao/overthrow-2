@@ -21,15 +21,15 @@ public sealed class PlayerPowerUI : MonoBehaviour
     
     private void SubscribeEvents()
     {
-        _localGameEvent.OnPowerChanged += OnPlayerBombShot_UpdatePowerAmountUI;
+        _localGameEvent.OnPowerChanged += OnPowerChanged_UpdatePowerAmountUI;
     }
 
     private void UnsubscribeEvents()
     {
-        _localGameEvent.OnPowerChanged -= OnPlayerBombShot_UpdatePowerAmountUI;
+        _localGameEvent.OnPowerChanged -= OnPowerChanged_UpdatePowerAmountUI;
     }
 
-    public void OnPlayerBombShot_UpdatePowerAmountUI(int currentPowerAmount, int maxPowerAmount)
+    public void OnPowerChanged_UpdatePowerAmountUI(int currentPowerAmount, int maxPowerAmount)
     {
         float healthPercent = (float)currentPowerAmount / maxPowerAmount;
         

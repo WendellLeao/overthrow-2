@@ -54,7 +54,6 @@ public sealed class PlayerInputListener : MonoBehaviour
 
         _characterControls.Shoot.canceled += OnShoot_PerformShoot;
         _characterControls.PowerShoot.canceled += OnShootBomb_PerformShootingBomb;
-        _characterControls.PauseGame.canceled += OnPauseGame_PauseGame;
     }
 
     private void UnsubscribeEvents()
@@ -67,7 +66,6 @@ public sealed class PlayerInputListener : MonoBehaviour
 
         _characterControls.Shoot.canceled -= OnShoot_PerformShoot;
         _characterControls.PowerShoot.canceled -= OnShootBomb_PerformShootingBomb;
-        _characterControls.PauseGame.canceled -= OnPauseGame_PauseGame;
     }
 
     private void UpdateInputs()
@@ -127,12 +125,7 @@ public sealed class PlayerInputListener : MonoBehaviour
         {
             case InputActionPhase.Performed:
             {
-                _gameIsPaused = true;
-                break;
-            }
-            case InputActionPhase.Canceled:
-            {
-                _gameIsPaused = false;
+                _gameIsPaused = !_gameIsPaused;
                 break;
             }
         }

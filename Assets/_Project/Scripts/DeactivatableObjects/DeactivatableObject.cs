@@ -21,6 +21,8 @@ public sealed class DeactivatableObject : MonoBehaviour
     public void DeactivateObject()
     {
         this.gameObject.SetActive(false);
+
+        _isActivated = true;
     }
 
     public void SetDeactivatedMaterial(Material deactivatedMaterial)

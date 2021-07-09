@@ -12,15 +12,23 @@ public sealed class BombProjectile : Projectile
     [Header("Mesh Renderer")]
     [SerializeField] private MeshRenderer _meshRenderer;
     
-    private int randomNumber;
+    [Header("Materials")]
+    private Material _startMaterial;
+
+    private bool _canPlaySoundEffect = true;
 
     protected override void OnDisable()
     {
         base.OnDisable();
 
-        ResetMeshRenderer();
+        ResetBombProjectile();
 
         ReturnProjectileToPool();
+    }
+
+    private void Awake()
+    {
+        SetStartMaterial();
     }
 
     private void LateUpdate()
@@ -50,6 +58,13 @@ public sealed class BombProjectile : Projectile
             if(nearbyObjectCollider.TryGetComponent<Rigidbody>(out Rigidbody rigidbody))
             {
                 rigidbody.AddExplosionForce(_explosionForce, this.transform.position, _radius);
+
+                if(_canPlaySoundEffect)
+                {
+                    SoundManager.instance.Play("Explosion");
+
+                    _canPlaySoundEffect = false;
+                }
                 
                 _explosionParticleObject.SetActive(true);
                 
@@ -63,8 +78,24 @@ public sealed class BombProjectile : Projectile
         ObjectPool.instance.ReturnObjectToPool(PoolType.BOMB_PROJECTILE, this.gameObject);
     }
 
-    private void ResetMeshRenderer()
+    private void ResetBombProjectile()
     {
         _meshRenderer.enabled = true;
+
+        _canPlaySoundEffect = true;
+
+        _explosionParticleObject.SetActive(false);
+
+        ResetMaterial();
+    }
+
+    private void SetStartMaterial()
+    {
+        _startMaterial = _meshRenderer.material;
+    }
+
+    private void ResetMaterial()
+    {
+        _meshRenderer.material = _startMaterial;
     }
 }

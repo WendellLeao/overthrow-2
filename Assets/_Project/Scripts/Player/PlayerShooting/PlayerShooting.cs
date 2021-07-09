@@ -14,10 +14,11 @@ public sealed class PlayerShooting : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
 
     [Header("Game Events")]
-    [SerializeField] private LocalGameEvents _localGameEvent;
+    [SerializeField] private LocalGameEvents _localGameEvents;
+    [SerializeField] private GlobalGameEvents _globalGameEvents;
     
     [Header("Game State")]
-    [SerializeField] private GameStateScriptableOject _currentGameState;
+    [SerializeField] private GameStateScriptableObject _currentGameState;
 
     private PlayerAmmo _playerAmmo;
 
@@ -47,21 +48,25 @@ public sealed class PlayerShooting : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        _localGameEvent.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
-        _localGameEvent.OnPlayerBombShot += OnPlayerBombShot_PerformBombShooting;
+        // _globalGameEvents.OnGameStateChanged += OnGameStateChanged_CheckIfCanShoot;
+        
+        _localGameEvents.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
+        _localGameEvents.OnPlayerShotBomb += OnPlayerBombShot_PerformBombShooting;
     }
 
     private void UnsubscribeEvents()
     {
-        _localGameEvent.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
-        _localGameEvent.OnPlayerBombShot -= OnPlayerBombShot_PerformBombShooting;
+        // _globalGameEvents.OnGameStateChanged -= OnGameStateChanged_CheckIfCanShoot;
+        
+        _localGameEvents.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
+        _localGameEvents.OnPlayerShotBomb -= OnPlayerBombShot_PerformBombShooting;
     }
 
     private void InitializePlayerAmmo()
     {
         _playerAmmo = new PlayerAmmo(_maxProjectileAmount);
 
-        _localGameEvent.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount);
+        _localGameEvents.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount);
     }
 
     private void OnPlayerShot_PerformShoot(PlayerInputData playerInputData)
@@ -82,7 +87,23 @@ public sealed class PlayerShooting : MonoBehaviour
     {
         if(_currentGameState.CurrentGameState == GameState.PLAYING)
         {
+            SoundManager.instance.Play("PlayerShooting");
+
             SpawnProjectile(PoolType.BOMB_PROJECTILE);
+        }
+    }
+
+    private void OnGameStateChanged_CheckIfCanShoot(GameState gameState)
+    {
+        if(gameState == GameState.PLAYING)
+        {
+            _localGameEvents.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
+            _localGameEvents.OnPlayerShotBomb += OnPlayerBombShot_PerformBombShooting;
+        }
+        else
+        {
+            _localGameEvents.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
+            _localGameEvents.OnPlayerShotBomb -= OnPlayerBombShot_PerformBombShooting;
         }
     }
 
@@ -102,7 +123,7 @@ public sealed class PlayerShooting : MonoBehaviour
     {
         _playerAmmo.DecreaseAmmo();
         
-        _localGameEvent.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount);
+        _localGameEvents.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount);
     }
 
     private bool CanShoot(PlayerInputData playerInputData)

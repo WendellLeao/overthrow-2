@@ -25,15 +25,20 @@ public sealed class PlayerPowerHandler : MonoBehaviour
         SetCurrentPowerAmount(0);
     }
 
+    void Update()
+    {
+        Debug.Log(_currentPowerAmount);
+    }
+
     private void SubscribeEvents()
     {
-        _localGameEvent.OnReadPlayerInputs += OnPlayerShotBomb_PerformShootingBomb;
+        _localGameEvent.OnReadPlayerInputs += OnPlayerShotBomb_PerformBombShooting;
         _localGameEvent.OnLaserCollide += IncreasePowerAmount;
     }
 
     private void UnsubscribeEvents()
     {
-        _localGameEvent.OnReadPlayerInputs -= OnPlayerShotBomb_PerformShootingBomb;
+        _localGameEvent.OnReadPlayerInputs -= OnPlayerShotBomb_PerformBombShooting;
         _localGameEvent.OnLaserCollide -= IncreasePowerAmount;
     }
 
@@ -44,11 +49,11 @@ public sealed class PlayerPowerHandler : MonoBehaviour
         _localGameEvent.OnPowerChanged?.Invoke(_currentPowerAmount, _maxPowerAmount);
     }
 
-    private void OnPlayerShotBomb_PerformShootingBomb(PlayerInputData playerInputData)
+    private void OnPlayerShotBomb_PerformBombShooting(PlayerInputData playerInputData)
     {
         if(playerInputData.IsShootingBomb && !playerInputData.IsShooting && _currentPowerAmount >= _maxPowerAmount)
         {
-            _localGameEvent.OnPlayerBombShot?.Invoke();
+            _localGameEvent.OnPlayerShotBomb?.Invoke();
 
             SetCurrentPowerAmount(0);
         }
@@ -56,7 +61,14 @@ public sealed class PlayerPowerHandler : MonoBehaviour
 
     private void IncreasePowerAmount()
     {
-        _currentPowerAmount += 5;
+        if(_currentPowerAmount < _maxPowerAmount)
+        {
+            _currentPowerAmount += 5;
+        }
+        else
+        {
+            _currentPowerAmount = _maxPowerAmount;
+        }
 
         _localGameEvent.OnPowerChanged?.Invoke(_currentPowerAmount, _maxPowerAmount);
     }

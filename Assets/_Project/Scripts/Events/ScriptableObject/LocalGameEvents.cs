@@ -8,7 +8,7 @@ public sealed class LocalGameEvents : ScriptableObject
 
     public UnityAction<int, int> OnPowerChanged;
 
-    public UnityAction OnPlayerBombShot;
+    public UnityAction OnPlayerShotBomb;
 
     public UnityAction OnLaserCollide;
 

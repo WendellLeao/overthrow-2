@@ -14,7 +14,7 @@ public sealed class GameOverHandler : MonoBehaviour
     [SerializeField] private GlobalGameEvents _globalGameEvents;
 
     [Header("Game State Scriptable Object")]
-    [SerializeField] private GameStateScriptableOject _gameStateScriptableObject;
+    [SerializeField] private GameStateScriptableObject _gameStateScriptableObject;
     
     private SceneHandler _sceneHandler = new SceneHandler();
 
@@ -64,6 +64,6 @@ public sealed class GameOverHandler : MonoBehaviour
     {
         _gameStateScriptableObject._currentGameState = newGameState;
 
-        _globalGameEvents.OnGameStateChanged?.Invoke();
+        _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }
 }
