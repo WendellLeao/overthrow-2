@@ -397,8 +397,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6203050505758877513}
-  - component: {fileID: 8389450500559891935}
   - component: {fileID: 7161173485181624605}
+  - component: {fileID: 8389450500559891935}
+  - component: {fileID: 3393074509662979888}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -423,20 +424,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8389450500559891935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6727948197397855731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 372a13dade9c6e14cb619d5fb5c09f3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnPosition: {fileID: 7442630517233331981}
-  _fireRate: 1
 --- !u!54 &7161173485181624605
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -453,3 +440,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8389450500559891935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727948197397855731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372a13dade9c6e14cb619d5fb5c09f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPosition: {fileID: 7442630517233331981}
+  _fireRate: 1
+--- !u!114 &3393074509662979888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727948197397855731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d83d0ea0f0d404a9a7cbc675955673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deactivatedMaterial: {fileID: 0}
+  _meshRenderer: {fileID: 0}
+  deactivatorObject:
+    serializedVersion: 2
+    m_Bits: 0

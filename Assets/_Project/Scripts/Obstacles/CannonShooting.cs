@@ -7,7 +7,7 @@ public sealed class CannonShooting : MonoBehaviour
     [SerializeField] private float _fireRate;
     private bool _canShoot = true;
 
-    private void FixedUpdate()
+    private void Update()
     {
         HandleShoot();
     }

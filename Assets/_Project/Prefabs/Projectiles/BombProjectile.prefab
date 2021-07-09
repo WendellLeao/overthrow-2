@@ -4993,7 +4993,7 @@ MonoBehaviour:
   _meshRenderer: {fileID: 1201168275915254272}
   deactivatorObject:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
 --- !u!114 &2474313075785547288
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -134,7 +134,7 @@ MonoBehaviour:
   _meshRenderer: {fileID: 836969101488410413}
   deactivatorObject:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 137
 --- !u!114 &3689200022513945248
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 748405899}
   - component: {fileID: 748405903}
   - component: {fileID: 748405904}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: barricadeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 906842550}
   - component: {fileID: 906842554}
   - component: {fileID: 906842555}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: barricadeFeet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,6 +303,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.8200002
       objectReference: {fileID: 0}
+    - target: {fileID: 916616527429455278, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: deactivatorObject.m_Bits
+      value: 136
+      objectReference: {fileID: 0}
     - target: {fileID: 1398694053823260300, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.694
@@ -334,6 +338,10 @@ PrefabInstance:
     - target: {fileID: 3686061634627137332, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709731711626940791, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: deactivatorObject.m_Bits
+      value: 136
       objectReference: {fileID: 0}
     - target: {fileID: 4871891367275633035, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
       propertyPath: m_LocalPosition.y
@@ -406,6 +414,10 @@ PrefabInstance:
     - target: {fileID: 7003894857164629803, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.694
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474913921808897649, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: deactivatorObject.m_Bits
+      value: 136
       objectReference: {fileID: 0}
     - target: {fileID: 8184648656452775795, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
       propertyPath: m_LocalPosition.y
