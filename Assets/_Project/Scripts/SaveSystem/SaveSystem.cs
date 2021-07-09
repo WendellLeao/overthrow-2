@@ -4,24 +4,17 @@ using System.IO;
 
 public static class SaveSystem
 {
-    private static string _fileName = "gameData.save";
+    private static string _fileName = "gameData.json";
 
     public static GameData SaveGameData()
     {
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        GameData gameData = GameData.Instance;
 
-        string path = GetFilePath();
+        string _json = JsonUtility.ToJson(gameData);
 
-        using(FileStream fileStream = File.Create(path))
-        {
-            GameData gameData = GameData.Instance;
+        File.WriteAllText(GetFilePath(), _json);
 
-            binaryFormatter.Serialize(fileStream, gameData);
-
-            fileStream.Close();
-            
-            return gameData;
-        }
+        return gameData;
     }
 
     public static GameData LoadGameData()
@@ -34,16 +27,11 @@ public static class SaveSystem
         }
         else
         {
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            string _json = File.ReadAllText(GetFilePath());
 
-            using(FileStream fileStream = new FileStream(path, FileMode.Open))
-            {
-                GameData gameData = binaryFormatter.Deserialize(fileStream) as GameData;
+            GameData.Instance =  JsonUtility.FromJson<GameData>(_json);
 
-                fileStream.Close();
-
-                return gameData;
-            }
+            return GameData.Instance;
         }
     }
 
@@ -55,6 +43,8 @@ public static class SaveSystem
     public static void DeleteSave()
     {
         File.Delete(GetFilePath());
+
+        GameData.Instance.Reset();
     }
 
     private static string GetFilePath()

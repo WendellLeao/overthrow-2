@@ -25,11 +25,6 @@ public sealed class PlayerPowerHandler : MonoBehaviour
         SetCurrentPowerAmount(0);
     }
 
-    void Update()
-    {
-        Debug.Log(_currentPowerAmount);
-    }
-
     private void SubscribeEvents()
     {
         _localGameEvent.OnReadPlayerInputs += OnPlayerShotBomb_PerformBombShooting;
