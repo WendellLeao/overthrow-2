@@ -1,10 +1,11 @@
 [System.Serializable]
 public sealed class GameData
 {
-    public int currentLevelIndex;
+    public int currentSceneIndex;
 
     public void Reset()
     {
-        currentLevelIndex = 0;
+        int skippedScenesAmount = SceneHandler.GetActiveSceneIndex() + 2;//Main Menu and LoadingScreen
+        currentSceneIndex = skippedScenesAmount;
     }
 }

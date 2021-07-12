@@ -15,8 +15,6 @@ public sealed class GameOverHandler : MonoBehaviour
 
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateScriptableObject _gameStateScriptableObject;
-    
-    private SceneHandler _sceneHandler = new SceneHandler();
 
     private void OnEnable()
     {
@@ -32,8 +30,8 @@ public sealed class GameOverHandler : MonoBehaviour
     {
         _globalGameEvents.OnPlayerDied += OnPlayerDied_LoseGame;
 
-        _restartGameButton.onClick.AddListener(_sceneHandler.ReloadScene);
-        _mainMenuButton.onClick.AddListener(_sceneHandler.BackToMainMenu);
+        _restartGameButton.onClick.AddListener(SceneHandler.ReloadScene);
+        _mainMenuButton.onClick.AddListener(SceneHandler.BackToMainMenu);
     }
 
     private void UnsubscribeEvents()

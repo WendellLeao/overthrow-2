@@ -17,8 +17,6 @@ public sealed class WinGameHandler : MonoBehaviour
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateScriptableObject _gameStateScriptableObject;
 
-    private SceneHandler _sceneHandler = new SceneHandler();
-
     private bool canSaveGame = true;
 
     private void OnEnable()
@@ -35,8 +33,8 @@ public sealed class WinGameHandler : MonoBehaviour
     {
         _globalGameEvents.OnLevelCompleted += OnLevelCompleted_LevelComplete;
 
-        _continueButton.onClick.AddListener(_sceneHandler.LoadNextScene);
-        _mainMenuButton.onClick.AddListener(_sceneHandler.BackToMainMenu);
+        _continueButton.onClick.AddListener(SceneHandler.LoadNextScene);
+        _mainMenuButton.onClick.AddListener(SceneHandler.BackToMainMenu);
     }
 
     private void UnsubscribeEvents()
@@ -53,7 +51,7 @@ public sealed class WinGameHandler : MonoBehaviour
 
         SetGameState(GameState.WIN);
 
-        if(_sceneHandler.NextSceneExists())
+        if(SceneHandler.NextSceneExists())
         {
             HandleGameSaving();
 
@@ -83,7 +81,7 @@ public sealed class WinGameHandler : MonoBehaviour
     {
         if(canSaveGame)
         {
-            SaveSystem.GetLocalData().currentLevelIndex++;
+            SaveSystem.GetLocalData().currentSceneIndex = SceneHandler.GetNextSceneIndex();
             
             SaveSystem.SaveGameData();
 

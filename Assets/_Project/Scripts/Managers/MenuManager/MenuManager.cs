@@ -10,9 +10,7 @@ public sealed class MenuManager : MonoBehaviour
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _newGameButton;
     [SerializeField] private Button _quitButton;
-    
-    private SceneHandler _sceneHandler = new SceneHandler();
-    
+
     private Menu _currentMenu;
 
     private void OnEnable()
@@ -51,7 +49,7 @@ public sealed class MenuManager : MonoBehaviour
 
         _quitButton.onClick.RemoveAllListeners();
     }
-    
+
     private void ResumeGame()
     {
         Time.timeScale = 1f;
@@ -82,23 +80,20 @@ public sealed class MenuManager : MonoBehaviour
     {
         _mainMenuObject.SetActive(true);
 
-        _continueButton.gameObject.SetActive(SaveSystem.SaveFileExists());
+        int firstLevelIndex = SceneHandler.GetActiveSceneIndex() + 2;
+        _continueButton.gameObject.SetActive(SaveSystem.GetLocalData().currentSceneIndex > firstLevelIndex);
     }
     
     private void OnClick_StartGame()
     {
-        SaveSystem.LoadGameData();////////////////////////////////
-
-        _sceneHandler.LoadScene(SaveSystem.GetLocalData().currentLevelIndex + 1);
+        SceneHandler.LoadNextScene();
     }
 
     private void OnClick_StartNewGame()
     {
         SaveSystem.DeleteSave();
-
-        SaveSystem.LoadGameData();////////////////////////////////
-
-        _sceneHandler.LoadScene(SaveSystem.GetLocalData().currentLevelIndex + 1);
+        
+        SceneHandler.LoadNextScene();
     }
 
     private void OnClick_Quit()

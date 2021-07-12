@@ -18,8 +18,6 @@ public sealed class PauseMenuHandler : MonoBehaviour
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateScriptableObject _gameStateScriptableObject;
 
-    [SerializeField] private SceneHandler _sceneHandler = new SceneHandler();
-
     private void OnEnable()
     {
         SubscribeEvents();
@@ -38,8 +36,8 @@ public sealed class PauseMenuHandler : MonoBehaviour
 
         _resumeGameButton.onClick.AddListener(HidePausePanel);
         
-        _restartGameButton.onClick.AddListener(_sceneHandler.ReloadScene);
-        _mainMenuButton.onClick.AddListener(_sceneHandler.BackToMainMenu);
+        _restartGameButton.onClick.AddListener(SceneHandler.ReloadScene);
+        _mainMenuButton.onClick.AddListener(SceneHandler.BackToMainMenu);
     }
 
     private void UnsubscribeEvents()
