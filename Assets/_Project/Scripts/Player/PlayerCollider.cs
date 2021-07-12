@@ -5,7 +5,7 @@ public sealed class PlayerCollider : MonoBehaviour
     [Header("Health System")]
     [SerializeField] private HealthSystem _playerHealthSystem;
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent<DeactivatableObject>(out DeactivatableObject deactivatableObject))
         {
