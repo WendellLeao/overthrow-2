@@ -4,7 +4,9 @@ using UnityEngine;
 public sealed class CannonShooting : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPosition;
+    
     [SerializeField] private float _fireRate;
+    
     private bool _canShoot = true;
 
     private void Update()

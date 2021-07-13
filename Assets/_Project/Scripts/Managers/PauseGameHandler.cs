@@ -14,10 +14,7 @@ public sealed class PauseGameHandler : MonoBehaviour
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
     [SerializeField] private LocalGameEvents _localGameEvents;
-    
-    [Header("Game State Scriptable Object")]
-    [SerializeField] private GameStateScriptableObject _gameStateScriptableObject;
-    
+
     private bool _canPauseGame = false;
 
     private void OnEnable()
@@ -55,15 +52,10 @@ public sealed class PauseGameHandler : MonoBehaviour
 
     private void OnGameStateChanged_CheckIfCanPause(GameState gameState)
     {
-        // if(gameState == GameState.PLAYING || gameState == GameState.PAUSED)
-        // {
-        //     _localGameEvents.OnReadPlayerInputs += OnGamePaused_HandlePauseGame;
-        // }
-        // else if(gameState == GameState.WIN || gameState == GameState.LOSE)
-        // {
-        //     Debug.Log("desinscreveu :(");
-        //     _localGameEvents.OnReadPlayerInputs -= OnGamePaused_HandlePauseGame;
-        // }
+        if(gameState == GameState.LOSE || gameState == GameState.WIN)
+        {
+            _localGameEvents.OnReadPlayerInputs -= OnGamePaused_HandlePauseGame;
+        }
     }
     
     private void OnGamePaused_HandlePauseGame(PlayerInputData playerInputData)

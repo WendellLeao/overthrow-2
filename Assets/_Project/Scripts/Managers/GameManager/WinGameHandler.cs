@@ -14,9 +14,6 @@ public sealed class WinGameHandler : MonoBehaviour
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
 
-    [Header("Game State Scriptable Object")]
-    [SerializeField] private GameStateScriptableObject _gameStateScriptableObject;
-
     private bool canSaveGame = true;
 
     private void OnEnable()
@@ -72,8 +69,6 @@ public sealed class WinGameHandler : MonoBehaviour
 
     private void SetGameState(GameState newGameState)
     {
-        _gameStateScriptableObject._currentGameState = newGameState;
-
         _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }
 

@@ -29,9 +29,6 @@ public sealed class PlayerPowerHandler : MonoBehaviour
     private void SubscribeEvents()
     {
         _globalGameEvents.OnGameStateChanged += OnGameStateChanged_CheckIfCanShoot;
-        
-        _localGameEvent.OnReadPlayerInputs += OnPlayerShotBomb_PerformBombShooting;
-        _localGameEvent.OnLaserCollide += IncreasePowerAmount;
     }
 
     private void UnsubscribeEvents()

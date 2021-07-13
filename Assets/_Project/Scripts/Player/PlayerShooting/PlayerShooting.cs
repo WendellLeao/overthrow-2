@@ -39,9 +39,6 @@ public sealed class PlayerShooting : MonoBehaviour
     private void SubscribeEvents()
     {
         _globalGameEvents.OnGameStateChanged += OnGameStateChanged_CheckIfCanShoot;
-        
-        _localGameEvents.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
-        _localGameEvents.OnPlayerShotBomb += OnPlayerBombShot_PerformBombShooting;
     }
 
     private void UnsubscribeEvents()
@@ -57,6 +54,20 @@ public sealed class PlayerShooting : MonoBehaviour
         _playerAmmo = new PlayerAmmo(_maxProjectileAmount);
 
         _localGameEvents.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount);
+    }
+    
+    private void OnGameStateChanged_CheckIfCanShoot(GameState gameState)
+    {
+        if(gameState == GameState.PLAYING)
+        {
+            _localGameEvents.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
+            _localGameEvents.OnPlayerShotBomb += OnPlayerBombShot_PerformBombShooting;
+        }
+        else
+        {
+            _localGameEvents.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
+            _localGameEvents.OnPlayerShotBomb -= OnPlayerBombShot_PerformBombShooting;
+        }
     }
 
     private void OnPlayerShot_PerformShoot(PlayerInputData playerInputData)
@@ -79,21 +90,7 @@ public sealed class PlayerShooting : MonoBehaviour
 
         SpawnProjectile(PoolType.BOMB_PROJECTILE);
     }
-
-    private void OnGameStateChanged_CheckIfCanShoot(GameState gameState)
-    {
-        if(gameState == GameState.PLAYING)
-        {
-            _localGameEvents.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
-            _localGameEvents.OnPlayerShotBomb += OnPlayerBombShot_PerformBombShooting;
-        }
-        else
-        {
-            _localGameEvents.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
-            _localGameEvents.OnPlayerShotBomb -= OnPlayerBombShot_PerformBombShooting;
-        }
-    }
-
+    
     private void SpawnProjectile(PoolType poolType)
     {
         GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(poolType);
