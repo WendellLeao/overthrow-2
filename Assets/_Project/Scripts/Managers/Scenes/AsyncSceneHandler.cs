@@ -10,20 +10,26 @@ public sealed class AsyncSceneHandler : MonoBehaviour
 
     public float GetNormalizedOperationProgress => _normalizedAsyncOperationProgress;
     
-    public void LoadAsyncScene(int sceneIndex)
-    {
-        StartCoroutine(LoadAsynchronously(sceneIndex));
-    }
-    
-    public void LoadAsyncScene(SceneEnum sceneEnum)
+    public void LoadAdditiveSceneAsync(SceneEnum sceneEnum)
     {
         int sceneEnumToInt = (int)sceneEnum;
-        StartCoroutine(LoadAsynchronously(sceneEnumToInt));
+        StartCoroutine(LoadAsynchronously(sceneEnumToInt, LoadSceneMode.Additive));
+    }
+
+    public void LoadSingleSceneAsync(int sceneIndex)
+    {
+        StartCoroutine(LoadAsynchronously(sceneIndex, LoadSceneMode.Single));
     }
     
-    private IEnumerator LoadAsynchronously(int sceneIndex)
+    public void LoadSingleSceneAsync(SceneEnum sceneEnum)
     {
-        _asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);
+        int sceneEnumToInt = (int)sceneEnum;
+        StartCoroutine(LoadAsynchronously(sceneEnumToInt, LoadSceneMode.Single));
+    }
+
+    private IEnumerator LoadAsynchronously(int sceneIndex, LoadSceneMode loadSceneMode)
+    {
+        _asyncOperation = SceneManager.LoadSceneAsync(sceneIndex, loadSceneMode);
 
         while (!_asyncOperation.isDone)
         {

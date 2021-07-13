@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public sealed class MenuManager : MonoBehaviour
@@ -90,6 +88,7 @@ public sealed class MenuManager : MonoBehaviour
         _mainMenuObject.SetActive(true);
 
         int firstLevelIndex = (int)SceneEnum.LEVEL_01;
+        
         _continueButton.gameObject.SetActive(SaveSystem.GetLocalData().currentSceneIndex > firstLevelIndex);
     }
 
@@ -102,7 +101,7 @@ public sealed class MenuManager : MonoBehaviour
     {
         SaveSystem.DeleteSave();
         
-        StartLoadedLevel();
+        StartFirstLevel();
     }
 
     private void StartLoadedLevel()
@@ -111,7 +110,14 @@ public sealed class MenuManager : MonoBehaviour
 
         int loadedSceneIndex = SaveSystem.LoadGameData().currentSceneIndex;
         
-        _asyncSceneHandler.LoadAsyncScene(loadedSceneIndex);
+        _asyncSceneHandler.LoadSingleSceneAsync(loadedSceneIndex);
+    }
+    
+    private void StartFirstLevel()
+    {
+        ShowMenu(Menu.LOADING_SCREEN);
+
+        _asyncSceneHandler.LoadSingleSceneAsync(SceneEnum.LEVEL_01);
     }
 
     private void OnClick_Quit()

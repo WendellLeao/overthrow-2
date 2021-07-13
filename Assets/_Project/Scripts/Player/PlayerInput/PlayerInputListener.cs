@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,7 +31,7 @@ public sealed class PlayerInputListener : MonoBehaviour
     {
         UpdateInputs();
         
-        //ResetInputs();
+        ResetInputs();
     }
 
     private void EnableInputSystem()

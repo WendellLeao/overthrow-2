@@ -7,5 +7,4 @@ public sealed class GlobalGameEvents : ScriptableObject
     public UnityAction<GameState> OnGameStateChanged;
     public UnityAction OnLevelCompleted;
     public UnityAction OnPlayerDied;
-    public UnityAction OnGamePaused;
 }

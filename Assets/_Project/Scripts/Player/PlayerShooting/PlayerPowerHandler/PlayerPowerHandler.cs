@@ -6,6 +6,7 @@ public sealed class PlayerPowerHandler : MonoBehaviour
     [SerializeField] private int _maxPowerAmount;
     
     [Header("Game Events")]
+    [SerializeField] private GlobalGameEvents _globalGameEvents;
     [SerializeField] private LocalGameEvents _localGameEvent;
 
     private int _currentPowerAmount;
@@ -27,14 +28,32 @@ public sealed class PlayerPowerHandler : MonoBehaviour
 
     private void SubscribeEvents()
     {
+        _globalGameEvents.OnGameStateChanged += OnGameStateChanged_CheckIfCanShoot;
+        
         _localGameEvent.OnReadPlayerInputs += OnPlayerShotBomb_PerformBombShooting;
         _localGameEvent.OnLaserCollide += IncreasePowerAmount;
     }
 
     private void UnsubscribeEvents()
     {
+        _globalGameEvents.OnGameStateChanged -= OnGameStateChanged_CheckIfCanShoot;
+        
         _localGameEvent.OnReadPlayerInputs -= OnPlayerShotBomb_PerformBombShooting;
         _localGameEvent.OnLaserCollide -= IncreasePowerAmount;
+    }
+    
+    private void OnGameStateChanged_CheckIfCanShoot(GameState gameState)
+    {
+        if(gameState == GameState.PLAYING)
+        {
+            _localGameEvent.OnReadPlayerInputs += OnPlayerShotBomb_PerformBombShooting;
+            _localGameEvent.OnLaserCollide += IncreasePowerAmount;
+        }
+        else
+        {
+            _localGameEvent.OnReadPlayerInputs -= OnPlayerShotBomb_PerformBombShooting;
+            _localGameEvent.OnLaserCollide -= IncreasePowerAmount;
+        }
     }
 
     private void SetCurrentPowerAmount(int powerAmount)

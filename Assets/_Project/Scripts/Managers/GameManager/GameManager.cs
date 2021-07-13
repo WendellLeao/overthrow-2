@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public sealed class GameManager : MonoBehaviour
@@ -8,11 +9,14 @@ public sealed class GameManager : MonoBehaviour
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateScriptableObject _gameStateScriptableObject;
 
+    private void Awake()
+    {
+        SetGameState(GameState.PLAYING);
+    }
+
     private void Start()
     {
         ResumeGame();
-
-        SetGameState(GameState.PLAYING);
 
         SoundManager.instance.PlaySoundtrack();
     }

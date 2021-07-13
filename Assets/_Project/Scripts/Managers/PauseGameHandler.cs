@@ -17,6 +17,8 @@ public sealed class PauseGameHandler : MonoBehaviour
     
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateScriptableObject _gameStateScriptableObject;
+    
+    private bool _canPauseGame = false;
 
     private void OnEnable()
     {
@@ -30,7 +32,7 @@ public sealed class PauseGameHandler : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        // _globalGameEvents.OnGameStateChanged += OnGameStateChanged_CheckIfCanPause;
+        _globalGameEvents.OnGameStateChanged += OnGameStateChanged_CheckIfCanPause;
         
         _localGameEvents.OnReadPlayerInputs += OnGamePaused_HandlePauseGame;
 
@@ -42,7 +44,7 @@ public sealed class PauseGameHandler : MonoBehaviour
 
     private void UnsubscribeEvents()
     {
-        // _globalGameEvents.OnGameStateChanged -= OnGameStateChanged_CheckIfCanPause;
+        _globalGameEvents.OnGameStateChanged -= OnGameStateChanged_CheckIfCanPause;
         
         _localGameEvents.OnReadPlayerInputs -= OnGamePaused_HandlePauseGame;
 
@@ -53,28 +55,30 @@ public sealed class PauseGameHandler : MonoBehaviour
 
     private void OnGameStateChanged_CheckIfCanPause(GameState gameState)
     {
-        if(gameState != GameState.LOSE && gameState != GameState.WIN)
-        {
-            _localGameEvents.OnReadPlayerInputs += OnGamePaused_HandlePauseGame;
-        }
-        else
-        {
-            _localGameEvents.OnReadPlayerInputs -= OnGamePaused_HandlePauseGame;
-        }
+        // if(gameState == GameState.PLAYING || gameState == GameState.PAUSED)
+        // {
+        //     _localGameEvents.OnReadPlayerInputs += OnGamePaused_HandlePauseGame;
+        // }
+        // else if(gameState == GameState.WIN || gameState == GameState.LOSE)
+        // {
+        //     Debug.Log("desinscreveu :(");
+        //     _localGameEvents.OnReadPlayerInputs -= OnGamePaused_HandlePauseGame;
+        // }
     }
     
     private void OnGamePaused_HandlePauseGame(PlayerInputData playerInputData)
     {
-        if(_gameStateScriptableObject.CurrentGameState != GameState.LOSE 
-        && _gameStateScriptableObject.CurrentGameState != GameState.WIN)///////////////////////////////
+        if (playerInputData.PressPause)
         {
-            if(GameIsStopped() && !playerInputData.PressPause)
-            {
-                HidePausePanel();
-            }
-            else if (!GameIsStopped() && playerInputData.PressPause)
+            _canPauseGame = !_canPauseGame;
+                
+            if (_canPauseGame)
             {
                 ShowPausePanel();
+            }
+            else
+            {
+                HidePausePanel();
             }
         }
     }
@@ -82,6 +86,8 @@ public sealed class PauseGameHandler : MonoBehaviour
     private void HidePausePanel()
     {
         ResumeGame();
+
+        _canPauseGame = false;
 
         SetGameState(GameState.PLAYING);
 
@@ -114,10 +120,5 @@ public sealed class PauseGameHandler : MonoBehaviour
     private void SetGameState(GameState newGameState)
     {
         _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
-    }
-
-    private bool GameIsStopped()
-    {
-        return Time.timeScale == 0f;
     }
 }

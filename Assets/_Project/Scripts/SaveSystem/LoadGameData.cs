@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public sealed class LoadGameData : MonoBehaviour
 {
@@ -15,6 +14,6 @@ public sealed class LoadGameData : MonoBehaviour
 	
 	private void LoadAsyncScene()
 	{
-		_asyncSceneHandler.LoadAsyncScene(SceneEnum.MAIN_MENU);
+		_asyncSceneHandler.LoadAdditiveSceneAsync(SceneEnum.MAIN_MENU);
 	}
 }
