@@ -8,20 +8,10 @@ public sealed class LoadingScreenHandler : MonoBehaviour
    
    [Header(("Loading Bar"))]
    [SerializeField] private Slider _slider;
-  
-   private void Start()
-   {
-      SetAsyncSceneIndex(SaveSystem.GetLocalData().currentSceneIndex);
-   }
 
    private void Update()
    {
       UpdateLoadingBar();
-   }
-
-   private void SetAsyncSceneIndex(int sceneIndex)
-   {
-      _asyncSceneHandler.LoadAsyncScene(sceneIndex);
    }
 
    private void UpdateLoadingBar()

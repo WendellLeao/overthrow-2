@@ -15,6 +15,12 @@ public sealed class AsyncSceneHandler : MonoBehaviour
         StartCoroutine(LoadAsynchronously(sceneIndex));
     }
     
+    public void LoadAsyncScene(SceneEnum sceneEnum)
+    {
+        int sceneEnumToInt = (int)sceneEnum;
+        StartCoroutine(LoadAsynchronously(sceneEnumToInt));
+    }
+    
     private IEnumerator LoadAsynchronously(int sceneIndex)
     {
         _asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);

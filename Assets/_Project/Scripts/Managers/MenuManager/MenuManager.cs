@@ -1,17 +1,21 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public sealed class MenuManager : MonoBehaviour
 {
     [Header("Menu Containers")]
     [SerializeField] private GameObject _mainMenuObject;
+    [SerializeField] private GameObject _loadingScreenObject;
 
     [Header("Menu Buttons")]
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _newGameButton;
     [SerializeField] private Button _quitButton;
 
-    private Menu _currentMenu;
+    [Header("Scene Handler")]
+    [SerializeField] private AsyncSceneHandler _asyncSceneHandler;
 
     private void OnEnable()
     {
@@ -22,7 +26,7 @@ public sealed class MenuManager : MonoBehaviour
     {
         UnsubscribeEvents();
     }
-
+    
     private void Start()
     {
         ResumeGame();
@@ -58,19 +62,24 @@ public sealed class MenuManager : MonoBehaviour
     private void SetMenuObjectPosition()
     {
         _mainMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        _loadingScreenObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
 
     private void ShowMenu(Menu menu)
     {
-        menu = Menu.MAIN;
-
         _mainMenuObject.SetActive(false);
+        _loadingScreenObject.SetActive(false);
 
         switch(menu)
         {
             case Menu.MAIN:
             {
                 HandleMainMenu();
+                break;
+            }
+            case Menu.LOADING_SCREEN:
+            {
+                _loadingScreenObject.SetActive(true);
                 break;
             }
         }
@@ -80,20 +89,29 @@ public sealed class MenuManager : MonoBehaviour
     {
         _mainMenuObject.SetActive(true);
 
-        int firstLevelIndex = SceneHandler.GetActiveSceneIndex() + 2;
+        int firstLevelIndex = (int)SceneEnum.LEVEL_01;
         _continueButton.gameObject.SetActive(SaveSystem.GetLocalData().currentSceneIndex > firstLevelIndex);
     }
-    
+
     private void OnClick_StartGame()
     {
-        SceneHandler.LoadNextScene();
+        StartLoadedLevel();
     }
 
     private void OnClick_StartNewGame()
     {
         SaveSystem.DeleteSave();
         
-        SceneHandler.LoadNextScene();
+        StartLoadedLevel();
+    }
+
+    private void StartLoadedLevel()
+    {
+        ShowMenu(Menu.LOADING_SCREEN);
+
+        int loadedSceneIndex = SaveSystem.LoadGameData().currentSceneIndex;
+        
+        _asyncSceneHandler.LoadAsyncScene(loadedSceneIndex);
     }
 
     private void OnClick_Quit()

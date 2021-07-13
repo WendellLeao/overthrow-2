@@ -6,11 +6,16 @@ public static class SceneHandler
     {
         SceneManager.LoadScene(sceneIndex);
     }
+    
+    public static void LoadScene(SceneEnum sceneEnum)
+    {
+        int sceneEnumToInt = (int)sceneEnum;
+        SceneManager.LoadScene(sceneEnumToInt);
+    }
 
     public static void LoadNextScene()
     {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        LoadScene(nextSceneIndex);
+        LoadScene(GetNextSceneIndex());
     }
     
     public static void ReloadScene()
@@ -20,13 +25,12 @@ public static class SceneHandler
 
     public static void BackToMainMenu()
     {
-        SceneManager.LoadScene(1);//Main Menu index
+        LoadScene(SceneEnum.MAIN_MENU);
     }
 
     public static bool NextSceneExists()
     {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        return nextSceneIndex < SceneManager.sceneCountInBuildSettings;
+        return GetNextSceneIndex() < SceneManager.sceneCountInBuildSettings;
     }
 
     public static int GetActiveSceneIndex()

@@ -5,7 +5,7 @@ public sealed class GameData
 
     public void Reset()
     {
-        int skippedScenesAmount = SceneHandler.GetActiveSceneIndex() + 2;//Main Menu and LoadingScreen
+        int skippedScenesAmount = SceneHandler.GetActiveSceneIndex() + 1;
         currentSceneIndex = skippedScenesAmount;
     }
 }

@@ -1,4 +1,5 @@
 public enum Menu
 {
-    MAIN
+    MAIN,
+    LOADING_SCREEN
 }

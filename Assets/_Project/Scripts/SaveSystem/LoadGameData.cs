@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public sealed class LoadGameData : MonoBehaviour
 {
@@ -8,15 +9,12 @@ public sealed class LoadGameData : MonoBehaviour
 	private void Awake()
 	{
 		SaveSystem.LoadGameData();
+		
+		LoadAsyncScene();
 	}
 	
-	private void Start()
+	private void LoadAsyncScene()
 	{
-		SetAsyncSceneIndex(1);
-	}
-
-	private void SetAsyncSceneIndex(int sceneIndex)
-	{
-		_asyncSceneHandler.LoadAsyncScene(sceneIndex);
+		_asyncSceneHandler.LoadAsyncScene(SceneEnum.MAIN_MENU);
 	}
 }
