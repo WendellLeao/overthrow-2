@@ -9,12 +9,6 @@ public sealed class BombProjectile : Projectile
     [Header("Particle")]
     [SerializeField] private GameObject _explosionParticleObject;
 
-    [Header("Mesh Renderer")]
-    [SerializeField] private MeshRenderer _meshRenderer;
-    
-    [Header("Materials")]
-    private Material _startMaterial;
-
     private bool _canPlaySoundEffect = true;
 
     protected override void OnDisable()
@@ -22,31 +16,16 @@ public sealed class BombProjectile : Projectile
         base.OnDisable();
 
         ResetBombProjectile();
-
-        ReturnProjectileToPool();
     }
-
-    private void Awake()
+    
+    protected override void ReturnProjectileToPool()
     {
-        SetStartMaterial();
-    }
-
-    private void LateUpdate()
-    {
-        UnparentProjectile();
+        ObjectPool.instance.ReturnObjectToPool(PoolType.BOMB_PROJECTILE, this.gameObject);
     }
 
     private void OnCollisionEnter(Collision other)
     {
         HandleExplosion();
-    }
-
-    private void UnparentProjectile()
-    {
-        if(this.transform.parent != null)
-        {
-            this.transform.parent = null;
-        }
     }
 
     private void HandleExplosion()
@@ -59,12 +38,7 @@ public sealed class BombProjectile : Projectile
             {
                 rigidbody.AddExplosionForce(_explosionForce, this.transform.position, _radius);
 
-                if(_canPlaySoundEffect)
-                {
-                    SoundManager.instance.Play("Explosion");
-
-                    _canPlaySoundEffect = false;
-                }
+                HandleSoundEffect();
                 
                 _explosionParticleObject.SetActive(true);
                 
@@ -73,11 +47,16 @@ public sealed class BombProjectile : Projectile
         }
     }
 
-    private void ReturnProjectileToPool()
+    private void HandleSoundEffect()
     {
-        ObjectPool.instance.ReturnObjectToPool(PoolType.BOMB_PROJECTILE, this.gameObject);
-    }
+        if(_canPlaySoundEffect)
+        {
+            SoundManager.instance.Play("Explosion");
 
+            _canPlaySoundEffect = false;
+        }
+    }
+    
     private void ResetBombProjectile()
     {
         _meshRenderer.enabled = true;
@@ -85,17 +64,5 @@ public sealed class BombProjectile : Projectile
         _canPlaySoundEffect = true;
 
         _explosionParticleObject.SetActive(false);
-
-        ResetMaterial();
-    }
-
-    private void SetStartMaterial()
-    {
-        _startMaterial = _meshRenderer.material;
-    }
-
-    private void ResetMaterial()
-    {
-        _meshRenderer.material = _startMaterial;
     }
 }

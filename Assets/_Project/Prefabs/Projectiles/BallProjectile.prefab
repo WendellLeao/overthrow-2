@@ -127,11 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05dd3345d2f62f04480277ee90dd00ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meshRenderer: {fileID: 836969101488410413}
   _rigidbody: {fileID: 836969101488410415}
   _shootForce: 250
   _deactivatableObject: {fileID: 5179823801072730766}
-  _meshRenderer: {fileID: 836969101488410413}
-  _startMaterial:
+  _newStartMaterial:
   - {fileID: 2100000, guid: ed47ec04336031d489bbf6f4bd552ba9, type: 2}
   - {fileID: 2100000, guid: c78b6e378cced6e49b9586bae01cbc5b, type: 2}
   - {fileID: 2100000, guid: 6c0d25474dfd33349bfeedd203d2a3e0, type: 2}
