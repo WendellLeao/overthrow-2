@@ -11,6 +11,7 @@ public sealed class PlayerCollider : MonoBehaviour
         {
             if(deactivatableObject.GetIsActivated && other.TryGetComponent<IObstacle>(out IObstacle obstacle))
             {
+                deactivatableObject.SetIsActivated(false);
                 _playerHealthSystem.Damage(50);
             }
         }

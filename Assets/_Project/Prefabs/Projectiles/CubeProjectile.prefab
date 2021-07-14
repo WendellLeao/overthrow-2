@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1201168275915254272}
   - component: {fileID: 3284982877799677353}
   - component: {fileID: 2295873807666452801}
+  - component: {fileID: 8298144719614476114}
   - component: {fileID: 1888719013819148040}
-  - component: {fileID: 4625222713001868140}
   m_Layer: 0
   m_Name: CubeProjectile
   m_TagString: Untagged
@@ -114,6 +114,21 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &8298144719614476114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7104654789432281182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833ab98b24add044ab78926d6c160b9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 2295873807666452801}
+  _shootForce: 80
+  _meshRenderer: {fileID: 1201168275915254272}
 --- !u!114 &1888719013819148040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,18 +146,3 @@ MonoBehaviour:
   deactivatorObject:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &4625222713001868140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7104654789432281182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 833ab98b24add044ab78926d6c160b9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 2295873807666452801}
-  _shootForce: 80
-  _meshRenderer: {fileID: 1201168275915254272}

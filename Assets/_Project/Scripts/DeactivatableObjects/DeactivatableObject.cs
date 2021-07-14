@@ -29,6 +29,11 @@ public sealed class DeactivatableObject : MonoBehaviour
         _deactivatedMaterial = deactivatedMaterial;
     }
 
+    public void SetIsActivated(bool isActivated)
+    {
+        _isActivated = isActivated;
+    }
+
     private void Update()
     {
         StartCoroutine(CheckObjectPosition());

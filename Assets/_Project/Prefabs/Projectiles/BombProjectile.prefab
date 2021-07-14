@@ -4875,8 +4875,8 @@ GameObject:
   - component: {fileID: 1201168275915254272}
   - component: {fileID: 3284982877799677353}
   - component: {fileID: 2295873807666452801}
-  - component: {fileID: 1888719013819148040}
   - component: {fileID: 2474313075785547288}
+  - component: {fileID: 1888719013819148040}
   m_Layer: 0
   m_Name: BombProjectile
   m_TagString: Untagged
@@ -4977,23 +4977,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &1888719013819148040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7104654789432281182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70d83d0ea0f0d404a9a7cbc675955673, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _deactivatedMaterial: {fileID: 2100000, guid: 40a353f6117398145a3e785d9854de93, type: 2}
-  _meshRenderer: {fileID: 1201168275915254272}
-  deactivatorObject:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &2474313075785547288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5012,3 +4995,20 @@ MonoBehaviour:
   _radius: 7
   _explosionParticleObject: {fileID: 769881850768977453}
   _meshRenderer: {fileID: 1201168275915254272}
+--- !u!114 &1888719013819148040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7104654789432281182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d83d0ea0f0d404a9a7cbc675955673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deactivatedMaterial: {fileID: 2100000, guid: 40a353f6117398145a3e785d9854de93, type: 2}
+  _meshRenderer: {fileID: 1201168275915254272}
+  deactivatorObject:
+    serializedVersion: 2
+    m_Bits: 0
