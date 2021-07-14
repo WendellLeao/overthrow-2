@@ -925,6 +925,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 554562361397173071, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_text
+      value: Press ESC to pause
+      objectReference: {fileID: 0}
     - target: {fileID: 3600218897295966149, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
       propertyPath: m_Name
       value: UI
@@ -972,6 +976,10 @@ PrefabInstance:
     - target: {fileID: 6139849057183071938, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115103150637219132, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}

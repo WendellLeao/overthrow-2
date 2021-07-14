@@ -4231,6 +4231,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 554562361397173071, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_text
+      value: Press RMB to shoot a special projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 554562361397173071, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 554562361397173071, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 554562361397173071, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264735812094236818, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 504.8403
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264735812094236818, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 117.6869
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264735812094236818, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 244.42017
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264735812094236818, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 74.21991
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157993992442906871, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 570
+      objectReference: {fileID: 0}
     - target: {fileID: 3600218897295966149, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
       propertyPath: m_Name
       value: UI
@@ -4280,6 +4316,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9092434861756301667, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115103150637219132, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

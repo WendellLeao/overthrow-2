@@ -684,6 +684,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 554562361397173071, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_text
+      value: Press LMB to shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264735812094236818, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 460.8978
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264735812094236818, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 222.44891
+      objectReference: {fileID: 0}
     - target: {fileID: 3600218897295966149, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
       propertyPath: m_Name
       value: UI
@@ -732,17 +744,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6500523374182400687, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-      propertyPath: m_fontStyle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296380782594422589, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1618650992}
-    - target: {fileID: 7296380782594422589, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-      propertyPath: m_RenderMode
-      value: 0
+    - target: {fileID: 9115103150637219132, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
@@ -1343,11 +1347,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592468940}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!20 &1618650992 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7679208727873538982, guid: 95bec163b768e2448a7fede340bf9af8, type: 3}
-  m_PrefabInstance: {fileID: 7679208728333632291}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1638154387
 GameObject:
   m_ObjectHideFlags: 0
