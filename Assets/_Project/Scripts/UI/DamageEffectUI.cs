@@ -54,6 +54,8 @@ public sealed class DamageEffectUI : MonoBehaviour
 	
 	private void OnHealthChanged_ShowDamageEffect(int currentHealthAmount, int maxHealthAmount)
 	{
+		ResetImageColor();
+
 		_damageEffectImage.enabled = true;
 
 		StartCoroutine(TimeToHideDamageEffect());
@@ -85,6 +87,8 @@ public sealed class DamageEffectUI : MonoBehaviour
 			else
 			{
 				ResetImageColor();
+
+				_canHideDamageEffect = false;
 			}
 		}
 	}
@@ -93,8 +97,6 @@ public sealed class DamageEffectUI : MonoBehaviour
 	{
 		_imageAlpha = 100f;
 
-		_canHideDamageEffect = false;
-		
 		_damageEffectImage.enabled = false;
 		
 		_damageEffectImage.color = _startImageColor;
