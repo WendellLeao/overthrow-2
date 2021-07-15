@@ -13,7 +13,7 @@ public sealed class CannonShooting : MonoBehaviour
     
     private bool _canShoot = true;
 
-    private void Update()
+    private void FixedUpdate()
     {
         HandleShoot();
     }
