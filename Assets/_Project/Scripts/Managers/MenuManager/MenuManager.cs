@@ -7,6 +7,8 @@ public sealed class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _mainMenuObject;
     [SerializeField] private GameObject _loadingScreenObject;
     [SerializeField] private GameObject _settingsMenuObject;
+    [SerializeField] private GameObject _videoSettingsMenuObject;
+    [SerializeField] private GameObject _audioSettingsMenuObject;
 
     [Header("Menu Buttons")]
     [SerializeField] private Button _continueButton;
@@ -36,6 +38,16 @@ public sealed class MenuManager : MonoBehaviour
             case Menu.SETTINGS:
             {
                 _settingsMenuObject.SetActive(true);
+                break;
+            }
+            case Menu.VIDEO_SETTINGS:
+            {
+                _videoSettingsMenuObject.SetActive(true);
+                break;
+            }
+            case Menu.AUDIO_SETTINGS:
+            {
+                _audioSettingsMenuObject.SetActive(true);
                 break;
             }
         }
@@ -87,18 +99,22 @@ public sealed class MenuManager : MonoBehaviour
         _mainMenuObject.SetActive(false);
         _loadingScreenObject.SetActive(false);
         _settingsMenuObject.SetActive(false);
+        _videoSettingsMenuObject.SetActive(false);
+        _audioSettingsMenuObject.SetActive(false);
     }
-
-    private void ResumeGame()
-    {
-        Time.timeScale = 1f;
-    }
-
+    
     private void SetMenuObjectPosition()
     {
         _mainMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         _loadingScreenObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         _settingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        _videoSettingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        _audioSettingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+    }
+    
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
     }
     
     private void HandleMainMenu()

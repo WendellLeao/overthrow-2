@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 public sealed class SettingsMenuHandler : MonoBehaviour
 {
