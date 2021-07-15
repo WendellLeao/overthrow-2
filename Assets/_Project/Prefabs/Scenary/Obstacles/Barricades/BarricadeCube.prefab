@@ -53,7 +53,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (9)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -119,7 +119,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (10)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -185,7 +185,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (2)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -251,7 +251,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (11)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -317,7 +317,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (8)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Layer
@@ -387,7 +387,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (13)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -453,7 +453,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (5)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -519,7 +519,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (3)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Layer
@@ -589,7 +589,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (1)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -655,7 +655,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (7)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -721,7 +721,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (6)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -787,7 +787,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (4)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -853,7 +853,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (14)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive
@@ -919,7 +919,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_Name
-      value: ProjectileCube (12)
+      value: CubeProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 7104654789432281182, guid: 0663522cd8afe8a4fb45b28e3f9fc093, type: 3}
       propertyPath: m_IsActive

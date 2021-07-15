@@ -35,6 +35,11 @@ public abstract class Projectile : MonoBehaviour
         SetStartMaterial();
     }
     
+    protected virtual void LateUpdate()
+    {
+        UnparentProjectile();
+    }
+    
     protected virtual void SetStartMaterial()
     {
         _startMaterial = _meshRenderer.material;
@@ -45,16 +50,11 @@ public abstract class Projectile : MonoBehaviour
         _meshRenderer.material = _startMaterial;
     }
     
-    private void LateUpdate()
-    {
-        UnparentProjectile();
-    }
-    
     private void UnparentProjectile()
     {
-        if(this.transform.parent != null)
+        if(transform.parent != null)
         {
-            this.transform.parent = null;
+            transform.parent = null;
         }
     }
     

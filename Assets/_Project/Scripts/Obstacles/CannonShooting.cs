@@ -34,7 +34,9 @@ public sealed class CannonShooting : MonoBehaviour
 
         GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(PoolType.CUBE_PROJECTILE);
 
-        SetProjectilePosition(projectileClone);
+        SetProjectileTransform(projectileClone.transform);
+        
+        FreezeProjectileRigidbodyConstraints(projectileClone);///////////////
 
         projectileClone.GetComponent<Projectile>().SetProjectileForce(_spawnPosition);
         
@@ -43,11 +45,19 @@ public sealed class CannonShooting : MonoBehaviour
         _canShoot = true;
     }
 
-    private void SetProjectilePosition(GameObject projectileClone)
+    private void SetProjectileTransform(Transform projectileCloneTransform)
     {
-        projectileClone.transform.parent = null;
+        projectileCloneTransform.parent = null;
 
-        projectileClone.transform.position = _spawnPosition.transform.position;
-        projectileClone.transform.eulerAngles = Vector3.zero;
+        projectileCloneTransform.position = _spawnPosition.transform.position;
+
+        projectileCloneTransform.rotation = Quaternion.Euler(Vector3.zero);
+    }
+
+    private void FreezeProjectileRigidbodyConstraints(GameObject projectileClone)
+    {
+        Rigidbody projectileRigidbody = projectileClone.GetComponent<Rigidbody>();
+        
+        projectileRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 }

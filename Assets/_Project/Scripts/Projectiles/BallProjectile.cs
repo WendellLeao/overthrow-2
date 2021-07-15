@@ -24,10 +24,7 @@ public sealed class BallProjectile : Projectile
         _meshRenderer.material = _newStartMaterial[_randomNumber];
     }
 
-    protected override void Awake()
-    {
-        
-    }
+    protected override void Awake() { }
 
     private void Start()
     {
