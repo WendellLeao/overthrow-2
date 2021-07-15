@@ -14,19 +14,7 @@ public sealed class BallProjectile : Projectile
 
     private int _randomNumber;
 
-    protected override void ReturnProjectileToPool()
-    {
-        ObjectPool.instance.ReturnObjectToPool(PoolType.BALL_PROJECTILE, this.gameObject);
-    }
-
-    protected override void ResetMaterial()
-    {
-        _meshRenderer.material = _newStartMaterial[_randomNumber];
-    }
-
-    protected override void Awake() { }
-
-    private void Start()
+    protected override void Awake()
     {
         SetRandomNumber();
         
@@ -36,22 +24,32 @@ public sealed class BallProjectile : Projectile
 
         SetRandomDeactivatedMaterial();
     }
-
-    private void SetRandomNumber()
+    
+    protected override void ReturnProjectileToPool()
     {
-        _randomNumber = Random.Range(0, _newStartMaterial.Length);
+        ObjectPool.instance.ReturnObjectToPool(PoolType.BALL_PROJECTILE, this.gameObject);
     }
 
+    protected override void ResetMaterial()
+    {
+        _meshRenderer.material = _newStartMaterial[_randomNumber];
+    }
+    
     protected override void SetStartMaterial()
     {
         _meshRenderer.material = _newStartMaterial[_randomNumber];
+    }
+    
+    private void SetRandomNumber()
+    {
+        _randomNumber = Random.Range(0, _newStartMaterial.Length);
     }
 
     private void SetRandomDeactivatedMaterial()
     {
         _deactivatableObject.SetDeactivatedMaterial(_newDeactivatedMaterial[_randomNumber]);
     }
-
+    
     private void SetParticleSystemStartColor()
     {
         ParticleSystem.MainModule particleSystemMainModule = _particleSystem.main;

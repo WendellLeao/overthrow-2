@@ -95,12 +95,17 @@ public sealed class PlayerShooting : MonoBehaviour
     {
         GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(poolType);
         
-        projectileClone.transform.parent = _playerTransform;
-
-        projectileClone.transform.position = _spawnTransform.position;
-        projectileClone.transform.rotation = Quaternion.identity;
+        SetProjectileTransform(projectileClone.transform);
 
         projectileClone.GetComponent<Projectile>().SetProjectileForce(_spawnTransform);
+    }
+
+    private void SetProjectileTransform(Transform projectileTransform)
+    {
+        projectileTransform.parent = _playerTransform;
+
+        projectileTransform.position = _spawnTransform.position;
+        projectileTransform.rotation = Quaternion.identity;
     }
 
     private void HandleAmmo()
