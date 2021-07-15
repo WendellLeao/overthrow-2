@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioMixer: {fileID: 24100000, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
-  _volumeSlider: {fileID: 2114096707}
+  _audioVolumeSlider: {fileID: 2114096707}
 --- !u!1 &270237950
 GameObject:
   m_ObjectHideFlags: 0
@@ -4884,7 +4884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -7459,7 +7459,7 @@ RectTransform:
   m_GameObject: {fileID: 2114096705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.2372, y: 2.2372, z: 2.2372}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1525967526}
   - {fileID: 1580689663}

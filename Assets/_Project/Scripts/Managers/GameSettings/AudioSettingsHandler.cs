@@ -8,13 +8,13 @@ public sealed class AudioSettingsHandler : MonoBehaviour
 	[SerializeField] private AudioMixer _audioMixer;
 	
 	[Header("Slider")]
-	[SerializeField] private Slider _volumeSlider;
+	[SerializeField] private Slider _audioVolumeSlider;
 	
 	private void OnEnable()
 	{
 		SubscribeEvents();
 	}
-
+	
 	private void OnDisable()
 	{ 
 		UnsubscribeEvents();
@@ -22,16 +22,16 @@ public sealed class AudioSettingsHandler : MonoBehaviour
 	
 	private void SubscribeEvents()
 	{
-		_volumeSlider.onValueChanged.AddListener(SetVolumeSliderValue);
+		_audioVolumeSlider.onValueChanged.AddListener(SetVolumeSliderValue);
 	}
-
+	
 	private void UnsubscribeEvents()
 	{
-		_volumeSlider.onValueChanged.RemoveAllListeners();
+		_audioVolumeSlider.onValueChanged.RemoveAllListeners();
 	}
 
 	private void SetVolumeSliderValue(float sliderValue)
 	{
-		_audioMixer.SetFloat("volume", Mathf.Log10((sliderValue) * 20));
+		_audioMixer.SetFloat("volume", Mathf.Log10((sliderValue) * 10f));
 	}
 }
