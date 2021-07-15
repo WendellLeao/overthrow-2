@@ -1,9 +1,12 @@
-using System;
+using UnityEngine.Audio;
 using UnityEngine;
+using System;
 
 public sealed class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
+    
+    [SerializeField] private AudioMixerGroup _mixerGroup;
     
     [SerializeField] private Sound[] _sounds;
 
@@ -71,16 +74,18 @@ public sealed class SoundManager : MonoBehaviour
 
     private void SetSoundProperties()
     {
-        foreach(Sound s in _sounds)
+        foreach(Sound soundObject in _sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
+            soundObject.source = gameObject.AddComponent<AudioSource>();
 
-            s.source.clip = s.clip;
+            soundObject.source.clip = soundObject.clip;
 
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
+            soundObject.source.volume = soundObject.volume;
+            soundObject.source.pitch = soundObject.pitch;
 
-            s.source.loop = s.loop;
+            soundObject.source.loop = soundObject.loop;
+            
+            soundObject.source.outputAudioMixerGroup = _mixerGroup;
         }
     }
 }

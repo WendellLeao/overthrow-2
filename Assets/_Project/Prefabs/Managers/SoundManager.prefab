@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ff2fd5c1585ee4abfd6ebee5d72667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mixerGroup: {fileID: 24300002, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
   _sounds:
   - name: Soundtrack
     clip: {fileID: 8300000, guid: 836969eb7b3fcf0429958e38923d6b31, type: 3}

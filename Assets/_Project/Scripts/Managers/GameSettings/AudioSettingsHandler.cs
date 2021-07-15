@@ -1,13 +1,14 @@
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine;
 
 public sealed class AudioSettingsHandler : MonoBehaviour
 {
-	[Header("Buttons UI")]
-	[SerializeField] private Button _backButton;
-    
-	[Header("Menu Manager")]
-	[SerializeField] private MenuManager _menuManager;
+	[Header("Audio Mixer")]
+	[SerializeField] private AudioMixer _audioMixer;
+	
+	[Header("Slider")]
+	[SerializeField] private Slider _volumeSlider;
 	
 	private void OnEnable()
 	{
@@ -15,22 +16,22 @@ public sealed class AudioSettingsHandler : MonoBehaviour
 	}
 
 	private void OnDisable()
-	{
+	{ 
 		UnsubscribeEvents();
 	}
-
+	
 	private void SubscribeEvents()
 	{
-		_backButton.onClick.AddListener(OnClick_BackToSettingsMenu);
+		_volumeSlider.onValueChanged.AddListener(SetVolumeSliderValue);
 	}
 
 	private void UnsubscribeEvents()
 	{
-		_backButton.onClick.RemoveAllListeners();
+		_volumeSlider.onValueChanged.RemoveAllListeners();
 	}
-    
-	private void OnClick_BackToSettingsMenu()
+
+	private void SetVolumeSliderValue(float sliderValue)
 	{
-		_menuManager.ShowMenu(Menu.SETTINGS);
+		_audioMixer.SetFloat("volume", Mathf.Log10((sliderValue) * 20));
 	}
 }

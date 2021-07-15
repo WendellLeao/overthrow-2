@@ -3,18 +3,25 @@ using UnityEngine.UI;
 
 public sealed class MenuManager : MonoBehaviour
 {
-    [Header("Menu Containers")]
+    [Header("Menus Object")]
     [SerializeField] private GameObject _mainMenuObject;
     [SerializeField] private GameObject _loadingScreenObject;
     [SerializeField] private GameObject _settingsMenuObject;
     [SerializeField] private GameObject _videoSettingsMenuObject;
     [SerializeField] private GameObject _audioSettingsMenuObject;
 
-    [Header("Menu Buttons")]
+    [Header("Main Menu Buttons")]
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _newGameButton;
-    [SerializeField] private Button _settingsMenuButton;
-    [SerializeField] private Button _quitButton;
+    [SerializeField] private Button _showSettingsMenuButton;
+    [SerializeField] private Button _quitGameButton;
+    
+    [Header("Settings Menu Buttons")]
+    [SerializeField] private Button _settingsMenuBackButton;
+    [SerializeField] private Button _showVideoMenuButton; 
+    [SerializeField] private Button _showAudioMenuButton; 
+    [SerializeField] private Button _audioMenuBackButton;
+    [SerializeField] private Button _videoMenuBackButton;
 
     [Header("Scene Handler")]
     [SerializeField] private AsyncSceneHandler _asyncSceneHandler;
@@ -67,7 +74,7 @@ public sealed class MenuManager : MonoBehaviour
     {
         ResumeGame();
 
-        SetMenuObjectPosition();
+        SetMenusObjectPosition();
 
         ShowMenu(Menu.MAIN);
 
@@ -79,9 +86,17 @@ public sealed class MenuManager : MonoBehaviour
         _continueButton.onClick.AddListener(OnClick_StartGame);
         _newGameButton.onClick.AddListener(OnClick_StartNewGame);
         
-        _settingsMenuButton.onClick.AddListener(OnClick_ShowSettingsMenu);
+        _showSettingsMenuButton.onClick.AddListener(delegate { ShowMenu(Menu.SETTINGS); });
+        
+        _settingsMenuBackButton.onClick.AddListener(delegate { ShowMenu(Menu.MAIN); });
+        
+        _showVideoMenuButton.onClick.AddListener(delegate { ShowMenu(Menu.VIDEO_SETTINGS); });
+        _showAudioMenuButton.onClick.AddListener(delegate { ShowMenu(Menu.AUDIO_SETTINGS); });
+        
+        _videoMenuBackButton.onClick.AddListener(delegate { ShowMenu(Menu.SETTINGS); });
+        _audioMenuBackButton.onClick.AddListener(delegate { ShowMenu(Menu.SETTINGS); });
 
-        _quitButton.onClick.AddListener(OnClick_Quit);
+        _quitGameButton.onClick.AddListener(delegate { Application.Quit(); });
     }
 
     private void UnsubscribeEvents()
@@ -89,9 +104,17 @@ public sealed class MenuManager : MonoBehaviour
         _continueButton.onClick.RemoveAllListeners();
         _newGameButton.onClick.RemoveAllListeners();
         
-        _settingsMenuButton.onClick.RemoveAllListeners();
+        _showSettingsMenuButton.onClick.RemoveAllListeners();
+        
+        _settingsMenuBackButton.onClick.RemoveAllListeners();
+        
+        _showVideoMenuButton.onClick.RemoveAllListeners();
+        _showAudioMenuButton.onClick.RemoveAllListeners();
+        
+        _videoMenuBackButton.onClick.RemoveAllListeners();
+        _audioMenuBackButton.onClick.RemoveAllListeners();
 
-        _quitButton.onClick.RemoveAllListeners();
+        _quitGameButton.onClick.RemoveAllListeners();
     }
 
     private void DeactiveMenus()
@@ -103,7 +126,7 @@ public sealed class MenuManager : MonoBehaviour
         _audioSettingsMenuObject.SetActive(false);
     }
     
-    private void SetMenuObjectPosition()
+    private void SetMenusObjectPosition()
     {
         _mainMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         _loadingScreenObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
@@ -135,7 +158,9 @@ public sealed class MenuManager : MonoBehaviour
     {
         SaveSystem.DeleteSave();
         
-        StartFirstLevel();
+        ShowMenu(Menu.LOADING_SCREEN);
+
+        _asyncSceneHandler.LoadSingleSceneAsync(SceneEnum.LEVEL_01);
     }
 
     private void StartLoadedLevel()
@@ -145,24 +170,5 @@ public sealed class MenuManager : MonoBehaviour
         int loadedSceneIndex = SaveSystem.LoadGameData().currentSceneIndex;
         
         _asyncSceneHandler.LoadSingleSceneAsync(loadedSceneIndex);
-    }
-    
-    private void StartFirstLevel()
-    {
-        ShowMenu(Menu.LOADING_SCREEN);
-
-        _asyncSceneHandler.LoadSingleSceneAsync(SceneEnum.LEVEL_01);
-    }
-
-    private void OnClick_ShowSettingsMenu()
-    {
-        ShowMenu(Menu.SETTINGS);
-    }
-
-    private void OnClick_Quit()
-    {
-        Debug.Log("Quit!");
-
-        Application.Quit();
     }
 }
