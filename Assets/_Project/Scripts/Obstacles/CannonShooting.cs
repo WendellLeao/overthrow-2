@@ -15,17 +15,17 @@ public sealed class CannonShooting : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleShoot();
+        if (_canShoot)
+        {
+            HandleShoot();
+        }
     }
 
     private void HandleShoot()
     {
-        if(_canShoot)
-        {
-            _canShoot = false;
+        _canShoot = false;
             
-            StartCoroutine(Shoot());
-        }
+        StartCoroutine(Shoot());
     }
 
     private IEnumerator Shoot()

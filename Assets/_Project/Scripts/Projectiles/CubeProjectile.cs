@@ -1,6 +1,9 @@
 public sealed class CubeProjectile : Projectile, IObstacle
 {
-    protected override void LateUpdate() { }
+    protected override void LateUpdate()
+    {
+        //Empty
+    }
 
     protected override void ReturnProjectileToPool()
     {

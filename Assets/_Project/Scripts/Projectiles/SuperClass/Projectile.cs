@@ -14,6 +14,8 @@ public abstract class Projectile : MonoBehaviour
     [Header("Fire")]
     [SerializeField] private float _shootForce;
 
+    private bool _canUnparent = true;
+
     public void SetProjectileForce(Transform spawnTransform)
     {
         _rigidbody.AddForce(spawnTransform.forward * _shootForce, ForceMode.Impulse);
@@ -27,6 +29,8 @@ public abstract class Projectile : MonoBehaviour
         
         ReturnProjectileToPool();
         
+        SetCanUnparent(true);
+        
         ResetMaterial();
     }
     
@@ -37,7 +41,10 @@ public abstract class Projectile : MonoBehaviour
     
     protected virtual void LateUpdate()
     {
-        UnparentProjectile();
+        if (_canUnparent)
+        {
+            UnparentProjectile();
+        }
     }
     
     protected virtual void SetStartMaterial()
@@ -51,15 +58,19 @@ public abstract class Projectile : MonoBehaviour
     }
     
     private void UnparentProjectile()
-    {
-        if(transform.parent != null)
-        {
-            transform.parent = null;
-        }
+    { 
+        transform.parent = null;
+        
+        SetCanUnparent(false);
     }
     
     private void ResetProjectileVelocity()
     {
         _rigidbody.velocity = Vector3.zero;
+    }
+
+    private void SetCanUnparent(bool canUnparent)
+    {
+        _canUnparent = canUnparent;
     }
 }

@@ -38,7 +38,10 @@ public sealed class BombProjectile : Projectile
             {
                 rigidbody.AddExplosionForce(_explosionForce, this.transform.position, _radius);
 
-                HandleSoundEffect();
+                if (_canPlaySoundEffect)
+                {
+                    HandleSoundEffect();
+                }
                 
                 _explosionParticleObject.SetActive(true);
                 
@@ -49,20 +52,17 @@ public sealed class BombProjectile : Projectile
 
     private void HandleSoundEffect()
     {
-        if(_canPlaySoundEffect)
-        {
-            SoundManager.instance.Play("Explosion");
+        SoundManager.instance.Play("Explosion");
 
-            _canPlaySoundEffect = false;
-        }
+        _canPlaySoundEffect = false;
     }
     
     private void ResetBombProjectile()
     {
+        _explosionParticleObject.SetActive(false);
+        
         _meshRenderer.enabled = true;
 
         _canPlaySoundEffect = true;
-
-        _explosionParticleObject.SetActive(false);
     }
 }

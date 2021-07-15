@@ -22,24 +22,21 @@ public sealed class LaserRotation : MonoBehaviour
     
     private void HandleRotation()
     {
-        if(_playerController.GetWayPointSystem != null)
-        {
-            WayPointChecker wayPointChecker = _playerController.GetWayPointSystem.GetWayPointChecker;
+        WayPointChecker wayPointChecker = _playerController.GetWayPointSystem.GetWayPointChecker;
             
-            float distanceToRotate = 10f;
+        float distanceToRotate = 10f;
 
-            if(wayPointChecker.GetNextTargetDistance() > distanceToRotate)
-            {
-                _laserContainer.SetActive(true);
+        if(wayPointChecker.GetNextTargetDistance() > distanceToRotate)
+        {
+            _laserContainer.SetActive(true);
 
-                UpdateLaserDirection();
-            }
-            else
+            UpdateLaserDirection();
+        }
+        else
+        {
+            if(!wayPointChecker.NextTargetIsTheLast())
             {
-                if(!wayPointChecker.NextTargetIsTheLast())
-                {
-                    _laserContainer.SetActive(false);
-                }
+                _laserContainer.SetActive(false);
             }
         }
     }
