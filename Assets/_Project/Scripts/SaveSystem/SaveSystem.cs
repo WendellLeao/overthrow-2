@@ -22,8 +22,7 @@ public static class SaveSystem
 
         if(!SaveFileExists())
         {
-            _localData.ResetCurrentSceneIndex();
-            _localData.ResetAudioMixerValue();
+            _localData.ResetAllData();
             
             return SaveGameData(); //Create a new save file
         }
