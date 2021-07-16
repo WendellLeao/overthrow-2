@@ -22,6 +22,9 @@ public static class SaveSystem
 
         if(!SaveFileExists())
         {
+            _localData.ResetCurrentSceneIndex();
+            _localData.ResetAudioMixerValue();
+            
             return SaveGameData(); //Create a new save file
         }
         else
@@ -34,21 +37,22 @@ public static class SaveSystem
         }
     }
 
-    public static bool SaveFileExists()
-    {
-        return File.Exists(GetFilePath());
-    }
-
     public static GameData GetLocalData()
     {
         return _localData;
     }
 
-    public static void DeleteSave()
+    private static void DeleteSave()
     {
         File.Delete(GetFilePath());
 
-        _localData.Reset();
+        _localData.ResetCurrentSceneIndex();
+        _localData.ResetAudioMixerValue();
+    }
+    
+    private static bool SaveFileExists()
+    {
+        return File.Exists(GetFilePath());
     }
 
     private static string GetFilePath()

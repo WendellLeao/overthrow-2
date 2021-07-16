@@ -156,9 +156,11 @@ public sealed class MenuManager : MonoBehaviour
 
     private void OnClick_StartNewGame()
     {
-        SaveSystem.DeleteSave();
-        
         ShowMenu(Menu.LOADING_SCREEN);
+        
+        SaveSystem.GetLocalData().ResetCurrentSceneIndex();
+
+        SaveSystem.SaveGameData();
 
         _asyncSceneHandler.LoadSingleSceneAsync(SceneEnum.LEVEL_01);
     }

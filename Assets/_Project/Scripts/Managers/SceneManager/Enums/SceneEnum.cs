@@ -1,6 +1,6 @@
 public enum SceneEnum
 {
-    DESERIALIZATION_SCENE,
+    GAME_LOAD_DATA,
     MAIN_MENU,
     LEVEL_01
 }

@@ -14,7 +14,7 @@ public sealed class WinGameHandler : MonoBehaviour
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
 
-    private bool canSaveGame = true;
+    private bool _canSaveGame = true;
 
     private void OnEnable()
     {
@@ -50,7 +50,10 @@ public sealed class WinGameHandler : MonoBehaviour
 
         if(SceneHandler.NextSceneExists())
         {
-            HandleGameSaving();
+            if (_canSaveGame)
+            {
+                HandleGameSaving();
+            }
 
             _winPanelObject.SetActive(true);
         }
@@ -74,13 +77,10 @@ public sealed class WinGameHandler : MonoBehaviour
 
     private void HandleGameSaving()
     {
-        if(canSaveGame)
-        {
-            SaveSystem.GetLocalData().currentSceneIndex = SceneHandler.GetNextSceneIndex();
+        SaveSystem.GetLocalData().currentSceneIndex = SceneHandler.GetNextSceneIndex();
             
-            SaveSystem.SaveGameData();
+        SaveSystem.SaveGameData();
 
-            canSaveGame = false;
-        }
+        _canSaveGame = false;
     }
 }
