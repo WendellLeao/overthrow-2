@@ -9,6 +9,8 @@ public sealed class GameData
     
     public int qualitySettingsIndex;
 
+    public int resolutionIndex;
+
     public bool isGameFullscreen;
 
 
@@ -33,6 +35,8 @@ public sealed class GameData
     public void ResetQualitySettings()
     {
         qualitySettingsIndex = QualitySettings.GetQualityLevel();
+
+        resolutionIndex = 0;
 
         isGameFullscreen = true;
     }

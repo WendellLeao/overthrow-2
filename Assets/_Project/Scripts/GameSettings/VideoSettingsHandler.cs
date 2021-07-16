@@ -26,9 +26,11 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 	private void Start()
 	{
 		AddResolutionsToDropdown();
+		
+		SetStartResolution();
 
 		SetStartFullscreenToggle();
-
+		
 		SetStartQualityLevel();
 	}
 
@@ -37,9 +39,7 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 		_resolutionDropdown.onValueChanged.AddListener(SetResolution);
 		_graphicsDropdown.onValueChanged.AddListener(SetQualityLevel);
 		
-		// _isFullscreenToggle.onValueChanged.AddListener(SetFullscreen);
-
-		_isFullscreenToggle.onValueChanged.AddListener((value) => { SetFullscreen(value); });
+		_isFullscreenToggle.onValueChanged.AddListener(SetFullscreen);
 	}
 
 	private void UnsubscribeEvents()
@@ -75,6 +75,17 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 		_resolutionDropdown.value = currentResolutionIndex;
 		_resolutionDropdown.RefreshShownValue();
 	}
+
+	private void SetStartResolution()
+	{
+		int resolutionIndex = SaveSystem.GetLocalData().resolutionIndex;
+		
+		Resolution resolution = _resolutions[resolutionIndex];
+
+		Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+		_resolutionDropdown.value = resolutionIndex;
+	}
 	
 	private void SetStartFullscreenToggle()
 	{
@@ -100,6 +111,10 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 		Resolution resolution = _resolutions[resolutionIndex];
 
 		Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+		SaveSystem.GetLocalData().resolutionIndex = resolutionIndex;
+
+		SaveSystem.SaveGameData();
 	}
 	
 	private void SetQualityLevel(int qualityIndex)
