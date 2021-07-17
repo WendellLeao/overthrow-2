@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
@@ -12,7 +14,7 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 	[SerializeField] private Toggle _isFullscreenToggle;
 	
 	private Resolution[] _resolutions;
-	
+
 	private void OnEnable()
 	{
 		SubscribeEvents();
@@ -25,20 +27,20 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 	
 	private void Start()
 	{
+		LoadFullscreenToggle();
+		
 		AddResolutionsToDropdown();
-		
-		SetStartResolution();
 
-		SetStartFullscreenToggle();
+		LoadResolution();
 		
-		SetStartQualityLevel();
+		LoadQualityLevel();
 	}
 
 	private void SubscribeEvents()
 	{
 		_resolutionDropdown.onValueChanged.AddListener(SetResolution);
 		_graphicsDropdown.onValueChanged.AddListener(SetQualityLevel);
-		
+
 		_isFullscreenToggle.onValueChanged.AddListener(SetFullscreen);
 	}
 
@@ -52,74 +54,79 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 
 	private void AddResolutionsToDropdown()
 	{
-		_resolutions = Screen.resolutions;
+		_resolutions = Screen.resolutions.Select(resolution => 
+			new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
 
 		_resolutionDropdown.ClearOptions();
 
 		List<string> options = new List<string>();
-
-		int currentResolutionIndex = 0;
+		
 		for(int i = 0; i < _resolutions.Length; i++)
 		{
 			string option = _resolutions[i].width + "x" + _resolutions[i].height;
+			
 			options.Add(option);
 
 			if(_resolutions[i].width == Screen.currentResolution.width && 
 			   _resolutions[i].height == Screen.currentResolution.height)
 			{
-				currentResolutionIndex = i;
+				SaveSystem.GetLocalData().StartDropdownResolutionIndex = i;
 			}
 		}
 
 		_resolutionDropdown.AddOptions(options);
-		_resolutionDropdown.value = currentResolutionIndex;
+		
 		_resolutionDropdown.RefreshShownValue();
 	}
-
-	private void SetStartResolution()
+	
+	//Load Settings
+	private void LoadResolution()
 	{
-		int resolutionIndex = SaveSystem.GetLocalData().resolutionIndex;
+		Screen.SetResolution(
+			SaveSystem.GetLocalData().CurrentResolutionWidth, 
+			SaveSystem.GetLocalData().CurrentResolutionHeight, 
+			SaveSystem.GetLocalData().IsFullscreen);
 		
-		Resolution resolution = _resolutions[resolutionIndex];
-
-		Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-
-		_resolutionDropdown.value = resolutionIndex;
+		_resolutionDropdown.value = SaveSystem.GetLocalData().CurrentDropdownResolutionIndex;
 	}
 	
-	private void SetStartFullscreenToggle()
+	private void Update()
 	{
-		if (SaveSystem.GetLocalData().isGameFullscreen)
-		{
-			_isFullscreenToggle.isOn = true;
-		}
-		else
-		{
-			_isFullscreenToggle.isOn = false;
-		}
+		Debug.Log(SaveSystem.GetLocalData().StartDropdownResolutionIndex);
+	}
+	
+	private void LoadFullscreenToggle()
+	{
+		_isFullscreenToggle.isOn = SaveSystem.GetLocalData().IsFullscreen;
+		
+		Screen.fullScreen = SaveSystem.GetLocalData().IsFullscreen;
 	}
 
-	private void SetStartQualityLevel()
+	private void LoadQualityLevel()
 	{
-		QualitySettings.SetQualityLevel(SaveSystem.GetLocalData().qualitySettingsIndex);
+		QualitySettings.SetQualityLevel(SaveSystem.GetLocalData().QualitySettingsIndex);
 
-		_graphicsDropdown.value = SaveSystem.GetLocalData().qualitySettingsIndex;
+		_graphicsDropdown.value = SaveSystem.GetLocalData().QualitySettingsIndex;
 	}
 
+	//Setting new settings
 	private void SetResolution(int resolutionIndex)
 	{
 		Resolution resolution = _resolutions[resolutionIndex];
 
-		Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+		Screen.SetResolution(resolution.width, resolution.height, SaveSystem.GetLocalData().IsFullscreen);
 
-		SaveSystem.GetLocalData().resolutionIndex = resolutionIndex;
+		SaveSystem.GetLocalData().CurrentResolutionWidth = resolution.width;
+		SaveSystem.GetLocalData().CurrentResolutionHeight = resolution.height;
+
+		SaveSystem.GetLocalData().CurrentDropdownResolutionIndex = resolutionIndex;
 
 		SaveSystem.SaveGameData();
 	}
 	
 	private void SetQualityLevel(int qualityIndex)
 	{
-		SaveSystem.GetLocalData().qualitySettingsIndex = qualityIndex;
+		SaveSystem.GetLocalData().QualitySettingsIndex = qualityIndex;
 		
 		QualitySettings.SetQualityLevel(qualityIndex);
 
@@ -128,7 +135,7 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 
 	private void SetFullscreen(bool isFullscreen)
 	{
-		SaveSystem.GetLocalData().isGameFullscreen = isFullscreen;
+		SaveSystem.GetLocalData().IsFullscreen = isFullscreen;
 		
 		Screen.fullScreen = isFullscreen;
 

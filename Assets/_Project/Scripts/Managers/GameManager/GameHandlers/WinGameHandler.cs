@@ -77,7 +77,7 @@ public sealed class WinGameHandler : MonoBehaviour
 
     private void HandleGameSaving()
     {
-        SaveSystem.GetLocalData().currentSceneIndex = SceneHandler.GetNextSceneIndex();
+        SaveSystem.GetLocalData().CurrentSceneIndex = SceneHandler.GetNextSceneIndex();
             
         SaveSystem.SaveGameData();
 

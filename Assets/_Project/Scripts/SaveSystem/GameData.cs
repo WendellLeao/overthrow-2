@@ -3,17 +3,19 @@ using UnityEngine;
 [System.Serializable]
 public sealed class GameData
 {
-    public int currentSceneIndex;
+    public int CurrentSceneIndex;
 
-    public float audioMixerValue;
+    public float AudioMixerValue;
     
-    public int qualitySettingsIndex;
+    public int QualitySettingsIndex;
 
-    public int resolutionIndex;
+    public int StartDropdownResolutionIndex, CurrentDropdownResolutionIndex;
 
-    public bool isGameFullscreen;
-
-
+    public int StartResolutionWidth, StartResolutionHeight;
+    public int CurrentResolutionWidth, CurrentResolutionHeight;
+    
+    public bool IsFullscreen;
+    
     public void ResetAllData()
     {
         ResetCurrentSceneIndex();
@@ -24,20 +26,33 @@ public sealed class GameData
     public void ResetCurrentSceneIndex()
     {
         int skippedScenesAmount = SceneHandler.GetActiveSceneIndex() + 1;
-        currentSceneIndex = skippedScenesAmount;
+        CurrentSceneIndex = skippedScenesAmount;
     }
 
     public void ResetAudioMixerValue()
     {
-        audioMixerValue = 1f;
+        AudioMixerValue = 1f;
     }
     
     public void ResetQualitySettings()
     {
-        qualitySettingsIndex = QualitySettings.GetQualityLevel();
+        QualitySettingsIndex = 0;
 
-        resolutionIndex = 0;
+        ResetResolution();
+        
+        IsFullscreen = true;
 
-        isGameFullscreen = true;
+        Screen.fullScreen = true;
+    }
+
+    private void ResetResolution()
+    {
+        StartResolutionWidth = Screen.currentResolution.width;
+        StartResolutionHeight = Screen.currentResolution.height;
+
+        CurrentResolutionWidth = StartResolutionWidth;
+        CurrentResolutionHeight = StartResolutionHeight;
+        
+        CurrentDropdownResolutionIndex = StartDropdownResolutionIndex;
     }
 }

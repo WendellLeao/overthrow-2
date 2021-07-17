@@ -146,7 +146,7 @@ public sealed class MenuManager : MonoBehaviour
 
         int firstLevelIndex = (int)SceneEnum.LEVEL_01;
         
-        _continueButton.gameObject.SetActive(SaveSystem.GetLocalData().currentSceneIndex > firstLevelIndex);
+        _continueButton.gameObject.SetActive(SaveSystem.GetLocalData().CurrentSceneIndex > firstLevelIndex);
     }
 
     private void OnClick_StartGame()
@@ -169,7 +169,7 @@ public sealed class MenuManager : MonoBehaviour
     {
         ShowMenu(Menu.LOADING_SCREEN);
 
-        int loadedSceneIndex = SaveSystem.LoadGameData().currentSceneIndex;
+        int loadedSceneIndex = SaveSystem.LoadGameData().CurrentSceneIndex;
         
         _asyncSceneHandler.LoadSingleSceneAsync(loadedSceneIndex);
     }
