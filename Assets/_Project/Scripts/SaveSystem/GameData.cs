@@ -4,15 +4,14 @@ using UnityEngine;
 public sealed class GameData
 {
     public int CurrentSceneIndex;
-
-    public float AudioMixerValue;
     
     public int QualitySettingsIndex;
 
-    public int StartDropdownResolutionIndex, CurrentDropdownResolutionIndex;
+    public int CurrentDropdownResolutionIndex;
 
-    public int StartResolutionWidth, StartResolutionHeight;
     public int CurrentResolutionWidth, CurrentResolutionHeight;
+
+    public float AudioMixerValue;
     
     public bool IsFullscreen;
     
@@ -38,21 +37,9 @@ public sealed class GameData
     {
         QualitySettingsIndex = 0;
 
-        ResetResolution();
+        CurrentResolutionWidth = Screen.currentResolution.width;
+        CurrentResolutionHeight = Screen.currentResolution.height;
         
         IsFullscreen = true;
-
-        Screen.fullScreen = true;
-    }
-
-    private void ResetResolution()
-    {
-        StartResolutionWidth = Screen.currentResolution.width;
-        StartResolutionHeight = Screen.currentResolution.height;
-
-        CurrentResolutionWidth = StartResolutionWidth;
-        CurrentResolutionHeight = StartResolutionHeight;
-        
-        CurrentDropdownResolutionIndex = StartDropdownResolutionIndex;
     }
 }

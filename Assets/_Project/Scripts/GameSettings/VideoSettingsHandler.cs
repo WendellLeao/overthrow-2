@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine.UI;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -67,18 +67,20 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 			
 			options.Add(option);
 
-			if(_resolutions[i].width == Screen.currentResolution.width && 
-			   _resolutions[i].height == Screen.currentResolution.height)
+			if(_resolutions[i].width == SaveSystem.GetLocalData().CurrentResolutionWidth && 
+			   _resolutions[i].height == SaveSystem.GetLocalData().CurrentResolutionHeight)
 			{
-				SaveSystem.GetLocalData().StartDropdownResolutionIndex = i;
+				SaveSystem.GetLocalData().CurrentDropdownResolutionIndex = i;
 			}
 		}
 
 		_resolutionDropdown.AddOptions(options);
 		
+		_resolutionDropdown.value = SaveSystem.GetLocalData().CurrentDropdownResolutionIndex;
+		
 		_resolutionDropdown.RefreshShownValue();
 	}
-	
+
 	//Load Settings
 	private void LoadResolution()
 	{
@@ -86,15 +88,8 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 			SaveSystem.GetLocalData().CurrentResolutionWidth, 
 			SaveSystem.GetLocalData().CurrentResolutionHeight, 
 			SaveSystem.GetLocalData().IsFullscreen);
-		
-		_resolutionDropdown.value = SaveSystem.GetLocalData().CurrentDropdownResolutionIndex;
 	}
-	
-	private void Update()
-	{
-		Debug.Log(SaveSystem.GetLocalData().StartDropdownResolutionIndex);
-	}
-	
+
 	private void LoadFullscreenToggle()
 	{
 		_isFullscreenToggle.isOn = SaveSystem.GetLocalData().IsFullscreen;
@@ -118,8 +113,6 @@ public sealed class VideoSettingsHandler : MonoBehaviour
 
 		SaveSystem.GetLocalData().CurrentResolutionWidth = resolution.width;
 		SaveSystem.GetLocalData().CurrentResolutionHeight = resolution.height;
-
-		SaveSystem.GetLocalData().CurrentDropdownResolutionIndex = resolutionIndex;
 
 		SaveSystem.SaveGameData();
 	}
