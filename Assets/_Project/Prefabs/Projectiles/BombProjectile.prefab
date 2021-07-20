@@ -9875,4 +9875,6 @@ MonoBehaviour:
   _deactivatorObject:
     serializedVersion: 2
     m_Bits: 0
-  _distanceToDisable: 120
+  _minimumDistanceToDisable: -120
+  _maximumDistanceToDisable: 80
+  _checkPositionRate: 1

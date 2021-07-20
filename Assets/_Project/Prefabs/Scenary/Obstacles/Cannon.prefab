@@ -468,11 +468,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d83d0ea0f0d404a9a7cbc675955673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deactivatedMaterial: {fileID: 0}
-  _meshRenderer: {fileID: 0}
-  deactivatorObject:
+  _deactivatedMaterial: {fileID: 2100000, guid: 4b6c16c8bf29c9e40bc66796d0674b6e, type: 2}
+  _meshRenderer: {fileID: 2113857774272604162}
+  _deactivatorObject:
     serializedVersion: 2
     m_Bits: 0
+  _minimumDistanceToDisable: -120
+  _maximumDistanceToDisable: 80
+  _checkPositionRate: 1
 --- !u!1 &6992327771483964612
 GameObject:
   m_ObjectHideFlags: 0

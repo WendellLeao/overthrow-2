@@ -13,7 +13,10 @@ public sealed class DeactivatableObject : MonoBehaviour
     [SerializeField] private LayerMask _deactivatorObject;
     
     [Header(("Check Object Position"))]
-    [SerializeField] private float _distanceToDisable;
+    [SerializeField] private float _minimumDistanceToDisable;
+    [SerializeField] private float _maximumDistanceToDisable;
+    
+    [SerializeField] private float _checkPositionRate;
 
     [Header("Enable Bolls")]
     private bool _isActivated = true;
@@ -22,32 +25,12 @@ public sealed class DeactivatableObject : MonoBehaviour
     {
         this.gameObject.SetActive(false);
 
-        _isActivated = true;
-    }
-
-    public void SetDeactivatedMaterial(Material deactivatedMaterial)
-    {
-        _deactivatedMaterial = deactivatedMaterial;
-    }
-
-    public void SetIsActivated(bool isActivated)
-    {
-        _isActivated = isActivated;
+        SetIsActivated(true);
     }
 
     private void Start()
     {
-        StartCoroutine(CheckObjectPosition());
-    }
-
-    private void Update()
-    {
-        /// não acho uma boa isso aqui que tu fez... Tu esta chamando uma Coroutine no update, isso é cagada.
-        /// tipo, em 0.5 segundos (que é o tempo ali que a coroutine espera) tu ja rodou o update oq? umas 30 vezes no minimo
-        /// então tu ja executtou essa coroutine 30x sendo que a 1a ainda nem se quer finalizou...
-        /// o que tu deveria fazer aqui é um "Loop de coroutine"
-        /// ou seja: a coroutine chama ela mesma qnd acaba. Again, isso que tu fez aqui na real pode fuder a performance do jogo legal.
-        //StartCoroutine(CheckObjectPosition());
+        StartCoroutine(CoroutineCheckObjectPosition());
     }
 
     private void OnCollisionEnter(Collision other)
@@ -59,30 +42,33 @@ public sealed class DeactivatableObject : MonoBehaviour
             _isActivated = false;
         }
     }
-
-    private IEnumerator CheckObjectPosition()
+    
+    private IEnumerator CoroutineCheckObjectPosition()
     {
-        // float timeToCheck = 0.5f;
-        //
-        // yield return new WaitForSeconds(timeToCheck);
-        //
-        // if(transform.position.y <= -_distanceToDisable || transform.position.y >= _distanceToDisable / 1.5f)
-        // {
-        //     DeactivateObject();
-        // }
-
-        Debug.Log("Checking position...");
-        
-        while (transform.position.y > -_distanceToDisable || transform.position.y < _distanceToDisable / 1.5f)
+        while(transform.position.y > _minimumDistanceToDisable && transform.position.y < _maximumDistanceToDisable)
         {
+            yield return new WaitForSeconds(_checkPositionRate);
+            
+            Debug.Log("Courotine method calls");
+
             yield return null;
         }
-        
+
         DeactivateObject();
     }
     
     public bool GetIsActivated()
     {
         return _isActivated;
+    }
+
+    public void SetIsActivated(bool isActivated)
+    {
+        _isActivated = isActivated;
+    }
+    
+    public void SetDeactivatedMaterial(Material deactivatedMaterial)
+    {
+        _deactivatedMaterial = deactivatedMaterial;
     }
 }
