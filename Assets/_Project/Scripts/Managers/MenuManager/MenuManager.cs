@@ -26,7 +26,7 @@ public sealed class MenuManager : MonoBehaviour
     [Header("Scene Handler")]
     [SerializeField] private AsyncSceneHandler _asyncSceneHandler;
 
-    public void ShowMenu(Menu menu)
+    private void ShowMenu(Menu menu)
     {
         DeactiveMenus();
 
@@ -125,16 +125,7 @@ public sealed class MenuManager : MonoBehaviour
         _videoSettingsMenuObject.SetActive(false);
         _audioSettingsMenuObject.SetActive(false);
     }
-    
-    private void SetMenusObjectPosition()
-    {
-        _mainMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        _loadingScreenObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        _settingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        _videoSettingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        _audioSettingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-    }
-    
+
     private void ResumeGame()
     {
         Time.timeScale = 1f;
@@ -172,5 +163,14 @@ public sealed class MenuManager : MonoBehaviour
         int loadedSceneIndex = SaveSystem.LoadGameData().CurrentSceneIndex;
         
         _asyncSceneHandler.LoadSingleSceneAsync(loadedSceneIndex);
+    }
+    
+    private void SetMenusObjectPosition()
+    {
+        _mainMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        _loadingScreenObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        _settingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        _videoSettingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        _audioSettingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
 }

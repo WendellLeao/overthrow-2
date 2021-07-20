@@ -3,12 +3,11 @@ using UnityEngine;
 public sealed class WayPointDirectionChecker
 {
     private WayPointSystem _wayPointSystem;
+    
     private Transform[] _wayPoints;
 
     private WayPointDirection _currentDirection;
-
-    public WayPointDirection GetCurrentDirection => _currentDirection;
-
+    
     public WayPointDirectionChecker(WayPointSystem wayPointSystem, Transform[] wayPoints)
     {
         _wayPointSystem = wayPointSystem;
@@ -37,22 +36,27 @@ public sealed class WayPointDirectionChecker
 
     private bool NextTargetIsLeft()
     {
-        return _wayPointSystem.transform.position.x > _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.x;
+        return _wayPointSystem.transform.position.x > _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.x;
     }
 
     private bool NextTargetIsRight()
     {
-        return _wayPointSystem.transform.position.x < _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.x 
+        return _wayPointSystem.transform.position.x < _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.x 
         && !NextTargetIsFoward();
     }
 
     private bool NextTargetIsFoward()
     {
-        return _wayPointSystem.transform.position.z < _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.z;
+        return _wayPointSystem.transform.position.z < _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.z;
     }
 
     private bool NextTargetIsBackward()
     {
-        return _wayPointSystem.transform.position.z > _wayPoints[_wayPointSystem.GetWayPointIndex].transform.position.z;
+        return _wayPointSystem.transform.position.z > _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.z;
+    }
+    
+    public WayPointDirection GetCurrentDirection()
+    {
+        return _currentDirection;
     }
 }

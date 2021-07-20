@@ -11,9 +11,6 @@ public sealed class HealthSystem : ScriptableObject
 
     private int _currentHealthAmount;
 
-    public int GetMaxHealthAmount => _maxHealthAmount;
-    public int GetCurrentHealthAmount => _currentHealthAmount;
-
     public void Damage(int damageAmount)
     {
         _currentHealthAmount -= damageAmount;

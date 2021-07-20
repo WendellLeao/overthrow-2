@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public sealed class GameOverHandler : MonoBehaviour
 {
-
     [Header("Panels UI")]
     [SerializeField] private GameObject _gameOverPanelObject;
 

@@ -70,11 +70,6 @@ public sealed class WinGameHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void SetGameState(GameState newGameState)
-    {
-        _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
-    }
-
     private void HandleGameSaving()
     {
         SaveSystem.GetLocalData().CurrentSceneIndex = SceneHandler.GetNextSceneIndex();
@@ -82,5 +77,10 @@ public sealed class WinGameHandler : MonoBehaviour
         SaveSystem.SaveGameData();
 
         _canSaveGame = false;
+    }
+    
+    private void SetGameState(GameState newGameState)
+    {
+        _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }
 }

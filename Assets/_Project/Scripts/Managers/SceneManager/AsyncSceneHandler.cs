@@ -7,8 +7,6 @@ public sealed class AsyncSceneHandler : MonoBehaviour
     private AsyncOperation _asyncOperation;
 
     private float _normalizedAsyncOperationProgress;
-
-    public float GetNormalizedOperationProgress => _normalizedAsyncOperationProgress;
     
     public void LoadAdditiveSceneAsync(SceneEnum sceneEnum)
     {
@@ -37,5 +35,10 @@ public sealed class AsyncSceneHandler : MonoBehaviour
             
             yield return null;
         }
+    }
+    
+    public float GetNormalizedOperationProgress()
+    {
+        return _normalizedAsyncOperationProgress;
     }
 }

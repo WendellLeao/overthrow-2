@@ -170,10 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca27608ce3a20a943a628e9d9cdf2f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerDamageHandler: {fileID: 7679208726618355854}
   _wayPointSystem: {fileID: 7679208726618355848}
-  _playerShooting: {fileID: 7679208728242780285}
-  _playerInput: {fileID: 11400000, guid: 6142d501afa9b1842a12b5bd8a081cda, type: 2}
 --- !u!114 &7679208726618355854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +248,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 7679208726618355852}
   _laserContainer: {fileID: 7679208726512982769}
+  _laserTransform: {fileID: 7679208727378460919}
+  _distanceToRotate: 10
 --- !u!1 &7679208727650522603
 GameObject:
   m_ObjectHideFlags: 0

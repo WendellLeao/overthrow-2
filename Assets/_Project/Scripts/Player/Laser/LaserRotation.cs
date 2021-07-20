@@ -7,8 +7,12 @@ public sealed class LaserRotation : MonoBehaviour
 
     [Header("Laser Components")]
     [SerializeField] private GameObject _laserContainer;
-
-    private float startOffset;
+    [SerializeField] private Transform _laserTransform;
+    
+    [Header("Rotation")]
+    [SerializeField] private float _distanceToRotate;
+    
+    private float _startOffset;
 
     private void Start()
     {
@@ -22,12 +26,9 @@ public sealed class LaserRotation : MonoBehaviour
     
     private void HandleRotation()
     {
-        WayPointChecker wayPointChecker = _playerController.GetWayPointSystem.GetWayPointChecker;
+        WayPointChecker wayPointChecker = _playerController.GetWayPointSystem.GetWayPointChecker();
             
-        /// Olha laa.... Numeros magicosss
-        float distanceToRotate = 10f;
-
-        if(wayPointChecker.GetNextTargetDistance() > distanceToRotate)
+        if(wayPointChecker.GetNextTargetDistance() > _distanceToRotate)
         {
             _laserContainer.SetActive(true);
 
@@ -44,9 +45,9 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void UpdateLaserDirection()
     {
-        WayPointDirectionChecker wayPointDirectionsChecker = _playerController.GetWayPointSystem.GetWayPointDirections;
+        WayPointDirectionChecker wayPointDirectionsChecker = _playerController.GetWayPointSystem.GetWayPointDirections();
 
-        switch (wayPointDirectionsChecker.GetCurrentDirection)
+        switch (wayPointDirectionsChecker.GetCurrentDirection())
         {
             case WayPointDirection.FOWARD:
             {
@@ -73,29 +74,29 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void RotateToFoward()
     {
-        transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-        transform.localPosition = new Vector3(0f, transform.localPosition.y, startOffset);
+        _laserTransform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        _laserTransform.localPosition = new Vector3(0f, _laserTransform.localPosition.y, _startOffset);
     }
     private void RotateToBackward()
     {
-        transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-        transform.localPosition = new Vector3(0f, transform.localPosition.y, -startOffset);
+        _laserTransform.localRotation = Quaternion.Euler(0f, 180f, 0f);
+        _laserTransform.localPosition = new Vector3(0f, _laserTransform.localPosition.y, -_startOffset);
     }
 
     private void RotateToLeft()
     {
-        transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
-        transform.localPosition = new Vector3(-startOffset, transform.localPosition.y, 0f);
+        _laserTransform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+        _laserTransform.localPosition = new Vector3(-_startOffset, _laserTransform.localPosition.y, 0f);
     }
 
     private void RotateToRight()
     {
-        transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
-        transform.localPosition = new Vector3(startOffset, transform.localPosition.y, 0f);
+        _laserTransform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+        _laserTransform.localPosition = new Vector3(_startOffset, _laserTransform.localPosition.y, 0f);
     }
 
     private void SetStartDepthOffset(float offset)
     {
-        startOffset = offset;
+        _startOffset = offset;
     }
 }
