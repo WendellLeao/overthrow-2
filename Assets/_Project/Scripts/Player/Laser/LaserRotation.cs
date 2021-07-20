@@ -24,6 +24,7 @@ public sealed class LaserRotation : MonoBehaviour
     {
         WayPointChecker wayPointChecker = _playerController.GetWayPointSystem.GetWayPointChecker;
             
+        /// Olha laa.... Numeros magicosss
         float distanceToRotate = 10f;
 
         if(wayPointChecker.GetNextTargetDistance() > distanceToRotate)

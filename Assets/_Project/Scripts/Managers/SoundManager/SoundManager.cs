@@ -4,6 +4,13 @@ using System;
 
 public sealed class SoundManager : MonoBehaviour
 {
+    
+    /// <summary>
+    /// Uma "reflexão" para o futuro ai...
+    ///  O quão facil tu acha que seria de adicionar novos sons ou variações de um mesmo som ? exemplo: 3 sons diferentes de tiro para criar variedade...
+    /// 
+    /// </summary>
+    
     public static SoundManager instance;
     
     [SerializeField] private AudioMixerGroup _mixerGroup;
@@ -12,6 +19,10 @@ public sealed class SoundManager : MonoBehaviour
 
     private bool _isPlayingSoundtrack = false;
 
+    
+    /// <summary>
+    /// Metodo privado acima dos publicos... No No No.
+    /// </summary>
     private void Awake()
     {
         SetSingleton(this);
@@ -19,8 +30,14 @@ public sealed class SoundManager : MonoBehaviour
         SetSoundProperties();
     }
 
+    
     public void Play(string soundName)///////// Change to enum
     {
+        ///Change to Enum, mas não trocou né mizeravi. To de olho.
+        /// E outra, Array.Find....
+        /// no Man, No...
+        /// usa um Dictionary !
+        
         Sound sound = Array.Find(_sounds, sound => sound.name == soundName);
         
         if(sound == null)

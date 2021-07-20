@@ -19,6 +19,9 @@ public sealed class WayPointChecker
 
     public bool IsAtTheLastTarget()
     {
+        /// ao invés de tu verificar se ele esta no ultimo checkpoint (ou no proximo como ali acima) verificando a posição tu poderia ter feito algo como
+        /// colocado um "ID" para cada checkpoint na inicializaçãoo e verificar esse ID...
+        /// verificar se o checkpoint é o ultimo ou proximo comparando a posição é simplesmente "gambiarresco"
         return _wayPointSystem.transform.position.x == _wayPoints[_wayPoints.Length - 1].transform.position.x 
         && _wayPointSystem.transform.position.z == _wayPoints[_wayPoints.Length - 1].transform.position.z;
     }
