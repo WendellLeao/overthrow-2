@@ -16,6 +16,11 @@ public sealed class BallProjectile : Projectile
 
     protected override void Awake()
     {
+        /// Fica a dica, ao invés de darmos override etc em metodos como "Start, Awake, Update" ou coisas do tipo o ideal é:
+        /// no metodo Awake da classe base tu chama um Initialize.
+        /// e ESTE sim tu pode/deve dar override entre os herdeiros (inclusive esse Initialize pode até mesmo ser abstrato)
+        /// e dai cada herdeiro tem sua propria forma de inicializar.
+        /// faça no Awake da classe base o que TODOS os projeteis vão realizar.
         SetRandomNumber();
         
         SetStartMaterial();

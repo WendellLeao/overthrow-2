@@ -15,6 +15,13 @@ public sealed class GameData
     
     public bool IsFullscreen;
     
+    /// <summary>
+    /// Não acho uma boa tu colocar METODOS dentro do arquivo de Save.
+    /// faz mais senttido esses metodos estarem no SaveSystem, afinnal, ELE é que cuida do save.
+    /// este script aqui deveria apenas guardar informação. Afinal ele é o GameData :p
+    /// 
+    /// </summary>
+    
     public void ResetAllData()
     {
         ResetCurrentSceneIndex();
