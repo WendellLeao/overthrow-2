@@ -9852,12 +9852,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260563f63578dee42b394626cd4f889b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meshRenderer: {fileID: 1201168275915254272}
   _rigidbody: {fileID: 2295873807666452801}
   _shootForce: 80
   _explosionForce: 900
   _radius: 7
   _explosionParticleObject: {fileID: 769881850768977453}
-  _meshRenderer: {fileID: 1201168275915254272}
 --- !u!114 &1888719013819148040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9872,6 +9872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deactivatedMaterial: {fileID: 2100000, guid: 40a353f6117398145a3e785d9854de93, type: 2}
   _meshRenderer: {fileID: 1201168275915254272}
-  deactivatorObject:
+  _deactivatorObject:
     serializedVersion: 2
     m_Bits: 0
+  _distanceToDisable: 120

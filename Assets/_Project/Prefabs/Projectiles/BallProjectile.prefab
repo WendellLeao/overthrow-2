@@ -154,9 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deactivatedMaterial: {fileID: 2100000, guid: d5077596fd03948479386c08b1c99fd1, type: 2}
   _meshRenderer: {fileID: 836969101488410413}
-  deactivatorObject:
+  _deactivatorObject:
     serializedVersion: 2
     m_Bits: 137
+  _distanceToDisable: 120
 --- !u!1 &6729131914009356849
 GameObject:
   m_ObjectHideFlags: 0
