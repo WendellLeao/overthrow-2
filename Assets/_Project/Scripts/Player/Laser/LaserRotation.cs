@@ -26,7 +26,7 @@ public sealed class LaserRotation : MonoBehaviour
     
     private void HandleRotation()
     {
-        WayPointChecker wayPointChecker = _playerController.GetWayPointSystem.GetWayPointChecker();
+        WayPointChecker wayPointChecker = _playerController.GetWayPointSystem().GetWayPointChecker();
             
         if(wayPointChecker.GetNextTargetDistance() > _distanceToRotate)
         {
@@ -45,7 +45,7 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void UpdateLaserDirection()
     {
-        WayPointDirectionChecker wayPointDirectionsChecker = _playerController.GetWayPointSystem.GetWayPointDirections();
+        WayPointDirectionChecker wayPointDirectionsChecker = _playerController.GetWayPointSystem().GetWayPointDirections();
 
         switch (wayPointDirectionsChecker.GetCurrentDirection())
         {

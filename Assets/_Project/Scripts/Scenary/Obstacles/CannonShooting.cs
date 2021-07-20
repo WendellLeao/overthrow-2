@@ -36,7 +36,7 @@ public sealed class CannonShooting : MonoBehaviour
 
         SetProjectileTransform(projectileClone.transform);
         
-        FreezeProjectileRigidbodyConstraints(projectileClone);///////////////
+        FreezeProjectileRigidbodyConstraints(projectileClone);
 
         projectileClone.GetComponent<Projectile>().SetProjectileForce(_spawnPosition);
         
@@ -45,6 +45,13 @@ public sealed class CannonShooting : MonoBehaviour
         _canShoot = true;
     }
 
+    private void FreezeProjectileRigidbodyConstraints(GameObject projectileClone)
+    {
+        Rigidbody projectileRigidbody = projectileClone.GetComponent<Rigidbody>();
+        
+        projectileRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+    
     private void SetProjectileTransform(Transform projectileCloneTransform)
     {
         projectileCloneTransform.parent = null;
@@ -52,12 +59,5 @@ public sealed class CannonShooting : MonoBehaviour
         projectileCloneTransform.position = _spawnPosition.transform.position;
 
         projectileCloneTransform.rotation = Quaternion.Euler(Vector3.zero);
-    }
-
-    private void FreezeProjectileRigidbodyConstraints(GameObject projectileClone)
-    {
-        Rigidbody projectileRigidbody = projectileClone.GetComponent<Rigidbody>();
-        
-        projectileRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 }

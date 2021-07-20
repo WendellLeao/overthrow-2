@@ -53,7 +53,7 @@ public sealed class PlayerShooting : MonoBehaviour
     {
         _playerAmmo = new PlayerAmmo(_maxProjectileAmount);
 
-        _localGameEvents.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount);
+        _localGameEvents.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount());
     }
     
     private void OnGameStateChanged_CheckIfCanShoot(GameState gameState)
@@ -112,12 +112,12 @@ public sealed class PlayerShooting : MonoBehaviour
     {
         _playerAmmo.DecreaseAmmo();
         
-        _localGameEvents.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount);
+        _localGameEvents.OnAmmoChanged?.Invoke(_playerAmmo.GetCurrentProjectileAmount());
     }
 
     private bool CanShoot(PlayerInputData playerInputData)
     {
         return playerInputData.IsShooting && !playerInputData.IsShootingBomb 
-        && _playerAmmo.GetCurrentProjectileAmount > 0 && Time.time > _nextFire;
+        && _playerAmmo.GetCurrentProjectileAmount() > 0 && Time.time > _nextFire;
     }
 }

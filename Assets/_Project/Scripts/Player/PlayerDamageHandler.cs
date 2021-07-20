@@ -2,7 +2,6 @@ using UnityEngine;
 
 public sealed class PlayerDamageHandler : MonoBehaviour
 {
-    
     /// <summary>
     /// DamageHandler não lida com o dano, mas sim o PlayerCollider aplica o dano...
     /// Acho que tu pecou aqui na "organização" da logica, pensa só...
@@ -50,16 +49,16 @@ public sealed class PlayerDamageHandler : MonoBehaviour
         _localGameEvents.OnHealthChanged -= OnHealthChanged_CheckIfPlayerIsDead;
     }
 
-    private void ResetCurrentHealthAmount()
-    {
-        _playerHealthSystem.ResetCurrentHealthAmount();
-    }
-
     private void OnHealthChanged_CheckIfPlayerIsDead(int currentHealthAmount, int maxHealthAmount)
     {
         if(currentHealthAmount <= 0)
         {
             _globalGameEvents.OnPlayerDied?.Invoke();
         }
+    }
+    
+    private void ResetCurrentHealthAmount()
+    {
+        _playerHealthSystem.ResetCurrentHealthAmount();
     }
 }

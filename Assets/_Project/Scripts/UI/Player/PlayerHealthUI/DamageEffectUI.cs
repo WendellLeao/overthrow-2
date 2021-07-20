@@ -31,6 +31,14 @@ public sealed class DamageEffectUI : MonoBehaviour
 	{
 		SetStartColor(_damageEffectImage.color);
 	}
+	
+	private void Update()
+	{
+		if (_canHideDamageEffect)
+		{
+			HandleDamageImageEffect();
+		}
+	}
 
 	private void SubscribeEvents()
 	{
@@ -40,16 +48,6 @@ public sealed class DamageEffectUI : MonoBehaviour
 	private void UnsubscribeEvents()
 	{
 		_localGameEvents.OnHealthChanged -= OnHealthChanged_ShowDamageEffect;
-	}
-
-	private void Update()
-	{
-		HandleDamageImageEffect();
-	}
-
-	private void SetStartColor(Color startColor)
-	{
-		_startImageColor = startColor;
 	}
 	
 	private void OnHealthChanged_ShowDamageEffect(int currentHealthAmount, int maxHealthAmount)
@@ -72,24 +70,21 @@ public sealed class DamageEffectUI : MonoBehaviour
 
 	private void HandleDamageImageEffect()
 	{
-		if(_canHideDamageEffect)
+		if (_damageEffectImage.color.a > 0f)
 		{
-			if (_damageEffectImage.color.a > 0f)
-			{
-				float speedToHide = 30f;
+			float speedToHide = 30f;
 						
-				_imageAlpha -= Time.deltaTime * speedToHide;
+			_imageAlpha -= Time.deltaTime * speedToHide;
 
-				Color newColor = new Color(_startImageColor.r, _startImageColor.g, _startImageColor.b, _imageAlpha * 0.01f);
+			Color newColor = new Color(_startImageColor.r, _startImageColor.g, _startImageColor.b, _imageAlpha * 0.01f);
 
-				_damageEffectImage.color = newColor;
-			}
-			else
-			{
-				ResetImageColor();
+			_damageEffectImage.color = newColor;
+		}
+		else
+		{
+			ResetImageColor();
 
-				_canHideDamageEffect = false;
-			}
+			_canHideDamageEffect = false;
 		}
 	}
 
@@ -100,5 +95,10 @@ public sealed class DamageEffectUI : MonoBehaviour
 		_damageEffectImage.enabled = false;
 		
 		_damageEffectImage.color = _startImageColor;
+	}
+	
+	private void SetStartColor(Color startColor)
+	{
+		_startImageColor = startColor;
 	}
 }
