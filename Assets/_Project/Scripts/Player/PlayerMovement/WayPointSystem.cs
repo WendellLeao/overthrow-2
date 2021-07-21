@@ -97,6 +97,6 @@ public sealed class WayPointSystem : MonoBehaviour
 
     private void SetPlayerPosition(Vector3 position)
     {
-        this.transform.position = position;
+        transform.position = position;
     }
 }

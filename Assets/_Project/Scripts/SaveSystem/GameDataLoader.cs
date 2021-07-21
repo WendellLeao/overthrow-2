@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public sealed class SaveSystemInitializer : MonoBehaviour
+public sealed class GameDataLoader : MonoBehaviour
 {
 	[Header("Async Scene Handler")]
 	[SerializeField] private AsyncSceneHandler _asyncSceneHandler;

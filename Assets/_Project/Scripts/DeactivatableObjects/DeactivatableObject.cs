@@ -23,14 +23,14 @@ public sealed class DeactivatableObject : MonoBehaviour
     
     public void DeactivateObject()
     {
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
 
         IsActivated = true;
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(CoroutineCheckObjectPosition());
+        StartCoroutine(CheckObjectPosition());
     }
 
     private void OnCollisionEnter(Collision other)
@@ -43,24 +43,30 @@ public sealed class DeactivatableObject : MonoBehaviour
         }
     }
     
-    private IEnumerator CoroutineCheckObjectPosition()
+    private IEnumerator CheckObjectPosition()
     {
-        while(transform.position.y > _minimumDistanceToDisable && transform.position.y < _maximumDistanceToDisable)
+        yield return new WaitForSeconds(_checkPositionRate);
+        
+        if(IsWithinTheLimits())
         {
-            yield return new WaitForSeconds(_checkPositionRate);
-            
-            Debug.Log("Courotine method calls");
-
-            yield return null;
+            StartCoroutine(CheckObjectPosition());
         }
+        else
+        {
+            DeactivateObject();
+        }
+    }
 
-        DeactivateObject();
+    private bool IsWithinTheLimits()
+    {
+        Vector3 objectPosition = transform.position;
+        return objectPosition.y > _minimumDistanceToDisable && objectPosition.y < _maximumDistanceToDisable;
     }
 
     public bool IsActivated
     {
-        get => _isActivated; 
-        set => _isActivated = value; 
+        get { return _isActivated; }
+        set { _isActivated = value; }
     }
 
     public void SetDeactivatedMaterial(Material deactivatedMaterial)
