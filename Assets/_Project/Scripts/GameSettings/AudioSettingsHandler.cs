@@ -51,7 +51,7 @@ public sealed class AudioSettingsHandler : MonoBehaviour
 
 	private void SetAudioMixerValue(float sliderValue)
 	{
-		float newAudioMixerValue = Mathf.Log10(sliderValue) * 20f;//Magic Number!!!
+		float newAudioMixerValue = Mathf.Log10(sliderValue) * 20f;
 		
 		_audioMixer.SetFloat("volume", newAudioMixerValue);
 

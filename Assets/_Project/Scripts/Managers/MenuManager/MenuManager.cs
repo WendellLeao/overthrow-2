@@ -149,7 +149,7 @@ public sealed class MenuManager : MonoBehaviour
     {
         ShowMenu(Menu.LOADING_SCREEN);
         
-        SaveSystem.GetLocalData().ResetCurrentSceneIndex();
+        SaveSystem.ResetCurrentSceneIndex();
 
         SaveSystem.SaveGameData();
 
