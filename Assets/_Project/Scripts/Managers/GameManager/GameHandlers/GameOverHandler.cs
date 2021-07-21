@@ -43,7 +43,7 @@ public sealed class GameOverHandler : MonoBehaviour
     {
         StopGame();
 
-        SetGameState(GameState.LOSE);
+        ChangeGameState(GameState.LOSE);
 
         _gameOverPanelObject.SetActive(true);
     }
@@ -55,7 +55,7 @@ public sealed class GameOverHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void SetGameState(GameState newGameState)
+    private void ChangeGameState(GameState newGameState)
     {
         _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }

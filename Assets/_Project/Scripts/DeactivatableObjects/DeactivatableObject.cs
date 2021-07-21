@@ -25,7 +25,7 @@ public sealed class DeactivatableObject : MonoBehaviour
     {
         this.gameObject.SetActive(false);
 
-        SetIsActivated(true);
+        IsActivated = true;
     }
 
     private void Start()
@@ -56,19 +56,15 @@ public sealed class DeactivatableObject : MonoBehaviour
 
         DeactivateObject();
     }
-    
-    public bool GetIsActivated()
+
+    public bool IsActivated
     {
-        return _isActivated;
+        get => _isActivated; 
+        set => _isActivated = value; 
     }
 
-    public void SetIsActivated(bool isActivated)
-    {
-        _isActivated = isActivated;
-    }
-    
     public void SetDeactivatedMaterial(Material deactivatedMaterial)
     {
-        _deactivatedMaterial = deactivatedMaterial;
+        _deactivatedMaterial = deactivatedMaterial; 
     }
 }

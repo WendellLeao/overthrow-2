@@ -81,7 +81,7 @@ public sealed class PauseGameHandler : MonoBehaviour
 
         _canPauseGame = false;
 
-        SetGameState(GameState.PLAYING);
+        ChangeGameState(GameState.PLAYING);
 
         _pausePanelObject.SetActive(false);
     }
@@ -90,7 +90,7 @@ public sealed class PauseGameHandler : MonoBehaviour
     {
         StopGame();
 
-        SetGameState(GameState.PAUSED);
+        ChangeGameState(GameState.PAUSED);
         
         _pausePanelObject.SetActive(true);
     }
@@ -109,7 +109,7 @@ public sealed class PauseGameHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void SetGameState(GameState newGameState)
+    private void ChangeGameState(GameState newGameState)
     {
         _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }

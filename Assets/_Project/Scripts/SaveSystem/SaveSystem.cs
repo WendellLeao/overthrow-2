@@ -36,11 +36,6 @@ public static class SaveSystem
         }
     }
 
-    public static GameData GetLocalData()
-    {
-        return _localData;
-    }
-
     private static void DeleteSave()
     {
         File.Delete(GetFilePath());
@@ -54,6 +49,11 @@ public static class SaveSystem
         return File.Exists(GetFilePath());
     }
 
+    public static GameData GetLocalData()
+    {
+        return _localData;
+    }
+    
     private static string GetFilePath()
     {
         return Path.Combine(Application.persistentDataPath, _fileName);

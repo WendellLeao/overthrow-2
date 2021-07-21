@@ -18,10 +18,10 @@ public sealed class GameManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         
-        SetGameState(GameState.PLAYING);
+        ChangeSetGameState(GameState.PLAYING);
     }
 
-    private void SetGameState(GameState newGameState)
+    private void ChangeSetGameState(GameState newGameState)
     {
         _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }

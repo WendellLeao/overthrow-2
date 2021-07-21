@@ -28,7 +28,7 @@ public sealed class WayPointSystem : MonoBehaviour
     {
         SetStartVerticalPosition(this.transform.position.y);
 
-        SetStartPosition(GetNewPosition());
+        SetPlayerPosition(GetNewPosition());
     }
 
     private void Update()
@@ -42,7 +42,7 @@ public sealed class WayPointSystem : MonoBehaviour
 
     private void HandleMovement()
     {
-        transform.position = Vector3.MoveTowards(transform.position, GetNewPosition(), _moveSpeed * Time.deltaTime);
+        SetPlayerPosition(Vector3.MoveTowards(transform.position, GetNewPosition(), _moveSpeed * Time.deltaTime));
     }
 
     private void HandlePlayerIsAtTarget()
@@ -95,7 +95,7 @@ public sealed class WayPointSystem : MonoBehaviour
         startVerticalPosition = verticalPosition;
     }
 
-    private void SetStartPosition(Vector3 position)
+    private void SetPlayerPosition(Vector3 position)
     {
         this.transform.position = position;
     }

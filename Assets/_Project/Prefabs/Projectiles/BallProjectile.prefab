@@ -140,6 +140,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 12ca79d1906ac624994fa91e85880fb8, type: 2}
   - {fileID: 2100000, guid: 3b20fc9e84b968641b7312bdcdd1ffd8, type: 2}
   _particleSystem: {fileID: 1000295245677458582}
+  _customParticlesAlphaColor: 0.2
 --- !u!114 &5179823801072730766
 MonoBehaviour:
   m_ObjectHideFlags: 0

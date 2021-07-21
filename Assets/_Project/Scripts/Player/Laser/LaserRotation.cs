@@ -16,7 +16,7 @@ public sealed class LaserRotation : MonoBehaviour
 
     private void Start()
     {
-        SetStartDepthOffset(transform.localPosition.z);
+        SetStartOffset(_laserTransform.localPosition.z);
     }
     
     private void Update()
@@ -77,6 +77,7 @@ public sealed class LaserRotation : MonoBehaviour
         _laserTransform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         _laserTransform.localPosition = new Vector3(0f, _laserTransform.localPosition.y, _startOffset);
     }
+    
     private void RotateToBackward()
     {
         _laserTransform.localRotation = Quaternion.Euler(0f, 180f, 0f);
@@ -95,7 +96,7 @@ public sealed class LaserRotation : MonoBehaviour
         _laserTransform.localPosition = new Vector3(_startOffset, _laserTransform.localPosition.y, 0f);
     }
 
-    private void SetStartDepthOffset(float offset)
+    private void SetStartOffset(float offset)
     {
         _startOffset = offset;
     }

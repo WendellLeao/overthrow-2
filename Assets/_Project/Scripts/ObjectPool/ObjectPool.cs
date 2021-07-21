@@ -100,9 +100,9 @@ public sealed class ObjectPool : MonoBehaviour
             return null;
         }
     }
-    
+
     private void SetSingleton(ObjectPool objectPool)
-    {
+    { 
         instance = objectPool;
     }
 }

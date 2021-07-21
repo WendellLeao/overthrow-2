@@ -99,15 +99,7 @@ public sealed class PlayerShooting : MonoBehaviour
 
         projectileClone.GetComponent<Projectile>().SetProjectileForce(_spawnTransform);
     }
-
-    private void SetProjectileTransform(Transform projectileTransform)
-    {
-        projectileTransform.parent = _playerTransform;
-
-        projectileTransform.position = _spawnTransform.position;
-        projectileTransform.rotation = Quaternion.identity;
-    }
-
+    
     private void HandleAmmo()
     {
         _playerAmmo.DecreaseAmmo();
@@ -119,5 +111,13 @@ public sealed class PlayerShooting : MonoBehaviour
     {
         return playerInputData.IsShooting && !playerInputData.IsShootingBomb 
         && _playerAmmo.GetCurrentProjectileAmount() > 0 && Time.time > _nextFire;
+    }
+    
+    private void SetProjectileTransform(Transform projectileTransform)
+    {
+        projectileTransform.parent = _playerTransform;
+
+        projectileTransform.position = _spawnTransform.position;
+        projectileTransform.rotation = Quaternion.identity;
     }
 }

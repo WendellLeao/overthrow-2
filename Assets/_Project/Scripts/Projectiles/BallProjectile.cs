@@ -11,23 +11,20 @@ public sealed class BallProjectile : Projectile
 
     [Header("Particle System")]
     [SerializeField] private ParticleSystem _particleSystem;
+    
+    [SerializeField] private float _customParticlesAlphaColor;
 
     private int _randomNumber;
 
-    protected override void Awake()
+    protected override void Initialize()
     {
-        /// Fica a dica, ao invés de darmos override etc em metodos como "Start, Awake, Update" ou coisas do tipo o ideal é:
-        /// no metodo Awake da classe base tu chama um Initialize.
-        /// e ESTE sim tu pode/deve dar override entre os herdeiros (inclusive esse Initialize pode até mesmo ser abstrato)
-        /// e dai cada herdeiro tem sua propria forma de inicializar.
-        /// faça no Awake da classe base o que TODOS os projeteis vão realizar.
         SetRandomNumber();
         
-        SetStartMaterial();
+        SetStartMaterial(_newStartMaterial[_randomNumber]);
 
-        SetParticleSystemStartColor();
+        SetParticleSystemStartColor(_newStartMaterial[_randomNumber].color);
 
-        SetRandomDeactivatedMaterial();
+        SetRandomDeactivatedMaterial(_newDeactivatedMaterial[_randomNumber]);
     }
     
     protected override void ReturnProjectileToPool()
@@ -39,31 +36,22 @@ public sealed class BallProjectile : Projectile
     {
         _meshRenderer.material = _newStartMaterial[_randomNumber];
     }
-    
-    protected override void SetStartMaterial()
-    {
-        _meshRenderer.material = _newStartMaterial[_randomNumber];
-    }
-    
+
     private void SetRandomNumber()
     {
         _randomNumber = Random.Range(0, _newStartMaterial.Length);
     }
 
-    private void SetRandomDeactivatedMaterial()
+    private void SetRandomDeactivatedMaterial(Material deactivatedMaterial)
     {
-        _deactivatableObject.SetDeactivatedMaterial(_newDeactivatedMaterial[_randomNumber]);
+        _deactivatableObject.SetDeactivatedMaterial(deactivatedMaterial);
     }
     
-    private void SetParticleSystemStartColor()
+    private void SetParticleSystemStartColor(Color startMaterialColor)
     {
         ParticleSystem.MainModule particleSystemMainModule = _particleSystem.main;
 
-        Color startMaterialColor = _newStartMaterial[_randomNumber].color;
-
-        float customAlphaColor = 0.2f;
-        
-        Color newStartColor = new Color(startMaterialColor.r, startMaterialColor.g, startMaterialColor.b, customAlphaColor);
+        Color newStartColor = new Color(startMaterialColor.r, startMaterialColor.g, startMaterialColor.b, _customParticlesAlphaColor);
 
         particleSystemMainModule.startColor = newStartColor;
     }

@@ -10,6 +10,7 @@ public sealed class PlayerInputListener : MonoBehaviour
     private InputActionsSystem.CharacterControlsActions _characterControls;
     
     private bool _isShooting = false, _isShootingBomb = false, _pressPause = false;
+    
     private Vector2 _mousePosition;
 
     private void OnEnable()
