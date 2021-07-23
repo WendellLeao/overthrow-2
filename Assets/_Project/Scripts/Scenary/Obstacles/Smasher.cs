@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public sealed class Smasher : MonoBehaviour
+public sealed class Smasher : MonoBehaviour, IObstacle
 {
     [Header("Movement")]
     [SerializeField] private float _minimumVerticalDistance;
@@ -9,6 +9,9 @@ public sealed class Smasher : MonoBehaviour
 
     [Header("Smasher Components")]
     [SerializeField] private Transform _smaherTransform;
+
+    [Header("Obstacle")]
+    [SerializeField] private int _damageToPlayerAmount;
     
     private float _pingPongValue = 0f;
 
@@ -25,5 +28,10 @@ public sealed class Smasher : MonoBehaviour
         float verticalposition = Mathf.Lerp(_minimumVerticalDistance, _maximumVerticalDistance, pingPong);
 
         _smaherTransform.position = new Vector3(transform.position.x, verticalposition, _smaherTransform.position.z);
+    }
+
+    public int GetDamageToPlayerAmount()
+    {
+        return _damageToPlayerAmount;
     }
 }

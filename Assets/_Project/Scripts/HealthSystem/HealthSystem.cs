@@ -32,4 +32,9 @@ public sealed class HealthSystem : ScriptableObject
     {
         _currentHealthAmount = _maxHealthAmount;
     }
+
+    public int GetCurrentHealthAmount()
+    {
+        return _currentHealthAmount;
+    }
 }

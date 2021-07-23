@@ -129,3 +129,4 @@ MonoBehaviour:
   _maximumVerticalDistance: 9
   _smashSpeed: 0.5
   _smaherTransform: {fileID: 4047162090726199691}
+  _damageToPlayerAmount: 200

@@ -129,6 +129,7 @@ MonoBehaviour:
   _meshRenderer: {fileID: 1201168275915254272}
   _rigidbody: {fileID: 2295873807666452801}
   _shootForce: 80
+  _damageToPlayerAmount: 50
 --- !u!114 &1888719013819148040
 MonoBehaviour:
   m_ObjectHideFlags: 0

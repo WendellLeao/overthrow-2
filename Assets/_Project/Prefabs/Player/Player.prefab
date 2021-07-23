@@ -57,7 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185e71e8f1ad710418f9096ee2b22e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealthSystem: {fileID: 11400000, guid: b3249c6c5639f3449abed719c28bf6fe, type: 2}
+  _playerController: {fileID: 7679208726618355852}
+  _localGameEvents: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
 --- !u!1 &3355118560775636867
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wayPointSystem: {fileID: 7679208726618355848}
+  _playerDamageHandler: {fileID: 7679208726618355854}
 --- !u!114 &7679208726618355854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,4 +897,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185e71e8f1ad710418f9096ee2b22e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealthSystem: {fileID: 11400000, guid: b3249c6c5639f3449abed719c28bf6fe, type: 2}
+  _playerController: {fileID: 7679208726618355852}
+  _localGameEvents: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
