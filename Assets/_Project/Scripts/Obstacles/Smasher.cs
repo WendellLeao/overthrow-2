@@ -15,11 +15,19 @@ public sealed class Smasher : MonoBehaviour, IObstacle
     
     private float _pingPongValue = 0f;
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<PlayerDamageHandler>(out PlayerDamageHandler playerDamageHandler))
+        {
+            playerDamageHandler.DamagePlayer(_damageToPlayerAmount);
+        }
+    }
+    
     private void Update()
     {
         HandleMovement();
     }
-
+    
     private void HandleMovement()
     {
         _pingPongValue += Time.deltaTime * _smashSpeed;
@@ -28,10 +36,5 @@ public sealed class Smasher : MonoBehaviour, IObstacle
         float verticalposition = Mathf.Lerp(_minimumVerticalDistance, _maximumVerticalDistance, pingPong);
 
         _smaherTransform.position = new Vector3(transform.position.x, verticalposition, _smaherTransform.position.z);
-    }
-
-    public int GetDamageToPlayerAmount()
-    {
-        return _damageToPlayerAmount;
     }
 }

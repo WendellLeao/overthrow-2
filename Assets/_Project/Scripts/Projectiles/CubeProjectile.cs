@@ -4,6 +4,22 @@ public sealed class CubeProjectile : Projectile, IObstacle
 {
     [Header(("Obstacle"))]
     [SerializeField] private int _damageToPlayerAmount;
+
+    [Header(("Deactivatable Object"))]
+    [SerializeField] private DeactivatableObject _deactivatableObject;
+    
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<PlayerDamageHandler>(out PlayerDamageHandler playerDamageHandler))
+        {
+            if (_deactivatableObject.IsActivated)
+            {
+                _deactivatableObject.IsActivated = false;
+                
+                playerDamageHandler.DamagePlayer(_damageToPlayerAmount);
+            }
+        }
+    }
     
     protected override void LateUpdate()
     {
@@ -13,10 +29,5 @@ public sealed class CubeProjectile : Projectile, IObstacle
     protected override void ReturnProjectileToPool()
     {
         ObjectPool.instance.ReturnObjectToPool(PoolType.CUBE_PROJECTILE, this.gameObject);
-    }
-
-    public int GetDamageToPlayerAmount()
-    {
-        return _damageToPlayerAmount;
     }
 }

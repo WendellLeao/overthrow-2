@@ -69,7 +69,7 @@ public abstract class Projectile : MonoBehaviour
         _rigidbody.velocity = Vector3.zero;
     }
     
-    protected void SetStartMaterial(Material startMaterial)
+    private void SetStartMaterial(Material startMaterial)
     {
         _startMaterial = startMaterial;
     }

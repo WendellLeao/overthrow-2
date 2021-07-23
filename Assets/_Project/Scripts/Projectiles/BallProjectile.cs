@@ -29,9 +29,7 @@ public sealed class BallProjectile : Projectile
     protected override void Initialize()
     {
         SetRandomNumber();
-        
-        SetStartMaterial(_newStartMaterial[_randomNumber]);
-        
+
         SetParticleSystemStartColor(_newStartMaterial[_randomNumber].color);
 
         SetRandomDeactivatedMaterial(_newDeactivatedMaterial[_randomNumber]);
