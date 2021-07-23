@@ -47,9 +47,14 @@ public abstract class Projectile : MonoBehaviour
         _meshRenderer.material = _startMaterial;
     }
 
-    private void Awake()
+    protected virtual void Initialize()
     {
         SetStartMaterial(_meshRenderer.material);
+    }
+
+    private void Awake()
+    {
+        Initialize();
     }
     
     private void UnparentProjectile()
