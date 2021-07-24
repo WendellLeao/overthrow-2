@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,11 +23,18 @@ public sealed class ObjectPool : MonoBehaviour
     private void Awake()
     {
         SetSingleton(this);
+        
+        //FillPool();
+    }
+
+    private void OnEnable()
+    {
+        FillPool();
     }
 
     private void Start()
     {
-        FillPool();
+        //FillPool();
     }
 
     private void FillPool()

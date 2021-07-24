@@ -16,7 +16,7 @@ public sealed class AudioSourceProperties : ScriptableObject
     [Range(0f, 1f)]
     public float SpatialBlend;
 
-    public bool DontDestroyOnLoad;
+    public bool PersistentSound;
     
     public bool Loop;
 }

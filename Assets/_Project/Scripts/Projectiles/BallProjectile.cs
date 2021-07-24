@@ -35,6 +35,11 @@ public sealed class BallProjectile : Projectile
         SetRandomDeactivatedMaterial(_newDeactivatedMaterial[_randomNumber]);
     }
 
+    protected override void PlayCollisionSound()
+    {
+        //Empty
+    }
+
     private void SetRandomNumber()
     {
         _randomNumber = Random.Range(0, _newStartMaterial.Length);

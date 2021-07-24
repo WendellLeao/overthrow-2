@@ -18,16 +18,21 @@ public sealed class BombProjectile : Projectile
         ResetBombProjectile();
     }
     
+    protected override void OnCollisionEnter(Collision other)
+    {
+        HandleExplosion();
+    }
+    
     protected override void ReturnProjectileToPool()
     {
         ObjectPool.instance.ReturnObjectToPool(PoolType.BOMB_PROJECTILE, this.gameObject);
     }
-
-    private void OnCollisionEnter(Collision other)
+    
+    protected override void PlayCollisionSound()
     {
-        HandleExplosion();
+        SoundManager.instance.PlaySound3D(Sound.BOMB_EXPLOSION, transform.localPosition);
     }
-
+    
     private void HandleExplosion()
     {
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, _radius);
@@ -50,9 +55,10 @@ public sealed class BombProjectile : Projectile
         }
     }
 
+  
     private void HandleSoundEffect()
     {
-        SoundManager.instance.PlaySound3D(Sound.BOMB_EXPLOSION, transform.localPosition);
+        PlayCollisionSound();
 
         _canPlaySoundEffect = false;
     }

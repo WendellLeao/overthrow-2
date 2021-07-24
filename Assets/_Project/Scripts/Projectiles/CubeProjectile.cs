@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public sealed class CubeProjectile : Projectile, IObstacle
@@ -22,12 +21,17 @@ public sealed class CubeProjectile : Projectile, IObstacle
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    protected override void OnCollisionEnter(Collision other)
     {
-        // if (!other.gameObject.TryGetComponent<CubeProjectile>(out CubeProjectile cubeProjectile))
-        // {
-        //     SoundManager.instance.PlaySound3D(Sound.CUBES_COLLISION, transform.localPosition);
-        // }
+        if (!other.gameObject.TryGetComponent<CubeProjectile>(out CubeProjectile cubeProjectile))
+        {
+            PlayCollisionSound();
+        }
+    }
+
+    protected override void PlayCollisionSound()
+    {
+        SoundManager.instance.PlaySound3D(Sound.CUBES_COLLISION, transform.localPosition);
     }
 
     protected override void LateUpdate()

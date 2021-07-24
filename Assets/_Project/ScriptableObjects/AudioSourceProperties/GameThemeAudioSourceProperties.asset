@@ -18,6 +18,5 @@ MonoBehaviour:
   AudioMixerGroup: {fileID: 24300002, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
   Volume: 0.45
   SpatialBlend: 0
-  DontDestroyOnLoad: 1
-  HasCooldown: 0
+  PersistentSound: 1
   Loop: 1

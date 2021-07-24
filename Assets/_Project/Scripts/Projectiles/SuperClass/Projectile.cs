@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Projectile : MonoBehaviour
@@ -22,6 +23,8 @@ public abstract class Projectile : MonoBehaviour
     }
     
     protected abstract void ReturnProjectileToPool();
+    
+    protected abstract void PlayCollisionSound();
 
     protected virtual void OnDisable()
     {
@@ -42,6 +45,11 @@ public abstract class Projectile : MonoBehaviour
         }
     }
 
+    protected virtual void OnCollisionEnter(Collision other)
+    {
+        PlayCollisionSound();
+    }
+    
     protected virtual void ResetMaterial()
     {
         _meshRenderer.material = _startMaterial;

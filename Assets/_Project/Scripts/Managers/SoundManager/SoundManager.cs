@@ -15,6 +15,11 @@ public sealed class SoundManager : MonoBehaviour
         
         AudioSource audioSource = GetSettedAudioSource(sound, soundGameObject);
 
+        if (!audioSource.loop)
+        {
+            StartCoroutine(DeactivateSoundGameObject(audioSource));
+        }
+
         audioSource.Play();
     }
 
@@ -23,6 +28,11 @@ public sealed class SoundManager : MonoBehaviour
         GameObject soundGameObject = ObjectPool.instance.GetObjectFromPool(PoolType.SOUND);
         
         AudioSource audioSource = GetSettedAudioSource(sound, soundGameObject);
+        
+        if (!audioSource.loop)
+        {
+            StartCoroutine(DeactivateSoundGameObject(audioSource));
+        }
 
         audioSource.PlayOneShot(audioSource.clip);
     }
@@ -30,18 +40,6 @@ public sealed class SoundManager : MonoBehaviour
     private void Awake()
     {
         SetSingleton(this);
-    }
-    
-    private void HandleSoundPersistence(AudioSourceProperties audioSourceProperties, AudioSource audioSource)
-    {
-        if (!audioSourceProperties.DontDestroyOnLoad)
-        {
-            StartCoroutine(DeactivateSoundGameObject(audioSource));
-        }
-        else
-        {
-            DontDestroyOnLoad(audioSource.gameObject);
-        }
     }
 
     private IEnumerator DeactivateSoundGameObject(AudioSource audioSource)
@@ -63,19 +61,22 @@ public sealed class SoundManager : MonoBehaviour
             {
                 int randomIndex = Random.Range(0, audioSourceProperties.AudioClips.Length);
                 audioSource.clip = audioSourceProperties.AudioClips[randomIndex];
-
+        
                 audioSource.volume = audioSourceProperties.Volume;
-
+        
                 audioSource.spatialBlend = audioSourceProperties.SpatialBlend;
-
+        
                 audioSource.loop = audioSourceProperties.Loop;
-
+        
                 audioSource.outputAudioMixerGroup = audioSourceProperties.AudioMixerGroup;
-
-                HandleSoundPersistence(audioSourceProperties, audioSource);
+        
+                if (audioSourceProperties.PersistentSound)
+                {
+                    DontDestroyOnLoad(audioSource.gameObject);
+                }
             }
         }
-
+        
         return audioSource;
     }
     
