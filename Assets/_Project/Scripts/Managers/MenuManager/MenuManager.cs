@@ -78,7 +78,7 @@ public sealed class MenuManager : MonoBehaviour
 
         ShowMenu(Menu.MAIN);
 
-        SoundManager.instance.PlayPersistentSound2D(Sound.GAME_THEME);
+        SoundManager.instance.PlaySound2D(Sound.GAME_THEME);
     }
 
     private void SubscribeEvents()

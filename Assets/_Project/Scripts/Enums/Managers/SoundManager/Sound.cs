@@ -4,4 +4,5 @@ public enum Sound
     PLAYER_SHOOTING,
     BOMB_EXPLOSION,
     LASER_COLLISION,
+    CUBES_COLLISION
 }
