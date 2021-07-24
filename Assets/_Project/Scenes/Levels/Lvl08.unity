@@ -2399,103 +2399,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
---- !u!114 &2014882968 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7014799821161800703, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2014882969 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7296380781890059185, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2014882970 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7296380781843023912, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &2014882971 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7296380782185159698, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2014882972 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7296380782338635896, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &2014882973 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7296380781774646020, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2014882974 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 168590626737328004, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2014882975 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7296380782200240926, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &2014882976 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7296380780718479259, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2014882977 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4906434914738637336, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &2014882978 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1543987936157666045, guid: d927eea1def93fe47bdae6b25ded3fe7, type: 3}
-  m_PrefabInstance: {fileID: 2014882966}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2018392241
 GameObject:
   m_ObjectHideFlags: 0
@@ -2952,31 +2855,31 @@ PrefabInstance:
     - target: {fileID: 1568081452, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _mainMenuButton
       value: 
-      objectReference: {fileID: 2014882974}
+      objectReference: {fileID: 0}
     - target: {fileID: 1568081452, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _restartGameButton
       value: 
-      objectReference: {fileID: 2014882975}
+      objectReference: {fileID: 0}
     - target: {fileID: 1568081452, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _gameOverPanelObject
       value: 
-      objectReference: {fileID: 2014882976}
+      objectReference: {fileID: 0}
     - target: {fileID: 1568081453, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _continueButton
       value: 
-      objectReference: {fileID: 2014882972}
+      objectReference: {fileID: 0}
     - target: {fileID: 1568081453, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _mainMenuButton
       value: 
-      objectReference: {fileID: 2014882977}
+      objectReference: {fileID: 0}
     - target: {fileID: 1568081453, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _winPanelObject
       value: 
-      objectReference: {fileID: 2014882973}
+      objectReference: {fileID: 0}
     - target: {fileID: 1568081453, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _endGamePanelObject
       value: 
-      objectReference: {fileID: 2014882978}
+      objectReference: {fileID: 0}
     - target: {fileID: 7938760289510950042, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -3028,18 +2931,18 @@ PrefabInstance:
     - target: {fileID: 7938760289510950045, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _mainMenuButton
       value: 
-      objectReference: {fileID: 2014882968}
+      objectReference: {fileID: 0}
     - target: {fileID: 7938760289510950045, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _pausePanelObject
       value: 
-      objectReference: {fileID: 2014882971}
+      objectReference: {fileID: 0}
     - target: {fileID: 7938760289510950045, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _resumeGameButton
       value: 
-      objectReference: {fileID: 2014882970}
+      objectReference: {fileID: 0}
     - target: {fileID: 7938760289510950045, guid: d562910204d9a13479b0d0e7de05934f, type: 3}
       propertyPath: _restartGameButton
       value: 
-      objectReference: {fileID: 2014882969}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d562910204d9a13479b0d0e7de05934f, type: 3}

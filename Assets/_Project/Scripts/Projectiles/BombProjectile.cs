@@ -52,7 +52,7 @@ public sealed class BombProjectile : Projectile
 
     private void HandleSoundEffect()
     {
-        SoundManager.instance.Play("Explosion");
+        //SoundManager.instance.Play("Explosion");
 
         _canPlaySoundEffect = false;
     }

@@ -84,21 +84,17 @@ public sealed class ObjectPool : MonoBehaviour
             {
                 return CreateBackupObject(poolType);
             }
-            else
-            {
-                GameObject objectFromPool = objectList.Dequeue();
+            
+            GameObject objectFromPool = objectList.Dequeue();
 
-                objectFromPool.SetActive(true);
+            objectFromPool.SetActive(true);
 
-                return objectFromPool;
-            }
+            return objectFromPool;
         }
-        else
-        {
-            Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
+        
+        Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
 
-            return null;
-        }
+        return null;
     }
 
     private void SetSingleton(ObjectPool objectPool)

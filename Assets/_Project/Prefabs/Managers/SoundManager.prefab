@@ -43,35 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ff2fd5c1585ee4abfd6ebee5d72667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mixerGroup: {fileID: 24300002, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
-  _sounds:
-  - name: Soundtrack
-    clip: {fileID: 8300000, guid: 836969eb7b3fcf0429958e38923d6b31, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 1
-    source: {fileID: 0}
-  - name: PlayerShooting
-    clip: {fileID: 8300000, guid: 85c6de9cf2ddf1c449f5e91cd38d055f, type: 3}
-    volume: 0.6
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: CubeCollision
-    clip: {fileID: 8300000, guid: f961d45d68e19ac49b5b480aded07405, type: 3}
-    volume: 0.55
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: LaserCollision
-    clip: {fileID: 8300000, guid: ad7fd387087a3f04db02eef40dca8858, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Explosion
-    clip: {fileID: 8300000, guid: 3c0d9626e9a7b6a41aa88d6607d3b615, type: 3}
-    volume: 0.55
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
+  _soundAudioClips:
+  - {fileID: 11400000, guid: ea75f259e74d2f34cac503871e538357, type: 2}
+  - {fileID: 11400000, guid: 737aafb9feb4fae4189e1d2ac0119600, type: 2}
