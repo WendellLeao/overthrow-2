@@ -47,3 +47,6 @@ MonoBehaviour:
   - _poolType: 0
     _objectToPool: {fileID: 836969101488410414, guid: ae1a35cf626650c4188d2ff5c5279118, type: 3}
     _startAmount: 30
+  - _poolType: 3
+    _objectToPool: {fileID: 6814026791834695557, guid: a6a635576455d374485d3acc834bc31f, type: 3}
+    _startAmount: 10

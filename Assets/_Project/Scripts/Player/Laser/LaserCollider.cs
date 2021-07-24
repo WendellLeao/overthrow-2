@@ -13,7 +13,7 @@ public sealed class LaserCollider : MonoBehaviour
             {
                 deactivatableObject.DeactivateObject();
 
-                //SoundManager.instance.Play("LaserCollision");
+                SoundManager.instance.PlaySound3D(Sound.LASER_COLLISION, transform.localPosition);
 
                 _localGameEvents.OnLaserCollide?.Invoke();
             }

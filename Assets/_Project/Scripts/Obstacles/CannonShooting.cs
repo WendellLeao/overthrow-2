@@ -40,6 +40,8 @@ public sealed class CannonShooting : MonoBehaviour
 
         projectileClone.GetComponent<Projectile>().SetProjectileForce(_spawnPosition);
         
+        SoundManager.instance.PlaySound3D(Sound.PLAYER_SHOOTING, transform.localPosition);
+        
         _shootingParticleSystem.Play();
 
         _canShoot = true;

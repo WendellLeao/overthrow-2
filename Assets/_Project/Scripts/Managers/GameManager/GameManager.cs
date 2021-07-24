@@ -9,7 +9,7 @@ public sealed class GameManager : MonoBehaviour
     {
         ResumeGame();
 
-        //SoundManager.instance.PlaySoundtrack();
+        //SoundManager.instance.PlaySound(Sound.GAME_THEME);
     }
 
     private void ResumeGame()

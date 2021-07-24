@@ -46,3 +46,5 @@ MonoBehaviour:
   _soundAudioClips:
   - {fileID: 11400000, guid: ea75f259e74d2f34cac503871e538357, type: 2}
   - {fileID: 11400000, guid: 737aafb9feb4fae4189e1d2ac0119600, type: 2}
+  - {fileID: 11400000, guid: fb4696bccc41c4341bf75b7cedb392f6, type: 2}
+  - {fileID: 11400000, guid: 91fe00c053c2efe449955524c9c460c6, type: 2}

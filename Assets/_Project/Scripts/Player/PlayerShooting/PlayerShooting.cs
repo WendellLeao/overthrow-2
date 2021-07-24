@@ -78,7 +78,7 @@ public sealed class PlayerShooting : MonoBehaviour
 
             SpawnProjectile(PoolType.BALL_PROJECTILE);
 
-            SoundManager.instance.PlaySound(Sound.PLAYER_SHOOTING);
+            SoundManager.instance.PlaySound3D(Sound.PLAYER_SHOOTING, transform.position);
 
             HandleAmmo();
         }
@@ -86,7 +86,7 @@ public sealed class PlayerShooting : MonoBehaviour
 
     private void OnPlayerBombShot_PerformBombShooting()
     {
-        SoundManager.instance.PlaySound(Sound.PLAYER_SHOOTING);
+        SoundManager.instance.PlaySound3D(Sound.PLAYER_SHOOTING, transform.position);
 
         SpawnProjectile(PoolType.BOMB_PROJECTILE);
     }
