@@ -313,6 +313,10 @@ PrefabInstance:
       propertyPath: deactivatorObject.m_Bits
       value: 136
       objectReference: {fileID: 0}
+    - target: {fileID: 916616527429455278, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: _deactivatorObject.m_Bits
+      value: 136
+      objectReference: {fileID: 0}
     - target: {fileID: 1398694053823260300, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.694
@@ -347,6 +351,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3709731711626940791, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
       propertyPath: deactivatorObject.m_Bits
+      value: 136
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709731711626940791, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: _deactivatorObject.m_Bits
       value: 136
       objectReference: {fileID: 0}
     - target: {fileID: 4871891367275633035, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
@@ -423,6 +431,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7474913921808897649, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
       propertyPath: deactivatorObject.m_Bits
+      value: 136
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474913921808897649, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}
+      propertyPath: _deactivatorObject.m_Bits
       value: 136
       objectReference: {fileID: 0}
     - target: {fileID: 8184648656452775795, guid: c910c58687c8ffe42b21a26a68c3ae26, type: 3}

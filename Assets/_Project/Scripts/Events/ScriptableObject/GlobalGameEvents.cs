@@ -5,6 +5,10 @@ using UnityEngine.Events;
 public sealed class GlobalGameEvents : ScriptableObject
 {
     public UnityAction<GameState> OnGameStateChanged;
+
+    public UnityAction<bool> OnGameIsPaused;
+    
     public UnityAction OnLevelCompleted;
+    
     public UnityAction OnPlayerDied;
 }

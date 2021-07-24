@@ -1,16 +1,7 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public sealed class WinGameHandler : MonoBehaviour
 {
-    [Header("Panels UI")]
-    [SerializeField] private GameObject _winPanelObject;
-    [SerializeField] private GameObject _endGamePanelObject;
-
-    [Header("Buttons UI")]
-    [SerializeField] private Button _continueButton;
-    [SerializeField] private Button _mainMenuButton;
-
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
 
@@ -29,17 +20,11 @@ public sealed class WinGameHandler : MonoBehaviour
     private void SubscribeEvents()
     {
         _globalGameEvents.OnLevelCompleted += OnLevelCompleted_LevelComplete;
-
-        _continueButton.onClick.AddListener(SceneHandler.LoadNextScene);
-        _mainMenuButton.onClick.AddListener(SceneHandler.BackToMainMenu);
     }
 
     private void UnsubscribeEvents()
     {
         _globalGameEvents.OnLevelCompleted -= OnLevelCompleted_LevelComplete;
-
-        _continueButton.onClick.RemoveAllListeners();
-        _mainMenuButton.onClick.RemoveAllListeners();
     }
 
     private void OnLevelCompleted_LevelComplete()
@@ -54,12 +39,6 @@ public sealed class WinGameHandler : MonoBehaviour
             {
                 HandleGameSaving();
             }
-
-            _winPanelObject.SetActive(true);
-        }
-        else
-        {
-            _endGamePanelObject.SetActive(true);
         }
     }
 
