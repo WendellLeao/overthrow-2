@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public sealed class GameOverHandler : MonoBehaviour
 {
-
     [Header("Panels UI")]
     [SerializeField] private GameObject _gameOverPanelObject;
 
@@ -44,7 +43,7 @@ public sealed class GameOverHandler : MonoBehaviour
     {
         StopGame();
 
-        SetGameState(GameState.LOSE);
+        ChangeGameState(GameState.LOSE);
 
         _gameOverPanelObject.SetActive(true);
     }
@@ -56,7 +55,7 @@ public sealed class GameOverHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void SetGameState(GameState newGameState)
+    private void ChangeGameState(GameState newGameState)
     {
         _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }

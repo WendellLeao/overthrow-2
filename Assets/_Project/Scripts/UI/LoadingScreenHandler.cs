@@ -16,6 +16,6 @@ public sealed class LoadingScreenHandler : MonoBehaviour
 
    private void UpdateLoadingBar()
    {
-      _slider.value = _asyncSceneHandler.GetNormalizedOperationProgress;
+      _slider.value = _asyncSceneHandler.GetNormalizedOperationProgress();
    }
 }

@@ -2,23 +2,26 @@ using UnityEngine;
 
 public sealed class PlayerCollider : MonoBehaviour
 {
-    [Header("Health System")]
-    [SerializeField] private HealthSystem _playerHealthSystem;
-
+    [Header("Player Controller")]
+    [SerializeField] private PlayerController _playerController;
+    
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<DeactivatableObject>(out DeactivatableObject deactivatableObject))
+        if (other.TryGetComponent<IObstacle>(out IObstacle obstacle))
         {
-            if(deactivatableObject.GetIsActivated && other.TryGetComponent<IObstacle>(out IObstacle obstacle))
+            if(other.TryGetComponent<DeactivatableObject>(out DeactivatableObject deactivatableObject))
             {
-                deactivatableObject.SetIsActivated(false);
-                _playerHealthSystem.Damage(50);
+                if(deactivatableObject.IsActivated)
+                {
+                    deactivatableObject.IsActivated = false;
+                    
+                    _playerController.GetPlayerDamageHandler().DamagePlayer(obstacle.GetDamageToPlayerAmount());
+                }
             }
-        }
-
-        if(other.TryGetComponent<Smasher>(out Smasher smasher))
-        {
-            _playerHealthSystem.Damage(200);
+            else if(other.TryGetComponent<Smasher>(out Smasher smasher))
+            {
+                _playerController.GetPlayerDamageHandler().DamagePlayer(obstacle.GetDamageToPlayerAmount());
+            }
         }
     }
 }

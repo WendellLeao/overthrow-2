@@ -22,7 +22,7 @@ public static class SaveSystem
 
         if(!SaveFileExists())
         {
-            _localData.ResetAllData();
+            ResetAllData();
             
             return SaveGameData(); //Create a new save file
         }
@@ -35,27 +35,49 @@ public static class SaveSystem
             return _localData;
         }
     }
-
-    public static GameData GetLocalData()
-    {
-        return _localData;
-    }
-
-    private static void DeleteSave()
-    {
-        File.Delete(GetFilePath());
-
-        _localData.ResetCurrentSceneIndex();
-        _localData.ResetAudioMixerValue();
-    }
     
+    public static void ResetCurrentSceneIndex()
+    {
+        int skippedScenesAmount = SceneHandler.GetActiveSceneIndex() + 1;
+        _localData.CurrentSceneIndex = skippedScenesAmount;
+    }
+
     private static bool SaveFileExists()
     {
         return File.Exists(GetFilePath());
     }
+    
+    private static void ResetAllData()
+    {
+        ResetCurrentSceneIndex();
+        ResetAudioMixerValue();
+        ResetQualitySettings();
+    }
 
+    private static void ResetAudioMixerValue()
+    {
+        _localData.AudioMixerValue = 1f;
+    }
+    
+    private static void ResetQualitySettings()
+    {
+        _localData.QualitySettingsIndex = 0;
+        
+         _localData.CurrentResolutionWidth = Screen.currentResolution.width;
+         _localData.CurrentResolutionHeight = Screen.currentResolution.height;
+        //_localData.CurrentResolutionWidth = 1600;////////native resolution
+        //_localData.CurrentResolutionHeight = 900;///////native resolution
+        
+        _localData.IsFullscreen = true;
+    }
+    
     private static string GetFilePath()
     {
         return Path.Combine(Application.persistentDataPath, _fileName);
+    }
+    
+    public static GameData GetLocalData()
+    {
+        return _localData;
     }
 }

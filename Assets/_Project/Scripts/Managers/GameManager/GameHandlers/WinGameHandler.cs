@@ -46,7 +46,7 @@ public sealed class WinGameHandler : MonoBehaviour
     {
         StopGame();
 
-        SetGameState(GameState.WIN);
+        ChangeGameState(GameState.WIN);
 
         if(SceneHandler.NextSceneExists())
         {
@@ -69,8 +69,8 @@ public sealed class WinGameHandler : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
     }
-
-    private void SetGameState(GameState newGameState)
+    
+    private void ChangeGameState(GameState newGameState)
     {
         _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
     }

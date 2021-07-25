@@ -22,7 +22,7 @@ public sealed class AudioSettingsHandler : MonoBehaviour
 	
 	private void Start()
 	{
-		SetStartAudioVolumeSliderValue();
+		LoadAudioVolumeSlider();
 		
 		SetAudioMixerValue(SaveSystem.GetLocalData().AudioMixerValue);
 	}
@@ -37,24 +37,24 @@ public sealed class AudioSettingsHandler : MonoBehaviour
 		_audioVolumeSlider.onValueChanged.RemoveAllListeners();
 	}
 
-	private void SetStartAudioVolumeSliderValue()
+	private void LoadAudioVolumeSlider()
 	{
 		_audioVolumeSlider.value = SaveSystem.GetLocalData().AudioMixerValue;
 	}
-
-	private void SetAudioMixerValue(float sliderValue)
-	{
-		float newAudioMixerValue = Mathf.Log10(sliderValue) * 20f;//Magic Number!!!
-		
-		_audioMixer.SetFloat("volume", newAudioMixerValue);
-
-		SaveAudioMixerValue(sliderValue);
-	}
-
+	
 	private void SaveAudioMixerValue(float audioMixerValue)
 	{
 		SaveSystem.GetLocalData().AudioMixerValue = audioMixerValue;
 		
 		SaveSystem.SaveGameData();
+	}
+
+	private void SetAudioMixerValue(float sliderValue)
+	{
+		float newAudioMixerValue = Mathf.Log10(sliderValue) * 20f;
+		
+		_audioMixer.SetFloat("volume", newAudioMixerValue);
+
+		SaveAudioMixerValue(sliderValue);
 	}
 }

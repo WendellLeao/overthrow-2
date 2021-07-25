@@ -29,11 +29,6 @@ public sealed class ObjectPool : MonoBehaviour
         FillPool();
     }
 
-    private void SetSingleton(ObjectPool objectPool)
-    {
-        instance = objectPool;
-    }
-
     private void FillPool()
     {
         _poolDictionary = new Dictionary<PoolType, Queue<GameObject>>();
@@ -52,32 +47,7 @@ public sealed class ObjectPool : MonoBehaviour
             _poolDictionary.Add(pool._poolType, objectPool);
         }
     }
-
-    public GameObject GetObjectFromPool(PoolType poolType)
-    {
-        if (_poolDictionary.TryGetValue(poolType, out Queue<GameObject> objectList))
-        {
-            if (objectList.Count == 0)
-            {
-                return CreateBackupObject(poolType);
-            }
-            else
-            {
-                GameObject objectFromPool = objectList.Dequeue();
-
-                objectFromPool.SetActive(true);
-
-                return objectFromPool;
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
-
-            return null;
-        }
-    }
-
+    
     private GameObject CreateNewObject(GameObject gameObject)
     {
         GameObject newGameObject = Instantiate(gameObject);
@@ -104,5 +74,35 @@ public sealed class ObjectPool : MonoBehaviour
         Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
         
         return null;
+    }
+    
+    public GameObject GetObjectFromPool(PoolType poolType)
+    {
+        if (_poolDictionary.TryGetValue(poolType, out Queue<GameObject> objectList))
+        {
+            if (objectList.Count == 0)
+            {
+                return CreateBackupObject(poolType);
+            }
+            else
+            {
+                GameObject objectFromPool = objectList.Dequeue();
+
+                objectFromPool.SetActive(true);
+
+                return objectFromPool;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
+
+            return null;
+        }
+    }
+
+    private void SetSingleton(ObjectPool objectPool)
+    { 
+        instance = objectPool;
     }
 }

@@ -51,7 +51,7 @@ public sealed class PlayerMouseLook : MonoBehaviour
     
     private void HandlePlayerHorizontalRotation()
     {
-        this.transform.Rotate(Vector3.up, _horizontalMouse);
+        transform.Rotate(Vector3.up, _horizontalMouse);
     }
 
     private void SetMouseInput(PlayerInputData playerInputData)

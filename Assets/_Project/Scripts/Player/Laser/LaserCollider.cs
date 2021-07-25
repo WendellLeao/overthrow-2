@@ -9,7 +9,7 @@ public sealed class LaserCollider : MonoBehaviour
     {
         if(other.TryGetComponent<DeactivatableObject>(out DeactivatableObject deactivatableObject))
         {
-            if(!deactivatableObject.GetIsActivated)
+            if(!deactivatableObject.IsActivated)
             {
                 deactivatableObject.DeactivateObject();
 

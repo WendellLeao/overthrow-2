@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +10,7 @@ public sealed class PlayerInputListener : MonoBehaviour
     private InputActionsSystem.CharacterControlsActions _characterControls;
     
     private bool _isShooting = false, _isShootingBomb = false, _pressPause = false;
+    
     private Vector2 _mousePosition;
 
     private void OnEnable()
@@ -70,12 +70,7 @@ public sealed class PlayerInputListener : MonoBehaviour
         _characterControls.Shoot.canceled -= OnShoot_PerformShoot;
         _characterControls.PowerShoot.canceled -= OnShootBomb_PerformShootingBomb;
     }
-
-    private void UpdateInputs()
-    {
-        _localGameEvents.OnReadPlayerInputs?.Invoke(CreateInputs());
-    }
-
+    
     private PlayerInputData CreateInputs()
     {
         PlayerInputData playerInputData = new PlayerInputData();
@@ -87,12 +82,17 @@ public sealed class PlayerInputListener : MonoBehaviour
 
         return playerInputData;
     }
-
+    
+    private void UpdateInputs()
+    {
+        _localGameEvents.OnReadPlayerInputs?.Invoke(CreateInputs());
+    }
+    
     private void ResetInputs()
     {
         _pressPause = false;
     }
-
+    
     private void OnShoot_PerformShoot(InputAction.CallbackContext context)
     {
         switch(context.phase)

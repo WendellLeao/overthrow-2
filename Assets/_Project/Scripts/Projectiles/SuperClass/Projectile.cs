@@ -33,12 +33,7 @@ public abstract class Projectile : MonoBehaviour
         
         ResetMaterial();
     }
-    
-    protected virtual void Awake()
-    {
-        SetStartMaterial();
-    }
-    
+
     protected virtual void LateUpdate()
     {
         if (_canUnparent)
@@ -46,15 +41,20 @@ public abstract class Projectile : MonoBehaviour
             UnparentProjectile();
         }
     }
-    
-    protected virtual void SetStartMaterial()
-    {
-        _startMaterial = _meshRenderer.material;
-    }
-    
+
     protected virtual void ResetMaterial()
     {
         _meshRenderer.material = _startMaterial;
+    }
+
+    protected virtual void Initialize()
+    {
+        SetStartMaterial(_meshRenderer.material);
+    }
+
+    private void Awake()
+    {
+        Initialize();
     }
     
     private void UnparentProjectile()
@@ -68,7 +68,12 @@ public abstract class Projectile : MonoBehaviour
     {
         _rigidbody.velocity = Vector3.zero;
     }
-
+    
+    protected void SetStartMaterial(Material startMaterial)
+    {
+        _startMaterial = startMaterial;
+    }
+    
     private void SetCanUnparent(bool canUnparent)
     {
         _canUnparent = canUnparent;

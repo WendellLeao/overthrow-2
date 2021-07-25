@@ -29,7 +29,7 @@ public sealed class PlayerAmmoUI : MonoBehaviour
         _localGameEvent.OnAmmoChanged -= OnPlayerShot_UpdateProjectileAmountUI;
     }
 
-    public void OnPlayerShot_UpdateProjectileAmountUI(int currentProjectileAmount)
+    private void OnPlayerShot_UpdateProjectileAmountUI(int currentProjectileAmount)
     {
         _projectileAmountText.text = "Ammo: " + currentProjectileAmount.ToString();
 

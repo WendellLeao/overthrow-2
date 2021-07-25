@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Project/Scenes/Async/LoadGameData.unity
+    path: Assets/_Project/Scenes/Async/GameDataLoader.unity
     guid: 757e2f2950d26314aa2fc9011659ffb1
   - enabled: 1
     path: Assets/_Project/Scenes/Menu/MainMenu.unity

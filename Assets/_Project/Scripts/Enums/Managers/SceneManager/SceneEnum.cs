@@ -1,6 +1,6 @@
 public enum SceneEnum
 {
-    GAME_LOAD_DATA,
+    GAME_DATA_LOADER,
     MAIN_MENU,
     LEVEL_01
 }

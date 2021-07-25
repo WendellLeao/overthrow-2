@@ -10,6 +10,7 @@ public static class SceneHandler
     public static void LoadScene(SceneEnum sceneEnum)
     {
         int sceneEnumToInt = (int)sceneEnum;
+        
         SceneManager.LoadScene(sceneEnumToInt);
     }
 

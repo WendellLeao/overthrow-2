@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c0f0a8915bbba44ba16bd9dac22c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cubeTransform: {fileID: 7324955116777999591}
   _xRotationSpeed: 0
   _yRotationSpeed: 0
   _zRotationSpeed: 0
