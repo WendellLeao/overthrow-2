@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public sealed class LaserCollider : MonoBehaviour
@@ -30,7 +29,7 @@ public sealed class LaserCollider : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision other)
     {
         Debug.Log("exit");
         _meshRenderer.material = _defaultLaserMaterial;
