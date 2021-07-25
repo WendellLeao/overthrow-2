@@ -83,7 +83,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wayPointSystem: {fileID: 7679208726618355848}
-  _playerDamageHandler: {fileID: 7679208726618355854}
 --- !u!114 &7679208726618355854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +310,7 @@ Transform:
   m_GameObject: {fileID: 7679208727796925684}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -1.839, z: 0}
-  m_LocalScale: {x: 0.18195647, y: 2.7030067, z: 0.18195648}
+  m_LocalScale: {x: 0.18195647, y: 2.7030067, z: 0.005950341}
   m_Children: []
   m_Father: {fileID: 7679208726512982768}
   m_RootOrder: 2
@@ -376,7 +375,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.412697, y: 1.9099998, z: 2.8}
+  m_Size: {x: 8.412697, y: 1.9099998, z: 64}
   m_Center: {x: -2.3411837, y: -1.1152791e-15, z: -0.0000009827291}
 --- !u!114 &7679208727796925690
 MonoBehaviour:
@@ -391,6 +390,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localGameEvents: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
+  _meshRenderer: {fileID: 7679208727796925688}
+  _laserCollisionMaterial: {fileID: 2100000, guid: f025c5db938b349a8b450e845b67e20a, type: 2}
+  _defaultLaserMaterial: {fileID: 2100000, guid: 0901bd31274b7c24a907731fa5e16f5f, type: 2}
 --- !u!1 &7679208727873538976
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +499,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
   m_VolumeTrigger: {fileID: 0}
   m_RenderPostProcessing: 1
   m_Antialiasing: 1

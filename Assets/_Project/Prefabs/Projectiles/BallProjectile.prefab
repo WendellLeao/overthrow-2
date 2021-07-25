@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ed47ec04336031d489bbf6f4bd552ba9, type: 2}
+  - {fileID: 2100000, guid: 22973e5cc34f45e43916dcd3c84dec85, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,9 +132,9 @@ MonoBehaviour:
   _shootForce: 250
   _deactivatableObject: {fileID: 5179823801072730766}
   _newStartMaterial:
-  - {fileID: 2100000, guid: ed47ec04336031d489bbf6f4bd552ba9, type: 2}
-  - {fileID: 2100000, guid: c78b6e378cced6e49b9586bae01cbc5b, type: 2}
-  - {fileID: 2100000, guid: 6c0d25474dfd33349bfeedd203d2a3e0, type: 2}
+  - {fileID: 2100000, guid: 22973e5cc34f45e43916dcd3c84dec85, type: 2}
+  - {fileID: 2100000, guid: 2ef7e886dd23fd94cb25189d46d299df, type: 2}
+  - {fileID: 2100000, guid: 891bf9125f2c6564d9dbe394ed2f25bc, type: 2}
   _newDeactivatedMaterial:
   - {fileID: 2100000, guid: d5077596fd03948479386c08b1c99fd1, type: 2}
   - {fileID: 2100000, guid: 12ca79d1906ac624994fa91e85880fb8, type: 2}

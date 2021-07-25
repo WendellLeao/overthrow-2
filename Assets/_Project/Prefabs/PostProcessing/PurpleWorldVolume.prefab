@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6870426197457570127}
   - component: {fileID: 6870426197457570126}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PurpleWorldVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}

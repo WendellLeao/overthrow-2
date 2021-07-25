@@ -15,10 +15,10 @@ public sealed class SoundManager : MonoBehaviour
         
         AudioSource audioSource = GetSettedAudioSource(sound, soundGameObject);
 
-        if (!audioSource.loop)
-        {
-            StartCoroutine(DeactivateSoundGameObject(audioSource));
-        }
+        // if (!audioSource.loop)
+        // {
+        //     StartCoroutine(DeactivateSoundGameObject(audioSource));
+        // }
 
         audioSource.Play();
     }
@@ -29,10 +29,10 @@ public sealed class SoundManager : MonoBehaviour
         
         AudioSource audioSource = GetSettedAudioSource(sound, soundGameObject);
         
-        if (!audioSource.loop)
-        {
-            StartCoroutine(DeactivateSoundGameObject(audioSource));
-        }
+        // if (!audioSource.loop)
+        // {
+        //     StartCoroutine(DeactivateSoundGameObject(audioSource));
+        // }
 
         audioSource.PlayOneShot(audioSource.clip);
     }

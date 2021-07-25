@@ -15,17 +15,22 @@ public sealed class Smasher : MonoBehaviour, IObstacle
     
     private float _pingPongValue = 0f;
 
-    public void OnTriggerEnter(Collider other)
+    public void DamagePlayer(PlayerDamageHandler playerDamageHandler)
     {
-        if (other.TryGetComponent<PlayerDamageHandler>(out PlayerDamageHandler playerDamageHandler))
-        {
-            playerDamageHandler.DamagePlayer(_damageToPlayerAmount);
-        }
+        playerDamageHandler.DamagePlayer(_damageToPlayerAmount);
     }
     
     private void Update()
     {
         HandleMovement();
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<PlayerDamageHandler>(out PlayerDamageHandler playerDamageHandler))
+        {
+            DamagePlayer(playerDamageHandler);
+        }
     }
     
     private void HandleMovement()

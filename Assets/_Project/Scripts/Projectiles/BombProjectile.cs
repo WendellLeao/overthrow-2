@@ -54,8 +54,7 @@ public sealed class BombProjectile : Projectile
             }
         }
     }
-
-  
+    
     private void HandleSoundEffect()
     {
         PlayCollisionSound();

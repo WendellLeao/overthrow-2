@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4497710458801457466}
   - component: {fileID: 4497710458801457467}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PinkWorldVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}

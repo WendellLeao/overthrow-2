@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6399327328812892546}
   - component: {fileID: 6399327328812892547}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WineWorldVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
