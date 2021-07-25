@@ -63,10 +63,10 @@ public static class SaveSystem
     {
         _localData.QualitySettingsIndex = 0;
         
-         _localData.CurrentResolutionWidth = Screen.currentResolution.width;
-         _localData.CurrentResolutionHeight = Screen.currentResolution.height;
-        //_localData.CurrentResolutionWidth = 1600;////////native resolution
-        //_localData.CurrentResolutionHeight = 900;///////native resolution
+         // _localData.CurrentResolutionWidth = Screen.currentResolution.width;
+         // _localData.CurrentResolutionHeight = Screen.currentResolution.height;
+        _localData.CurrentResolutionWidth = 1600;////////native resolution
+        _localData.CurrentResolutionHeight = 900;///////native resolution
         
         _localData.IsFullscreen = true;
     }
