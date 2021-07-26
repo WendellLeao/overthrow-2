@@ -16,7 +16,7 @@ public sealed class CannonShooting : MonoBehaviour
     
     private bool _canShoot = true;
 
-    private void Awake()
+    private void Start()
     {
         _soundManager = SoundManager.instance;
     }
