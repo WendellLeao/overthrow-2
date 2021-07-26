@@ -30,7 +30,8 @@ public sealed class BombProjectile : Projectile
     
     protected override void PlayCollisionSound()
     {
-        SoundManager.instance.PlaySound3D(Sound.BOMB_EXPLOSION, transform.localPosition);
+        //SoundManager.instance.PlaySound3D(Sound.BOMB_EXPLOSION, transform.localPosition);
+        SoundManager.instance.PlaySound2D(Sound.BOMB_EXPLOSION);
     }
     
     private void HandleExplosion()

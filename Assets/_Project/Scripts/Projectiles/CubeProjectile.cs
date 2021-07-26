@@ -26,7 +26,7 @@ public sealed class CubeProjectile : Projectile, IObstacle
 
     protected override void PlayCollisionSound()
     {
-        SoundManager.instance.PlaySound3D(Sound.CUBES_COLLISION, transform.localPosition);
+        SoundManager.instance.PlaySound3D(Sound.CUBES_COLLISION, transform.position);
     }
 
     protected override void LateUpdate()

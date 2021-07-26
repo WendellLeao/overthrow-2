@@ -1,15 +1,14 @@
+using Random = UnityEngine.Random;
 using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class SoundPlayer : MonoBehaviour
 {
-    [SerializeField] private AudioSourceProperties[] _audioSourceProperties;
     [SerializeField] private AudioSource _audioSource;
 
-    public void PlaySound3D(Sound sound, Vector3 position)
+    public void PlaySound3D(AudioSourceProperties audioSourceProperties, Vector3 position)
     {
-        SetAudioSourceProperties(sound);
+        SetAudioSourceProperties(audioSourceProperties);
         
         transform.position = position;
 
@@ -18,9 +17,9 @@ public class SoundPlayer : MonoBehaviour
         HandleSoundPlayerDeactivating();
     }
 
-    public void PlaySound2D(Sound sound)
+    public void PlaySound2D(AudioSourceProperties audioSourceProperties)
     {
-        SetAudioSourceProperties(sound);
+        SetAudioSourceProperties(audioSourceProperties);
 
         _audioSource.PlayOneShot(_audioSource.clip);
         
@@ -47,28 +46,22 @@ public class SoundPlayer : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void SetAudioSourceProperties(Sound sound)
+    private void SetAudioSourceProperties(AudioSourceProperties audioSourceProperties)
     {
-        foreach (AudioSourceProperties _audioSourceProperties in _audioSourceProperties)//Dictionary
+        int randomIndex = Random.Range(0, audioSourceProperties.AudioClips.Length);
+        _audioSource.clip = audioSourceProperties.AudioClips[randomIndex];
+        
+        _audioSource.volume = audioSourceProperties.Volume;
+        
+        _audioSource.spatialBlend = audioSourceProperties.SpatialBlend;
+        
+        _audioSource.loop = audioSourceProperties.Loop;
+        
+        _audioSource.outputAudioMixerGroup = audioSourceProperties.AudioMixerGroup;
+        
+        if (audioSourceProperties.PersistentSound)
         {
-            if (_audioSourceProperties.Sound == sound)
-            {
-                int randomIndex = Random.Range(0, _audioSourceProperties.AudioClips.Length);
-                _audioSource.clip = _audioSourceProperties.AudioClips[randomIndex];
-        
-                _audioSource.volume = _audioSourceProperties.Volume;
-        
-                _audioSource.spatialBlend = _audioSourceProperties.SpatialBlend;
-        
-                _audioSource.loop = _audioSourceProperties.Loop;
-        
-                _audioSource.outputAudioMixerGroup = _audioSourceProperties.AudioMixerGroup;
-        
-                if (_audioSourceProperties.PersistentSound)
-                {
-                    DontDestroyOnLoad(_audioSource.gameObject);
-                }
-            }
+            DontDestroyOnLoad(_audioSource.gameObject);
         }
     }
 }
