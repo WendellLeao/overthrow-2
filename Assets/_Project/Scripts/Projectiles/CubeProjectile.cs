@@ -7,10 +7,13 @@ public sealed class CubeProjectile : Projectile, IObstacle
 
     [Header(("Deactivatable Object"))]
     [SerializeField] private DeactivatableObject _deactivatableObject;
+
+    [Header(("Game Events"))]
+    [SerializeField] private LocalGameEvents _localGameEvents;
     
-    public void DamagePlayer(PlayerDamageHandler playerDamageHandler)
+    public void DamagePlayer(int damageAmount)
     {
-        playerDamageHandler.DamagePlayer(_damageToPlayerAmount);
+        _localGameEvents.OnPlayerIsHitted?.Invoke(damageAmount);
     }
 
     protected override void OnCollisionEnter(Collision other)
@@ -42,7 +45,7 @@ public sealed class CubeProjectile : Projectile, IObstacle
         {
             _deactivatableObject.IsActivated = false;
                 
-            DamagePlayer(playerDamageHandler);
+            DamagePlayer(_damageToPlayerAmount);
         }
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine.Events;
 public sealed class LocalGameEvents : ScriptableObject
 {
     public UnityAction<int, int> OnHealthChanged;
+
+    public UnityAction<int> OnPlayerIsHitted;
     
     public UnityAction<int, int> OnPowerChanged;
 

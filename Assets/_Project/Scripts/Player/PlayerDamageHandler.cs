@@ -7,17 +7,38 @@ public sealed class PlayerDamageHandler : MonoBehaviour
 
     [Header("Game Events")]
     [SerializeField] private GlobalGameEvents _globalGameEvents;
+    [SerializeField] private LocalGameEvents _localGameEvents;
+
+    private void OnEnable()
+    {
+        SubscribeEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeEvents();
+    }
+
+    private void SubscribeEvents()
+    {
+        _localGameEvents.OnPlayerIsHitted += OnPlayerIsHitted_DamagePlayer;
+    }
+
+    private void UnsubscribeEvents()
+    {
+        _localGameEvents.OnPlayerIsHitted -= OnPlayerIsHitted_DamagePlayer;
+    }
+
+    private void Start()
+    {
+        ResetCurrentHealthAmount();
+    }
     
-    public void DamagePlayer(int damageAmount)
+    private void OnPlayerIsHitted_DamagePlayer(int damageAmount)
     {
         _playerHealthSystem.Damage(damageAmount);
         
         CheckIfPlayerIsDead(_playerHealthSystem.GetCurrentHealthAmount());
-    }
-    
-    private void Start()
-    {
-        ResetCurrentHealthAmount();
     }
 
     private void CheckIfPlayerIsDead(int currentHealthAmount)

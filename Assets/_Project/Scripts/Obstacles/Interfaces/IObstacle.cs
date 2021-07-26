@@ -1,4 +1,4 @@
 public interface IObstacle
 {
-    public void DamagePlayer(PlayerDamageHandler playerDamageHandler);
+    public void DamagePlayer(int damageAmount);
 }

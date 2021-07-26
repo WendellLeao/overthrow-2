@@ -13,11 +13,14 @@ public sealed class Smasher : MonoBehaviour, IObstacle
     [Header("Obstacle")]
     [SerializeField] private int _damageToPlayerAmount;
     
+    [Header(("Game Events"))]
+    [SerializeField] private LocalGameEvents _localGameEvents;
+    
     private float _pingPongValue = 0f;
 
-    public void DamagePlayer(PlayerDamageHandler playerDamageHandler)
+    public void DamagePlayer(int damageAmount)
     {
-        playerDamageHandler.DamagePlayer(_damageToPlayerAmount);
+        _localGameEvents.OnPlayerIsHitted?.Invoke(damageAmount);
     }
     
     private void Update()
@@ -29,7 +32,7 @@ public sealed class Smasher : MonoBehaviour, IObstacle
     {
         if (other.TryGetComponent<PlayerDamageHandler>(out PlayerDamageHandler playerDamageHandler))
         {
-            DamagePlayer(playerDamageHandler);
+            DamagePlayer(_damageToPlayerAmount);
         }
     }
     

@@ -130,3 +130,4 @@ MonoBehaviour:
   _smashSpeed: 0.5
   _smaherTransform: {fileID: 4047162090726199691}
   _damageToPlayerAmount: 200
+  _localGameEvents: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}

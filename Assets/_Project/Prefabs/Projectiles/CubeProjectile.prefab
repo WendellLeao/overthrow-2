@@ -131,6 +131,7 @@ MonoBehaviour:
   _shootForce: 80
   _damageToPlayerAmount: 50
   _deactivatableObject: {fileID: 1888719013819148040}
+  _localGameEvents: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
 --- !u!114 &1888719013819148040
 MonoBehaviour:
   m_ObjectHideFlags: 0
