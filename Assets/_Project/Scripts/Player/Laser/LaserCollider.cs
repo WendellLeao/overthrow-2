@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public sealed class LaserCollider : MonoBehaviour
@@ -16,22 +17,26 @@ public sealed class LaserCollider : MonoBehaviour
     {
         if(other.TryGetComponent<DeactivatableObject>(out DeactivatableObject deactivatableObject))
         {
-            _meshRenderer.material = _laserCollisionMaterial;
+            //_meshRenderer.material = _laserCollisionMaterial;
             
             if(!deactivatableObject.IsActivated)
             {
                 deactivatableObject.DeactivateObject();
 
-                SoundManager.instance.PlaySound3D(Sound.LASER_COLLISION, transform.localPosition);
+                SoundManager.instance.PlaySound3D(Sound.LASER_COLLISION, transform.position);
 
                 _localGameEvents.OnLaserCollide?.Invoke();
             }
         }
     }
-
-    private void OnCollisionExit(Collision other)
-    {
-        Debug.Log("exit");
-        _meshRenderer.material = _defaultLaserMaterial;
-    }
+    
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     if(other.TryGetComponent<DeactivatableObject>(out DeactivatableObject deactivatableObject))
+    //     {
+    //         Debug.Log("exit");
+    //         _meshRenderer.material = _defaultLaserMaterial;
+    //         _isTouching = false;
+    //     }
+    // }
 }

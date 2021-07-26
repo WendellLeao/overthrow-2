@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 609369549410807949}
+  - component: {fileID: 4518193996438584885}
   - component: {fileID: 2043261275061151588}
   m_Layer: 0
-  m_Name: Sound
+  m_Name: SoundPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,6 +32,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4518193996438584885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743092204026524569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7046d7d341a3145b006dbe1d8b3e8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSourceProperties:
+  - {fileID: 11400000, guid: 737aafb9feb4fae4189e1d2ac0119600, type: 2}
+  - {fileID: 11400000, guid: 91fe00c053c2efe449955524c9c460c6, type: 2}
+  - {fileID: 11400000, guid: fb4696bccc41c4341bf75b7cedb392f6, type: 2}
+  - {fileID: 11400000, guid: a8108dbf98c25454db09efd784ae8474, type: 2}
+  - {fileID: 11400000, guid: ea75f259e74d2f34cac503871e538357, type: 2}
+  _audioSource: {fileID: 2043261275061151588}
 --- !u!82 &2043261275061151588
 AudioSource:
   m_ObjectHideFlags: 0

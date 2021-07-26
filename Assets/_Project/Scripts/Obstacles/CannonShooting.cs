@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,8 +11,15 @@ public sealed class CannonShooting : MonoBehaviour
 
     [Header("Particle System")]
     [SerializeField] private ParticleSystem _shootingParticleSystem;
+
+    private SoundManager _soundManager;
     
     private bool _canShoot = true;
+
+    private void Awake()
+    {
+        _soundManager = SoundManager.instance;
+    }
 
     private void FixedUpdate()
     {
@@ -40,7 +48,7 @@ public sealed class CannonShooting : MonoBehaviour
 
         projectileClone.GetComponent<Projectile>().SetProjectileForce(_spawnPosition);
         
-        SoundManager.instance.PlaySound3D(Sound.PLAYER_SHOOTING, transform.localPosition);
+        _soundManager.PlaySound3D(Sound.PLAYER_SHOOTING, transform.position);
         
         _shootingParticleSystem.Play();
 
