@@ -2680,25 +2680,9 @@ PrefabInstance:
       value: ObjectPool
       objectReference: {fileID: 0}
     - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
-      propertyPath: _pools.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
-      propertyPath: _pools.Array.data[1]._poolType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
       propertyPath: _pools.Array.data[0]._startAmount
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
-      propertyPath: _pools.Array.data[1]._startAmount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7178361663202367187, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
-      propertyPath: _pools.Array.data[1]._objectToPool
-      value: 
-      objectReference: {fileID: 743092204026524569, guid: e9da34070c3056146bd38fa7b20441f2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 701eebeb746553f45adf165a0a7f23c4, type: 3}
 --- !u!1001 &7679208728333632291

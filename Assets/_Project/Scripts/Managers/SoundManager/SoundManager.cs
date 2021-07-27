@@ -13,7 +13,12 @@ public sealed class SoundManager : MonoBehaviour
     {
         if (_audioSourcePropertiesDictionary.TryGetValue(sound, out AudioSourceProperties audioSourceProperties))
         {
-            GetSoundPlayer().PlaySound3D(audioSourceProperties, position);
+            if (CanPlaySound(audioSourceProperties))
+            {
+                GetSoundPlayer().PlaySound3D(audioSourceProperties, position);
+
+                audioSourceProperties.IsPlaying = true;
+            }
         }
     }
 
@@ -21,7 +26,12 @@ public sealed class SoundManager : MonoBehaviour
     {
         if (_audioSourcePropertiesDictionary.TryGetValue(sound, out AudioSourceProperties audioSourceProperties))
         {
-            GetSoundPlayer().PlaySound2D(audioSourceProperties);
+            if (CanPlaySound(audioSourceProperties))
+            {
+                GetSoundPlayer().PlaySound2D(audioSourceProperties);
+                
+                audioSourceProperties.IsPlaying = true;
+            }
         }
     }
     
@@ -45,9 +55,15 @@ public sealed class SoundManager : MonoBehaviour
         }
     }
 
+    private bool CanPlaySound(AudioSourceProperties audioSourceProperties)
+    {
+        return !audioSourceProperties.PersistentSound || !audioSourceProperties.IsPlaying;
+    }
+
     private SoundPlayer GetSoundPlayer()
     {
         GameObject soundPlayerGameObject = ObjectPool.instance.GetObjectFromPool(PoolType.SOUND_PLAYER);
+        
         SoundPlayer soundPlayer = soundPlayerGameObject.GetComponent<SoundPlayer>();
 
         return soundPlayer;

@@ -49,4 +49,4 @@ MonoBehaviour:
     _startAmount: 30
   - _poolType: 3
     _objectToPool: {fileID: 743092204026524569, guid: e9da34070c3056146bd38fa7b20441f2, type: 3}
-    _startAmount: 10
+    _startAmount: 30

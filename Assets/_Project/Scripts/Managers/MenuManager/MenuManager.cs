@@ -1,5 +1,6 @@
-using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
+using UnityEngine;
 
 public sealed class MenuManager : MonoBehaviour
 {
@@ -78,7 +79,7 @@ public sealed class MenuManager : MonoBehaviour
 
         ShowMenu(Menu.MAIN);
 
-        SoundManager.instance.PlaySound2D(Sound.GAME_THEME);
+        StartCoroutine(DelayToPlayGameTheme(0.2f));///
     }
 
     private void SubscribeEvents()
@@ -116,7 +117,7 @@ public sealed class MenuManager : MonoBehaviour
 
         _quitGameButton.onClick.RemoveAllListeners();
     }
-
+    
     private void DeactiveMenus()
     {
         _mainMenuObject.SetActive(false);
@@ -172,5 +173,12 @@ public sealed class MenuManager : MonoBehaviour
         _settingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         _videoSettingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         _audioSettingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+    }
+    
+    private IEnumerator DelayToPlayGameTheme(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        
+        SoundManager.instance.PlaySound2D(Sound.GAME_THEME);
     }
 }

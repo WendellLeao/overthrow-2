@@ -20,3 +20,4 @@ MonoBehaviour:
   SpatialBlend: 0
   PersistentSound: 1
   Loop: 1
+  IsPlaying: 0

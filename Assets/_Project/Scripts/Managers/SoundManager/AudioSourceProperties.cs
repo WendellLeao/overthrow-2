@@ -19,4 +19,6 @@ public sealed class AudioSourceProperties : ScriptableObject
     public bool PersistentSound;
     
     public bool Loop;
+
+    public bool IsPlaying;
 }

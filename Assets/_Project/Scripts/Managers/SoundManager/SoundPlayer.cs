@@ -6,33 +6,36 @@ public class SoundPlayer : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
 
+    private AudioSourceProperties _audioSourceProperties;
+
     public void PlaySound3D(AudioSourceProperties audioSourceProperties, Vector3 position)
     {
-        SetAudioSourceProperties(audioSourceProperties);
+        PlaySound(audioSourceProperties);
         
         transform.position = position;
-
-        _audioSource.Play();
-        
-        HandleSoundPlayerDeactivating();
     }
 
     public void PlaySound2D(AudioSourceProperties audioSourceProperties)
     {
-        SetAudioSourceProperties(audioSourceProperties);
-
-        _audioSource.PlayOneShot(_audioSource.clip);
-        
-        HandleSoundPlayerDeactivating();
+        PlaySound(audioSourceProperties);
     }
 
     private void OnDisable()
     {
         ObjectPool.instance.ReturnObjectToPool(PoolType.SOUND_PLAYER, this.gameObject);
+
+        if (_audioSourceProperties != null)
+        {
+            _audioSourceProperties.IsPlaying = false;
+        }
     }
     
-    private void HandleSoundPlayerDeactivating()
+    private void PlaySound(AudioSourceProperties audioSourceProperties)
     {
+        SetAudioSourceProperties(audioSourceProperties);
+
+        _audioSource.Play();
+        
         if (!_audioSource.loop)
         {
             StartCoroutine(DeactivateSoundGameObject());
@@ -42,12 +45,14 @@ public class SoundPlayer : MonoBehaviour
     private IEnumerator DeactivateSoundGameObject()
     {
         yield return new WaitForSeconds(_audioSource.clip.length);
-        
+
         this.gameObject.SetActive(false);
     }
 
     private void SetAudioSourceProperties(AudioSourceProperties audioSourceProperties)
     {
+        _audioSourceProperties = audioSourceProperties;
+        
         int randomIndex = Random.Range(0, audioSourceProperties.AudioClips.Length);
         _audioSource.clip = audioSourceProperties.AudioClips[randomIndex];
         
@@ -58,7 +63,7 @@ public class SoundPlayer : MonoBehaviour
         _audioSource.loop = audioSourceProperties.Loop;
         
         _audioSource.outputAudioMixerGroup = audioSourceProperties.AudioMixerGroup;
-        
+
         if (audioSourceProperties.PersistentSound)
         {
             DontDestroyOnLoad(_audioSource.gameObject);
