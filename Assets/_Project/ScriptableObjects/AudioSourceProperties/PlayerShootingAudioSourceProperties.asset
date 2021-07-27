@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c223accb17b113143ae320d1cdb2142c, type: 3}
   m_Name: PlayerShootingAudioSourceProperties
   m_EditorClassIdentifier: 
-  Sound: 1
+  Sound: 2
   AudioClips:
   - {fileID: 8300000, guid: 85c6de9cf2ddf1c449f5e91cd38d055f, type: 3}
   AudioMixerGroup: {fileID: 24300002, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
   Volume: 0.5
   SpatialBlend: 1
+  PersistentSound: 0
   Loop: 0
+  IsPlaying: 0

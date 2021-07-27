@@ -30,6 +30,8 @@ public sealed class GameOverHandler : MonoBehaviour
         StopGame();
 
         ChangeGameState(GameState.LOSE);
+        
+        SoundManager.instance.PlaySound2D(Sound.GAME_OVER);
     }
 
     private void StopGame()

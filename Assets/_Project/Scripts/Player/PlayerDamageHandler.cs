@@ -38,6 +38,11 @@ public sealed class PlayerDamageHandler : MonoBehaviour
     {
         _playerHealthSystem.Damage(damageAmount);
         
+        if(_playerHealthSystem.GetCurrentHealthAmount() > 0)
+        {
+            SoundManager.instance.PlaySound2D(Sound.PLAYER_DAMAGE);
+        }
+        
         CheckIfPlayerIsDead(_playerHealthSystem.GetCurrentHealthAmount());
     }
 

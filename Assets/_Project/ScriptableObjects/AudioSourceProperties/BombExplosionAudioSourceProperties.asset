@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c223accb17b113143ae320d1cdb2142c, type: 3}
   m_Name: BombExplosionAudioSourceProperties
   m_EditorClassIdentifier: 
-  Sound: 2
+  Sound: 3
   AudioClips:
   - {fileID: 8300000, guid: 3c0d9626e9a7b6a41aa88d6607d3b615, type: 3}
   AudioMixerGroup: {fileID: 24300002, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
@@ -20,3 +20,4 @@ MonoBehaviour:
   SpatialBlend: 0
   PersistentSound: 0
   Loop: 0
+  IsPlaying: 0
