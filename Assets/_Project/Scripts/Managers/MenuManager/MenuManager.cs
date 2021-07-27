@@ -168,16 +168,16 @@ public sealed class MenuManager : MonoBehaviour
 
     private void OnClick_BackToMainMenu()
     {
-        ShowMenu(Menu.MAIN); 
-            
         PlayUIButtonClickSound();
+        
+        ShowMenu(Menu.MAIN); 
     }
     
     private void OnClick_QuitGame()
     {
-        Application.Quit(); 
-            
         PlayUIButtonClickSound();
+
+        Application.Quit(); 
     }
     
     private void StartLoadedLevel()

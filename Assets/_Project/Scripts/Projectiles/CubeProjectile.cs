@@ -18,10 +18,10 @@ public sealed class CubeProjectile : Projectile, IObstacle
 
     protected override void OnCollisionEnter(Collision other)
     {
-        if (!other.gameObject.TryGetComponent<CubeProjectile>(out CubeProjectile cubeProjectile))
-        {
-            PlayCollisionSound();
-        }
+        // if (!other.gameObject.TryGetComponent<CubeProjectile>(out CubeProjectile cubeProjectile))
+        // {
+        //     PlayCollisionSound();
+        // }
     }
 
     protected override void PlayCollisionSound()

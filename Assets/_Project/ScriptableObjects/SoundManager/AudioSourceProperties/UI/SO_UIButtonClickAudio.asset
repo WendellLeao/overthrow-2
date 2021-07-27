@@ -16,7 +16,7 @@ MonoBehaviour:
   AudioClips:
   - {fileID: 8300000, guid: 7f945cdedf897b04b9c36ff2f3177aae, type: 3}
   AudioMixerGroup: {fileID: 24300002, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
-  Volume: 0.4
+  Volume: 0.6
   SpatialBlend: 0
   PersistentSound: 0
   Loop: 0
