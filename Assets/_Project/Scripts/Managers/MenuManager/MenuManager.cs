@@ -27,10 +27,76 @@ public sealed class MenuManager : MonoBehaviour
     [Header("Scene Handler")]
     [SerializeField] private AsyncSceneHandler _asyncSceneHandler;
 
+    private SoundManager _soundManager;
+    
+    private void OnEnable()
+    {
+        SubscribeEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeEvents();
+    }
+    
+    private void Start()
+    {
+        ResumeGame();
+
+        SetMenusObjectPosition();
+        
+        SetSoundManager(SoundManager.instance);
+
+        ShowMenu(Menu.MAIN);
+
+        StartCoroutine(DelayToPlayGameTheme(0.2f));///
+    }
+
+    private void SubscribeEvents()
+    {
+        _continueButton.onClick.AddListener(OnClick_StartGame);
+        _newGameButton.onClick.AddListener(OnClick_StartNewGame);
+        
+        _showSettingsMenuButton.onClick.AddListener(delegate { ShowMenu(Menu.SETTINGS); });
+        
+        _settingsMenuBackButton.onClick.AddListener(OnClick_BackToMainMenu);
+        
+        _showVideoMenuButton.onClick.AddListener(delegate { ShowMenu(Menu.VIDEO_SETTINGS); });
+        _showAudioMenuButton.onClick.AddListener(delegate { ShowMenu(Menu.AUDIO_SETTINGS); });
+        
+        _videoMenuBackButton.onClick.AddListener(delegate { ShowMenu(Menu.SETTINGS); });
+        _audioMenuBackButton.onClick.AddListener(delegate { ShowMenu(Menu.SETTINGS); });
+
+        _quitGameButton.onClick.AddListener(OnClick_QuitGame);
+    }
+
+    private void UnsubscribeEvents()
+    {
+        _continueButton.onClick.RemoveAllListeners();
+        _newGameButton.onClick.RemoveAllListeners();
+        
+        _showSettingsMenuButton.onClick.RemoveAllListeners();
+        
+        _settingsMenuBackButton.onClick.RemoveAllListeners();
+        
+        _showVideoMenuButton.onClick.RemoveAllListeners();
+        _showAudioMenuButton.onClick.RemoveAllListeners();
+        
+        _videoMenuBackButton.onClick.RemoveAllListeners();
+        _audioMenuBackButton.onClick.RemoveAllListeners();
+
+        _quitGameButton.onClick.RemoveAllListeners();
+    }
+    
     private void ShowMenu(Menu menu)
     {
         DeactiveMenus();
 
+        if (menu != Menu.MAIN)
+        {
+            PlayButtonClickSound();
+        }
+        
         switch(menu)
         {
             case Menu.MAIN:
@@ -59,63 +125,6 @@ public sealed class MenuManager : MonoBehaviour
                 break;
             }
         }
-    }
-    
-    private void OnEnable()
-    {
-        SubscribeEvents();
-    }
-
-    private void OnDisable()
-    {
-        UnsubscribeEvents();
-    }
-    
-    private void Start()
-    {
-        ResumeGame();
-
-        SetMenusObjectPosition();
-
-        ShowMenu(Menu.MAIN);
-
-        StartCoroutine(DelayToPlayGameTheme(0.2f));///
-    }
-
-    private void SubscribeEvents()
-    {
-        _continueButton.onClick.AddListener(OnClick_StartGame);
-        _newGameButton.onClick.AddListener(OnClick_StartNewGame);
-        
-        _showSettingsMenuButton.onClick.AddListener(delegate { ShowMenu(Menu.SETTINGS); });
-        
-        _settingsMenuBackButton.onClick.AddListener(delegate { ShowMenu(Menu.MAIN); });
-        
-        _showVideoMenuButton.onClick.AddListener(delegate { ShowMenu(Menu.VIDEO_SETTINGS); });
-        _showAudioMenuButton.onClick.AddListener(delegate { ShowMenu(Menu.AUDIO_SETTINGS); });
-        
-        _videoMenuBackButton.onClick.AddListener(delegate { ShowMenu(Menu.SETTINGS); });
-        _audioMenuBackButton.onClick.AddListener(delegate { ShowMenu(Menu.SETTINGS); });
-
-        _quitGameButton.onClick.AddListener(delegate { Application.Quit(); });
-    }
-
-    private void UnsubscribeEvents()
-    {
-        _continueButton.onClick.RemoveAllListeners();
-        _newGameButton.onClick.RemoveAllListeners();
-        
-        _showSettingsMenuButton.onClick.RemoveAllListeners();
-        
-        _settingsMenuBackButton.onClick.RemoveAllListeners();
-        
-        _showVideoMenuButton.onClick.RemoveAllListeners();
-        _showAudioMenuButton.onClick.RemoveAllListeners();
-        
-        _videoMenuBackButton.onClick.RemoveAllListeners();
-        _audioMenuBackButton.onClick.RemoveAllListeners();
-
-        _quitGameButton.onClick.RemoveAllListeners();
     }
     
     private void DeactiveMenus()
@@ -157,6 +166,20 @@ public sealed class MenuManager : MonoBehaviour
         _asyncSceneHandler.LoadSingleSceneAsync(SceneEnum.LEVEL_01);
     }
 
+    private void OnClick_BackToMainMenu()
+    {
+        ShowMenu(Menu.MAIN); 
+            
+        PlayButtonClickSound();
+    }
+    
+    private void OnClick_QuitGame()
+    {
+        Application.Quit(); 
+            
+        PlayButtonClickSound();
+    }
+    
     private void StartLoadedLevel()
     {
         ShowMenu(Menu.LOADING_SCREEN);
@@ -166,6 +189,23 @@ public sealed class MenuManager : MonoBehaviour
         _asyncSceneHandler.LoadSingleSceneAsync(loadedSceneIndex);
     }
     
+    private IEnumerator DelayToPlayGameTheme(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        
+        SoundManager.instance.PlaySound2D(Sound.GAME_THEME);
+    }
+
+    private void PlayButtonClickSound()
+    {
+        _soundManager.PlaySound2D(Sound.BUTTON_CLICK);
+    }
+
+    private void SetSoundManager(SoundManager soundManager)
+    {
+        _soundManager = soundManager;
+    }
+    
     private void SetMenusObjectPosition()
     {
         _mainMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
@@ -173,12 +213,5 @@ public sealed class MenuManager : MonoBehaviour
         _settingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         _videoSettingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         _audioSettingsMenuObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-    }
-    
-    private IEnumerator DelayToPlayGameTheme(float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime);
-        
-        SoundManager.instance.PlaySound2D(Sound.GAME_THEME);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,7 +17,7 @@ public sealed class CannonShooting : MonoBehaviour
 
     private void Start()
     {
-        _soundManager = SoundManager.instance;
+        SetSoundManager(SoundManager.instance);
     }
 
     private void FixedUpdate()
@@ -69,5 +68,10 @@ public sealed class CannonShooting : MonoBehaviour
         projectileCloneTransform.position = _spawnPosition.transform.position;
 
         projectileCloneTransform.rotation = Quaternion.Euler(Vector3.zero);
+    }
+
+    private void SetSoundManager(SoundManager soundManager)
+    {
+        _soundManager = soundManager;
     }
 }

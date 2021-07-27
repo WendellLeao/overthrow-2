@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c223accb17b113143ae320d1cdb2142c, type: 3}
+  m_Name: ButtonClickAudioSourceProperties
+  m_EditorClassIdentifier: 
+  Sound: 8
+  AudioClips:
+  - {fileID: 8300000, guid: 7f945cdedf897b04b9c36ff2f3177aae, type: 3}
+  AudioMixerGroup: {fileID: 24300002, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
+  Volume: 0.4
+  SpatialBlend: 0
+  PersistentSound: 0
+  Loop: 0
+  IsPlaying: 0
