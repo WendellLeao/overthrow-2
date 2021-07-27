@@ -8,5 +8,5 @@ public enum Sound
     CUBES_COLLISION,
     CANNON_SHOOTING,
     PLAYER_DAMAGE,
-    BUTTON_CLICK
+    UI_BUTTON_CLICK
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c223accb17b113143ae320d1cdb2142c, type: 3}
-  m_Name: ButtonClickAudioSourceProperties
+  m_Name: UIButtonClickAudioSourceProperties
   m_EditorClassIdentifier: 
   Sound: 8
   AudioClips:

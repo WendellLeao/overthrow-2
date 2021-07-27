@@ -94,7 +94,7 @@ public sealed class MenuManager : MonoBehaviour
 
         if (menu != Menu.MAIN)
         {
-            PlayButtonClickSound();
+            PlayUIButtonClickSound();
         }
         
         switch(menu)
@@ -170,14 +170,14 @@ public sealed class MenuManager : MonoBehaviour
     {
         ShowMenu(Menu.MAIN); 
             
-        PlayButtonClickSound();
+        PlayUIButtonClickSound();
     }
     
     private void OnClick_QuitGame()
     {
         Application.Quit(); 
             
-        PlayButtonClickSound();
+        PlayUIButtonClickSound();
     }
     
     private void StartLoadedLevel()
@@ -196,9 +196,9 @@ public sealed class MenuManager : MonoBehaviour
         SoundManager.instance.PlaySound2D(Sound.GAME_THEME);
     }
 
-    private void PlayButtonClickSound()
+    private void PlayUIButtonClickSound()
     {
-        _soundManager.PlaySound2D(Sound.BUTTON_CLICK);
+        _soundManager.PlaySound2D(Sound.UI_BUTTON_CLICK);
     }
 
     private void SetSoundManager(SoundManager soundManager)
