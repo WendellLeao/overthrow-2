@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c223accb17b113143ae320d1cdb2142c, type: 3}
-  m_Name: CubesCollisionAudioSourceProperties
+  m_Name: SO_LaserCollisionAudio
   m_EditorClassIdentifier: 
-  Sound: 5
+  Sound: 4
   AudioClips:
-  - {fileID: 8300000, guid: 63674984564161a46b9520692dbb37d0, type: 3}
-  - {fileID: 8300000, guid: e93c6fc68c2b1144ab919d8f78f3a9c0, type: 3}
+  - {fileID: 8300000, guid: ad7fd387087a3f04db02eef40dca8858, type: 3}
   AudioMixerGroup: {fileID: 24300002, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
-  Volume: 1
-  SpatialBlend: 0.9
+  Volume: 0.1
+  SpatialBlend: 1
   PersistentSound: 0
   Loop: 0
   IsPlaying: 0

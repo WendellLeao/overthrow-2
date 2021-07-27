@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c223accb17b113143ae320d1cdb2142c, type: 3}
-  m_Name: CannonShootingAudioSourceProperties
+  m_Name: SO_UIButtonClickAudio
   m_EditorClassIdentifier: 
-  Sound: 6
+  Sound: 8
   AudioClips:
-  - {fileID: 8300000, guid: 70dd6f3ac18da6b4d8546f5cd463d272, type: 3}
+  - {fileID: 8300000, guid: 7f945cdedf897b04b9c36ff2f3177aae, type: 3}
   AudioMixerGroup: {fileID: 24300002, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
-  Volume: 1
-  SpatialBlend: 0.9
+  Volume: 0.4
+  SpatialBlend: 0
   PersistentSound: 0
   Loop: 0
   IsPlaying: 0

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c223accb17b113143ae320d1cdb2142c, type: 3}
-  m_Name: UIButtonClickAudioSourceProperties
+  m_Name: SO_GameOverAudio
   m_EditorClassIdentifier: 
-  Sound: 8
+  Sound: 1
   AudioClips:
-  - {fileID: 8300000, guid: 7f945cdedf897b04b9c36ff2f3177aae, type: 3}
+  - {fileID: 8300000, guid: 096436d9dc506af42a8da64872785082, type: 3}
   AudioMixerGroup: {fileID: 24300002, guid: dd47991f9e1359742bbe533eea1555af, type: 2}
-  Volume: 0.4
+  Volume: 0.2
   SpatialBlend: 0
   PersistentSound: 0
   Loop: 0
