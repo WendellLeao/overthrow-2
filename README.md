@@ -1,2 +1,2 @@
-# overthrow-the-pirate-king
-A 3D shooter about pirates and cannons.
+# Drop Cubes 3D
+A 3D shooter about drop cubes.
