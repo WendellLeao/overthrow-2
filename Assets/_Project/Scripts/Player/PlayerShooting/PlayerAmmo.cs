@@ -1,19 +1,22 @@
-public sealed class PlayerAmmo
+namespace _Project.Scripts.Player.PlayerShooting
 {
-    private int _currentProjectileAmount;
-    
-    public PlayerAmmo(int maxProjectileAmount)
+    public sealed class PlayerAmmo
     {
-        _currentProjectileAmount = maxProjectileAmount;
-    }
+        private int _currentProjectileAmount;
+    
+        public PlayerAmmo(int maxProjectileAmount)
+        {
+            _currentProjectileAmount = maxProjectileAmount;
+        }
 
-    public void DecreaseAmmo()
-    {   
-        _currentProjectileAmount--;
-    }
+        public void DecreaseAmmo()
+        {   
+            _currentProjectileAmount--;
+        }
     
-    public int GetCurrentProjectileAmount()
-    {
-        return _currentProjectileAmount;
+        public int GetCurrentProjectileAmount()
+        {
+            return _currentProjectileAmount;
+        }
     }
 }

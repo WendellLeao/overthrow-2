@@ -1,61 +1,67 @@
+using _Project.Scripts.Enums.Managers.SoundManager;
+using _Project.Scripts.Events.ScriptableObject;
+using _Project.Scripts.Managers.SoundManager;
 using UnityEngine;
 
-public sealed class PlayerDamageHandler : MonoBehaviour
+namespace _Project.Scripts.Player
 {
-    [Header("Health System")]
-    [SerializeField] private HealthSystem _playerHealthSystem;
-
-    [Header("Game Events")]
-    [SerializeField] private GlobalGameEvents _globalGameEvents;
-    [SerializeField] private LocalGameEvents _localGameEvents;
-
-    private void OnEnable()
+    public sealed class PlayerDamageHandler : MonoBehaviour
     {
-        SubscribeEvents();
-    }
+        [Header("Health System")]
+        [SerializeField] private HealthSystem.HealthSystem _playerHealthSystem;
 
-    private void OnDisable()
-    {
-        UnsubscribeEvents();
-    }
+        [Header("Game Events")]
+        [SerializeField] private GlobalGameEvents _globalGameEvents;
+        [SerializeField] private LocalGameEvents _localGameEvents;
 
-    private void SubscribeEvents()
-    {
-        _localGameEvents.OnPlayerIsHitted += OnPlayerIsHitted_DamagePlayer;
-    }
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
 
-    private void UnsubscribeEvents()
-    {
-        _localGameEvents.OnPlayerIsHitted -= OnPlayerIsHitted_DamagePlayer;
-    }
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
 
-    private void Start()
-    {
-        ResetCurrentHealthAmount();
-    }
+        private void SubscribeEvents()
+        {
+            _localGameEvents.OnPlayerIsHitted += OnPlayerIsHitted_DamagePlayer;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _localGameEvents.OnPlayerIsHitted -= OnPlayerIsHitted_DamagePlayer;
+        }
+
+        private void Start()
+        {
+            ResetCurrentHealthAmount();
+        }
     
-    private void OnPlayerIsHitted_DamagePlayer(int damageAmount)
-    {
-        _playerHealthSystem.Damage(damageAmount);
-        
-        if(_playerHealthSystem.GetCurrentHealthAmount() > 0)
+        private void OnPlayerIsHitted_DamagePlayer(int damageAmount)
         {
-            SoundManager.instance.PlaySound2D(Sound.PLAYER_DAMAGE);
-        }
+            _playerHealthSystem.Damage(damageAmount);
         
-        CheckIfPlayerIsDead(_playerHealthSystem.GetCurrentHealthAmount());
-    }
-
-    private void CheckIfPlayerIsDead(int currentHealthAmount)
-    {
-        if(currentHealthAmount <= 0)
-        {
-            _globalGameEvents.OnPlayerDied?.Invoke();
+            if(_playerHealthSystem.GetCurrentHealthAmount() > 0)
+            {
+                SoundManager.instance.PlaySound2D(Sound.PLAYER_DAMAGE);
+            }
+        
+            CheckIfPlayerIsDead(_playerHealthSystem.GetCurrentHealthAmount());
         }
-    }
 
-    private void ResetCurrentHealthAmount()
-    {
-        _playerHealthSystem.ResetCurrentHealthAmount();
+        private void CheckIfPlayerIsDead(int currentHealthAmount)
+        {
+            if(currentHealthAmount <= 0)
+            {
+                _globalGameEvents.OnPlayerDied?.Invoke();
+            }
+        }
+
+        private void ResetCurrentHealthAmount()
+        {
+            _playerHealthSystem.ResetCurrentHealthAmount();
+        }
     }
 }

@@ -1,65 +1,71 @@
+using _Project.Scripts.Enums.Managers.GameManager;
+using _Project.Scripts.Events.ScriptableObject;
+using _Project.Scripts.Managers.SceneManager;
 using UnityEngine;
 
-public sealed class WinGameHandler : MonoBehaviour
+namespace _Project.Scripts.Managers.GameManager.GameHandlers
 {
-    [Header("Game Events")]
-    [SerializeField] private GlobalGameEvents _globalGameEvents;
-
-    private bool _canSaveGame = true;
-
-    private void OnEnable()
+    public sealed class WinGameHandler : MonoBehaviour
     {
-        SubscribeEvents();
-    }
+        [Header("Game Events")]
+        [SerializeField] private GlobalGameEvents _globalGameEvents;
 
-    private void OnDisable()
-    {
-        UnsubscribeEvents();
-    }
+        private bool _canSaveGame = true;
 
-    private void SubscribeEvents()
-    {
-        _globalGameEvents.OnLevelCompleted += OnLevelCompleted_LevelComplete;
-    }
-
-    private void UnsubscribeEvents()
-    {
-        _globalGameEvents.OnLevelCompleted -= OnLevelCompleted_LevelComplete;
-    }
-
-    private void OnLevelCompleted_LevelComplete()
-    {
-        StopGame();
-
-        ChangeGameState(GameState.WIN);
-
-        if(SceneHandler.NextSceneExists())
+        private void OnEnable()
         {
-            if (_canSaveGame)
+            SubscribeEvents();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            _globalGameEvents.OnLevelCompleted += OnLevelCompleted_LevelComplete;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _globalGameEvents.OnLevelCompleted -= OnLevelCompleted_LevelComplete;
+        }
+
+        private void OnLevelCompleted_LevelComplete()
+        {
+            StopGame();
+
+            ChangeGameState(GameState.WIN);
+
+            if(SceneHandler.NextSceneExists())
             {
-                HandleGameSaving();
+                if (_canSaveGame)
+                {
+                    HandleGameSaving();
+                }
             }
         }
-    }
 
-    private void StopGame()
-    {
-        Time.timeScale = 0f;
+        private void StopGame()
+        {
+            Time.timeScale = 0f;
 
-        Cursor.lockState = CursorLockMode.None;
-    }
+            Cursor.lockState = CursorLockMode.None;
+        }
     
-    private void ChangeGameState(GameState newGameState)
-    {
-        _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
-    }
+        private void ChangeGameState(GameState newGameState)
+        {
+            _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
+        }
 
-    private void HandleGameSaving()
-    {
-        SaveSystem.GetLocalData().CurrentSceneIndex = SceneHandler.GetNextSceneIndex();
+        private void HandleGameSaving()
+        {
+            SaveSystem.SaveSystem.GetLocalData().CurrentSceneIndex = SceneHandler.GetNextSceneIndex();
             
-        SaveSystem.SaveGameData();
+            SaveSystem.SaveSystem.SaveGameData();
 
-        _canSaveGame = false;
+            _canSaveGame = false;
+        }
     }
 }

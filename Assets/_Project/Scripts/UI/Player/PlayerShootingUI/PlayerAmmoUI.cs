@@ -1,46 +1,50 @@
-using UnityEngine;
+using _Project.Scripts.Events.ScriptableObject;
 using TMPro;
+using UnityEngine;
 
-public sealed class PlayerAmmoUI : MonoBehaviour
+namespace _Project.Scripts.UI.Player.PlayerShootingUI
 {
-    [Header("Text")]
-    [SerializeField] private TMP_Text _projectileAmountText;
-
-    [Header("Game Events")]
-    [SerializeField] private LocalGameEvents _localGameEvent;
-
-    private void OnEnable()
+    public sealed class PlayerAmmoUI : MonoBehaviour
     {
-        SubscribeEvents();
-    }
+        [Header("Text")]
+        [SerializeField] private TMP_Text _projectileAmountText;
 
-    private void OnDisable()
-    {
-        UnsubscribeEvents();
-    }
-    
-    private void SubscribeEvents()
-    {
-        _localGameEvent.OnAmmoChanged += OnPlayerShot_UpdateProjectileAmountUI;
-    }
+        [Header("Game Events")]
+        [SerializeField] private LocalGameEvents _localGameEvent;
 
-    private void UnsubscribeEvents()
-    {
-        _localGameEvent.OnAmmoChanged -= OnPlayerShot_UpdateProjectileAmountUI;
-    }
-
-    private void OnPlayerShot_UpdateProjectileAmountUI(int currentProjectileAmount)
-    {
-        _projectileAmountText.text = "Ammo: " + currentProjectileAmount.ToString();
-
-        UpdateProjectileAmountColorUI(currentProjectileAmount);
-    }
-
-    private void UpdateProjectileAmountColorUI(int projectileAmount)
-    {
-        if(projectileAmount <= 0)
+        private void OnEnable()
         {
-            _projectileAmountText.color = Color.red;
+            SubscribeEvents();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+    
+        private void SubscribeEvents()
+        {
+            _localGameEvent.OnAmmoChanged += OnPlayerShot_UpdateProjectileAmountUI;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _localGameEvent.OnAmmoChanged -= OnPlayerShot_UpdateProjectileAmountUI;
+        }
+
+        private void OnPlayerShot_UpdateProjectileAmountUI(int currentProjectileAmount)
+        {
+            _projectileAmountText.text = "Ammo: " + currentProjectileAmount.ToString();
+
+            UpdateProjectileAmountColorUI(currentProjectileAmount);
+        }
+
+        private void UpdateProjectileAmountColorUI(int projectileAmount)
+        {
+            if(projectileAmount <= 0)
+            {
+                _projectileAmountText.color = Color.red;
+            }
         }
     }
 }

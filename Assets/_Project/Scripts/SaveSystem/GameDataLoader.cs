@@ -1,19 +1,24 @@
+using _Project.Scripts.Enums.Managers.SceneManager;
+using _Project.Scripts.Managers.SceneManager;
 using UnityEngine;
 
-public sealed class GameDataLoader : MonoBehaviour
+namespace _Project.Scripts.SaveSystem
 {
-	[Header("Async Scene Handler")]
-	[SerializeField] private AsyncSceneHandler _asyncSceneHandler;
+	public sealed class GameDataLoader : MonoBehaviour
+	{
+		[Header("Async Scene Handler")]
+		[SerializeField] private AsyncSceneHandler _asyncSceneHandler;
 
-	private void Awake()
-	{
-		SaveSystem.LoadGameData();
+		private void Awake()
+		{
+			SaveSystem.LoadGameData();
 		
-		LoadAsyncScene();
-	}
+			LoadAsyncScene();
+		}
 	
-	private void LoadAsyncScene()
-	{
-		_asyncSceneHandler.LoadAdditiveSceneAsync(SceneEnum.MAIN_MENU);
+		private void LoadAsyncScene()
+		{
+			_asyncSceneHandler.LoadAdditiveSceneAsync(SceneEnum.MAIN_MENU);
+		}
 	}
 }

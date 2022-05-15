@@ -1,38 +1,42 @@
-using UnityEngine.UI;
+using _Project.Scripts.Events.ScriptableObject;
 using UnityEngine;
+using UnityEngine.UI;
 
-public sealed class PlayerPowerUI : MonoBehaviour
+namespace _Project.Scripts.Player.PlayerShooting.PlayerPowerHandler
 {
-    [Header("UI")]
-    [SerializeField] private Image _powerBarImage;
-
-    [Header("Game Events")]
-    [SerializeField] private LocalGameEvents _localGameEvent;
-
-    private void OnEnable()
+    public sealed class PlayerPowerUI : MonoBehaviour
     {
-        SubscribeEvents();
-    }
+        [Header("UI")]
+        [SerializeField] private Image _powerBarImage;
 
-    private void OnDisable()
-    {
-        UnsubscribeEvents();
-    }
+        [Header("Game Events")]
+        [SerializeField] private LocalGameEvents _localGameEvent;
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
     
-    private void SubscribeEvents()
-    {
-        _localGameEvent.OnPowerChanged += OnPowerChanged_UpdatePowerAmountUI;
-    }
+        private void SubscribeEvents()
+        {
+            _localGameEvent.OnPowerChanged += OnPowerChanged_UpdatePowerAmountUI;
+        }
 
-    private void UnsubscribeEvents()
-    {
-        _localGameEvent.OnPowerChanged -= OnPowerChanged_UpdatePowerAmountUI;
-    }
+        private void UnsubscribeEvents()
+        {
+            _localGameEvent.OnPowerChanged -= OnPowerChanged_UpdatePowerAmountUI;
+        }
 
-    private void OnPowerChanged_UpdatePowerAmountUI(int currentPowerAmount, int maxPowerAmount)
-    {
-        float healthPercent = (float)currentPowerAmount / maxPowerAmount;
+        private void OnPowerChanged_UpdatePowerAmountUI(int currentPowerAmount, int maxPowerAmount)
+        {
+            float healthPercent = (float)currentPowerAmount / maxPowerAmount;
         
-        _powerBarImage.fillAmount = healthPercent;
+            _powerBarImage.fillAmount = healthPercent;
+        }
     }
 }

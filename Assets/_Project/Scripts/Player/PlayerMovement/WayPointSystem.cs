@@ -1,102 +1,106 @@
+using _Project.Scripts.Events.ScriptableObject;
 using UnityEngine;
 
-public sealed class WayPointSystem : MonoBehaviour
-{    
-    [SerializeField] private Transform[] _wayPoints;
+namespace _Project.Scripts.Player.PlayerMovement
+{
+    public sealed class WayPointSystem : MonoBehaviour
+    {    
+        [SerializeField] private Transform[] _wayPoints;
 
-    [Header("Movement")]
-    [SerializeField] private float _moveSpeed;
+        [Header("Movement")]
+        [SerializeField] private float _moveSpeed;
 
-    [Header("Game Events")]
-    [SerializeField] private GlobalGameEvents _globalGameEvent;
+        [Header("Game Events")]
+        [SerializeField] private GlobalGameEvents _globalGameEvent;
     
-    private WayPointDirectionChecker _wayPointDirectionChecker;
-    private WayPointChecker _wayPointChecker;
+        private WayPointDirectionChecker _wayPointDirectionChecker;
+        private WayPointChecker _wayPointChecker;
 
-    private float startVerticalPosition;
+        private float startVerticalPosition;
 
-    private Vector3 targetPos, newPos;
+        private Vector3 targetPos, newPos;
     
-    private int _wayPointIndex = 0;
+        private int _wayPointIndex = 0;
     
-    private void Awake()
-    {
-        InstanceWaypointCheckers();
-    }
-
-    private void Start()
-    {
-        SetStartVerticalPosition(this.transform.position.y);
-
-        SetPlayerPosition(GetNewPosition());
-    }
-
-    private void Update()
-    {
-        HandleMovement();
-
-        HandlePlayerIsAtTarget();
-
-        _wayPointDirectionChecker.UpdateDirections();
-    }
-
-    private void HandleMovement()
-    {
-        SetPlayerPosition(Vector3.MoveTowards(transform.position, GetNewPosition(), _moveSpeed * Time.deltaTime));
-    }
-
-    private void HandlePlayerIsAtTarget()
-    {
-        if (_wayPointChecker.IsAtTheNextTarget())
+        private void Awake()
         {
-            if (_wayPointChecker.IsAtTheLastTarget())
+            InstanceWaypointCheckers();
+        }
+
+        private void Start()
+        {
+            SetStartVerticalPosition(this.transform.position.y);
+
+            SetPlayerPosition(GetNewPosition());
+        }
+
+        private void Update()
+        {
+            HandleMovement();
+
+            HandlePlayerIsAtTarget();
+
+            _wayPointDirectionChecker.UpdateDirections();
+        }
+
+        private void HandleMovement()
+        {
+            SetPlayerPosition(Vector3.MoveTowards(transform.position, GetNewPosition(), _moveSpeed * Time.deltaTime));
+        }
+
+        private void HandlePlayerIsAtTarget()
+        {
+            if (_wayPointChecker.IsAtTheNextTarget())
             {
-                _globalGameEvent.OnLevelCompleted?.Invoke();
-            }
-            else
-            {
-                _wayPointIndex++;
+                if (_wayPointChecker.IsAtTheLastTarget())
+                {
+                    _globalGameEvent.OnLevelCompleted?.Invoke();
+                }
+                else
+                {
+                    _wayPointIndex++;
+                }
             }
         }
-    }
 
-    private void InstanceWaypointCheckers()
-    {
-        _wayPointChecker = new WayPointChecker(this, _wayPoints);
+        private void InstanceWaypointCheckers()
+        {
+            _wayPointChecker = new WayPointChecker(this, _wayPoints);
 
-        _wayPointDirectionChecker = new WayPointDirectionChecker(this, _wayPoints);
-    }
+            _wayPointDirectionChecker = new WayPointDirectionChecker(this, _wayPoints);
+        }
     
-    private Vector3 GetNewPosition()
-    {
-        targetPos = _wayPoints[_wayPointIndex].transform.position;
-        newPos = new Vector3(targetPos.x, startVerticalPosition, targetPos.z);
+        private Vector3 GetNewPosition()
+        {
+            targetPos = _wayPoints[_wayPointIndex].transform.position;
+            newPos = new Vector3(targetPos.x, startVerticalPosition, targetPos.z);
 
-        return newPos;
-    }
+            return newPos;
+        }
     
-    public WayPointDirectionChecker GetWayPointDirections()
-    {
-        return _wayPointDirectionChecker;
-    }
+        public WayPointDirectionChecker GetWayPointDirections()
+        {
+            return _wayPointDirectionChecker;
+        }
 
-    public WayPointChecker GetWayPointChecker()
-    {
-        return _wayPointChecker;
-    }
+        public WayPointChecker GetWayPointChecker()
+        {
+            return _wayPointChecker;
+        }
 
-    public int GetWayPointIndex()
-    {
-        return _wayPointIndex;
-    }
+        public int GetWayPointIndex()
+        {
+            return _wayPointIndex;
+        }
     
-    private void SetStartVerticalPosition(float verticalPosition)
-    {
-        startVerticalPosition = verticalPosition;
-    }
+        private void SetStartVerticalPosition(float verticalPosition)
+        {
+            startVerticalPosition = verticalPosition;
+        }
 
-    private void SetPlayerPosition(Vector3 position)
-    {
-        transform.position = position;
+        private void SetPlayerPosition(Vector3 position)
+        {
+            transform.position = position;
+        }
     }
 }

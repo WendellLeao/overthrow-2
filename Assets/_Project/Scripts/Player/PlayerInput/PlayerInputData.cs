@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public struct PlayerInputData
+namespace _Project.Scripts.Player.PlayerInput
 {
-    public Vector2 MousePosition;
-    public bool IsShooting;
-    public bool IsShootingBomb;
-    public bool PressPause;
+    public struct PlayerInputData
+    {
+        public Vector2 MousePosition;
+        public bool IsShooting;
+        public bool IsShootingBomb;
+        public bool PressPause;
+    }
 }

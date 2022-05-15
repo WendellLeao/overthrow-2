@@ -1,105 +1,108 @@
-using System;
 using System.Collections.Generic;
+using _Project.Scripts.Enums.ObjectPool;
 using UnityEngine;
 
-public sealed class ObjectPool : MonoBehaviour
+namespace _Project.Scripts.ObjectPool
 {
-    public static ObjectPool instance;
-
-    [SerializeField] private List<Pool> _pools = new List<Pool>();
-
-    private Dictionary<PoolType, Queue<GameObject>> _poolDictionary;
-
-    public void ReturnObjectToPool(PoolType objectType, GameObject objectToReturn)
+    public sealed class ObjectPool : MonoBehaviour
     {
-        if (_poolDictionary.TryGetValue(objectType, out Queue<GameObject> objectList))
+        public static ObjectPool instance;
+
+        [SerializeField] private List<Pool> _pools = new List<Pool>();
+
+        private Dictionary<PoolType, Queue<GameObject>> _poolDictionary;
+
+        public void ReturnObjectToPool(PoolType objectType, GameObject objectToReturn)
         {
-            objectList.Enqueue(objectToReturn);
-        }
-
-        objectToReturn.SetActive(false);
-    }
-
-    private void Awake()
-    {
-        SetSingleton(this);
-    }
-
-    private void Start()
-    {
-        FillPool();
-    }
-
-    private void FillPool()
-    {
-        _poolDictionary = new Dictionary<PoolType, Queue<GameObject>>();
-
-        foreach (Pool pool in _pools)
-        {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-
-            for(int i = 0; i < pool._startAmount; i++)
+            if (_poolDictionary.TryGetValue(objectType, out Queue<GameObject> objectList))
             {
-                GameObject newGameObject = CreateNewObject(pool._objectToPool);
-
-                objectPool.Enqueue(newGameObject);
+                objectList.Enqueue(objectToReturn);
             }
 
-            _poolDictionary.Add(pool._poolType, objectPool);
+            objectToReturn.SetActive(false);
         }
-    }
+
+        private void Awake()
+        {
+            SetSingleton(this);
+        }
+
+        private void Start()
+        {
+            FillPool();
+        }
+
+        private void FillPool()
+        {
+            _poolDictionary = new Dictionary<PoolType, Queue<GameObject>>();
+
+            foreach (Pool pool in _pools)
+            {
+                Queue<GameObject> objectPool = new Queue<GameObject>();
+
+                for(int i = 0; i < pool._startAmount; i++)
+                {
+                    GameObject newGameObject = CreateNewObject(pool._objectToPool);
+
+                    objectPool.Enqueue(newGameObject);
+                }
+
+                _poolDictionary.Add(pool._poolType, objectPool);
+            }
+        }
     
-    private GameObject CreateNewObject(GameObject gameObject)
-    {
-        GameObject newGameObject = Instantiate(gameObject);
-
-        newGameObject.SetActive(false);
-
-        return newGameObject;
-    }
-
-    private GameObject CreateBackupObject(PoolType poolType)
-    {
-        GameObject newBackupObject = null;
-
-        foreach (Pool pool in _pools)
+        private GameObject CreateNewObject(GameObject gameObject)
         {
-            if (pool._poolType == poolType)
-            {
-                newBackupObject = Instantiate(pool._objectToPool);
+            GameObject newGameObject = Instantiate(gameObject);
 
-                return newBackupObject;
-            }
+            newGameObject.SetActive(false);
+
+            return newGameObject;
         }
 
-        Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
+        private GameObject CreateBackupObject(PoolType poolType)
+        {
+            GameObject newBackupObject = null;
+
+            foreach (Pool pool in _pools)
+            {
+                if (pool._poolType == poolType)
+                {
+                    newBackupObject = Instantiate(pool._objectToPool);
+
+                    return newBackupObject;
+                }
+            }
+
+            Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
         
-        return null;
-    }
+            return null;
+        }
     
-    public GameObject GetObjectFromPool(PoolType poolType)
-    {
-        if (_poolDictionary.TryGetValue(poolType, out Queue<GameObject> objectList))
+        public GameObject GetObjectFromPool(PoolType poolType)
         {
-            if (objectList.Count == 0)
+            if (_poolDictionary.TryGetValue(poolType, out Queue<GameObject> objectList))
             {
-                return CreateBackupObject(poolType);
-            }
+                if (objectList.Count == 0)
+                {
+                    return CreateBackupObject(poolType);
+                }
             
-            GameObject objectFromPool = objectList.Dequeue();
+                GameObject objectFromPool = objectList.Dequeue();
 
-            objectFromPool.SetActive(true);
+                objectFromPool.SetActive(true);
 
-            return objectFromPool;
-        }
+                return objectFromPool;
+            }
         
-        Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
+            Debug.LogWarning("Pool of type '" + poolType + "' doesn't exist!");
 
-        return null;
-    }
+            return null;
+        }
 
-    private void SetSingleton(ObjectPool objectPool)
-    { 
-        instance = objectPool;
+        private void SetSingleton(ObjectPool objectPool)
+        { 
+            instance = objectPool;
+        }
     }
 }

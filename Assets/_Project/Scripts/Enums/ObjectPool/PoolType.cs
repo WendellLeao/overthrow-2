@@ -1,7 +1,10 @@
-public enum PoolType
+namespace _Project.Scripts.Enums.ObjectPool
 {
-    BALL_PROJECTILE,
-    CUBE_PROJECTILE,
-    BOMB_PROJECTILE,
-    SOUND_PLAYER
+    public enum PoolType
+    {
+        BALL_PROJECTILE,
+        CUBE_PROJECTILE,
+        BOMB_PROJECTILE,
+        SOUND_PLAYER
+    }
 }

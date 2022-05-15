@@ -1,4 +1,7 @@
-public interface IObstacle
+namespace _Project.Scripts.Obstacles.Interfaces
 {
-    public void DamagePlayer(int damageAmount);
+    public interface IObstacle
+    {
+        public void DamagePlayer(int damageAmount);
+    }
 }

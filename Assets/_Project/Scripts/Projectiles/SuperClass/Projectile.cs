@@ -1,89 +1,91 @@
-using System;
 using UnityEngine;
 
-public abstract class Projectile : MonoBehaviour
+namespace _Project.Scripts.Projectiles.SuperClass
 {
-    [Header("Mesh Renderer")]
-    [SerializeField] protected MeshRenderer _meshRenderer;
-    
-    [Header("Materials")]
-    protected Material _startMaterial;
-    
-    [Header("Projectile Components")]
-    [SerializeField] private Rigidbody _rigidbody;
-
-    [Header("Fire")]
-    [SerializeField] private float _shootForce;
-
-    private bool _canUnparent = true;
-
-    public void SetProjectileForce(Transform spawnTransform)
+    public abstract class Projectile : MonoBehaviour
     {
-        _rigidbody.AddForce(spawnTransform.forward * _shootForce, ForceMode.Impulse);
-    }
+        [Header("Mesh Renderer")]
+        [SerializeField] protected MeshRenderer _meshRenderer;
     
-    protected abstract void ReturnProjectileToPool();
+        [Header("Materials")]
+        protected Material _startMaterial;
     
-    protected abstract void PlayCollisionSound();
+        [Header("Projectile Components")]
+        [SerializeField] private Rigidbody _rigidbody;
 
-    protected virtual void OnDisable()
-    {
-        ResetProjectileVelocity();
-        
-        ReturnProjectileToPool();
-        
-        SetCanUnparent(true);
-        
-        ResetMaterial();
-    }
+        [Header("Fire")]
+        [SerializeField] private float _shootForce;
 
-    protected virtual void LateUpdate()
-    {
-        if (_canUnparent)
+        private bool _canUnparent = true;
+
+        public void SetProjectileForce(Transform spawnTransform)
         {
-            UnparentProjectile();
+            _rigidbody.AddForce(spawnTransform.forward * _shootForce, ForceMode.Impulse);
         }
-    }
-
-    protected virtual void OnCollisionEnter(Collision other)
-    {
-        PlayCollisionSound();
-    }
     
-    protected virtual void ResetMaterial()
-    {
-        _meshRenderer.material = _startMaterial;
-    }
-
-    protected virtual void Initialize()
-    {
-        SetStartMaterial(_meshRenderer.material);
-    }
-
-    private void Awake()
-    {
-        Initialize();
-    }
+        protected abstract void ReturnProjectileToPool();
     
-    private void UnparentProjectile()
-    { 
-        transform.parent = null;
+        protected abstract void PlayCollisionSound();
+
+        protected virtual void OnDisable()
+        {
+            ResetProjectileVelocity();
         
-        SetCanUnparent(false);
-    }
+            ReturnProjectileToPool();
+        
+            SetCanUnparent(true);
+        
+            ResetMaterial();
+        }
+
+        protected virtual void LateUpdate()
+        {
+            if (_canUnparent)
+            {
+                UnparentProjectile();
+            }
+        }
+
+        protected virtual void OnCollisionEnter(Collision other)
+        {
+            PlayCollisionSound();
+        }
     
-    private void ResetProjectileVelocity()
-    {
-        _rigidbody.velocity = Vector3.zero;
-    }
+        protected virtual void ResetMaterial()
+        {
+            _meshRenderer.material = _startMaterial;
+        }
+
+        protected virtual void Initialize()
+        {
+            SetStartMaterial(_meshRenderer.material);
+        }
+
+        private void Awake()
+        {
+            Initialize();
+        }
     
-    private void SetStartMaterial(Material startMaterial)
-    {
-        _startMaterial = startMaterial;
-    }
+        private void UnparentProjectile()
+        { 
+            transform.parent = null;
+        
+            SetCanUnparent(false);
+        }
     
-    private void SetCanUnparent(bool canUnparent)
-    {
-        _canUnparent = canUnparent;
+        private void ResetProjectileVelocity()
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
+    
+        private void SetStartMaterial(Material startMaterial)
+        {
+            _startMaterial = startMaterial;
+        }
+    
+        private void SetCanUnparent(bool canUnparent)
+        {
+            _canUnparent = canUnparent;
+        }
     }
 }

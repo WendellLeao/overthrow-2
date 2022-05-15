@@ -1,6 +1,9 @@
-public enum SceneEnum
+namespace _Project.Scripts.Enums.Managers.SceneManager
 {
-    GAME_DATA_LOADER,
-    MAIN_MENU,
-    LEVEL_01
+    public enum SceneEnum
+    {
+        GAME_DATA_LOADER,
+        MAIN_MENU,
+        LEVEL_01
+    }
 }

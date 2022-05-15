@@ -1,15 +1,18 @@
-[System.Serializable]
-public sealed class GameData
+namespace _Project.Scripts.SaveSystem
 {
-    public int CurrentSceneIndex;
+    [System.Serializable]
+    public sealed class GameData
+    {
+        public int CurrentSceneIndex;
     
-    public int QualitySettingsIndex;
+        public int QualitySettingsIndex;
 
-    public int CurrentDropdownResolutionIndex;
+        public int CurrentDropdownResolutionIndex;
 
-    public int CurrentResolutionWidth, CurrentResolutionHeight;
+        public int CurrentResolutionWidth, CurrentResolutionHeight;
 
-    public float AudioMixerValue;
+        public float AudioMixerValue;
     
-    public bool IsFullscreen;
+        public bool IsFullscreen;
+    }
 }

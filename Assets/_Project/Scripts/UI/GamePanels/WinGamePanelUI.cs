@@ -1,54 +1,59 @@
-using UnityEngine.UI;
+using _Project.Scripts.Events.ScriptableObject;
+using _Project.Scripts.Managers.SceneManager;
 using UnityEngine;
+using UnityEngine.UI;
 
-public sealed class WinGamePanelUI : MonoBehaviour
+namespace _Project.Scripts.UI.GamePanels
 {
-    [Header("Panels UI")]
-    [SerializeField] private GameObject _winPanelObject;
-    [SerializeField] private GameObject _endGamePanelObject;
-
-    [Header("Buttons UI")]
-    [SerializeField] private Button _continueButton;
-    [SerializeField] private Button _mainMenuButton;
-
-    [Header("Game Events")]
-    [SerializeField] private GlobalGameEvents _globalGameEvents;
-
-    private void OnEnable()
+    public sealed class WinGamePanelUI : MonoBehaviour
     {
-        SubscribeEvents();
-    }
+        [Header("Panels UI")]
+        [SerializeField] private GameObject _winPanelObject;
+        [SerializeField] private GameObject _endGamePanelObject;
 
-    private void OnDisable()
-    {
-        UnsubscribeEvents();
-    }
+        [Header("Buttons UI")]
+        [SerializeField] private Button _continueButton;
+        [SerializeField] private Button _mainMenuButton;
 
-    private void SubscribeEvents()
-    {
-        _globalGameEvents.OnLevelCompleted += OnLevelCompleted_ShowWinPanelUI;
+        [Header("Game Events")]
+        [SerializeField] private GlobalGameEvents _globalGameEvents;
 
-        _continueButton.onClick.AddListener(SceneHandler.LoadNextScene);
-        _mainMenuButton.onClick.AddListener(SceneHandler.BackToMainMenu);
-    }
-
-    private void UnsubscribeEvents()
-    {
-        _globalGameEvents.OnLevelCompleted -= OnLevelCompleted_ShowWinPanelUI;
-
-        _continueButton.onClick.RemoveAllListeners();
-        _mainMenuButton.onClick.RemoveAllListeners();
-    }
-
-    private void OnLevelCompleted_ShowWinPanelUI()
-    {
-        if(SceneHandler.NextSceneExists())
+        private void OnEnable()
         {
-            _winPanelObject.SetActive(true);
+            SubscribeEvents();
         }
-        else
+
+        private void OnDisable()
         {
-            _endGamePanelObject.SetActive(true);
+            UnsubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            _globalGameEvents.OnLevelCompleted += OnLevelCompleted_ShowWinPanelUI;
+
+            _continueButton.onClick.AddListener(SceneHandler.LoadNextScene);
+            _mainMenuButton.onClick.AddListener(SceneHandler.BackToMainMenu);
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _globalGameEvents.OnLevelCompleted -= OnLevelCompleted_ShowWinPanelUI;
+
+            _continueButton.onClick.RemoveAllListeners();
+            _mainMenuButton.onClick.RemoveAllListeners();
+        }
+
+        private void OnLevelCompleted_ShowWinPanelUI()
+        {
+            if(SceneHandler.NextSceneExists())
+            {
+                _winPanelObject.SetActive(true);
+            }
+            else
+            {
+                _endGamePanelObject.SetActive(true);
+            }
         }
     }
 }

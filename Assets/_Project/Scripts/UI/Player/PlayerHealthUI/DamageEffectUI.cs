@@ -1,106 +1,110 @@
 using System.Collections;
-using UnityEngine.UI;
+using _Project.Scripts.Events.ScriptableObject;
 using UnityEngine;
+using UnityEngine.UI;
 
-public sealed class DamageEffectUI : MonoBehaviour
+namespace _Project.Scripts.UI.Player.PlayerHealthUI
 {
-	[Header("UI")]
-	[SerializeField]
-	private Image _damageEffectImage;
-
-	[Header("Game Events")]
-	[SerializeField]
-	private LocalGameEvents _localGameEvents;
-
-	[Header("Damage Effect")]
-	private Color _startImageColor;
-
-	private float _imageAlpha = 100f;
-
-	private bool _canHideDamageEffect = false;
-
-	private void OnEnable()
+	public sealed class DamageEffectUI : MonoBehaviour
 	{
-		SubscribeEvents();
-	}
+		[Header("UI")]
+		[SerializeField]
+		private Image _damageEffectImage;
 
-	private void OnDisable()
-	{
-		UnsubscribeEvents();
-	}
+		[Header("Game Events")]
+		[SerializeField]
+		private LocalGameEvents _localGameEvents;
 
-	private void Start()
-	{
-		SetStartColor(_damageEffectImage.color);
-	}
+		[Header("Damage Effect")]
+		private Color _startImageColor;
 
-	private void Update()
-	{
-		if (_canHideDamageEffect)
+		private float _imageAlpha = 100f;
+
+		private bool _canHideDamageEffect = false;
+
+		private void OnEnable()
 		{
-			HandleDamageImageEffect();
+			SubscribeEvents();
 		}
-	}
 
-	private void SubscribeEvents()
-	{
-		_localGameEvents.OnHealthChanged += OnHealthChanged_ShowDamageEffect;
-	}
-
-	private void UnsubscribeEvents()
-	{
-		_localGameEvents.OnHealthChanged -= OnHealthChanged_ShowDamageEffect;
-	}
-
-	private void OnHealthChanged_ShowDamageEffect(int currentHealthAmount, int maxHealthAmount)
-	{
-		ResetImageColor();
-
-		_damageEffectImage.enabled = true;
-
-		StartCoroutine(TimeToHideDamageEffect());
-	}
-
-	private IEnumerator TimeToHideDamageEffect()
-	{
-		float timeToStartRoutine = 0.5f;
-
-		yield return new WaitForSeconds(timeToStartRoutine);
-
-		_canHideDamageEffect = true;
-	}
-
-	private void HandleDamageImageEffect()
-	{
-		if (_damageEffectImage.color.a > 0f)
+		private void OnDisable()
 		{
-			float speedToHide = 30f;
-
-			_imageAlpha -= Time.deltaTime * speedToHide;
-
-			Color newColor = new Color(_startImageColor.r, _startImageColor.g, _startImageColor.b, _imageAlpha * 0.01f);
-
-			_damageEffectImage.color = newColor;
+			UnsubscribeEvents();
 		}
-		else
+
+		private void Start()
+		{
+			SetStartColor(_damageEffectImage.color);
+		}
+
+		private void Update()
+		{
+			if (_canHideDamageEffect)
+			{
+				HandleDamageImageEffect();
+			}
+		}
+
+		private void SubscribeEvents()
+		{
+			_localGameEvents.OnHealthChanged += OnHealthChanged_ShowDamageEffect;
+		}
+
+		private void UnsubscribeEvents()
+		{
+			_localGameEvents.OnHealthChanged -= OnHealthChanged_ShowDamageEffect;
+		}
+
+		private void OnHealthChanged_ShowDamageEffect(int currentHealthAmount, int maxHealthAmount)
 		{
 			ResetImageColor();
 
-			_canHideDamageEffect = false;
+			_damageEffectImage.enabled = true;
+
+			StartCoroutine(TimeToHideDamageEffect());
 		}
-	}
 
-	private void ResetImageColor()
-	{
-		_imageAlpha = 100f;
+		private IEnumerator TimeToHideDamageEffect()
+		{
+			float timeToStartRoutine = 0.5f;
 
-		_damageEffectImage.enabled = false;
+			yield return new WaitForSeconds(timeToStartRoutine);
 
-		_damageEffectImage.color = _startImageColor;
-	}
+			_canHideDamageEffect = true;
+		}
 
-	private void SetStartColor(Color startColor)
-	{
-		_startImageColor = startColor;
+		private void HandleDamageImageEffect()
+		{
+			if (_damageEffectImage.color.a > 0f)
+			{
+				float speedToHide = 30f;
+
+				_imageAlpha -= Time.deltaTime * speedToHide;
+
+				Color newColor = new Color(_startImageColor.r, _startImageColor.g, _startImageColor.b, _imageAlpha * 0.01f);
+
+				_damageEffectImage.color = newColor;
+			}
+			else
+			{
+				ResetImageColor();
+
+				_canHideDamageEffect = false;
+			}
+		}
+
+		private void ResetImageColor()
+		{
+			_imageAlpha = 100f;
+
+			_damageEffectImage.enabled = false;
+
+			_damageEffectImage.color = _startImageColor;
+		}
+
+		private void SetStartColor(Color startColor)
+		{
+			_startImageColor = startColor;
+		}
 	}
 }

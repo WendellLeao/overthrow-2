@@ -1,62 +1,66 @@
+using _Project.Scripts.Enums.Player.PlayerMovement;
 using UnityEngine;
 
-public sealed class WayPointDirectionChecker
+namespace _Project.Scripts.Player.PlayerMovement
 {
-    private WayPointSystem _wayPointSystem;
+    public sealed class WayPointDirectionChecker
+    {
+        private WayPointSystem _wayPointSystem;
     
-    private Transform[] _wayPoints;
+        private Transform[] _wayPoints;
 
-    private WayPointDirection _currentDirection;
+        private WayPointDirection _currentDirection;
     
-    public WayPointDirectionChecker(WayPointSystem wayPointSystem, Transform[] wayPoints)
-    {
-        _wayPointSystem = wayPointSystem;
-        _wayPoints = wayPoints;
-    }
-
-    public void UpdateDirections()
-    {
-        if(NextTargetIsLeft())
+        public WayPointDirectionChecker(WayPointSystem wayPointSystem, Transform[] wayPoints)
         {
-            _currentDirection = WayPointDirection.LEFT;
+            _wayPointSystem = wayPointSystem;
+            _wayPoints = wayPoints;
         }
-        else if(NextTargetIsRight())
+
+        public void UpdateDirections()
         {
-            _currentDirection = WayPointDirection.RIGHT;
+            if(NextTargetIsLeft())
+            {
+                _currentDirection = WayPointDirection.LEFT;
+            }
+            else if(NextTargetIsRight())
+            {
+                _currentDirection = WayPointDirection.RIGHT;
+            }
+            else if(NextTargetIsFoward())
+            {
+                _currentDirection = WayPointDirection.FOWARD;
+            }
+            else if(NextTargetIsBackward())
+            {
+                _currentDirection = WayPointDirection.BACKWARD;
+            }
         }
-        else if(NextTargetIsFoward())
+
+        private bool NextTargetIsLeft()
         {
-            _currentDirection = WayPointDirection.FOWARD;
+            return _wayPointSystem.transform.position.x > _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.x;
         }
-        else if(NextTargetIsBackward())
+
+        private bool NextTargetIsRight()
         {
-            _currentDirection = WayPointDirection.BACKWARD;
+            return _wayPointSystem.transform.position.x < _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.x 
+                   && !NextTargetIsFoward();
         }
-    }
 
-    private bool NextTargetIsLeft()
-    {
-        return _wayPointSystem.transform.position.x > _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.x;
-    }
+        private bool NextTargetIsFoward()
+        {
+            return _wayPointSystem.transform.position.z < _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.z;
+        }
 
-    private bool NextTargetIsRight()
-    {
-        return _wayPointSystem.transform.position.x < _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.x 
-        && !NextTargetIsFoward();
-    }
-
-    private bool NextTargetIsFoward()
-    {
-        return _wayPointSystem.transform.position.z < _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.z;
-    }
-
-    private bool NextTargetIsBackward()
-    {
-        return _wayPointSystem.transform.position.z > _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.z;
-    }
+        private bool NextTargetIsBackward()
+        {
+            return _wayPointSystem.transform.position.z > _wayPoints[_wayPointSystem.GetWayPointIndex()].transform.position.z;
+        }
     
-    public WayPointDirection GetCurrentDirection()
-    {
-        return _currentDirection;
+        public WayPointDirection GetCurrentDirection()
+        {
+            return _currentDirection;
+        }
     }
 }

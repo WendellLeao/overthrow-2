@@ -1,77 +1,84 @@
 using System.Collections;
+using _Project.Scripts.Enums.Managers.SoundManager;
+using _Project.Scripts.Enums.ObjectPool;
+using _Project.Scripts.Managers.SoundManager;
+using _Project.Scripts.Projectiles.SuperClass;
 using UnityEngine;
 
-public sealed class CannonShooting : MonoBehaviour
+namespace _Project.Scripts.Obstacles
 {
-    [Header("Shooting")]
-    [SerializeField] private Transform _spawnPosition;
-    
-    [SerializeField] private float _fireRate;
-
-    [Header("Particle System")]
-    [SerializeField] private ParticleSystem _shootingParticleSystem;
-
-    private SoundManager _soundManager;
-    
-    private bool _canShoot = true;
-
-    private void Start()
+    public sealed class CannonShooting : MonoBehaviour
     {
-        SetSoundManager(SoundManager.instance);
-    }
+        [Header("Shooting")]
+        [SerializeField] private Transform _spawnPosition;
+    
+        [SerializeField] private float _fireRate;
 
-    private void FixedUpdate()
-    {
-        if (_canShoot)
+        [Header("Particle System")]
+        [SerializeField] private ParticleSystem _shootingParticleSystem;
+
+        private SoundManager _soundManager;
+    
+        private bool _canShoot = true;
+
+        private void Start()
         {
-            HandleShoot();
+            SetSoundManager(SoundManager.instance);
         }
-    }
 
-    private void HandleShoot()
-    {
-        _canShoot = false;
+        private void FixedUpdate()
+        {
+            if (_canShoot)
+            {
+                HandleShoot();
+            }
+        }
+
+        private void HandleShoot()
+        {
+            _canShoot = false;
             
-        StartCoroutine(Shoot());
-    }
+            StartCoroutine(Shoot());
+        }
 
-    private IEnumerator Shoot()
-    {
-        yield return new WaitForSeconds(_fireRate);
+        private IEnumerator Shoot()
+        {
+            yield return new WaitForSeconds(_fireRate);
 
-        GameObject projectileClone = ObjectPool.instance.GetObjectFromPool(PoolType.CUBE_PROJECTILE);
+            GameObject projectileClone = ObjectPool.ObjectPool.instance.GetObjectFromPool(PoolType.CUBE_PROJECTILE);
 
-        SetProjectileTransform(projectileClone.transform);
+            SetProjectileTransform(projectileClone.transform);
         
-        FreezeProjectileRigidbodyConstraints(projectileClone);
+            FreezeProjectileRigidbodyConstraints(projectileClone);
 
-        projectileClone.GetComponent<Projectile>().SetProjectileForce(_spawnPosition);
+            projectileClone.GetComponent<Projectile>().SetProjectileForce(_spawnPosition);
         
-        _soundManager.PlaySound3D(Sound.CANNON_SHOOTING, transform.position);
+            _soundManager.PlaySound3D(Sound.CANNON_SHOOTING, transform.position);
         
-        _shootingParticleSystem.Play();
+            _shootingParticleSystem.Play();
 
-        _canShoot = true;
-    }
+            _canShoot = true;
+        }
 
-    private void FreezeProjectileRigidbodyConstraints(GameObject projectileClone)
-    {
-        Rigidbody projectileRigidbody = projectileClone.GetComponent<Rigidbody>();
+        private void FreezeProjectileRigidbodyConstraints(GameObject projectileClone)
+        {
+            Rigidbody projectileRigidbody = projectileClone.GetComponent<Rigidbody>();
         
-        projectileRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-    }
+            projectileRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        }
     
-    private void SetProjectileTransform(Transform projectileCloneTransform)
-    {
-        projectileCloneTransform.parent = null;
+        private void SetProjectileTransform(Transform projectileCloneTransform)
+        {
+            projectileCloneTransform.parent = null;
 
-        projectileCloneTransform.position = _spawnPosition.transform.position;
+            projectileCloneTransform.position = _spawnPosition.transform.position;
 
-        projectileCloneTransform.rotation = Quaternion.Euler(Vector3.zero);
-    }
+            projectileCloneTransform.rotation = Quaternion.Euler(Vector3.zero);
+        }
 
-    private void SetSoundManager(SoundManager soundManager)
-    {
-        _soundManager = soundManager;
+        private void SetSoundManager(SoundManager soundManager)
+        {
+            _soundManager = soundManager;
+        }
     }
 }

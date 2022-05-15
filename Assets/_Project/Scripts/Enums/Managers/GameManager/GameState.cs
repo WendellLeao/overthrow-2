@@ -1,7 +1,10 @@
-public enum GameState
+namespace _Project.Scripts.Enums.Managers.GameManager
 {
-    PLAYING,
-    PAUSED,
-    LOSE,
-    WIN  
+    public enum GameState
+    {
+        PLAYING,
+        PAUSED,
+        LOSE,
+        WIN  
+    }
 }

@@ -1,7 +1,10 @@
-public enum WayPointDirection
+namespace _Project.Scripts.Enums.Player.PlayerMovement
 {
-    FOWARD,
-    BACKWARD,
-    RIGHT,
-    LEFT
+    public enum WayPointDirection
+    {
+        FOWARD,
+        BACKWARD,
+        RIGHT,
+        LEFT
+    }
 }

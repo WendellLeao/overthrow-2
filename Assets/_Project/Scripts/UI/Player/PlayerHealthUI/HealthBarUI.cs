@@ -1,38 +1,42 @@
-using UnityEngine.UI;
+using _Project.Scripts.Events.ScriptableObject;
 using UnityEngine;
+using UnityEngine.UI;
 
-public sealed class HealthBarUI : MonoBehaviour
+namespace _Project.Scripts.UI.Player.PlayerHealthUI
 {
-    [Header("UI")]
-    [SerializeField] private Image _healthBarImage;
-
-    [Header("Game Events")]
-    [SerializeField] private LocalGameEvents _localGameEvent;
-
-    private void OnEnable()
+    public sealed class HealthBarUI : MonoBehaviour
     {
-        SubscribeEvents();
-    }
+        [Header("UI")]
+        [SerializeField] private Image _healthBarImage;
 
-    private void OnDisable()
-    {
-        UnsubscribeEvents();
-    }
+        [Header("Game Events")]
+        [SerializeField] private LocalGameEvents _localGameEvent;
 
-    private void SubscribeEvents()
-    {
-        _localGameEvent.OnHealthChanged += OnHealthChanged_UpdateHealthBar;
-    }
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
 
-    private void UnsubscribeEvents()
-    {
-        _localGameEvent.OnHealthChanged -= OnHealthChanged_UpdateHealthBar;
-    }
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
 
-    private void OnHealthChanged_UpdateHealthBar(int currentHealthAmount, int maxHealthAmount)
-    {
-        float healthPercent = (float)currentHealthAmount / maxHealthAmount;
+        private void SubscribeEvents()
+        {
+            _localGameEvent.OnHealthChanged += OnHealthChanged_UpdateHealthBar;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _localGameEvent.OnHealthChanged -= OnHealthChanged_UpdateHealthBar;
+        }
+
+        private void OnHealthChanged_UpdateHealthBar(int currentHealthAmount, int maxHealthAmount)
+        {
+            float healthPercent = (float)currentHealthAmount / maxHealthAmount;
         
-        _healthBarImage.fillAmount = healthPercent;
+            _healthBarImage.fillAmount = healthPercent;
+        }
     }
 }

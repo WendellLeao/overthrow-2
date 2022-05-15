@@ -52,8 +52,30 @@
                 },
                 {
                     "name": "",
+                    "id": "1fbaf58f-08a9-40bc-ac34-38e3a8f0ed9d",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "00f3d276-ecf8-4c24-9d34-f322621a1383",
                     "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81b103e3-644d-46f7-b66d-caae0a340bc8",
+                    "path": "<Touchscreen>/primaryTouch/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

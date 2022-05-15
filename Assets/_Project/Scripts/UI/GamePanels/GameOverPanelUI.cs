@@ -1,46 +1,51 @@
-using UnityEngine.UI;
+using _Project.Scripts.Events.ScriptableObject;
+using _Project.Scripts.Managers.SceneManager;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameOverPanelUI : MonoBehaviour
+namespace _Project.Scripts.UI.GamePanels
 {
-    [Header("Panels UI")]
-    [SerializeField] private GameObject _gameOverPanelObject;
-
-    [Header("Buttons UI")]
-    [SerializeField] private Button _restartGameButton;
-    [SerializeField] private Button _mainMenuButton; 
-
-    [Header("Game Events")]
-    [SerializeField] private GlobalGameEvents _globalGameEvents;
-
-    private void OnEnable()
+    public class GameOverPanelUI : MonoBehaviour
     {
-        SubscribeEvents();
-    }
+        [Header("Panels UI")]
+        [SerializeField] private GameObject _gameOverPanelObject;
 
-    private void OnDisable()
-    {
-        UnsubscribeEvents();
-    }
+        [Header("Buttons UI")]
+        [SerializeField] private Button _restartGameButton;
+        [SerializeField] private Button _mainMenuButton; 
 
-    private void SubscribeEvents()
-    {
-        _globalGameEvents.OnPlayerDied += OnPlayerDied_ShowGameOverPanelUI;
+        [Header("Game Events")]
+        [SerializeField] private GlobalGameEvents _globalGameEvents;
 
-        _restartGameButton.onClick.AddListener(SceneHandler.ReloadScene);
-        _mainMenuButton.onClick.AddListener(SceneHandler.BackToMainMenu);
-    }
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
 
-    private void UnsubscribeEvents()
-    {
-        _globalGameEvents.OnPlayerDied -= OnPlayerDied_ShowGameOverPanelUI;
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
 
-        _restartGameButton.onClick.RemoveAllListeners();
-        _mainMenuButton.onClick.RemoveAllListeners();
-    }
+        private void SubscribeEvents()
+        {
+            _globalGameEvents.OnPlayerDied += OnPlayerDied_ShowGameOverPanelUI;
 
-    private void OnPlayerDied_ShowGameOverPanelUI()
-    {
-        _gameOverPanelObject.SetActive(true);
+            _restartGameButton.onClick.AddListener(SceneHandler.ReloadScene);
+            _mainMenuButton.onClick.AddListener(SceneHandler.BackToMainMenu);
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _globalGameEvents.OnPlayerDied -= OnPlayerDied_ShowGameOverPanelUI;
+
+            _restartGameButton.onClick.RemoveAllListeners();
+            _mainMenuButton.onClick.RemoveAllListeners();
+        }
+
+        private void OnPlayerDied_ShowGameOverPanelUI()
+        {
+            _gameOverPanelObject.SetActive(true);
+        }
     }
 }

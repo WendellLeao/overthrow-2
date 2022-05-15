@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @InputActionsSystem : IInputActionCollection, IDisposable
+namespace _Project.Scripts.Inputs
 {
-    public InputActionAsset asset { get; }
-    public @InputActionsSystem()
+    public class @InputActionsSystem : IInputActionCollection, IDisposable
     {
-        asset = InputActionAsset.FromJson(@"{
+        public InputActionAsset asset { get; }
+        public @InputActionsSystem()
+        {
+            asset = InputActionAsset.FromJson(@"{
     ""name"": ""InputActionsSystem"",
     ""maps"": [
         {
@@ -65,8 +67,30 @@ public class @InputActionsSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1fbaf58f-08a9-40bc-ac34-38e3a8f0ed9d"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""00f3d276-ecf8-4c24-9d34-f322621a1383"",
                     ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81b103e3-644d-46f7-b66d-caae0a340bc8"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -128,159 +152,160 @@ public class @InputActionsSystem : IInputActionCollection, IDisposable
     ],
     ""controlSchemes"": []
 }");
+            // CharacterControls
+            m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
+            m_CharacterControls_Shoot = m_CharacterControls.FindAction("Shoot", throwIfNotFound: true);
+            m_CharacterControls_PowerShoot = m_CharacterControls.FindAction("PowerShoot", throwIfNotFound: true);
+            m_CharacterControls_MouseLook = m_CharacterControls.FindAction("MouseLook", throwIfNotFound: true);
+            m_CharacterControls_PauseGame = m_CharacterControls.FindAction("PauseGame", throwIfNotFound: true);
+            // MenuControls
+            m_MenuControls = asset.FindActionMap("MenuControls", throwIfNotFound: true);
+            m_MenuControls_PauseGame = m_MenuControls.FindAction("PauseGame", throwIfNotFound: true);
+        }
+
+        public void Dispose()
+        {
+            UnityEngine.Object.Destroy(asset);
+        }
+
+        public InputBinding? bindingMask
+        {
+            get => asset.bindingMask;
+            set => asset.bindingMask = value;
+        }
+
+        public ReadOnlyArray<InputDevice>? devices
+        {
+            get => asset.devices;
+            set => asset.devices = value;
+        }
+
+        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+        public bool Contains(InputAction action)
+        {
+            return asset.Contains(action);
+        }
+
+        public IEnumerator<InputAction> GetEnumerator()
+        {
+            return asset.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Enable()
+        {
+            asset.Enable();
+        }
+
+        public void Disable()
+        {
+            asset.Disable();
+        }
+
         // CharacterControls
-        m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
-        m_CharacterControls_Shoot = m_CharacterControls.FindAction("Shoot", throwIfNotFound: true);
-        m_CharacterControls_PowerShoot = m_CharacterControls.FindAction("PowerShoot", throwIfNotFound: true);
-        m_CharacterControls_MouseLook = m_CharacterControls.FindAction("MouseLook", throwIfNotFound: true);
-        m_CharacterControls_PauseGame = m_CharacterControls.FindAction("PauseGame", throwIfNotFound: true);
+        private readonly InputActionMap m_CharacterControls;
+        private ICharacterControlsActions m_CharacterControlsActionsCallbackInterface;
+        private readonly InputAction m_CharacterControls_Shoot;
+        private readonly InputAction m_CharacterControls_PowerShoot;
+        private readonly InputAction m_CharacterControls_MouseLook;
+        private readonly InputAction m_CharacterControls_PauseGame;
+        public struct CharacterControlsActions
+        {
+            private @InputActionsSystem m_Wrapper;
+            public CharacterControlsActions(@InputActionsSystem wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Shoot => m_Wrapper.m_CharacterControls_Shoot;
+            public InputAction @PowerShoot => m_Wrapper.m_CharacterControls_PowerShoot;
+            public InputAction @MouseLook => m_Wrapper.m_CharacterControls_MouseLook;
+            public InputAction @PauseGame => m_Wrapper.m_CharacterControls_PauseGame;
+            public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(CharacterControlsActions set) { return set.Get(); }
+            public void SetCallbacks(ICharacterControlsActions instance)
+            {
+                if (m_Wrapper.m_CharacterControlsActionsCallbackInterface != null)
+                {
+                    @Shoot.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
+                    @Shoot.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
+                    @Shoot.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
+                    @PowerShoot.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPowerShoot;
+                    @PowerShoot.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPowerShoot;
+                    @PowerShoot.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPowerShoot;
+                    @MouseLook.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
+                    @MouseLook.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
+                    @MouseLook.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
+                    @PauseGame.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
+                    @PauseGame.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
+                    @PauseGame.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
+                }
+                m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Shoot.started += instance.OnShoot;
+                    @Shoot.performed += instance.OnShoot;
+                    @Shoot.canceled += instance.OnShoot;
+                    @PowerShoot.started += instance.OnPowerShoot;
+                    @PowerShoot.performed += instance.OnPowerShoot;
+                    @PowerShoot.canceled += instance.OnPowerShoot;
+                    @MouseLook.started += instance.OnMouseLook;
+                    @MouseLook.performed += instance.OnMouseLook;
+                    @MouseLook.canceled += instance.OnMouseLook;
+                    @PauseGame.started += instance.OnPauseGame;
+                    @PauseGame.performed += instance.OnPauseGame;
+                    @PauseGame.canceled += instance.OnPauseGame;
+                }
+            }
+        }
+        public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
+
         // MenuControls
-        m_MenuControls = asset.FindActionMap("MenuControls", throwIfNotFound: true);
-        m_MenuControls_PauseGame = m_MenuControls.FindAction("PauseGame", throwIfNotFound: true);
-    }
-
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
-
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
-
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
-    }
-
-    // CharacterControls
-    private readonly InputActionMap m_CharacterControls;
-    private ICharacterControlsActions m_CharacterControlsActionsCallbackInterface;
-    private readonly InputAction m_CharacterControls_Shoot;
-    private readonly InputAction m_CharacterControls_PowerShoot;
-    private readonly InputAction m_CharacterControls_MouseLook;
-    private readonly InputAction m_CharacterControls_PauseGame;
-    public struct CharacterControlsActions
-    {
-        private @InputActionsSystem m_Wrapper;
-        public CharacterControlsActions(@InputActionsSystem wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Shoot => m_Wrapper.m_CharacterControls_Shoot;
-        public InputAction @PowerShoot => m_Wrapper.m_CharacterControls_PowerShoot;
-        public InputAction @MouseLook => m_Wrapper.m_CharacterControls_MouseLook;
-        public InputAction @PauseGame => m_Wrapper.m_CharacterControls_PauseGame;
-        public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CharacterControlsActions set) { return set.Get(); }
-        public void SetCallbacks(ICharacterControlsActions instance)
+        private readonly InputActionMap m_MenuControls;
+        private IMenuControlsActions m_MenuControlsActionsCallbackInterface;
+        private readonly InputAction m_MenuControls_PauseGame;
+        public struct MenuControlsActions
         {
-            if (m_Wrapper.m_CharacterControlsActionsCallbackInterface != null)
+            private @InputActionsSystem m_Wrapper;
+            public MenuControlsActions(@InputActionsSystem wrapper) { m_Wrapper = wrapper; }
+            public InputAction @PauseGame => m_Wrapper.m_MenuControls_PauseGame;
+            public InputActionMap Get() { return m_Wrapper.m_MenuControls; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(MenuControlsActions set) { return set.Get(); }
+            public void SetCallbacks(IMenuControlsActions instance)
             {
-                @Shoot.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
-                @Shoot.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
-                @Shoot.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnShoot;
-                @PowerShoot.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPowerShoot;
-                @PowerShoot.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPowerShoot;
-                @PowerShoot.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPowerShoot;
-                @MouseLook.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
-                @MouseLook.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
-                @MouseLook.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseLook;
-                @PauseGame.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
-                @PauseGame.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
-                @PauseGame.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseGame;
-            }
-            m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Shoot.started += instance.OnShoot;
-                @Shoot.performed += instance.OnShoot;
-                @Shoot.canceled += instance.OnShoot;
-                @PowerShoot.started += instance.OnPowerShoot;
-                @PowerShoot.performed += instance.OnPowerShoot;
-                @PowerShoot.canceled += instance.OnPowerShoot;
-                @MouseLook.started += instance.OnMouseLook;
-                @MouseLook.performed += instance.OnMouseLook;
-                @MouseLook.canceled += instance.OnMouseLook;
-                @PauseGame.started += instance.OnPauseGame;
-                @PauseGame.performed += instance.OnPauseGame;
-                @PauseGame.canceled += instance.OnPauseGame;
+                if (m_Wrapper.m_MenuControlsActionsCallbackInterface != null)
+                {
+                    @PauseGame.started -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnPauseGame;
+                    @PauseGame.performed -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnPauseGame;
+                    @PauseGame.canceled -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnPauseGame;
+                }
+                m_Wrapper.m_MenuControlsActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @PauseGame.started += instance.OnPauseGame;
+                    @PauseGame.performed += instance.OnPauseGame;
+                    @PauseGame.canceled += instance.OnPauseGame;
+                }
             }
         }
-    }
-    public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
-
-    // MenuControls
-    private readonly InputActionMap m_MenuControls;
-    private IMenuControlsActions m_MenuControlsActionsCallbackInterface;
-    private readonly InputAction m_MenuControls_PauseGame;
-    public struct MenuControlsActions
-    {
-        private @InputActionsSystem m_Wrapper;
-        public MenuControlsActions(@InputActionsSystem wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PauseGame => m_Wrapper.m_MenuControls_PauseGame;
-        public InputActionMap Get() { return m_Wrapper.m_MenuControls; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MenuControlsActions set) { return set.Get(); }
-        public void SetCallbacks(IMenuControlsActions instance)
+        public MenuControlsActions @MenuControls => new MenuControlsActions(this);
+        public interface ICharacterControlsActions
         {
-            if (m_Wrapper.m_MenuControlsActionsCallbackInterface != null)
-            {
-                @PauseGame.started -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnPauseGame;
-                @PauseGame.performed -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnPauseGame;
-                @PauseGame.canceled -= m_Wrapper.m_MenuControlsActionsCallbackInterface.OnPauseGame;
-            }
-            m_Wrapper.m_MenuControlsActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @PauseGame.started += instance.OnPauseGame;
-                @PauseGame.performed += instance.OnPauseGame;
-                @PauseGame.canceled += instance.OnPauseGame;
-            }
+            void OnShoot(InputAction.CallbackContext context);
+            void OnPowerShoot(InputAction.CallbackContext context);
+            void OnMouseLook(InputAction.CallbackContext context);
+            void OnPauseGame(InputAction.CallbackContext context);
         }
-    }
-    public MenuControlsActions @MenuControls => new MenuControlsActions(this);
-    public interface ICharacterControlsActions
-    {
-        void OnShoot(InputAction.CallbackContext context);
-        void OnPowerShoot(InputAction.CallbackContext context);
-        void OnMouseLook(InputAction.CallbackContext context);
-        void OnPauseGame(InputAction.CallbackContext context);
-    }
-    public interface IMenuControlsActions
-    {
-        void OnPauseGame(InputAction.CallbackContext context);
+        public interface IMenuControlsActions
+        {
+            void OnPauseGame(InputAction.CallbackContext context);
+        }
     }
 }

@@ -1,28 +1,33 @@
+using _Project.Scripts.Enums.Managers.GameManager;
+using _Project.Scripts.Events.ScriptableObject;
 using UnityEngine;
 
-public sealed class GameManager : MonoBehaviour
+namespace _Project.Scripts.Managers.GameManager
 {
-    [Header("Game Events")]
-    [SerializeField] private GlobalGameEvents _globalGameEvents;
-
-    private void Start()
+    public sealed class GameManager : MonoBehaviour
     {
-        ResumeGame();
+        [Header("Game Events")]
+        [SerializeField] private GlobalGameEvents _globalGameEvents;
 
-        //SoundManager.instance.PlaySound2D(Sound.GAME_THEME);
-    }
+        private void Start()
+        {
+            ResumeGame();
 
-    private void ResumeGame()
-    {
-        Time.timeScale = 1f;
+            //SoundManager.instance.PlaySound2D(Sound.GAME_THEME);
+        }
 
-        Cursor.lockState = CursorLockMode.Locked;
+        private void ResumeGame()
+        {
+            Time.timeScale = 1f;
+
+            Cursor.lockState = CursorLockMode.Locked;
         
-        ChangeSetGameState(GameState.PLAYING);
-    }
+            ChangeSetGameState(GameState.PLAYING);
+        }
 
-    private void ChangeSetGameState(GameState newGameState)
-    {
-        _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
+        private void ChangeSetGameState(GameState newGameState)
+        {
+            _globalGameEvents.OnGameStateChanged?.Invoke(newGameState);
+        }
     }
 }

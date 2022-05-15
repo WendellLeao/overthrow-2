@@ -1,8 +1,11 @@
-public enum Menu
+namespace _Project.Scripts.Enums.Managers.MenuManager
 {
-    MAIN,
-    LOADING_SCREEN,
-    SETTINGS,
-    AUDIO_SETTINGS,
-    VIDEO_SETTINGS
+    public enum Menu
+    {
+        MAIN,
+        LOADING_SCREEN,
+        SETTINGS,
+        AUDIO_SETTINGS,
+        VIDEO_SETTINGS
+    }
 }

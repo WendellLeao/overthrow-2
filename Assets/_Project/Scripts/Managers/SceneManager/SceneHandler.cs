@@ -1,46 +1,49 @@
-using UnityEngine.SceneManagement;
+using _Project.Scripts.Enums.Managers.SceneManager;
 
-public static class SceneHandler
+namespace _Project.Scripts.Managers.SceneManager
 {
-    public static void LoadScene(int sceneIndex)
+    public static class SceneHandler
     {
-        SceneManager.LoadScene(sceneIndex);
-    }
+        public static void LoadScene(int sceneIndex)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex);
+        }
     
-    public static void LoadScene(SceneEnum sceneEnum)
-    {
-        int sceneEnumToInt = (int)sceneEnum;
+        public static void LoadScene(SceneEnum sceneEnum)
+        {
+            int sceneEnumToInt = (int)sceneEnum;
         
-        SceneManager.LoadScene(sceneEnumToInt);
-    }
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneEnumToInt);
+        }
 
-    public static void LoadNextScene()
-    {
-        LoadScene(GetNextSceneIndex());
-    }
+        public static void LoadNextScene()
+        {
+            LoadScene(GetNextSceneIndex());
+        }
     
-    public static void ReloadScene()
-    {
-        LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+        public static void ReloadScene()
+        {
+            LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        }
 
-    public static void BackToMainMenu()
-    {
-        LoadScene(SceneEnum.MAIN_MENU);
-    }
+        public static void BackToMainMenu()
+        {
+            LoadScene(SceneEnum.MAIN_MENU);
+        }
 
-    public static bool NextSceneExists()
-    {
-        return GetNextSceneIndex() < SceneManager.sceneCountInBuildSettings;
-    }
+        public static bool NextSceneExists()
+        {
+            return GetNextSceneIndex() < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
+        }
 
-    public static int GetActiveSceneIndex()
-    {
-        return SceneManager.GetActiveScene().buildIndex;
-    }
+        public static int GetActiveSceneIndex()
+        {
+            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        }
     
-    public static int GetNextSceneIndex()
-    {
-        return SceneManager.GetActiveScene().buildIndex + 1;
+        public static int GetNextSceneIndex()
+        {
+            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1;
+        }
     }
 }

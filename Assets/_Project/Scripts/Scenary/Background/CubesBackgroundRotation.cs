@@ -1,17 +1,20 @@
 using UnityEngine;
 
-public sealed class CubesBackgroundRotation : MonoBehaviour
+namespace _Project.Scripts.Scenary.Background
 {
-    [SerializeField] private Transform _cubeTransform;
-    [SerializeField] private float _xRotationSpeed, _yRotationSpeed, _zRotationSpeed;
-
-    private void Update()
+    public sealed class CubesBackgroundRotation : MonoBehaviour
     {
-        HandleRotation();
-    }
+        [SerializeField] private Transform _cubeTransform;
+        [SerializeField] private float _xRotationSpeed, _yRotationSpeed, _zRotationSpeed;
 
-    private void HandleRotation()
-    {
-        _cubeTransform.Rotate(new Vector3(_xRotationSpeed, _yRotationSpeed, _zRotationSpeed) * Time.deltaTime);
+        private void Update()
+        {
+            HandleRotation();
+        }
+
+        private void HandleRotation()
+        {
+            _cubeTransform.Rotate(new Vector3(_xRotationSpeed, _yRotationSpeed, _zRotationSpeed) * Time.deltaTime);
+        }
     }
 }

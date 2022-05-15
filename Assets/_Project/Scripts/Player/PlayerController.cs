@@ -1,12 +1,16 @@
+using _Project.Scripts.Player.PlayerMovement;
 using UnityEngine;
 
-public sealed class PlayerController : MonoBehaviour
+namespace _Project.Scripts.Player
 {
-    [Header("Player Components")]
-    [SerializeField] private WayPointSystem _wayPointSystem;
-
-    public WayPointSystem GetWayPointSystem()
+    public sealed class PlayerController : MonoBehaviour
     {
-        return _wayPointSystem;
+        [Header("Player Components")]
+        [SerializeField] private WayPointSystem _wayPointSystem;
+
+        public WayPointSystem GetWayPointSystem()
+        {
+            return _wayPointSystem;
+        }
     }
 }
