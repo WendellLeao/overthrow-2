@@ -1,7 +1,6 @@
 using _Project.Scripts.Events.ScriptableObject;
-using _Project.Scripts.Inputs;
-using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine;
 
 namespace _Project.Scripts.Player.PlayerInput
 {

@@ -56,7 +56,7 @@ namespace _Project.Scripts.Player.PlayerShooting
         {
             _globalGameEvents.OnGameStateChanged -= OnGameStateChanged_CheckIfCanShoot;
         
-            _localGameEvents.OnShootButtonClick -= OnPlayerShot_PerformShoot;
+            _localGameEvents.OnShootButtonClick -= HandleShootButtonClick;
             _localGameEvents.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
             _localGameEvents.OnPlayerShotBomb -= OnPlayerBombShot_PerformBombShooting;
         }
@@ -72,13 +72,13 @@ namespace _Project.Scripts.Player.PlayerShooting
         {
             if(gameState == GameState.PLAYING)
             {
-                _localGameEvents.OnShootButtonClick += OnPlayerShot_PerformShoot;
+                _localGameEvents.OnShootButtonClick += HandleShootButtonClick;
                 _localGameEvents.OnReadPlayerInputs += OnPlayerShot_PerformShoot;
                 _localGameEvents.OnPlayerShotBomb += OnPlayerBombShot_PerformBombShooting;
             }
             else
             {
-                _localGameEvents.OnShootButtonClick -= OnPlayerShot_PerformShoot;
+                _localGameEvents.OnShootButtonClick -= HandleShootButtonClick;
                 _localGameEvents.OnReadPlayerInputs -= OnPlayerShot_PerformShoot;
                 _localGameEvents.OnPlayerShotBomb -= OnPlayerBombShot_PerformBombShooting;
             }
@@ -100,6 +100,13 @@ namespace _Project.Scripts.Player.PlayerShooting
             }
         }
 
+        private void HandleShootButtonClick()
+        {
+            _playerInputData.IsShooting = true;
+            
+            OnPlayerShot_PerformShoot(_playerInputData);
+        }
+        
         private void OnPlayerBombShot_PerformBombShooting()
         {
             SoundManager.instance.PlaySound3D(Sound.PLAYER_SHOOTING, transform.position);
@@ -125,8 +132,24 @@ namespace _Project.Scripts.Player.PlayerShooting
 
         private bool CanShoot(PlayerInputData playerInputData)
         {
-            return playerInputData.IsShooting && !playerInputData.IsShootingBomb 
-                                              && _playerAmmo.GetCurrentProjectileAmount() > 0 && Time.time > _nextFire;
+            if (!playerInputData.IsShooting)
+            {
+                return false;
+            }
+
+            if (playerInputData.IsShootingBomb)
+            {
+                return false;
+            }
+
+            bool hasAmmo = _playerAmmo.GetCurrentProjectileAmount() > 0;
+            
+            if (!hasAmmo && Time.time > _nextFire)
+            {
+                return false;
+            }
+
+            return true;
         }
     
         private void SetProjectileTransform(Transform projectileTransform)

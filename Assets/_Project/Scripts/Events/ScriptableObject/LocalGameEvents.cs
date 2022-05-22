@@ -12,6 +12,8 @@ namespace _Project.Scripts.Events.ScriptableObject
         public UnityAction<int> OnPlayerIsHitted;
     
         public UnityAction<int, int> OnPowerChanged;
+        
+        public UnityAction OnShootButtonClick;
 
         public UnityAction OnPlayerShotBomb;
 
@@ -19,7 +21,6 @@ namespace _Project.Scripts.Events.ScriptableObject
 
         public delegate void DelegateOnReadPlayerInputs(PlayerInputData playerInputData);
         public DelegateOnReadPlayerInputs OnReadPlayerInputs;
-        public DelegateOnReadPlayerInputs OnShootButtonClick;
 
         public delegate void DelegateOnAmmoChanged(int currentProjectileAmount);
         public DelegateOnAmmoChanged OnAmmoChanged;
