@@ -15,16 +15,28 @@ namespace _Project.Scripts.Player.PlayerShooting
         private void Awake()
         {
             _button.onClick.AddListener(HandleShootButtonClick);
+
+            _localGameEvents.OnHealthChanged += HandleHealthChanged;
         }
 
         private void OnDestroy()
         {
             _button.onClick.RemoveListener(HandleShootButtonClick);
+            
+            _localGameEvents.OnHealthChanged -= HandleHealthChanged;
         }
 
         private void HandleShootButtonClick()
         {
             _localGameEvents.OnShootButtonClick.Invoke();
+        }
+        
+        private void HandleHealthChanged(int currentHealth, int maxHealth)
+        {
+            if (currentHealth <= 0)
+            {
+                _button.onClick.RemoveListener(HandleShootButtonClick);
+            }
         }
     }
 }

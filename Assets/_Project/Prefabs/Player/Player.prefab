@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wayPoints: []
-  _moveSpeed: 7
+  _moveSpeed: 13
   _globalGameEvent: {fileID: 11400000, guid: 5404f54fbff4c00498f96470263f1154, type: 2}
 --- !u!65 &3511883607792057271
 BoxCollider:
@@ -649,7 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnTransform: {fileID: 7679208728402740734}
   _fireRate: 0.2
-  _maxProjectileAmount: 15
+  _maxProjectileAmount: 30
   _playerTransform: {fileID: 7679208726618355855}
   _localGameEvents: {fileID: 11400000, guid: 2f206fb706c0a89429e84b8f73b9a9cd, type: 2}
   _globalGameEvents: {fileID: 11400000, guid: 5404f54fbff4c00498f96470263f1154, type: 2}

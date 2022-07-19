@@ -136,19 +136,22 @@ namespace _Project.Scripts.Player.PlayerShooting
             {
                 return false;
             }
-
+            
             if (playerInputData.IsShootingBomb)
             {
                 return false;
             }
-
-            bool hasAmmo = _playerAmmo.GetCurrentProjectileAmount() > 0;
             
-            if (!hasAmmo && Time.time > _nextFire)
+            if (_playerAmmo.GetCurrentProjectileAmount() <= 0)
             {
                 return false;
             }
 
+            if (Time.time <= _nextFire)
+            {
+                return false;
+            }            
+            
             return true;
         }
     
