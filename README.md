@@ -2,4 +2,6 @@
 
 Navigate a surreal dreamscape where obstacles stand in your way. Shoot them down and race to the finish, but be careful—if the living cubes touch you, it's game over. Precision, speed, and quick reflexes are key to surviving this fast-paced challenge.
 
+Stay focused, move fast, and overcome every challenge in this dreamlike world.
+
 ![overthrow](https://github.com/user-attachments/assets/e69f47eb-b342-4335-b2d1-1c8bdfce8a90)
